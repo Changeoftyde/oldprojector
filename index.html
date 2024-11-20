@@ -1,16 +1,20 @@
 <!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <html>
 <body>
 <img class="logo" src="IMG_8460.png">
-<img class="info" src="IMG_8457.png">
+<div id="info">
 <div class="backdrop"></div>
 <style>
-  .info {
+  #info {
+    background-image: url("IMG_8457.png");
+    background-size: cover;
     width: 100%;
-    height: auto;
+    height: 182.33%;
     position: absolute;
     left: 0;
-    top: 80vh;
     z-index: -1999;
   }
   .backdrop {
@@ -32,5 +36,11 @@
     left: 50%;
   }
 </style>
+<script>
+document.getElementById("info").style.top = window.innerHeight - window.innerWidth * 0.2 + "px";
+window.addEventListener("resize", function() {
+  document.getElementById("info").style.top = window.innerHeight - window.innerWidth * 0.2 + "px";
+})
+</script>
 </body>
 </html>
