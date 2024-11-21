@@ -4,7 +4,6 @@
 </head>
 <html>
 <body>
-
 <img src="IMG_8465.png" class="waves">
 <img class="logo" src="IMG_8460.png">
 <div id="info">
@@ -72,5 +71,9 @@
     left: 50%;
   }
 </style>
+<script>
+if (localStorage.getItem("pic")) {
+} else { document.getElementById("set").style.backgroundImage = "url('IMG_8486.png')"; }
+</script>
 </body>
 </html>
