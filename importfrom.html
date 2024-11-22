@@ -1,6 +1,6 @@
 <img class="header" src="Add a heading.zip - 8.png">
 <img style="top: 22vw" src="IMG_8546.png" class="steppng">
-<textarea></textarea>
+<textarea id="ta"></textarea>
 <img class="submit" src="Add a heading.png"> 
 <div id="space"></div>
 <style>
@@ -59,3 +59,27 @@
     src: url("coolvetica.ttf");
   }
 </style>
+<script>
+  submit {
+    ta = document.getElementById("ta");
+    tav = ta.value;
+    qn = 1;
+    an = 1;
+    i = 0;
+    current = "q";
+    for (hamburger = 0; i < tav.length; hamburger++) {
+    if (tav.substring(i, i+3) == "///") {
+      i += 2;
+      if (current == "q") { current = "a"; } else { current = "q" }
+      window[current.concat("n")] = window[current.concat("n")] + 1;
+    } else {
+      if (window[current.concat(window[current.concat("n")].toString())]) {
+      window[current.concat(window[current.concat("n")].toString())] = window[current.concat(window[current.concat("n")].toString())].concat(tav[i]);
+      } else {
+      window[current.concat(window[current.concat("n")].toString())] = tav[i];
+      }
+    }
+    i++;
+    }
+  }
+</script>
