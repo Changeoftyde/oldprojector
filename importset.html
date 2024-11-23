@@ -1,1 +1,51 @@
-
+<!DOCTYPE html>
+<html>
+<body>
+<img class="header" src="Add a heading.zip - 9.png">
+<input type="file" id="file">
+<style>
+  body {
+    background-image: url("IMG_8508.png");
+    background-size: cover;
+    background-repeat: repeat;
+  }
+  .header {
+    z-index: 2000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+  @font-face {
+    font-family: codec;
+    src: url("coolvetica.ttf");
+  }
+  input {
+    font-family: codec;
+    font-size: 3vw;
+    background-color: white;
+    color: #031e33;
+    border-width: 0.5vw;
+    border-color: #031e33;
+    border-radius: 0.5vw;
+    width: 20%;
+    height: 7.5vw;
+    position: absolute;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    top: 28vw;
+  }
+</style>
+<script>
+var fr = new FileReader();
+let test;
+document.getElementById('file').addEventListener('change', function () {
+fr.onload = () => {
+string = fr.result;
+}
+fr.readAsText(this.files[0]);
+});
+</script>
+</body>
+</html>
