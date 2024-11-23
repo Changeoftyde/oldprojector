@@ -43,14 +43,60 @@
   }  
 </style>
 <script>
-var fr = new FileReader();
-let test;
-document.getElementById('file').addEventListener('change', function () {
+fr = new FileReader();
+document.getElementById('file').addEventListener('change', function() {
 fr.onload = () => {
-string = fr.result;
+rawsd = fr.result;
 }
 fr.readAsText(this.files[0]);
+setTimeout(au, 100);
 });
+function au() {
+  hamburger = 0;
+  gti = false;
+  gt = 1;
+  qn = 1;
+  an = 0;
+  sd = fr.result.toString();
+  current = "q";
+  for (i = 0; i < sd.length; hamburger++) {
+    if (sd.substring(i, i + 2) == "[]" && gti == false) {
+      gt += 1;
+      i += 1;
+      if (gt == 4) { gti = true }
+    } else if (sd.substring(i, i + 3) == "///" && gti == true) {
+      i += 2;
+      if (current == "q") { current = "a"; } else { current = "q" }
+      window[current.concat("n")] = window[current.concat("n")] + 1;
+    } else if (gti == false) {
+      if (window["g".concat(gt.toString())]) { window["g".concat(gt.toString())] = window["g".concat(gt.toString())].concat(sd[i]) } else { window["g".concat(gt.toString())] = sd[i]; }
+    } else {
+      if (window[current.concat(window[current.concat("n")].toString())]) {
+        window[current.concat(window[current.concat("n")].toString())] = window[current.concat(window[current.concat("n")].toString())].concat(sd[i]);
+      } else {
+        window[current.concat(window[current.concat("n")].toString())] = sd[i];
+      }
+    }
+    i++;
+  }
+  qn -= 1;
+  name = g1;
+  author = g2;
+  pic = g3;
+  if (an != qn || name == "" || author == "" || pic == "" || an < 1) {
+    alert("File could not be read as a Projector Set.");
+  } else {
+      sessionStorage.setItem("qat", (qn + an).toString());
+      for (a = 1; a < (qn + 1); a++) {
+        sessionStorage.setItem("a".concat(a.toString()), window["a".concat(a.toString())]);
+        sessionStorage.setItem("q".concat(a.toString()), window["q".concat(a.toString())]);
+      }
+      sessionStorage.setItem("n", name);
+      sessionStorage.setItem("p", pic);
+      sessionStorage.setItem("a", author);
+      window.location.href = "edit.html";  
+  }
+}
 </script>
 </body>
 </html>
