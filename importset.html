@@ -21,15 +21,14 @@
     font-family: codec;
     src: url("coolvetica.ttf");
   }
-  input {
-    width: 20%;
-    height: 7.5vw;
-    color: white;
-    position: absolute;
-    transform: translate(-50%, 0%);
-    left: 50%;
-    top: 40vw;
+  input[type="file"] {
+    display: none;
   }
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+  }  
 </style>
 <script>
 var fr = new FileReader();
