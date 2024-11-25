@@ -13,16 +13,16 @@
   <option value="4">Math/Language Arts</option>
   <option value="5">Arts/Sports</option>
 </select>
-<div id="pic1" class="lpo"></div>
-<div id="pic3" class="lpo"></div>
-<div id="pic5" class="lpo"></div>
-<div id="pic7" class="lpo"></div>
-<div id="pic9" class="lpo"></div>
-<div id="pic2" class="rpo"></div>
-<div id="pic4" class="rpo"></div>
-<div id="pic6" class="rpo"></div>
-<div id="pic8" class="rpo"></div>
-<div id="pic10" class="rpo"></div>
+<div id="pic1" onclick="chosen()" class="lpo"></div>
+<div id="pic3" onclick="chosen()"  class="lpo"></div>
+<div id="pic5" onclick="chosen()"  class="lpo"></div>
+<div id="pic7" onclick="chosen()"  class="lpo"></div>
+<div id="pic9" onclick="chosen()"  class="lpo"></div>
+<div id="pic2" onclick="chosen()"  class="rpo"></div>
+<div id="pic4" onclick="chosen()"  class="rpo"></div>
+<div id="pic6" onclick="chosen()"  class="rpo"></div>
+<div id="pic8" onclick="chosen()"  class="rpo"></div>
+<div id="pic10" onclick="chosen()"  class="rpo"></div>
 </div>
 </div>
 <div id="questions">
@@ -59,6 +59,7 @@ input {
   left: 50%;
   top: 50%;
   position: absolute;
+  text-shadow: 0 0 2vw black;
 }
 select {
   height: 2vw;
@@ -80,7 +81,6 @@ select {
   position: absolute;
 }
 #chosenImage {
-  background-color: green;
   position: absolute;
   margin-top: 1.3vw;
   overflow-x: hidden;
@@ -152,6 +152,7 @@ body {
     font-size: 3.5vw;
     color: black;
     line-height: 0.6vw;
+    border-radius: 3vw;
   }
   #questions {
     overflow-y: scroll;
@@ -174,8 +175,13 @@ body {
     background-size: cover;
     background-repeat: repeat;
   }
+  .chosen {
+    outline: 0.8vw solid black;
+  }
 </style>
 <script>
+ss();
+cd = 0;
 cvs();
 document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.1333) + "px";
 document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.40) + "px";
@@ -197,8 +203,60 @@ if (window.innerWidth > window.innerHeight) {
   gotab();
 }
 })
+function ss() {
+  noc = parseInt(sessionStorage.getItem("qat")) / 2;
+  if (sessionStorage.getItem("c") == "0") {
+    document.getElementById("name").value = sessionStorage.getItem("n");
+    document.getElementById("author").value = sessionStorage.getItem("a");
+    if (document.getElementById("name").value.length > 50) {
+      document.getElementById("name").value = document.getElementById("name").value.substring(0, 50);
+    } 
+    if (document.getElementById("author").value.length > 50) {
+      document.getElementById("author").value = document.getElementById("author").value.substring(0, 50);
+    }
+    document.getElementById("cit").innerHTML = document.getElementById("name").value;
+    cd = parseInt(sessionStorage.getItem("p"));
+    if (cd < 11) {
+      document.getElementById("pic".concat(cd.toString())).classList.add("chosen");
+    }
+    for (i = 1; i < (noc + 1); i++) {
+      if (i != 1) { add(); }
+      document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
+      document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
+      cc();
+    }
+  } else if (sessionStorage.getItem("c") == "1") {
+    noc = parseInt(sessionStorage.getItem("qat")) / 2;
+    for (i = 1; i < (noc + 1); i++) {
+      if (i != 1) { add(); }
+      document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
+      document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
+      cc();
+    }
+  } else {}
+  sessionStorage.setItem("c", "3");
+}
+function chosen() {
+  cd = ((parseInt(document.getElementById("select").value) - 1) * 10) + parseInt(event.target.id.substring(3));
+  event.target.classList.add("chosen");
+  for (i = 1; i < 11; i++) {
+    current = ((parseInt(document.getElementById("select").value) - 1) * 10) + i;
+    if (cd == current) {
+      document.getElementById("pic" + i.toString()).classList.add("chosen");
+    } else {
+      document.getElementById("pic" + i.toString()).classList.remove("chosen");
+    }
+  }
+  document.getElementById("chosenImage").style.backgroundImage = "url('p".concat(cd.toString(), ".png')");
+}
 function cvs() {
   for (i = 1; i < 11; i++) {
+    current = ((parseInt(document.getElementById("select").value) - 1) * 10) + i;
+    if (cd == current) {
+      document.getElementById("pic" + i.toString()).classList.add("chosen");
+    } else {
+      document.getElementById("pic" + i.toString()).classList.remove("chosen");
+    }
     current = ((parseInt(document.getElementById("select").value) - 1) * 10) + i;
     document.getElementById("pic".concat(i.toString())).style.backgroundImage = "url('p".concat(current.toString(), ".png')");
   }
@@ -207,10 +265,12 @@ function gosbs() {
   for (i = 0; i < 5; i++) {
   document.getElementsByClassName("lpo")[i].style.height = 4 + "vw";
   document.getElementsByClassName("lpo")[i].style.top = 3 + 5 * i + "vw";
+  
   }
   for (i = 0; i < 5; i++) {
   document.getElementsByClassName("rpo")[i].style.height = 4 + "vw";
   document.getElementsByClassName("rpo")[i].style.top = 3 + 5 * i + "vw";
+  
   }
   document.getElementById("cit").style.fontSize = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
   document.getElementById("cit").style.lineHeight = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
@@ -329,11 +389,11 @@ document.getElementById("cit").innerHTML = document.getElementById("name").value
 })
 window.addEventListener("paste", function() {
 setTimeout(function() {
-if (document.getElementById("name").value.length > 20) {
-document.getElementById("name").value = document.getElementById("name").value.substring(0, 20);
-}
-if (document.getElementById("author").value.length > 20) {
-document.getElementById("author").value = document.getElementById("author").value.substring(0, 20);
+if (document.getElementById("name").value.length > 50) {
+document.getElementById("name").value = document.getElementById("name").value.substring(0, 50);
+} 
+if (document.getElementById("author").value.length > 50) {
+document.getElementById("author").value = document.getElementById("author").value.substring(0, 50);
 }
 document.getElementById("cit").innerHTML = document.getElementById("name").value;
 }, 100)
