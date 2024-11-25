@@ -219,9 +219,11 @@ function ss() {
     }
     document.getElementById("cit").innerHTML = document.getElementById("name").value;
     cd = parseInt(sessionStorage.getItem("p"));
+    alert(cd);
     if (cd < 11) {
       document.getElementById("pic".concat(cd.toString())).classList.add("chosen");
     }
+    document.getElementById("chosenImage").style.backgroundImage = "url('p".concat(cd.toString(), ".png')");
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
