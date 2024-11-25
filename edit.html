@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<body>
+<div id="create"></div>
+<div id="manifest"><span style="line-height: 1">Set Details</span><br><span style="font-size: 1.5vw">Set Name: <input id="name" style="width: 40%; height: 1.5vw"></span><br><span style="font-size: 1.5vw">Set Author: <input id="author" style="width: 40%; height: 1.5vw"></span>
+<div id="chosenImage"><p id="cit"></p></div>
+<div id="chooseImage">
+<select onchange="cvs()" id="select">
+  <option value="1">Science</option>
+  <option value="2">History</option>
+  <option value="3">Culture</option>
+  <option value="4">Math/Language Arts</option>
+  <option value="5">Arts/Sports</option>
+</select>
+<div id="pic1" class="lpo"></div>
+<div id="pic3" class="lpo"></div>
+<div id="pic5" class="lpo"></div>
+<div id="pic7" class="lpo"></div>
+<div id="pic9" class="lpo"></div>
+<div id="pic2" class="rpo"></div>
+<div id="pic4" class="rpo"></div>
+<div id="pic6" class="rpo"></div>
+<div id="pic8" class="rpo"></div>
+<div id="pic10" class="rpo"></div>
+</div>
+</div>
+<div id="questions">
+  <div class="space"></div>
+  <div class="space"></div>
+  <img onclick="add()" src="IMG_8550.png" id="add">
+  <div id="g1" class="question"><span>Question 1: </span><span id="q1l">(0/500)</span><img src="IMG_8551.png" id="d1" onclick="remove()" class="delete"><textarea id="ta1a"></textarea><span>Answer 1: </span><span id="a1l">(0/1000)</span><textarea id="ta1b"></textarea></div>
+  <div id="s1" class="space"></div>
+</div>
+<style>
+.lpo {
+  position: absolute;
+  left: 6.67%;
+  width: 40%;
+  background-size: cover;
+}
+.rpo {
+  position: absolute;
+  left: 53.33%;
+  width: 40%;
+  background-size: cover;
+}
+input {
+  font-size: 1.5vw;
+}
+#cit {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  color: white;
+  line-height: 5vw;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  position: absolute;
+}
+select {
+  height: 2vw;
+  font-size: 1.8vw;
+  width: 100%;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: white;
+  background-color: grey;
+  z-index: 2000;
+}
+#selector {
+  line-height: 0.8vw;
+  height: 100%;
+  top: 0.6vw;
+  position: absolute;
+}
+#chosenImage {
+  background-color: green;
+  position: absolute;
+  margin-top: 1.3vw;
+  overflow-x: hidden;
+}
+#bar {
+  font-size: 1vw;
+  text-align: center;
+  width: 100%;
+  height: 2vw;
+  color: white;
+  background-color: grey;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+#chooseImage {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  margin-top: 1.3vw;
+  overflow-y: scroll;
+}
+body {
+  background-color: black;
+}
+  .delete {
+    width: 4vw;
+    height: 4vw;
+    position: absolute;
+    left: 87.5%;
+    top: 2%;
+  }
+  #add {
+    z-index: 2000;
+    width: 4vw;
+    height: 4vw;
+    position: fixed;
+    transform: translate(-50%, 0%);
+    left: 26.67%;
+    top: 7.75vw;
+  }
+  textarea {
+  width: 38.5vw;
+  height: 7.5vw;
+  margin-left: -1vw;
+  font-size: 2.5vw;
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 0;
+  color: white;
+  }
+  .space {
+    width: 100%;
+    height: 3vw;
+  }
+  .question {
+    border-radius: 2vw;
+    overflow-x: hidden;
+    font-size: 4vw;
+    position: relative;
+    width: 100%;
+  }
+  #manifest {
+    position: absolute;
+    left: 53.33%;
+    top: 6.67vw;
+    background-color: white;
+    width: 40%;
+    text-align: center;
+    font-size: 3.5vw;
+    color: black;
+    line-height: 0.6vw;
+  }
+  #questions {
+    overflow-y: scroll;
+    width: 40%;
+    left: 6.67vw;
+    top: 6.67vw;
+    position: absolute;
+    color: white;
+  }
+  #create {
+    width: 40%;
+    height: 20vw;
+    background-color: blue;
+    left: 53.33%;
+    bottom: 6.67vw;
+    position: absolute;
+  }
+  body {
+    background-image: url("IMG_8508.png");
+    background-size: cover;
+    background-repeat: repeat;
+  }
+</style>
+<script>
+cvs();
+document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.1333) + "px";
+document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.40) + "px";
+ci = document.getElementById("chosenImage");
+ci2 = document.getElementById("chooseImage");
+bar = document.getElementById("bar");
+select = document.getElementById("select");
+if (window.innerWidth > window.innerHeight) {
+  gosbs();
+} else {
+  gotab();
+}
+window.addEventListener("resize", function() {
+document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.1333) + "px";
+document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.4) + "px";
+if (window.innerWidth > window.innerHeight) {
+  gosbs();
+} else {
+  gotab();
+}
+})
+function cvs() {
+  for (i = 1; i < 11; i++) {
+    current = ((parseInt(document.getElementById("select").value) - 1) * 10) + i;
+    document.getElementById("pic".concat(i.toString())).style.backgroundImage = "url('p".concat(current.toString(), ".png')");
+  }
+}
+function gosbs() {
+  for (i = 0; i < 5; i++) {
+  document.getElementsByClassName("lpo")[i].style.height = 4 + "vw";
+  document.getElementsByClassName("lpo")[i].style.top = 3 + 5 * i + "vw";
+  }
+  for (i = 0; i < 5; i++) {
+  document.getElementsByClassName("rpo")[i].style.height = 4 + "vw";
+  document.getElementsByClassName("rpo")[i].style.top = 3 + 5 * i + "vw";
+  }
+  document.getElementById("cit").style.fontSize = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
+  document.getElementById("cit").style.lineHeight = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
+  ci2.style.top = "auto";
+  ci.style.width = 40 + "%";
+  ci.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) + "px";
+  ci.style.transform = "translate(0%, 0%)";
+  ci.style.left = 53.33 + "%";
+  ci2.style.width = 40 + "%";
+  ci2.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) + "px";
+  ci2.style.transform = "translate(0%, 0%)";
+  ci2.style.left = 6.67 + "%";
+}
+function gotab() {
+  for (i = 0; i < 5; i++) {
+  document.getElementsByClassName("lpo")[i].style.height = 8 + "vw";
+  document.getElementsByClassName("lpo")[i].style.top = 5 + 10 * i + "vw";
+  }
+  for (i = 0; i < 5; i++) {
+  document.getElementsByClassName("rpo")[i].style.height = 8 + "vw";
+  document.getElementsByClassName("rpo")[i].style.top = 5 + 10 * i + "vw";
+  }
+  document.getElementById("cit").style.fontSize = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.1433)) * 0.05 + "px";
+  document.getElementById("cit").style.lineHeight = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.1433)) * 0.05 + "px";
+  ci.style.left = 50 + "%";
+  ci.style.width = 86.67 + "%";
+  ci.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.1433)) * 0.5 + "px";
+  ci.style.transform = "translate(-50%, 0%)";
+  ci2.style.bottom = 1.5 + "vw";
+  ci2.style.left = 50 + "%";
+  ci2.style.width = 86.67 + "%";
+  ci2.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.1433)) * 0.5 + "px";
+  ci2.style.transform = "translate(-50%, 0%)";
+}
+total = 1;
+function remove() {
+  num = event.target.id.substring(1);
+  document.getElementById("g".concat(num)).remove();
+  document.getElementById("s".concat(num)).remove();
+  total--;
+  b = 0;
+  for (i = 1; i < (total + 2); i++) {
+    if (i <= num) { continue; }
+    document.getElementById("g".concat(i.toString())).children[0].innerHTML = "Question ".concat((i - 1).toString(), ": ");
+    document.getElementById("g".concat(i.toString())).children[4].innerHTML = "Answer ".concat((i - 1).toString(), ": ");
+    document.getElementById("g".concat(i.toString())).id = "g".concat((i - 1).toString());
+    document.getElementById("s".concat(i.toString())).id = "s".concat((i - 1).toString());
+    document.getElementById("d".concat(i.toString())).id = "d".concat((i - 1).toString());
+    document.getElementById("q".concat(i.toString(), "l")).id = "q".concat((i - 1).toString(), "l");
+    document.getElementById("a".concat(i.toString(), "l")).id = "a".concat((i - 1).toString(), "l");
+    document.getElementById("ta".concat(i.toString(), "a")).id = "ta".concat((i - 1).toString(), "a");
+    document.getElementById("ta".concat(i.toString(), "b")).id = "ta".concat((i - 1).toString(), "b");
+  }
+}
+function add() {
+  total++;
+  nD = document.createElement("div");
+  nD.classList.add("question");
+  nD.id = "g".concat(total.toString());
+  document.getElementById("questions").appendChild(nD);
+  nS = document.createElement("span");
+  nS.innerHTML = "Question ".concat(total.toString(), ": ");
+  nD.appendChild(nS);
+  nS = document.createElement("span");
+  nS.id = "q".concat(total.toString(), "l");
+  nS.innerHTML = "(0/500)";
+  nD.appendChild(nS);
+  nImg = document.createElement("img");
+  nImg.src = "IMG_8551.png";
+  nImg.classList.add("delete");
+  nImg.onclick = remove;
+  nImg.id = "d".concat(total.toString());
+  nD.appendChild(nImg);
+  nTA = document.createElement("textarea");
+  nTA.id = "ta".concat(total.toString(), "a");
+  nD.appendChild(nTA);
+  nS = document.createElement("span");
+  nS.innerHTML = "Answer ".concat(total.toString(), ": ");
+  nD.appendChild(nS);
+  nS = document.createElement("span");
+  nS.id = "a".concat(total.toString(), "l");
+  nS.innerHTML = "(0/1000)";
+  nD.appendChild(nS);
+  nTA = document.createElement("textarea");
+  nTA.id = "ta".concat(total.toString(), "b");
+  nD.appendChild(nTA);
+  nSp = document.createElement("div");
+  nSp.classList.add("space");
+  nSp.id = "s".concat(total.toString());
+  document.getElementById("questions").appendChild(nSp);
+}
+function cc() {
+  setTimeout(function() {
+  for (i = 1; i < (total + 1); i++) {
+    wq = document.getElementById("q".concat(i.toString(), "l"));
+    wa = document.getElementById("a".concat(i.toString(), "l"));
+    if (document.getElementById("ta".concat(i.toString(), "a")).value.length > 500) { document.getElementById("ta".concat(i.toString(), "a")).value = document.getElementById("ta".concat(i.toString(), "a")).value.substring(0, 500) }
+    if (document.getElementById("ta".concat(i.toString(), "b")).value.length > 1000) { document.getElementById("ta".concat(i.toString(), "b")).value = document.getElementById("ta".concat(i.toString(), "b")).value.substring(0, 1000) }
+    wq.innerHTML = "(".concat((document.getElementById("ta".concat(i.toString(), "a")).value.length).toString(), "/500)");
+    wa.innerHTML = "(".concat((document.getElementById("ta".concat(i.toString(), "b")).value.length).toString(), "/1000)");
+  }
+  }, 100);
+}
+window.addEventListener("keydown", cc);
+window.addEventListener("paste", cc);
+window.addEventListener("keydown", function() {
+setTimeout(function() {
+if (document.getElementById("name").value.length > 50) {
+document.getElementById("name").value = document.getElementById("name").value.substring(0, 50);
+}
+if (document.getElementById("author").value.length > 50) {
+document.getElementById("author").value = document.getElementById("author").value.substring(0, 50);
+} 
+document.getElementById("cit").innerHTML = document.getElementById("name").value;
+}, 100)
+})
+window.addEventListener("paste", function() {
+setTimeout(function() {
+if (document.getElementById("name").value.length > 20) {
+document.getElementById("name").value = document.getElementById("name").value.substring(0, 20);
+}
+if (document.getElementById("author").value.length > 20) {
+document.getElementById("author").value = document.getElementById("author").value.substring(0, 20);
+}
+document.getElementById("cit").innerHTML = document.getElementById("name").value;
+}, 100)
+})
+</script>
+</body>
+</html>
