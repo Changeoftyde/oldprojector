@@ -83,11 +83,23 @@
     }
     qn -= 1;
     
-    
+    tstl = false;
+    for (i = 1; i < (qn + 1); i++) {
+      if (window["q".concat(i.toString())].length > 500) {
+        tstl = true;
+      }
+      if (window["a".concat(i.toString())].length > 1000) {
+        tstl = true;
+      }
+    }
     if (an != qn) {
       alert("Ensure that every question has an answer.")
     } else if (an == 0) {
-      alert("Please check your text format.")
+      alert("Please check your text format.");
+    } else if (tstl == true) {
+      alert("Some Questions/Answers are too long. Ensure that all questions are at maximum 500 Characters long and all answers are at maximum 1000 Characters long.");
+    } else if (qn > 300) {
+      alert("You have too many Questions/Answers. Please limit your amount of questions to 300.");
     } else {
       sessionStorage.setItem("qat", (qn + an).toString());
       for (a = 1; a < (qn + 1); a++) {
