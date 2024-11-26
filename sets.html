@@ -53,6 +53,7 @@ adjust();
 initial();
 window.addEventListener("resize", adjust);
 function blank() {
+  alert(event.target.id.substring(3));
   sessionStorage.setItem("wic", event.target.id.substring(3));
   sessionStorage.setItem("c", "2");
   window.location.href = "edit.html";
