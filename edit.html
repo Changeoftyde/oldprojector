@@ -202,6 +202,11 @@ total = 1;
 ss();
 cd = 0;
 cvs();
+for (i = 1; i < 11; i++) {
+  if (localStorage.getItem(i.toString().concat("f"))) {} else {
+    localStorage.setItem(i.toString().concat("f"), "true");
+  }
+}
 document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.1333) + "px";
 document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.40) + "px";
 ci = document.getElementById("chosenImage");
@@ -247,6 +252,7 @@ function create() {
   if (mode == "0" || mode == "1" || mode == "3") {
     for (i = 1; i < 11; i++) {
       if (localStorage.getItem(i.toString().concat("f")) == "true") {
+        localStorage.setItem(i.toString().concat("f"), "false");
         slot = i;
         break;
       }
