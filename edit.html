@@ -223,11 +223,55 @@ if (window.innerWidth > window.innerHeight) {
   gotab();
 }
 })
+cd = 0;
+function create() {
+  ae = false;
+  for (i = 1; i < (total + 1), i++) {
+    if (document.getElementById("ta".concat(i.toString(), "a")).value == "") {
+      ae = true;
+    }
+    if (document.getElementById("ta".concat(i.toString(), "b")).value == "") {
+      ae = true;
+    }
+  }
+  if (document.getElementById("name").value == "") {
+    alert("Set Name Missing");
+  } else if (document.getElementById("author").value == "") {
+    alert("Set Author Missing");
+  } else if (cd == 0) {
+    alert("Set Picture Missing");
+  } else if (ae == true) {
+    alert("One or more Questions/Answers missing");
+  } else if (total = 0) {
+    alert("You must have at least one question in a set.");
+  } else {
+  if (mode == "0" || mode == "1" || mode == "3") {
+    for (i = 1; i < 11; i++) {
+      if (localStorage.getItem(i.toString().concat("f")) == "true") {
+        slot = i;
+        break;
+      }
+    }
+  } else if (mode == "2") {
+    slot = which;
+  } else {}
+  localStorage.setItem(slot.toString().concat("n"), document.getElementById("name").value);
+  localStorage.setItem(slot.toString().concat("a"), document.getElementById("author").value);
+  localStorage.setItem(slot.toString().concat("p"), cd.toString());
+  for (i = 1; i < (total + 1), i++) {
+    localStorage.setItem(slot.toString().concat("q", i.toString()), document.getElementById("ta".concat(i.toString(), "a")).value);
+    localStorage.setItem(slot.toString().concat("a", i.toString()), document.getElementById("ta".concat(i.toString(), "b")).value);
+  }
+  window.location.href = "index.html";
+  }
+}
+which = parseInt(sessionStorage.getItem("wic"));
 document.getElementsByClassName("checkbox")[0].addEventListener("change", function() {
   ch = document.getElementsByClassName("checkbox")[0];
   tof = ch.checked;
 })
 function ss() {
+  mode = sessionStorge.getItem("c");
   noc = parseInt(sessionStorage.getItem("qat")) / 2;
   if (sessionStorage.getItem("c") == "0") {
     document.getElementById("name").value = sessionStorage.getItem("n");
