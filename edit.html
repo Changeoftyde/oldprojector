@@ -332,6 +332,7 @@ function remove() {
 }
 function add() {
   total++;
+  if (total != 301) {
   nD = document.createElement("div");
   nD.classList.add("question");
   nD.id = "g".concat(total.toString());
@@ -366,6 +367,7 @@ function add() {
   nSp.classList.add("space");
   nSp.id = "s".concat(total.toString());
   document.getElementById("questions").appendChild(nSp);
+  }
 }
 function cc() {
   setTimeout(function() {
