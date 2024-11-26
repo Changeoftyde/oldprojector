@@ -223,6 +223,10 @@ if (window.innerWidth > window.innerHeight) {
   gotab();
 }
 })
+document.getElementsByClassName("checkbox")[0].addEventListener("change", function() {
+  ch = document.getElementsByClassName("checkbox")[0];
+  tof = ch.checked;
+})
 function ss() {
   noc = parseInt(sessionStorage.getItem("qat")) / 2;
   if (sessionStorage.getItem("c") == "0") {
