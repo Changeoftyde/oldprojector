@@ -199,8 +199,8 @@ body {
 </style>
 <script>
 total = 1;
-ss();
 cd = 0;
+ss();
 cvs();
 for (i = 1; i < 11; i++) {
   if (localStorage.getItem(i.toString().concat("f"))) {} else {
@@ -285,7 +285,6 @@ function ss() {
     }
     document.getElementById("cit").innerHTML = document.getElementById("name").value;
     cd = parseInt(sessionStorage.getItem("p"));
-    alert(cd);
     if (cd < 11) {
       document.getElementById("pic".concat(cd.toString())).classList.add("chosen");
     }
