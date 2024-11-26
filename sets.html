@@ -58,7 +58,7 @@ function blank() {
 function initial() {
   for (i = 1; i < 11; i++) {
     if (localStorage.getItem(i.toString().concat("f"))) {
-      if (localStorage.getItem(i.toString().concat("f")) == "false") {
+      if (localStorage.getItem(i.toString().concat("f")) == "true") {
         document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
         document.getElementById("pro".concat(i.toString())).onclick = blank;
       } else {
