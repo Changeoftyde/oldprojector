@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><body>
+<h1>Projections</h1>
+<div class="projection" id="pro1"><p class="protxt"><span id="pt1"></span><br><span id="auth1"></span></p></div>
+<div class="projection" id="pro2"><p class="protxt"><span id="pt2"></span><br><span id="auth2"></span></p></div>
+<div class="projection" id="pro3"><p class="protxt"><span id="pt3"></span><br><span id="auth3"></span></p></div>
+<div class="projection" id="pro4"><p class="protxt"><span id="pt4"></span><br><span id="auth4"></span></p></div>
+<div class="projection" id="pro5"><p class="protxt"><span id="pt5"></span><br><span id="auth5"></span></p></div>
+<div class="projection" id="pro6"><p class="protxt"><span id="pt6"></span><br><span id="auth6"></span></p></div>
+<div class="projection" id="pro7"><p class="protxt"><span id="pt7"></span><br><span id="auth7"></span></p></div>
+<div class="projection" id="pro8"><p class="protxt"><span id="pt8"></span><br><span id="auth8"></span></p></div>
+<div class="projection" id="pro9"><p class="protxt"><span id="pt9"></span><br><span id="auth9"></span></p></div>
+<div class="projection" id="pro10"><p class="protxt"><span id="pt10"></span><br><span id="auth10"></span></p></div>
+<style>
+  body {
+    background-color: black;
+  }
+  h1 {
+    color: white;
+    text-align: center;
+    font-size: 5vh;
+    position: absolute;
+    top: 2vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .projection {
+    overflow-x: hidden;
+    background-color: blue;
+    transform: translate(0%, 0%);
+    position: absolute;
+    outline: 0.6vh solid white;
+    border-radius: 2vh;
+  }
+  .protxt {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 100%;
+    color: white;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    margin: 0;
+    z-index: 2000;
+  }
+</style>
+<script>
+adjust();
+initial();
+window.addEventListener("resize", adjust);
+function blank() {
+  sessionStorage.setItem("wic", event.target.id.substring(3));
+  sessionStorage.setItem("c", "2");
+  window.location.href = "edit.html";
+}
+function initial() {
+  for (i = 1; i < 11; i++) {
+    if (localStorage.getItem(i.toString().concat("f"))) {
+      if (localStorage.getItem(i.toString().concat("f")) == "false") {
+        document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
+        document.getElementById("pro".concat(i.toString())).onclick = blank;
+      } else {
+        document.getElementById("pt".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("n"));
+        document.getElementById("auth".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("a"));
+        document.getElementById("pro".concat(i.toString())).style.backgroundImage = "url('p".concat(localStorage.getItem(i.toString().concat("p")), ".png')");
+      }
+    } else {
+      document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
+      document.getElementById("pro".concat(i.toString())).onclick = blank;
+    }
+  }
+}
+function adjust() {
+  if (window.innerHeight > window.innerWidth) {
+    for (i = 1; i < 11; i++) {
+      document.getElementById("pt".concat(i.toString())).style.fontSize = 5 + "vw";
+      document.getElementById("auth".concat(i.toString())).style.fontSize = 2.5 + "vw";
+    }
+    for (i = 1; i < 11; i++) {
+      document.getElementById("pro".concat(i.toString())).style.width = 40 + "%";
+      document.getElementById("pro".concat(i.toString())).style.height = 30 + "vw";
+      if (i % 2 == 0) {
+        document.getElementById("pro".concat(i.toString())).style.left = 53.33 + "%";
+        document.getElementById("pro".concat(i.toString())).style.top = ((0.08 + (i / 2 - 1) * (0.367)) * window.innerWidth) + (0.05 * window.innerHeight) + "px";
+      } else {
+        document.getElementById("pro".concat(i.toString())).style.left = 6.67 + "%";
+        document.getElementById("pro".concat(i.toString())).style.top = ((0.08 + ((i + 1) / 2 - 1) * (0.367)) * window.innerWidth) + (0.05 * window.innerHeight) + "px";
+      }
+    }
+  } else {
+    for (i = 1; i < 11; i++) {
+      document.getElementById("pt".concat(i.toString())).style.fontSize = 1.5 + "vw";
+      document.getElementById("auth".concat(i.toString())).style.fontSize = 0.75 + "vw";
+    }
+    for (i = 1; i < 11; i++) {
+      document.getElementById("pro".concat(i.toString())).style.width = 15 + "%";
+      document.getElementById("pro".concat(i.toString())).style.height = 10 + "vw";
+      if ((i - 5) < 1) {
+        document.getElementById("pro".concat(i.toString())).style.top = (0.08 * window.innerWidth) + (0.05 * window.innerHeight) + "px";
+        document.getElementById("pro".concat(i.toString())).style.left = (4.16 + (i - 1) * 19.16) + "%";
+      } else {
+        document.getElementById("pro".concat(i.toString())).style.left = (4.16 + (i - 6) * 19.16) + "%";
+        document.getElementById("pro".concat(i.toString())).style.top = (0.22 * window.innerWidth) + (0.05 * window.innerHeight) + "px";
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
