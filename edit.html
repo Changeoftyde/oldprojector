@@ -245,7 +245,7 @@ function create() {
     alert("Set Picture Missing");
   } else if (ae == true) {
     alert("One or more Questions/Answers missing");
-  } else if (total = 0) {
+  } else if (total == 0) {
     alert("You must have at least one question in a set.");
   } else {
   if (mode == "0" || mode == "1" || mode == "3") {
@@ -261,7 +261,7 @@ function create() {
   localStorage.setItem(slot.toString().concat("n"), document.getElementById("name").value);
   localStorage.setItem(slot.toString().concat("a"), document.getElementById("author").value);
   localStorage.setItem(slot.toString().concat("p"), cd.toString());
-  for (i = 1; i < (total + 1), i++) {
+  for (i = 1; i < (total + 1); i++) {
     localStorage.setItem(slot.toString().concat("q", i.toString()), document.getElementById("ta".concat(i.toString(), "a")).value);
     localStorage.setItem(slot.toString().concat("a", i.toString()), document.getElementById("ta".concat(i.toString(), "b")).value);
   }
