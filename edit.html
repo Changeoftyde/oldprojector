@@ -51,129 +51,16 @@ label {
 .lpo {
   position: absolute;
   left: 6.67%;
-  width: 40%;
-  background-size: cover;
-}
-.rpo {
-  position: absolute;
-  left: 53.33%;
-  width: 40%;
-  background-size: cover;
-}
-input {
-  font-size: 1.5vw;
-}
-#cit {
-  margin: 0;
-  text-align: center;
-  width: 100%;
-  color: white;
-  line-height: 5vw;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-  position: absolute;
-  text-shadow: 0 0 2vw black;
-}
-select {
-  height: 2vw;
-  font-size: 1.8vw;
-  width: 100%;
-  border-radius: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  text-align: center;
-  color: white;
-  background-color: grey;
-  z-index: 2000;
-}
-#selector {
-  line-height: 0.8vw;
-  height: 100%;
-  top: 0.6vw;
-  position: absolute;
-}
-#chosenImage {
+@@ -84,8 +99,6 @@
   position: absolute;
   margin-top: 1.3vw;
   overflow-x: hidden;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 #bar {
   font-size: 1vw;
-  text-align: center;
-  width: 100%;
-  height: 2vw;
-  color: white;
-  background-color: grey;
-  top: 0;
-  left: 0;
-  position: absolute;
-}
-#chooseImage {
-  background-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  margin-top: 1.3vw;
-  overflow-y: scroll;
-}
-body {
-  background-color: black;
-}
-  .delete {
-    width: 4vw;
-    height: 4vw;
-    position: absolute;
-    left: 87.5%;
-    top: 2%;
-  }
-  #add {
-    z-index: 2000;
-    width: 4vw;
-    height: 4vw;
-    position: fixed;
-    transform: translate(-50%, 0%);
-    left: 26.67%;
-    top: 7.75vw;
-  }
-  textarea {
-  width: 38.5vw;
-  height: 7.5vw;
-  margin-left: -1vw;
-  font-size: 2.5vw;
-  border-radius: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 0;
-  color: white;
-  }
-  .space {
-    width: 100%;
-    height: 3vw;
-  }
-  .question {
-    border-radius: 2vw;
-    overflow-x: hidden;
-    font-size: 4vw;
-    position: relative;
-    width: 100%;
-  }
-  #manifest {
-    position: absolute;
-    left: 53.33%;
-    top: 6.67vw;
-    background-color: white;
-    width: 40%;
-    text-align: center;
-    font-size: 3.5vw;
-    color: black;
-    line-height: 0.6vw;
-    border-radius: 3vw;
-  }
-  #questions {
-    overflow-y: scroll;
-    width: 40%;
-    left: 6.67vw;
-    top: 6.67vw;
+@@ -164,53 +177,56 @@
     position: absolute;
     color: white;
   }
@@ -184,7 +71,8 @@ body {
   #create {
     width: 40%;
     height: 20vw;
-    background-color: blue;
+    background-size: cover;
+    background-image: url("IMG_8726.png");
     left: 53.33%;
     bottom: 6.67vw;
     position: absolute;
