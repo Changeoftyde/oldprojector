@@ -32,7 +32,22 @@
   <div id="g1" class="question"><span>Question 1: </span><span id="q1l">(0/500)</span><img src="IMG_8551.png" id="d1" onclick="remove()" class="delete"><textarea id="ta1a"></textarea><span>Answer 1: </span><span id="a1l">(0/1000)</span><textarea id="ta1b"></textarea></div>
   <div id="s1" class="space"></div>
 </div>
+<div id="chd">
+<input id="ch" type="checkbox" class="checkbox">
+<label for="ch">Download Current Set</label>
+</div>
 <style>
+#chd {
+  transform: translate(-50%, -50%);
+  left: 73.33%;
+  z-index: 3000;
+  position: absolute;
+  bottom: 26.5vw;
+}
+label {
+  color: white;
+  font-size: 2vw;
+}
 .lpo {
   position: absolute;
   left: 6.67%;
@@ -84,8 +99,6 @@ select {
   position: absolute;
   margin-top: 1.3vw;
   overflow-x: hidden;
-  background-size: cover;
-  background-position: 50% 50%;
 }
 #bar {
   font-size: 1vw;
@@ -164,11 +177,14 @@ body {
     position: absolute;
     color: white;
   }
+  .checkbox {
+    width: 2vw;
+    height: 2vw;
+  }
   #create {
     width: 40%;
     height: 20vw;
-    background-size: cover;
-    background-image: url("IMG_8726.png");
+    background-color: blue;
     left: 53.33%;
     bottom: 6.67vw;
     position: absolute;
