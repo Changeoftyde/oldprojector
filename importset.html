@@ -92,7 +92,7 @@ function au() {
       tstl = true;
     }
   }
-  if (an != qn || name == "" || author == "" || pic == "" || an < 1 || parseInt(pic) < 51 || parseInt(pic) > 0 || parseFloat(pic) % 1 == 0) {
+  if (an != qn || name == "" || author == "" || pic == "" || an < 1 || parseInt(pic) > 50 || parseInt(pic) < 1 || parseFloat(pic) % 1 == 0) {
     alert("File could not be read as a Projector Set.");
   } else if (tstl == true) {
     alert("Some Questions/Answers are too long. Ensure that all questions are at maximum 500 Characters long and all answers are at maximum 1000 Characters long.");
