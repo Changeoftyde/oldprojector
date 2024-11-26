@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <body>
-<div id="create"></div>
+<div onclick="create()" id="create"></div>
 <div id="manifest"><span style="line-height: 1">Set Details</span><br><span style="font-size: 1.5vw">Set Name: <input id="name" style="width: 40%; height: 1.5vw"></span><br><span style="font-size: 1.5vw">Set Author: <input id="author" style="width: 40%; height: 1.5vw"></span>
 <div id="chosenImage"><p id="cit"></p></div>
 <div id="chooseImage">
@@ -31,10 +31,6 @@
   <img onclick="add()" src="IMG_8550.png" id="add">
   <div id="g1" class="question"><span>Question 1: </span><span id="q1l">(0/500)</span><img src="IMG_8551.png" id="d1" onclick="remove()" class="delete"><textarea id="ta1a"></textarea><span>Answer 1: </span><span id="a1l">(0/1000)</span><textarea id="ta1b"></textarea></div>
   <div id="s1" class="space"></div>
-</div>
-<div id="chd">
-<input id="ch" type="checkbox" class="checkbox">
-<label for="ch">Download Current Set</label>
 </div>
 <style>
 #chd {
@@ -269,10 +265,6 @@ function create() {
   }
 }
 which = parseInt(sessionStorage.getItem("wic"));
-document.getElementsByClassName("checkbox")[0].addEventListener("change", function() {
-  ch = document.getElementsByClassName("checkbox")[0];
-  tof = ch.checked;
-})
 function ss() {
   mode = sessionStorage.getItem("c");
   noc = parseInt(sessionStorage.getItem("qat")) / 2;
