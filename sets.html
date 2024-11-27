@@ -53,8 +53,17 @@ adjust();
 initial();
 window.addEventListener("resize", adjust);
 function blank() {
-  alert(event.target.id.substring(3));
-  sessionStorage.setItem("wic", event.target.id.substring(3));
+  allow = "";
+  if (event.target.tagName == "DIV") {
+    allow = event.target.id.substring(3);
+  } else if (event.target.tagName == "SPAN" && event.target.id.substring(0, 4) == "auth") {
+    allow = event.target.id.substring(4);
+  } else if (event.target.tagName == "P") { 
+    allow = event.target.children[0].id.substring(2);
+  } else {
+    allow = event.target.id.substring(2);
+  }
+  sessionStorage.setItem("wic", allow);
   sessionStorage.setItem("c", "2");
   window.location.href = "edit.html";
 }
