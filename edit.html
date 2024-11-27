@@ -259,6 +259,7 @@ function create() {
     }
   } else if (mode == "2") {
     slot = which;
+    localStorage.setItem(slot.toString().concat("f"), "false");
   } else {}
   localStorage.setItem(slot.toString().concat("n"), document.getElementById("name").value);
   localStorage.setItem(slot.toString().concat("a"), document.getElementById("author").value);
