@@ -62,6 +62,7 @@ adjust();
 window.addEventListener("resize", adjust);
 ses();
 function ses() {
+  ses = "";
   if (sessionStorage.getItem("whichclicked")) {
     if (sessionStorage.getItem("whichclicked") == "0") {
       window.location.href = "sets.html";
