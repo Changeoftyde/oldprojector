@@ -256,7 +256,7 @@ function create() {
         break;
       }
     }
-  } else if (mode == "2") {
+  } else if (mode == "2" || mode == "4") {
     slot = which;
     localStorage.setItem(slot.toString().concat("f"), "false");
   } else {}
@@ -275,7 +275,7 @@ which = parseInt(sessionStorage.getItem("wic"));
 function ss() {
   mode = sessionStorage.getItem("c");
   noc = parseInt(sessionStorage.getItem("qat")) / 2;
-  if (sessionStorage.getItem("c") == "0") {
+  if (sessionStorage.getItem("c") == "0" || sessionStorage.getItem("c") == "4") {
     document.getElementById("name").value = sessionStorage.getItem("n");
     document.getElementById("author").value = sessionStorage.getItem("a");
     if (document.getElementById("name").value.length > 50) {
@@ -305,7 +305,7 @@ function ss() {
       cc();
     }
   } else {}
-  sessionStorage.setItem("c", "3");
+  sessionStorage.setItem("c", "5");
 }
 function chosen() {
   cd = ((parseInt(document.getElementById("select").value) - 1) * 10) + parseInt(event.target.id.substring(3));
