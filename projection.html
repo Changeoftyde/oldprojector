@@ -83,6 +83,19 @@ function ses() {
   document.getElementById("small").innerHTML = localStorage.getItem(ses.concat("a"));
   sessionStorage.setItem("whichclicked", "0");
 }
+function edit() {
+  sessionStorage.setItem("c", "2");
+  sessionStorage.setItem("wic", ses);
+  sessionStorage.setItem("qat", localStorage.getItem(ses.concat("qat")));
+  sessionStorage.setItem("n", localStorage.getItem(ses.concat("n")));
+  sessionStorage.setItem("a", localStorage.getItem(ses.concat("a")));
+  sessionStorage.setItem("p", localStorage.getItem(ses.concat("p")));
+  for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
+    sessionStorage.setItem("q".concat(i.toString()), localStorage.getItem(ses.concat("q", i.toString())));
+    sessionStorage.setItem("a".concat(i.toString()), localStorage.getItem(ses.concat("a", i.toString())));
+  }
+  window.location.href = "edit.html";
+}
 function download() {
   qaa = "";
   for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
