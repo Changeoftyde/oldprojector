@@ -67,6 +67,20 @@ function blank() {
   sessionStorage.setItem("c", "2");
   window.location.href = "edit.html";
 }
+function filled() {
+  allow = "";
+  if (event.target.tagName == "DIV") {
+    allow = event.target.id.substring(3);
+  } else if (event.target.tagName == "SPAN" && event.target.id.substring(0, 4) == "auth") {
+    allow = event.target.id.substring(4);
+  } else if (event.target.tagName == "P") { 
+    allow = event.target.children[0].id.substring(2);
+  } else {
+    allow = event.target.id.substring(2);
+  }
+  sessionStorage.setItem("whichclicked", allow);
+  window.location.href = "projection.html";
+}
 function initial() {
   for (i = 1; i < 11; i++) {
     if (localStorage.getItem(i.toString().concat("f"))) {
@@ -77,6 +91,7 @@ function initial() {
         document.getElementById("pt".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("n"));
         document.getElementById("auth".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("a"));
         document.getElementById("pro".concat(i.toString())).style.backgroundImage = "url('p".concat(localStorage.getItem(i.toString().concat("p")), ".png')");
+        document.getElementById("pro".concat(i.toString())).onclick = filled;
       }
     } else {
       document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
