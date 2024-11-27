@@ -7,7 +7,6 @@
 <button onclick="del()" style="left: 66.67%; color: #6d1212" id="delete" class="button1">Delete</button>
 <button style="left: 10%" id="study" class="button2">Study</button>
 <button style="left: 52.5%" id="play" class="button2">Play</button>
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
 <style>
 #small {
   font-size: 2.5vh;
@@ -167,8 +166,8 @@ function adjust() {
   document.getElementsByClassName("button2")[0].style.top = (wH * 0.75) + (window.innerWidth * 0.2) + "px";
   document.getElementsByClassName("button2")[1].style.top = (wH * 0.75) + (window.innerWidth * 0.2) + "px";
 }
-</script>
-</html>ses();
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer">
+ses();
 function ses() {
   ses = "";
   if (sessionStorage.getItem("whichclicked")) {
