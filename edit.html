@@ -268,6 +268,7 @@ function create() {
     localStorage.setItem(slot.toString().concat("q", i.toString()), document.getElementById("ta".concat(i.toString(), "a")).value);
     localStorage.setItem(slot.toString().concat("a", i.toString()), document.getElementById("ta".concat(i.toString(), "b")).value);
   }
+  localStorage.setItem(slot.toString().concat("qat"), total.toString());
   window.location.href = "sets.html";
   }
 }
