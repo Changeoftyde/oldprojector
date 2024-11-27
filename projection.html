@@ -75,6 +75,16 @@ function ses() {
   document.getElementById("small").innerHTML = localStorage.getItem(ses.concat("a"));
   sessionStorage.setItem("whichclicked", "0");
 }
+function download() {
+  qaa = "";
+  for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
+    qaa = qaa.concat(localStorage.getItem(ses.toString().concat("q", i.toString())), "///", localStorage.getItem(ses.toString().concat("a", i.toString())), "///");
+  }
+  var blob = new Blob([localStorage.getItem(ses.concat("n")).concat("[]", localStorage.getItem(ses.concat("a")), "[]", localStorage.getItem(ses.concat("p")), "[]", qaa)], {
+    type: "text/plain;charset=utf-8",
+    });
+  saveAs(blob, localStorage.getItem(ses.concat("n")).concat(".projection"));
+}
 function del() {
   localStorage.setItem(ses.concat("f"), "true");
   window.location.href = "sets.html";
