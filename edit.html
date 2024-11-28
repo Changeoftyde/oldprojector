@@ -289,6 +289,9 @@ function ss() {
   mode = sessionStorage.getItem("c");
   noc = parseInt(sessionStorage.getItem("qat")) / 2;
   if (sessionStorage.getItem("c") == "0" || sessionStorage.getItem("c") == "4") {
+    if (sessionStorage.getItem("c") == "4") {
+      noc = parseInt(sessionStorage.getItem("qat"));
+    }
     document.getElementById("name").value = sessionStorage.getItem("n");
     document.getElementById("author").value = sessionStorage.getItem("a");
     if (document.getElementById("name").value.length > 50) {
