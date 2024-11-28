@@ -121,6 +121,7 @@ function del() {
   window.location.href = "sets.html";
 }
 function adjust() {
+  if (window.innerHeight > window.innerWidth) {
   wH = window.innerHeight - (window.innerWidth * 0.3);
   document.getElementsByClassName("button1")[0].style.height = (wH * 0.15) + "px";
   document.getElementsByClassName("button1")[1].style.height = (wH * 0.15) + "px";
@@ -133,6 +134,24 @@ function adjust() {
   document.getElementsByClassName("button1")[2].style.top = (wH * 0.6) + (window.innerWidth * 0.15) + "px";
   document.getElementsByClassName("button2")[0].style.top = (wH * 0.75) + (window.innerWidth * 0.2) + "px";
   document.getElementsByClassName("button2")[1].style.top = (wH * 0.75) + (window.innerWidth * 0.2) + "px";
+  document.getElementById("projection").style.top = 10 + "vw";
+  document.getElementById("projection").style.width = 80 + "%";
+  } else {
+  wH = window.innerHeight - (window.innerWidth * 0.15);
+  document.getElementById("projection").style.top = 5 + "vw";
+  document.getElementById("projection").style.width = 80 + "%";
+  document.getElementsByClassName("button1")[0].style.height = (wH * 0.15) + "px";
+  document.getElementsByClassName("button1")[1].style.height = (wH * 0.15) + "px";
+  document.getElementsByClassName("button1")[2].style.height = (wH * 0.15) + "px";
+  document.getElementsByClassName("button2")[0].style.height = (wH * 0.25) + "px";
+  document.getElementsByClassName("button2")[1].style.height = (wH * 0.25) + "px";
+  document.getElementById("projection").style.height = (wH * 0.6) + "px";
+  document.getElementsByClassName("button1")[0].style.top = (wH * 0.6) + (window.innerWidth * 0.075) + "px";
+  document.getElementsByClassName("button1")[1].style.top = (wH * 0.6) + (window.innerWidth * 0.075) + "px";
+  document.getElementsByClassName("button1")[2].style.top = (wH * 0.6) + (window.innerWidth * 0.075) + "px";
+  document.getElementsByClassName("button2")[0].style.top = (wH * 0.75) + (window.innerWidth * 0.10) + "px";
+  document.getElementsByClassName("button2")[1].style.top = (wH * 0.75) + (window.innerWidth * 0.10) + "px";
+  }
 }
 </script>
 </html
