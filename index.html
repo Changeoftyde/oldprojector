@@ -16,14 +16,14 @@
 </div>
 <div class="backdrop"></div>
 <style>
-  #menucontrolled {
+  #menucontroller {
     background-size: cover;
     background-image: url("Frame 1.png");
     height: auto;
     position: fixed;
     top: 0;
     right: 0;
-    transform: translate(-100%, 0%);
+    transform: translate(0%, 0%);
   }
   #menu {
     transition: 1.5s;
@@ -100,13 +100,13 @@ over = false;
 rendermenu();
 window.addEventListener("resize", rendermenu);
 function rendermenu() {
-  document.getElementById("menucontroller").style.width = 0.2 * window.innerWidth + 0.05 * window.innerHeight + "px";
+  document.getElementById("menucontroller").style.width = 0.1 * window.innerWidth + 0.05 * window.innerHeight + "px";
   if (over == true) {
     HW = window.innerHeight / window.innerWidth;
-    height = (403 * (0.2 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
+    height = (403 * (0.1 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
     document.getElementById("menucontroller").style.right = ((((HW / 2.61) * 28) + 41.4) / 100 * window.innerWidth) - (height / 9.35);
   } else {
-    document.getElementById("menucontroller").style.right = 0 + "%";
+    document.getElementById("menucontroller").style.right =  (height / -9.35) + "px";
   }
 }
 function sfs() {
