@@ -5,6 +5,7 @@
 <html>
 <body>
 <div id="menu"></div>
+<div id="menucontroller"></div>
 <img src="IMG_8465.png" class="waves">
 <img class="logo" src="IMG_8460.png">
 <div id="info">
@@ -15,14 +16,23 @@
 </div>
 <div class="backdrop"></div>
 <style>
+  #menucontrolled {
+    background-size: cover;
+    background-image: url("Frame 1.png");
+    height: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
   #menu {
+    transition: 1.5s;
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 4000;
-    left: 0;
+    left: 100%;
     top: 0;
-    background-image: url("IMG_8762.png");
+    background-image: url("IMG_8761.png");
     background-size: cover;
     background-position: 50% 100%;
   }
@@ -85,6 +95,19 @@
   }
 </style>
 <script>
+over = false;
+rendermenu();
+window.addEventListener("resize", rendermenu);
+function rendermenu() {
+  document.getElementById("menucontroller").style.width = 0.2 * window.innerWidth + 0.05 * window.innerHeight + "px";
+  if (over == true) {
+    HW = window.innerHeight / window.innerWidth;
+    height = (403 * (0.2 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
+    document.getElementById("menucontroller").style.right = ((((HW / 2.61) * 28) + 41.4) / 100 * window.innerWidth) - (height / 9.35);
+  } else {
+    document.getElementById("menucontroller").style.right = 0 + "%";
+  }
+}
 function sfs() {
   sessionStorage.setItem("c", "3");
   window.location.href = "edit.html";
