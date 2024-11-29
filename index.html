@@ -112,11 +112,28 @@ function togglemenu() {
   if (over == true) {
     over = false;
     document.getElementById("menu").style.left = 100 + "%";
+    animate("close");
     rendermenu();
   } else {
     over = true;
     document.getElementById("menu").style.left = 0 + "%";
+    animate("open");
     rendermenu();
+  }
+}
+function animate(oc) {
+  if (oc == "open") {
+    for (i = 2; i < 7; i++) {
+      setTimeout(function() {
+        document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
+      }, (i - 1) * 300);
+    }
+  } else {
+    for (i = 5; i > 0; i--) {
+      setTimeout(function() {
+        document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
+      }, (6 - i) * 300);
+    }
   }
 }
 function sfs() {
