@@ -5,7 +5,7 @@
 <html>
 <body>
 <div id="menu"></div>
-<img id="menucontroller" src="Frame 1.png">
+<img onclick="togglemenu()" id="menucontroller" src="Frame 1.png">
 <img src="IMG_8465.png" class="waves">
 <img class="logo" src="IMG_8460.png">
 <div id="info">
@@ -17,6 +17,7 @@
 <div class="backdrop"></div>
 <style>
   #menucontroller {
+    transition: 1.5s;
     z-index: 4000;
     height: auto;
     position: fixed;
@@ -97,15 +98,25 @@
 <script>
 over = false;
 rendermenu();
-window.addEventListener("resize", rendermenu);
 function rendermenu() {
-  document.getElementById("menucontroller").style.width = 0.1 * window.innerWidth + 0.05 * window.innerHeight + "px";
+  document.getElementById("menucontroller").style.width = (0.1 * window.innerWidth + 0.05 * window.innerHeight) + "px";
+  height = (403 * (0.1 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
   if (over == true) {
     HW = window.innerHeight / window.innerWidth;
-    height = (403 * (0.1 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
-    document.getElementById("menucontroller").style.right = ((((HW / 2.61) * 28) + 41.4) / 100 * window.innerWidth) - (height / 9.35);
+    document.getElementById("menucontroller").style.right = ((((HW / 2.61) * 28) + 41.4) / 100 * window.innerWidth) - (height / 9.35) + "px";
   } else {
-    document.getElementById("menucontroller").style.right =  (height / -9.35) + "px";
+    document.getElementById("menucontroller").style.right = (height / -9.35) + "px";
+  }
+}
+function togglemenu() {
+  if (over == true) {
+    over = false;
+    document.getElementById("menu").style.left = 100 + "%";
+    rendermenu();
+  } else {
+    over = true;
+    document.getElementById("menu").style.left = 0 + "%";
+    rendermenu();
   }
 }
 function sfs() {
@@ -114,6 +125,7 @@ function sfs() {
 }
 if (localStorage.getItem("pic")) {
 } else { document.getElementById("set").style.backgroundImage = "url('IMG_8486.png')"; }
+window.addEventListener("resize", rendermenu);
 </script>
 </body>
 </html>
