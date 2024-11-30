@@ -126,13 +126,13 @@ function animate(oc) {
     for (let i = 2; i < 7; i++) {
       setTimeout(function() {
         document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
-      }, (i - 1) * 300);
+      }, (i - 1) * 50);
     }
   } else {
     for (let i = 5; i > 0; i--) {
       setTimeout(function() {
         document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
-      }, (6 - i) * 300);
+      }, (6 - i) * 50);
     }
   }
 }
