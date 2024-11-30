@@ -123,13 +123,13 @@ function togglemenu() {
 }
 function animate(oc) {
   if (oc == "open") {
-    for (i = 2; i < 7; i++) {
+    for (let i = 2; i < 7; i++) {
       setTimeout(function() {
         document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
       }, (i - 1) * 300);
     }
   } else {
-    for (i = 5; i > 0; i--) {
+    for (let i = 5; i > 0; i--) {
       setTimeout(function() {
         document.getElementById("menucontroller").src = "Frame ".concat(i.toString(), ".png");
       }, (6 - i) * 300);
