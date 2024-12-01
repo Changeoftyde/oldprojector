@@ -4,7 +4,14 @@
 </head>
 <html>
 <body>
-<div id="menu"></div>
+<div id="menu">
+<img src="Projections.png" class="link" style="top: 2.5vw">
+<img src="Create.png" class="link">
+<img src="Import.png" class="link">
+<img src="Study.png" class="link">
+<img src="Play.png" class="link">
+<img src="Home.png" class="link">
+</div>
 <img onclick="togglemenu()" id="menucontroller" src="Frame 1.png">
 <img src="IMG_8465.png" class="waves">
 <img class="logo" src="IMG_8460.png">
@@ -16,6 +23,12 @@
 </div>
 <div class="backdrop"></div>
 <style>
+  .link {
+    position: absolute;
+    z-index: 2000;
+    height: auto;
+    right: 2.5vw;
+  }
   #menucontroller {
     transition: 1.5s;
     z-index: 4000;
@@ -101,8 +114,13 @@ rendermenu();
 function rendermenu() {
   document.getElementById("menucontroller").style.width = (0.1 * window.innerWidth + 0.05 * window.innerHeight) + "px";
   height = (403 * (0.1 * window.innerWidth + 0.05 * window.innerHeight)) / 412;
+  HW = window.innerHeight / window.innerWidth;
+  for (i = 0; i < 6; i++) {
+    wl = ((((HW / 2.61) * 28) + 32.9) / 100 * window.innerWidth) - (0.05 * window.innerWidth);
+    document.getElementsByClassName("link")[i].style.width = wl + "px";
+    document.getElementsByClassName("link")[i].style.top = 0.025 * window.innerWidth + ((446 * wl / 2278) * i + 0.025 * window.innerWidth) + "px";
+  }
   if (over == true) {
-    HW = window.innerHeight / window.innerWidth;
     document.getElementById("menucontroller").style.right = ((((HW / 2.61) * 28) + 41.4) / 100 * window.innerWidth) - (height / 9.35) + "px";
   } else {
     document.getElementById("menucontroller").style.right = (height / -9.35) + "px";
