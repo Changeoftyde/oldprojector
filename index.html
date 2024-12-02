@@ -118,7 +118,13 @@ function rendermenu() {
   HW = window.innerHeight / window.innerWidth;
   for (i = 0; i < 6; i++) {
     wl = ((((HW / 2.61) * 28) + 32.9) / 100 * window.innerWidth) - (0.05 * window.innerWidth);
+    if ((((wl * 0.195) * 6) + window.innerWidth * 0.175) > window.innerHeight) {
+      wl = (window.innerHeight - (window.innerWidth * 0.175)) * 0.1666;
+    } else {
+      wl = ((((HW / 2.61) * 28) + 32.9) / 100 * window.innerWidth) - (0.05 * window.innerWidth);
+    }
     document.getElementsByClassName("link2")[i].style.width = wl + "px";
+    document.getElementsByClassName("link2")[i].style.height = wl * 0.195 + "px";
     document.getElementsByClassName("link2")[i].style.top = 0.025 * window.innerWidth + (((446 * wl / 2278) + (0.025 * window.innerWidth)) * i) + "px";
   }
   if (over == true) {
