@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech-to-Text Example</title>
+</head>
+<body>
+  <h1>Speech-to-Text Example</h1>
+  <button id="start-recognition">Start Speaking</button>
+  <p id="output">Your speech will appear here...</p>
+
+  <script>
+    // Check if the browser supports the SpeechRecognition API
+    if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+      alert('Speech Recognition is not supported in this browser.');
+    }
+
+    // Create recognition instance based on browser support
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+    recognition.interimResults = true; // Show results as the user speaks
+    recognition.maxAlternatives = 1; // Limit to 1 result (most accurate)
+
+    // Start recognition on button click
+    document.getElementById('start-recognition').addEventListener('click', function() {
+      recognition.start();
+      console.log('Speech recognition started...');
+    });
+
+    // Process recognition results
+    recognition.addEventListener('result', function(event) {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('output').textContent = transcript;
+      console.log('Speech recognized: ', transcript);
+    });
+
+    // Handle recognition errors
+    recognition.addEventListener('error', function(event) {
+      console.error('Error occurred in speech recognition:', event.error);
+      alert('Error occurred: ' + event.error);
+    });
+
+    // Stop recognition when done
+    recognition.addEventListener('end', function() {
+      console.log('Speech recognition stopped.');
+    });
+  </script>
+</body>
+</html>
