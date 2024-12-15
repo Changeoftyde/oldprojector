@@ -309,7 +309,6 @@ function ss() {
     document.getElementById("chosenImage").style.backgroundImage = "url('p".concat(cd.toString(), ".png')");
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
-      total++;
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
       document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
       cc();
@@ -318,7 +317,6 @@ function ss() {
     noc = parseInt(sessionStorage.getItem("qat")) / 2;
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
-      total++;
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
       document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
       cc();
