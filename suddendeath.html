@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<body>
+<img src="Phase 1.png" onclick="toggle()" id="settings">
+<div id="menu"></div>
+
+<div id="menuoptions">
+<h1 id="ttitle">Settings</h1>
+<p id="endlessmodelabel" class="label">Endless Mode</p><div style="left: 23vh" class="ts" id="endlessmode" onclick="onoff()"><div id="endlessmodeslider" class="tss"></div></div>
+<p id="universalquestionslabel" style="top: 10vh" class="label">Universal Questions</p><div style="left: 23vh; top: 10vh" class="ts" id="universalquestions" onclick="onoff()"><div id="universalquestionsslider" class="tss"></div></div>
+<p class="smalllabel" id="uql2">Dictates Whether or Not Certain Questions can be Answered by all Students</p>
+<p id="penalizationlabel" style="top: 15vh" class="label">Wrong Answers Penalizable</p><div style="left: 23vh; top: 15vh" class="ts" id="penalization" onclick="onoff()"><div id="penalizationslider" class="tss"></div></div>
+<p id="questioncyclelabel" style="top: 5vh; margin-left: 8vh; transition: 0.5s; transition-property: opacity" class="label">Amount of Question Cycles:</p><input style="transition: 0.5s; transition-property: opacity" id="questioncycle" value="1">
+<p class="smalllabel" id="uql2" style="margin-left: 8vh; ; transition: 0.5s; transition-property: opacity">Estimated Game Duration: </p>
+<p id="maxpointslabel" style="top: 25vh" class="label">Maximum Amount of Points: 10,000</p><div style="left: 60vh; top: 25vh" class="plusminus" id="maxpoints"><img src="plus.png" onclick="plus" id="plus"><img src="minus.png" onclick="minus()" id="minus"></div>
+</div>
+
+<div id="logo">
+<img src="suddendeath.png" id="logo2">
+</div>
+<button onclick="addteam()" id="addteam">Add Team</button>
+<div id="teams">
+<div class="team" id="team1">
+<textarea id="art1" class="artitle">TEAM 1
+</textarea>
+<button onclick="remove()" class="remove" id="button1">Remove</button>
+<textarea id="ar1" class="autoresizing">
+</textarea>
+</div>
+</div>
+<style>
+  
+  .smalllabel {
+    font-size: 2vh;
+    position: absolute;
+    line-height: 2vh;
+  }
+  .plusminus {
+    overflow: hidden;
+    width: 8vh;
+    height: 4vh;
+    text-align: center;
+    font-size: 3vh;
+    position: absolute;
+    top: 5vh;
+    background-color: yellow;
+    border: 0;
+    outline: 0;
+    border-radius: 2vh;
+    left: 46vh;
+  }
+  #plus {
+    top: 0;
+    width: 50%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+  }
+  #minus {
+    top: 0;
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    position: absolute;
+  }
+  #questioncycle {
+    width: 5vh;
+    height: 2.5vh;
+    text-align: center;
+    font-size: 3vh;
+    position: absolute;
+    top: 5vh;
+    border: 0;
+    outline: 0;
+    border-radius: 2vh;
+    left: 46vh;
+  }
+  #ttitle {
+    transform: translate(-50%, 0%);
+    left: 50vw;
+    position: absolute;
+    top: 1vh;
+    margin: 0;
+    padding: 0;
+    font-size: 5vh;
+  }
+  .label {
+    padding: 0;
+    margin: 0;
+    line-height: 4vh;
+    position: absolute;
+    word-wrap: break-word;
+  }
+  #menu {
+    position: fixed;
+    width: 300%;
+    height: 300%;
+    top: -300%;
+    right: -300%;
+    transition: 1.5s;
+    transform: translate(0%, 0%);
+    background-image: url("IMG_.png");
+    background-size: cover;
+    background-position: 0% 100%;
+    background-color: black;
+    z-index: 1999;
+  }
+  #settings {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2000;
+    height: 10vh;
+    width: 10vh;
+  }
+  .remove {
+    width: 9vh;
+    height: 3vh;
+    font-size: 1.5vh;
+    border: 0;
+    outline: 0;
+    border-radius: 0.5vh;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  .tss {
+    left: 0.5vh;
+    height: 3vh;
+    transform: translate(0%, -50%);
+    top: 50%;
+    width: 3vh;
+    border-radius: 3vh;
+    background-color: white;
+    position: absolute;
+    transition: 0.5s;
+    transition-property: left;
+  }
+  .ts {
+    transition: 0.5s;
+    position: absolute;
+    height: 4vh;
+    width: 8vh;
+    border-radius: 4vh;
+    background-color: #dddddd;
+    z-index: 2000;
+    transition-property: background-color;
+  }
+  #menuoptions {
+    font-size: 4vh;
+    color: white;
+    z-index: 2000;
+    position: absolute;
+    bottom: 100%;
+    height: 100%;
+    transition: 1.5s;
+  }
+  .artitle {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 4vh;
+    display: block;
+    overflow: hidden;
+    resize: none;
+    width: 100%;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    height: 10vh;
+    color: white;
+    background-color: transparent;
+  }
+  .autoresizing {
+    margin-top: 2vh;
+    text-align: center;
+    padding: 0;
+    font-size: 3vh;
+    display: block;
+    overflow: hidden;
+    resize: none;
+    width: 100%;
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    height: 5vh;
+    color: white;
+    background-color: transparent;
+  }
+  #teams {
+    position: absolute;
+    width: 100%;
+  }
+  .team {
+    background-color: green;
+    height: auto;
+    width: 30vh;
+    position: absolute;
+    overflow-y: hidden;
+  }
+  #addteam {
+    width: 40%;
+    left: 50%;
+    width: 20vh;
+    height: 5vh;
+    font-size: 3vh;
+    border-radius: 2vh;
+    transform: translate(-50%, 0%);
+    position: absolute;
+  }
+  #logo2 {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  #logo {
+    overflow-x: hidden;
+    width: 80%;
+    height: 20%;
+    background-color: red;
+    position: absolute;
+    top: 10vw;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+</style>
+<script>
+  totalTeams = 1;
+  window.addEventListener("resize", renderel);
+  renderel();
+  endlessmode = false;
+  universalquestions = true;
+  penalization = true;
+  document.getElementById("universalquestions").style.backgroundColor = "#8be283";
+  document.getElementById("universalquestions".concat("slider")).style.left = 4.5 + "vh";
+  document.getElementById("penalization").style.backgroundColor = "#8be283";
+  document.getElementById("penalization".concat("slider")).style.left = 4.5 + "vh";
+  getSession();
+  calculate();
+  document.getElementById("questioncycle").addEventListener("keydown", calculate);
+  document.getElementById("questioncycle").addEventListener("paste", calculate);
+  function calculate() {
+    value = parseInt(document.getElementById("questioncycle").value);
+    medium = value * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
+    high = parseInt(medium + 2.5);
+    low = parseInt(medium - 2.5);
+    document.getElementsByClassName("smalllabel")[1].innerHTML = "Estimated Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
+  }
+  function getSession() {
+    if (sessionStorage.getItem("whichclicked2")) {
+    if (sessionStorage.getItem("whichclicked2") == "0") {
+      window.location.href = "sets.html";
+    }
+    current = sessionStorage.getItem("whichclicked2");
+    sessionStorage.setItem("whichclicked2", "0");
+    } else {
+      window.location.href = "sets.html";
+    }
+  }
+  function onoff() {
+    happened = false;
+    for (i = 0; i < event.target.id.length; i++) {
+      if (event.target.id.substring(i, i + 6) == "slider") {
+        wslider = event.target.id.substring(0, event.target.id.length - 6);
+        happened = true;
+      }
+    }
+    if (happened == false) { wslider = event.target.id; }
+    if (window[wslider] == false) {
+      window[wslider] = true;
+      document.getElementById(wslider).style.backgroundColor = "#8be283";
+      document.getElementById(wslider.concat("slider")).style.left = 4.5 + "vh";
+    } else {
+      window[wslider] = false;
+      document.getElementById(wslider).style.backgroundColor = "#dddddd";
+      document.getElementById(wslider.concat("slider")).style.left = 0.5 + "vh";
+    }
+    renderel();
+  }
+  function addteam() {
+    totalTeams += 1;
+    newDiv = document.createElement("div");
+    newDiv.id = "team".concat(totalTeams.toString());
+    newDiv.classList.add("team");
+    document.getElementById("teams").appendChild(newDiv);
+    newTxt = document.createElement("textarea");
+    newTxt.classList.add("artitle");
+    newTxt.innerHTML = "TEAM ".concat(totalTeams.toString());
+    newTxt.id = "art".concat(totalTeams.toString());
+    newDiv.appendChild(newTxt);
+    newButton = document.createElement("button");
+    newButton.id = "button".concat(totalTeams.toString());
+    newButton.setAttribute("onclick", "remove()");
+    newButton.innerHTML = "Remove";
+    newButton.classList.add("remove");
+    newDiv.appendChild(newButton);
+    newTxt = document.createElement("textarea");
+    newTxt.classList.add("autoresizing");
+    newTxt.id = "ar".concat(totalTeams.toString());
+    newDiv.appendChild(newTxt);
+    renderel();
+  }
+  open = false;
+  function toggle() {
+    if (open == false) {
+      open = true;
+      document.getElementById("menuoptions").style.bottom = 0 + "%";
+      document.getElementById("menu").style.right = 0;
+      document.getElementById("menu").style.top = 0;
+      for (i = 2; i < 7; i++) {
+        setTimeout(function() {
+          document.getElementById("settings").src = "Phase ".concat(i.toString());
+        }, (i - 1) * 300)
+      }
+    } else {
+      open = false;
+      document.getElementById("menuoptions").style.bottom = 100 + "%";
+      document.getElementById("menu").style.right = -300 + "%";
+      document.getElementById("menu").style.top = -300 + "%";
+      for (i = 6; i > 1; i--) {
+        setTimeout(function() {
+          document.getElementById("settings").src = "Phase ".concat(i.toString());
+        }, (7 - i) * 300);
+      }
+    }
+  }
+        window.addEventListener('keydown', autoResize);
+        window.addEventListener('cut', autoResize);
+        window.addEventListener('paste', autoResize);
+        window.addEventListener('keydown', renderel);
+        window.addEventListener('cut', renderel);
+        window.addEventListener('paste', renderel);
+        function autoResize() {
+          setTimeout(function() {
+          for (i = 0; i < (document.getElementsByClassName("artitle").length); i++) {
+            textarea = document.getElementsByClassName("artitle")[i];
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + 'px';
+            textarea = document.getElementsByClassName("autoresizing")[i];
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + 'px';
+          }
+          }, 80);
+        }
+  function remove() {
+    num = parseInt(event.target.id.substring(6));
+    for (i = (num + 1); i < (totalTeams + 1); i++) {
+      document.getElementById("team".concat(i.toString())).id = "team".concat((i - 1).toString());
+      document.getElementById("art".concat(i.toString())).id = "art".concat((i - 1).toString());
+      document.getElementById("button".concat(i.toString())).id = "button".concat((i - 1).toString());
+      document.getElementById("ar".concat(i.toString())).id = "ar".concat((i - 1).toString());
+    }
+    document.getElementById("team".concat(num.toString())).remove();
+    totalTeams--;
+    renderel();
+  }
+  endlessmodelength = 0.235;
+  universalquestionslength = 0.33;
+  penalizationlength = 0.46;
+  questioncyclelength = 0.54;
+  maxpointslength = 0.6;
+  document.getElementById("questioncycle").addEventListener("keydown", expected);
+  document.getElementById("questioncycle").addEventListener("paste", expected);
+  function expected() {
+    input = parseInt(document.getElementById("questioncycle").value);
+    middle = input * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
+    high = parseInt(middle + 2.5);
+    low = parseInt(middle - 2.5);
+    document.getElementsByClassName(smalllabel)[1].innerHTML = "Expected Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
+  }
+  function renderel() {
+    setTimeout(function() {
+    for (i = 0; i < document.getElementsByClassName("label").length; i++) {
+      document.getElementsByClassName("label")[i].style.width = window.innerWidth - (window.innerHeight * 0.2) + "px";
+    }
+    for (i = 0; i < document.getElementsByClassName("smalllabel").length; i++) {
+      document.getElementsByClassName("smalllabel")[i].style.width = window.innerWidth - (window.innerHeight * 0.11) + "px";
+    }  
+    document.getElementsByClassName("label")[3].style.width = window.innerWidth - (window.innerHeight * 0.29) + "px";
+    document.getElementsByClassName("smalllabel")[1].style.width = window.innerWidth - (window.innerHeight * 0.19) + "px";
+    ratio = window.innerHeight / window.innerWidth;
+    for (i = 0; i < document.getElementsByClassName("ts").length; i++) {
+      const tsElement = document.getElementsByClassName("ts")[i];
+      if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
+        tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
+      } else {
+        tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
+      }
+    }
+    document.getElementById("endlessmodelabel").style.top = 9 + "vh";
+    document.getElementById("endlessmode").style.top = 9 + "vh";
+    totalHeight = endlessmodelabel.offsetHeight / (0.04 * window.innerHeight);
+    if (endlessmode == true) {
+      document.getElementById("questioncyclelabel").style.opacity = 0;
+      document.getElementById("questioncycle").style.opacity = 0;
+      document.getElementsByClassName("smalllabel")[1].style.opacity = 0;
+      document.getElementById("maxpointslabel").style.top = (((totalHeight) * 0.04) + 0.125) * window.innerHeight + "px";
+      document.getElementById("maxpoints").style.top = (((totalHeight) * 0.04) + 0.125) * window.innerHeight + "px";
+      totalHeight += document.getElementById("maxpointslabel").offsetHeight / (window.innerHeight * 0.04);
+      document.getElementById("universalquestions").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
+      document.getElementById("universalquestionslabel").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
+      totalHeight += document.getElementById("universalquestionslabel").offsetHeight / (window.innerHeight * 0.04);
+      document.getElementsByClassName("smalllabel")[0].style.top = (((totalHeight) * 0.04) + 0.15) * window.innerHeight + "px";
+      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
+      document.getElementById("penalization").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
+      document.getElementById("penalizationlabel").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
+    } else {
+      document.getElementById("questioncyclelabel").style.opacity = 1;
+      document.getElementById("questioncycle").style.opacity = 1;
+      document.getElementsByClassName("smalllabel")[1].style.opacity = 1;
+      document.getElementById("questioncyclelabel").style.top = ((totalHeight * 0.04) + 0.11) * window.innerHeight + "px";
+      document.getElementById("questioncycle").style.top = ((totalHeight * 0.04) + 0.11) * window.innerHeight + "px";
+      totalHeight += document.getElementById("questioncyclelabel").offsetHeight / (window.innerHeight * 0.04);
+      document.getElementsByClassName("smalllabel")[1].style.top = ((parseInt(totalHeight) * 0.04) + 0.13) * window.innerHeight + "px";
+      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
+      document.getElementById("maxpointslabel").style.top = (((totalHeight) * 0.04) + 0.14) * window.innerHeight + "px";
+      document.getElementById("maxpoints").style.top = (((totalHeight) * 0.04) + 0.14) * window.innerHeight + "px";
+      totalHeight += document.getElementById("maxpointslabel").offsetHeight / (window.innerHeight * 0.04);
+      document.getElementById("universalquestions").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
+      document.getElementById("universalquestionslabel").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
+      totalHeight += document.getElementById("universalquestionslabel").offsetHeight / (window.innerHeight * 0.04);
+      document.getElementsByClassName("smalllabel")[0].style.top = (((totalHeight) * 0.04) + 0.15) * window.innerHeight + "px";
+      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
+      document.getElementById("penalization").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
+      document.getElementById("penalizationlabel").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
+    }
+    tsElement = document.getElementById("questioncycle");
+    if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
+      tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
+    } else {
+      tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
+    }
+    tsElement = document.getElementById("maxpoints");
+    if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
+      tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
+    } else {
+      tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
+    }
+    ratio2 = ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) / ((window.innerWidth - (2 * (ratio * 0.025)) * window.innerWidth));
+    if (ratio2 > 1) {
+      document.getElementById("logo2").style.height = "auto";
+      document.getElementById("logo2").style.width = 100 + "%";
+    } else {
+      document.getElementById("logo2").style.width = "auto";
+      document.getElementById("logo2").style.height = 100 + "%";
+    }
+    ratio = (ratio / 3) * 2;
+    document.getElementById("logo").style.height = (0.2 * window.innerHeight) * ((ratio + 4) / 3) + "px";
+    document.getElementById("logo").style.width = (window.innerWidth - (2 * (ratio * 0.025)) * window.innerWidth) + "px";
+    document.getElementById("logo").style.top = (((ratio * 0.025)) * window.innerWidth) + "px";
+    document.getElementById("addteam").style.top = 2 * (((ratio * 0.025)) * window.innerWidth) + ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) + "px";
+    document.getElementById("teams").style.top = (0.05 * window.innerHeight) + 3 * (((ratio * 0.025)) * window.innerWidth) + ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) + "px";
+    margin = (((ratio * 0.025)) * window.innerWidth);
+    nopr = parseInt((1 / (ratio / 2)) * 1.5);
+    bestHeight = 0;
+    topp = 0;
+    for (i = 1; i < (totalTeams + 1); i++) {
+      document.getElementById("team".concat(i.toString())).style.width = (window.innerWidth - ((nopr + 1) * margin)) / nopr + "px";
+      remainder = i % nopr;
+      ogr = remainder;
+      if (remainder == 0) { remainder = nopr }
+      dvsp = i - remainder;
+      dvsp = dvsp / nopr;
+      document.getElementById("team".concat(i.toString())).style.left = (remainder - 1) * (margin + ((window.innerWidth - ((nopr + 1) * margin)) / nopr)) + "px";
+      if (dvsp != 0) {
+        topp = 0;
+        for (a = 1; a < (dvsp + 1); a++) {
+          topp += document.getElementById("team".concat((i - (nopr * a)).toString())).offsetHeight + margin;
+        }
+        document.getElementById("team".concat(i.toString())).style.top = topp + "px";
+        topp = 0;
+      } else {
+        document.getElementById("team".concat(i.toString())).style.top = 0;
+      }
+    }
+    }, 100);
+  }
+</script>
+</body>
+</html>
