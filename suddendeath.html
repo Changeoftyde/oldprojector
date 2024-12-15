@@ -242,11 +242,14 @@
   document.getElementById("questioncycle").addEventListener("keydown", calculate);
   document.getElementById("questioncycle").addEventListener("paste", calculate);
   function calculate() {
+    setTimeout(function() {
     value = parseInt(document.getElementById("questioncycle").value);
     medium = value * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
     high = parseInt(medium + 2.5);
     low = parseInt(medium - 2.5);
+    if (low < 1) { low = 1 }
     document.getElementsByClassName("smalllabel")[1].innerHTML = "Estimated Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
+    }, 50);
   }
   function getSession() {
     if (sessionStorage.getItem("whichclicked2")) {
