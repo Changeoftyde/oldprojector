@@ -14,7 +14,7 @@
 <button onclick="download()" style="left: 38.33%" id="download" class="button1">Download</button>
 <button onclick="del()" style="left: 66.67%; color: #6d1212" id="delete" class="button1">Delete</button>
 <button style="left: 10%" id="study" class="button2">Study</button>
-<button style="left: 52.5%" id="play" class="button2">Play</button>
+<button onclick="play()" style="left: 52.5%" id="play" class="button2">Play</button>
 <style>
   button {
   font-family: codec;
@@ -79,6 +79,10 @@ body {
 adjust();
 window.addEventListener("resize", adjust);
 ses();
+function play() {
+  sessionStorage.setItem("whichclicked2", ses);
+  window.location.href = "suddendeath.html";
+}
 function ses() {
   if (sessionStorage.getItem("whichclicked")) {
     if (sessionStorage.getItem("whichclicked") == "0") {
