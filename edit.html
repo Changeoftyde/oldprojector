@@ -293,7 +293,6 @@ function ss() {
     if (sessionStorage.getItem("c") == "4") {
       noc = parseInt(sessionStorage.getItem("qat"));
     }
-    total = noc;
     document.getElementById("name").value = sessionStorage.getItem("n");
     document.getElementById("author").value = sessionStorage.getItem("a");
     if (document.getElementById("name").value.length > 50) {
@@ -310,15 +309,16 @@ function ss() {
     document.getElementById("chosenImage").style.backgroundImage = "url('p".concat(cd.toString(), ".png')");
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
+      total++;
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
       document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
       cc();
     }
   } else if (sessionStorage.getItem("c") == "1") {
     noc = parseInt(sessionStorage.getItem("qat")) / 2;
-    total = noc;
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
+      total++;
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
       document.getElementById("ta".concat(i.toString(), "b")).innerHTML = sessionStorage.getItem("a".concat(i.toString()));
       cc();
