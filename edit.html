@@ -273,7 +273,6 @@ function create() {
   } else if (mode == "2" || mode == "4") {
     slot = which;
     localStorage.setItem(slot.toString().concat("f"), "false");
-    localStorage.setItem(slot.toString().concat("qat"), total.toString());
   } else {}
   localStorage.setItem(slot.toString().concat("n"), document.getElementById("name").value);
   localStorage.setItem(slot.toString().concat("a"), document.getElementById("author").value);
@@ -294,6 +293,7 @@ function ss() {
     if (sessionStorage.getItem("c") == "4") {
       noc = parseInt(sessionStorage.getItem("qat"));
     }
+    total = noc;
     document.getElementById("name").value = sessionStorage.getItem("n");
     document.getElementById("author").value = sessionStorage.getItem("a");
     if (document.getElementById("name").value.length > 50) {
@@ -316,6 +316,7 @@ function ss() {
     }
   } else if (sessionStorage.getItem("c") == "1") {
     noc = parseInt(sessionStorage.getItem("qat")) / 2;
+    total = noc;
     for (i = 1; i < (noc + 1); i++) {
       if (i != 1) { add(); }
       document.getElementById("ta".concat(i.toString(), "a")).innerHTML = sessionStorage.getItem("q".concat(i.toString()));
