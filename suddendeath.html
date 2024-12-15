@@ -245,7 +245,6 @@
     setTimeout(function() {
     value = parseInt(document.getElementById("questioncycle").value);
     medium = value * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
-    alert(localStorage.getItem(current.concat("qat")));
     high = parseInt(medium + 2.5);
     low = parseInt(medium - 2.5);
     if (low < 1) { low = 1 }
@@ -258,7 +257,6 @@
       window.location.href = "sets.html";
     }
     current = sessionStorage.getItem("whichclicked2");
-    alert(current);
     sessionStorage.setItem("whichclicked2", "0");
     } else {
       window.location.href = "sets.html";
