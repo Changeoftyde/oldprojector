@@ -262,6 +262,7 @@
     }
     current = sessionStorage.getItem("whichclicked2");
     sessionStorage.setItem("whichclicked2", "0");
+    document.getElementById("logo").style.backgroundImage = "url('p".concat(localStorage.getItem(current.concat("p")), ".png')");
     } else {
       window.location.href = "sets.html";
     }
