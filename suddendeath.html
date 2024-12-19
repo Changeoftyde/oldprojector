@@ -17,7 +17,7 @@
 </div>
 
 <div id="logo">
-<img src="suddendeath.png" id="logo2">
+<img src="suddendeath.png" src="IMG_8935.png" id="logo2">
 </div>
 <button onclick="addteam()" id="addteam">Add Team</button>
 <div id="teams">
@@ -29,6 +29,7 @@
 </textarea>
 </div>
 </div>
+<div id="backgroundDiv"></div>
 <style>
   
   .smalllabel {
@@ -187,10 +188,15 @@
     color: white;
     background-color: transparent;
   }
-  body {
-    background-image: url("suddendeathbackground.png");
-    background-position: 50%;
+  #backgroundDiv {
+    width: 100%;
+    height: 100%;
     background-size: cover;
+    background-position: 50% 50%;
+    position: fixed;
+    z-index: -2000;
+    top: 0;
+    left: 0;
   }
   #teams {
     position: absolute;
@@ -226,6 +232,7 @@
     background-size: cover;
     background-position: 50% 50%;
     position: absolute;
+    background-image: url("suddendeathbackground.png");
     top: 10vw;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -263,7 +270,7 @@
     }
     current = sessionStorage.getItem("whichclicked2");
     sessionStorage.setItem("whichclicked2", "0");
-    document.getElementById("logo").style.backgroundImage = "url('p".concat(localStorage.getItem(current.concat("p")), ".png')");
+    document.getElementById("backgroundDiv").style.backgroundImage = "url('p".concat(localStorage.getItem(current.concat("p")), ".png')");
     } else {
       window.location.href = "sets.html";
     }
