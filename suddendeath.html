@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <body>
+<div id="pregame">
 <img src="Phase 1.png" onclick="toggle()" id="settings">
 <div id="menu"></div>
 
@@ -30,8 +31,9 @@
 </div>
 </div>
 <div id="backgroundDiv"></div>
-<button id="play">PLAY
+<button onclick="play()" id="play">PLAY
 </button>
+</div>
 <style>
   #play {
     transform: translate(-50%, 0%);
@@ -375,7 +377,33 @@
     }
     renderel();
   }
+  function play() {
+    works == true;
+    for (i = 1; i < totalTeams + 1; i++) {
+      if (document.getElementById("art").concat(i.toString()).innerHTML = "") {
+        message = "One or More Team Names Missing";
+        works = false;
+      } else if (document.getElementById("ar").concat(i.toString()).innerHTML = "") {
+        message = "One or More Teams Missing Members";
+        works = false;
+      }
+    }
+    if (works == false) {
+    alert(message);
+    } else if (totalTeams < 2) {
+    alert("At Least Two Teams Required to Play");
+    } else if (parseInt(document.getElementById("questioncycle").value) < 1) {
+    alert("You Need a Question Cycle Value of At Least 1");
+    } else if (parseInt(document.getElementById("questioncycle").value) % 1 != 0) {
+    alert("You Need a Question Cycle Value that is a Whole Number");
+    } else if (parseInt(document.getElementById("questioncycle").value) > 100) {
+    alert("You Need a Question Cycle Value that is less than or equal to 100");
+    } else {
+    document.getElementById("pregame").remove();
+    }
+  }
   function addteam() {
+    if (totalTeams == 25) {
     totalTeams += 1;
     newDiv = document.createElement("div");
     newDiv.id = "team".concat(totalTeams.toString());
@@ -397,6 +425,7 @@
     newTxt.id = "ar".concat(totalTeams.toString());
     newDiv.appendChild(newTxt);
     renderel();
+    }
   }
   open = false;
   function toggle() {
