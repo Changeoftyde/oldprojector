@@ -13,7 +13,7 @@
 <p id="penalizationlabel" style="top: 15vh" class="label">Wrong Answers Penalizable</p><div style="left: 23vh; top: 15vh" class="ts" id="penalization" onclick="onoff()"><div id="penalizationslider" class="tss"></div></div>
 <p id="questioncyclelabel" style="top: 5vh; margin-left: 8vh; transition: 0.5s; transition-property: opacity" class="label">Amount of Question Cycles:</p><input style="transition: 0.5s; transition-property: opacity" id="questioncycle" value="1">
 <p class="smalllabel" id="uql2" style="margin-left: 8vh; ; transition: 0.5s; transition-property: opacity">Estimated Game Duration: </p>
-<p id="maxpointslabel" style="top: 25vh" class="label">Maximum Amount of Points: 10,000</p><div style="left: 60vh; top: 25vh" class="plusminus" id="maxpoints"><img src="plus.png" onclick="plus" id="plus"><img src="minus.png" onclick="minus()" id="minus"></div>
+<p id="maxpointslabel" style="top: 25vh" class="label">Maximum Amount of Points: 10,000</p><div style="left: 60vh; top: 25vh" class="plusminus" id="maxpoints"><img src="plus.png" onclick="plus()" id="plus"><img src="minus.png" onclick="minus()" id="minus"></div>
 </div>
 
 <div id="logo">
@@ -64,7 +64,6 @@
     font-size: 3vh;
     position: absolute;
     top: 5vh;
-    background-color: yellow;
     border: 0;
     outline: 0;
     border-radius: 2vh;
@@ -283,6 +282,24 @@
     if (low < 1) { low = 1 }
     document.getElementsByClassName("smalllabel")[1].innerHTML = "Estimated Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
     }, 50);
+  }
+  max = 10000;
+  function plus()  {
+    if (max == 9000) {
+      document.getElementById("plus").src = "plusdisabled.png";
+      max = 10000;
+      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 10,000";
+    } else if (max != 10000) {
+      max += 1000;
+      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
+    }
+  }
+  function minus() {
+    if (max == 9000) {
+      document.getElementById("plus").src = "plusdisabled.png";
+    } else if (max != 2500) {
+      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
+    }
   }
   function getSession() {
     if (sessionStorage.getItem("whichclicked2")) {
