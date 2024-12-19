@@ -303,34 +303,43 @@
   }
   max = 10000;
   function plus()  {
-    if (max != 2500) {
-      document.getElementById("minus").src = "minus.png";
-    } 
-    if (max == 9000) {
+    if (max == 10000) {
       document.getElementById("plus").src = "plusdisabled.png";
+    } else {
+      document.getElementById("plus").src = "plus.png";
+    }
+    if (max == 2500) {
+      document.getElementById("minus").src = "minusdisabled.png";
+    } else {
+      document.getElementById("minus").src = "minus.png";
+    }
+    if (max == 9000) {
       max = 10000;
       document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 10,000";
     } else if (max == 2500) {
-      document.getElementById("plus").src = "plus.png";
       max = 3000;
       document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 3,000";
     } else if (max != 10000) {
-      document.getElementById("plus").src = "plus.png";
       max += 1000;
       document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
     }
   }
   function minus() {
-    if (max != 10000) {
+    if (max == 10000) {
+      document.getElementById("plus").src = "plusdisabled.png";
+    } else {
       document.getElementById("plus").src = "plus.png";
-    } 
+    }
+    if (max == 2500) {
+      document.getElementById("minus").src = "minusdisabled.png";
+    } else {
+      document.getElementById("minus").src = "minus.png";
+    }
     if (max == 3000) {
       max = 2500;
-      document.getElementById("minus").src = "minusdisabled.png";
       document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 2,500";
     } else if (max != 2500) {
       max -= 1000;
-      document.getElementById("minus").src = "minus.png";
       document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
     }
   }
