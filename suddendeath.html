@@ -394,7 +394,7 @@
     alert("At Least Two Teams Required to Play");
     } else if (parseInt(document.getElementById("questioncycle").value) < 1) {
     alert("You Need a Question Cycle Value of At Least 1");
-    } else if (parseInt(document.getElementById("questioncycle").value) % 1 != 0) {
+    } else if (parseFloat(document.getElementById("questioncycle").value) % 1 != 0) {
     alert("You Need a Question Cycle Value that is a Whole Number");
     } else if (parseInt(document.getElementById("questioncycle").value) > 100) {
     alert("You Need a Question Cycle Value that is less than or equal to 100");
