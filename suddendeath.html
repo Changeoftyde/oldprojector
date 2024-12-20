@@ -403,7 +403,7 @@
     }
   }
   function addteam() {
-    if (totalTeams == 25) {
+    if (totalTeams != 25) {
     totalTeams += 1;
     newDiv = document.createElement("div");
     newDiv.id = "team".concat(totalTeams.toString());
