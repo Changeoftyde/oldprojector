@@ -380,10 +380,10 @@
   function play() {
     works = true;
     for (i = 1; i < totalTeams + 1; i++) {
-      if (document.getElementById("art").concat(i.toString()).innerHTML = "") {
+      if (document.getElementById("art").concat(i.toString()).innerHTML == "") {
         message = "One or More Team Names Missing";
         works = false;
-      } else if (document.getElementById("ar").concat(i.toString()).innerHTML = "") {
+      } else if (document.getElementById("ar").concat(i.toString()).innerHTML == "") {
         message = "One or More Teams Missing Members";
         works = false;
       }
