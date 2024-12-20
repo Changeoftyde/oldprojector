@@ -377,13 +377,13 @@
     }
     renderel();
   }
-  function play() {
+    function play() {
     works = true;
     for (i = 1; i < totalTeams + 1; i++) {
-      if (document.getElementById("art").concat(i.toString()).innerHTML == "") {
+      if (document.getElementById("art".concat(i.toString())).value == "") {
         message = "One or More Team Names Missing";
         works = false;
-      } else if (document.getElementById("ar").concat(i.toString()).innerHTML == "") {
+      } else if (document.getElementById("ar".concat(i.toString())).value == "") {
         message = "One or More Teams Missing Members";
         works = false;
       }
@@ -402,6 +402,7 @@
     document.getElementById("pregame").remove();
     }
   }
+
   function addteam() {
     if (totalTeams != 25) {
     totalTeams += 1;
