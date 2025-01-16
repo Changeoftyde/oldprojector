@@ -399,8 +399,23 @@
     } else if (parseInt(document.getElementById("questioncycle").value) > 100) {
     alert("You Need a Question Cycle Value that is less than or equal to 100");
     } else {
-    document.getElementById("pregame").remove();
+    //remember current
+    not = document.getElementsByClassName("team").length;
+    for (i = 1; i < document.getElementsByClassName("team").length + 1; i++) {
+      window["teamName".concat(i.toString())] = document.getElementById("art".concat(i.toString())).value;
+      txt = document.getElementById("ar".concat(i.toString())).value;
+      currentword = 1;
+      for (i = 0; i < t.length; i++) {
+        if (txt.substring(i, i + 1) == "\n") {
+          currentword++;
+        } else if (txt.substring(i - 1, i) == "\n") {
+          window["t".concat(i.toString(), "n", currentword.toString())] = txt.substring(i, i + 1);
+        } else {
+          window["t".concat(i.toString(), "n", currentword.toString())] = window["t".concat(i.toString(), "n", currentword.toString())].concat(txt.substring(i, i + 1));
+        }
+      }
     }
+    document.getElementById("pregame").remove();
   }
 
   function addteam() {
