@@ -34,7 +34,15 @@
 <button onclick="play()" id="play">PLAY
 </button>
 </div>
+<div><div id="teams2"</div>
 <style>
+  #teams2 {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+  }
   #play {
     transform: translate(-50%, 0%);
     left: 50%;
@@ -417,7 +425,16 @@
     }
     document.getElementById("pregame").remove();
   }
-
+  function addteam(vp) {
+    newDiv = document.createElement("div");
+    newDiv.id = "team".concat(vp.toString());
+    newDiv.classList.add("team");
+    document.getElementById("teams2").appendChild(newDiv);
+    newH1 = document.createElement("h1");
+    newH1.classList.add("teamtitle");
+    newH1.innerHTML = ;
+    renderel();
+  }
   function addteam() {
     if (totalTeams != 25) {
     totalTeams += 1;
