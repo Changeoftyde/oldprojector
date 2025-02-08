@@ -42,9 +42,10 @@
 <p id="info"></p>
 </div>
 <div id="loadbaroutline"><div id="loadbar"></div></div>
-<div class="bgblack"></div>
+
 
 </div>
+<div class="bgblack"></div>
 </div>
 
 <div class="hidden" id="questionslide">
@@ -130,6 +131,7 @@ Click here to reveal the answer (after everyone has answered)
   word-wrap: break-word;
   text-align: center;
   left: 50%;
+  color: white;
   transform: translate(-50%, 0%);
 }
 #answer {
@@ -139,6 +141,7 @@ Click here to reveal the answer (after everyone has answered)
   word-wrap: break-word;
   position: absolute;
   left: 50%;
+  color: white;
   transform: translate(-50%, 0%);
   overflow-y: scroll;
 }
@@ -801,7 +804,7 @@ Click here to reveal the answer (after everyone has answered)
     } else {
     cq++;
     }
-    //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString()));
+    document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString()));
     document.getElementById("questionslide").classList.remove("hidden");
     //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString());
     renderel();
