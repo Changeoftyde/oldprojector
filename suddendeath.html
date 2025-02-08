@@ -709,6 +709,7 @@ Click here to reveal the answer (after everyone has answered)
   hap2 = false;
   function switchToQuestionSlide() {
     cq2++;
+    document.getElementById("answer").innerHTML = "Click here to reveal the answer (after everyone has answered)";
     if (hap2 == false) {
     for (i = 1; i <= totalTeams; i++) {
       newDiv = document.createElement("div");
