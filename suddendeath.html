@@ -42,6 +42,7 @@
 <p id="info"></p>
 </div>
 <div id="loadbaroutline"><div id="loadbar"></div></div>
+<div class="bgblack"></div>
 
 </div>
 </div>
@@ -60,26 +61,52 @@
 Click here to reveal the answer (after everyone has answered)
 </div>
 </div>
+<div class="bgred"></div>
 </div>
 
 <div class="hidden" id="scoreboard">
 <h1 id="st">SCOREBOARD</h1>
 <img src="next.png" onclick="preludeQuestionSlide()" id="n1" class="next">
+<div class="bgred"></div>
 </div>
 
 <p class="hidden" id="score0">-1</p>
 <style>
+.bgblack {
+  z-index: -2000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url("bgpreludeslide.png");
+}
+.bgred {
+  z-index: -2000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url("bgqasslide.png");
+}
 .score {
   text-align: right;
   position: absolute;
   top: -3vh;
   right: 1vh;
+  color: white;
 }
 #st {
   left: 50%;
   position: absolute;
   transform: translate(-50%, 0%);
   top: 0;
+  color: white;
 }
 .teamscore {
   width: 90%;
@@ -89,6 +116,7 @@ Click here to reveal the answer (after everyone has answered)
   padding: 1vh;
   font-size: 4vh;
   border-radius: 1vh;
+  color: white;
   position: absolute;
 }
 #space2 {
@@ -145,9 +173,11 @@ Click here to reveal the answer (after everyone has answered)
    width: 80%;
    height: 5vh;
    border-radius: 5vh;
-   background-color: yellow;
    left: 10%;
    width: 0;
+   transition-property: width;
+   background-size: cover;
+   background-position: 50% 50%;
   }
   .next {
    height: 5vh;
@@ -163,7 +193,7 @@ Click here to reveal the answer (after everyone has answered)
     top: 2.5vh;
     position: relative;
     border-radius: 5vh;
-    outline: black solid 2vh;
+    outline: white solid 2vh;
     margin-left: 50%;
     transform: translate(-50%, 0%);
   }
@@ -174,7 +204,7 @@ Click here to reveal the answer (after everyone has answered)
   }
   #infodiv {
     font-size: 3vh;
-    outline: black solid 1vh;
+    outline: white solid 1vh;
     box-sizing: border-box;
     border-radius: 5vh;
     margin-left: 50%;
@@ -182,7 +212,7 @@ Click here to reveal the answer (after everyone has answered)
     width: 80%;
     transform: translate(-50%, 0%);
     text-align: center;
-    background-color: green;
+    color: white;
   }
   .hidden {
     z-index: -1000;
@@ -457,6 +487,10 @@ Click here to reveal the answer (after everyone has answered)
   }
 </style>
 <script>
+  colors = ["#2f5cf0", "#2f94f0", "#81e6e9", "#15f99b", "#42de3e", "#9dde3e", "#d5de3e", "#efc634", "#efa234", "#ff6a02", "#ff4b02", "#ff020e", "#ff4a00", "#283ab8", "#488d2f", "#1e0627", "#123c42", "#91c0c6", "#ff7b00", "#96558d"];
+  coordcolor = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 2500, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
+  pucolors = ["#f5a616", "#692cab", "#f13334"];
+  pucoordcolor = ["infinity", "steal", "double"];
   totalTeams = 1;
   window.addEventListener("resize", renderel);
   renderel();
@@ -692,6 +726,22 @@ Click here to reveal the answer (after everyone has answered)
   }
   skipthis = false;
   function loadingScreen() {
+    document.getElementById("loadbar").style.transition = 0 + "s";
+    if (suddendeath == true) {
+      document.getElementById("loadbar").style.backgroundColor = "#f43f3f";
+      document.getElementById("loadbar").style.backgroundImage = "none";
+    } else if (powerplay != false) {
+      if (powerplay != "random") {
+        document.getElementById("loadbar").style.backgroundColor = pucolors[pucoordcolor.indexOf(powerplay)];
+        document.getElementById("loadbar").style.backgroundImage = "none";
+      } else {
+        document.getElementById("loadbar").style.backgroundImage = "url('randomcolors.png')";
+      }
+    } else {
+      document.getElementById("loadbar").style.backgroundColor = colors[coordcolor.indexOf(nxtpts)];
+      document.getElementById("loadbar").style.backgroundImage = "none";
+    }
+    loadbar.offsetHeight;
     document.getElementById("loadbar").style.transition = 5 + "s";
     document.getElementById("loadbar").style.width = 80 + "vw";
     setTimeout(function() {
@@ -751,8 +801,9 @@ Click here to reveal the answer (after everyone has answered)
     } else {
     cq++;
     }
+    //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString()));
     document.getElementById("questionslide").classList.remove("hidden");
-    document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString()));
+    //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString());
     renderel();
   }
   function skip() {
