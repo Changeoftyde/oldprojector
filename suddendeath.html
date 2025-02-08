@@ -447,6 +447,8 @@ Click here to reveal the answer (after everyone has answered)
     background-color: rgba(0, 0, 0, 0.5);
     height: auto;
     width: 30vh;
+    background-size: cover;
+    background-position: 50% 50%;
     position: absolute;
     overflow-y: hidden;
     border-radius: 1vh;
@@ -643,10 +645,10 @@ Click here to reveal the answer (after everyone has answered)
     teamel = document.getElementById("team".concat(tsguy.toString()));
     if (window["t".concat(tsguy.toString(), "bg")] == 1 && penalization == true) {
       window["t".concat(tsguy.toString(), "bg")] = 2;
-      teamel.style.backgroundColor = "rgba(191, 52, 46, 0.5)";
+      teamel.style.backgroundImage = "url('incorrect.png')";
     } else if (window["t".concat(tsguy.toString(), "bg")] == 2) {
       window["t".concat(tsguy.toString(), "bg")] = 0;
-      teamel.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+      teamel.style.backgroundImage = "url('neutral.png')";
     } else {
       /*for (a = 1; a <= totalTeams; a++) {
         if ((window["t".concat(a.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(a.toString(), "bg")] == 2 && penalization == false) && a != tsguy) {
@@ -657,7 +659,7 @@ Click here to reveal the answer (after everyone has answered)
       if (penalization == true) {
       window["t".concat(tsguy.toString(), "bg")] = 1;
       } else { window["t".concat(tsguy.toString(), "bg")] = 2; }
-      teamel.style.backgroundColor = "rgba(127, 199, 118, 0.5)";
+      teamel.style.backgroundImage = "url('correct.png')";
     }
   }
   nxtpts = 0.5;
@@ -788,7 +790,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     for (i = 1; i <= totalTeams; i++) {
       window["t".concat(i.toString(), "bg")] = 0;
-      document.getElementById("team".concat(i.toString())).style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+      document.getElementById("team".concat(i.toString())).style.backgroundImage = "url('neutral.png')";
     }
     for (i = 1; i <= totalTeams; i++) {
       if (window["currentname".concat(i.toString())] != window["non".concat(i.toString())]) {
