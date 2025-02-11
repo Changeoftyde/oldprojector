@@ -66,6 +66,10 @@ Click here to reveal the answer (after everyone has answered)
 </div>
 
 <div class="hidden" id="scoreboard">
+<div id="animations">
+<img id="animimage">
+<div id="transbg"></div>
+</div>
 <h1 id="st">SCOREBOARD</h1>
 <img src="next.png" onclick="preludeQuestionSlide()" id="n1" class="next">
 <div class="bgred"></div>
@@ -73,6 +77,27 @@ Click here to reveal the answer (after everyone has answered)
 
 <p class="hidden" id="score0">-1</p>
 <style>
+#animations {
+  z-index: 50000;
+}
+#transbg {
+  height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50000;
+}
+#animimage {
+  height: 100vh;
+  width: auto;
+  z-index: 50001;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
 .bgblack {
   z-index: -2000;
   width: 100vw;
@@ -546,7 +571,9 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + nxtpts;
       }
     }
-    
+    if (powerplay != "random" || powerplay != "false") {
+      animate(powerplay);
+    }
     renderscoreboardteams();
   }
   window.addEventListener("resize", renderscoreboardteams);
