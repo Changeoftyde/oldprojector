@@ -67,8 +67,8 @@ Click here to reveal the answer (after everyone has answered)
 
 <div class="hidden" id="scoreboard">
 <div class="hidden" id="animations">
-<img id="animimage">
-<div id="transbg"></div>
+<img class="hidden" id="animimage">
+<div class="hidden" id="transbg"></div>
 </div>
 <h1 id="st">SCOREBOARD</h1>
 <img src="next.png" onclick="preludeQuestionSlide()" id="n1" class="next">
@@ -763,6 +763,8 @@ Click here to reveal the answer (after everyone has answered)
   }
   function animate(typeofanim) {
     document.getElementById("animations").classList.remove("hidden");
+    document.getElementById("animimage").classList.remove("hidden");
+    document.getElementById("transbg").classList.remove("hidden");
     if (typeofanim == "infinity") {
       document.getElementById("animimage").src = "infinityframe1.png";
       setTimeout(function() {
@@ -867,6 +869,8 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("transbg").style.opacity = 1;
       }, 4700);
     }
+    document.getElementById("animimage").classList.add("hidden");
+    document.getElementById("transbg").classList.add("hidden");
   }
   skipthis = false;
   function loadingScreen() {
