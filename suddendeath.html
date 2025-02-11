@@ -729,6 +729,113 @@ Click here to reveal the answer (after everyone has answered)
   function reveal() {
     document.getElementById("answer").innerHTML = localStorage.getItem(current.concat("a", cq.toString()));
   }
+  function animate(typeofanim) {
+    document.getElementById("animations").classList.remove("hidden");
+    if (typeofanim == "infinity") {
+      document.getElementById("animimage").src = "infinityframe1.png";
+      setTimeout(function() {
+        nxtone = 1;
+         for (i = 2; i <= 12; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "infinityframe".concat(nxtone.toString(), ".png");
+             if (nxtone == 12) {
+               document.getElementById("transbg").opacity = 0;
+             }
+           }, (i - 1) * 50);
+         }
+      }, 1000);
+      setTimeout(function() {
+        document.getElementById("animimage").style.transition = 2 + "s";
+        document.getElementById("animimage").style.opacity = 0;
+        document.getElementById("animations").classList.add("hidden");
+        document.getElementById("animimage").style.transition = "none";
+        document.getElementById("animimage").style.opacity = 1;
+        document.getElementById("transbg").style.opacity = 1;
+      }, 3000);
+    } else if (typeofanim == "steal") {
+      document.getElementById("animimage").src = "stealframe1.png";
+      setTimeout(function() {
+        nxtone = 1;
+         for (i = 2; i <= 4; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+           }, (i - 1) * 25);
+         }
+      }, 1000);
+      setTimeout(function() {
+        nxtone = 4;
+         for (i = 5; i <= 7; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+           }, (i - 4) * 25);
+         }
+      }, 1575);
+      setTimeout(function() {
+        nxtone = 7;
+         for (i = 8; i <= 10; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+             if (nxtone == 10) {
+               document.getElementById("transbg").style.opacity = 0;
+             }
+           }, (i - 7) * 25);
+         }
+      }, 2150);
+      setTimeout(function() {
+         nxtone = 10;
+         for (i = 11; i <= 34; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+           }, (i - 10) * 25);
+         }
+      }, 2350);
+      setTimeout(function() {
+        document.getElementById("animations").classList.add("hidden");
+        document.getElementById("transbg").style.opacity = 1;
+      }, 2875);
+    } else {
+      document.getElementById("animimage").src = "doubleframe1.png";
+      setTimeout(function() {
+        nxtone = 1;
+         for (i = 2; i <= 5; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+           }, (i - 1) * 100);
+         }
+      }, 1000);
+      setTimeout(function() {
+        nxtone = 5;
+         for (i = 6; i <= 17; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+             if (nxtone == 17) {
+               document.getElementById("transbg").style.opacity = 0;
+             }
+           }, (i - 5) * 100);
+         }
+      }, 1900);
+      setTimeout(function() {
+        nxtone = 17;
+         for (i = 18; i <= 25; i++) {
+           setTimeout(function() {
+             nxtone++;
+             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
+           }, (i - 17) * 100);
+         }
+      }, 3600);
+      setTimeout(function() {
+        document.getElementById("animations").classList.add("hidden");
+        document.getElementById("transbg").style.opacity = 1;
+      }, 4700);
+    }
+  }
   skipthis = false;
   function loadingScreen() {
     document.getElementById("loadbar").style.transition = 0 + "s";
