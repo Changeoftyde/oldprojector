@@ -574,7 +574,7 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + nxtpts;
       }
     }
-    if (powerplay != "random" || powerplay != "false") {
+    if (powerplay != "random" || powerplay != false) {
       animate(powerplay);
     }
     renderscoreboardteams();
