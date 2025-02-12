@@ -66,8 +66,8 @@ Click here to reveal the answer (after everyone has answered)
 </div>
 
 <div class="hidden" id="scoreboard">
-<div class="hidden" id="animations">
-<img class="hidden" id="animimage">
+<div id="animations">
+<img id="animimage">
 <div class="hidden" id="transbg"></div>
 </div>
 <h1 id="st">SCOREBOARD</h1>
@@ -245,7 +245,6 @@ Click here to reveal the answer (after everyone has answered)
     color: white;
   }
   .hidden {
-    z-index: -10000;
     opacity: 0;
     pointer-events: none;
   }
@@ -763,8 +762,6 @@ Click here to reveal the answer (after everyone has answered)
   }
   function animate(typeofanim) {
     document.getElementById("animations").classList.remove("hidden");
-    document.getElementById("animimage").classList.remove("hidden");
-    document.getElementById("transbg").classList.remove("hidden");
     if (typeofanim == "infinity") {
       document.getElementById("animimage").src = "infinityframe1.png";
       setTimeout(function() {
@@ -787,8 +784,6 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("animimage").style.transition = "none";
         document.getElementById("animimage").style.opacity = 1;
         document.getElementById("transbg").style.opacity = 1;
-        document.getElementById("animimage").classList.add("hidden");
-        document.getElementById("transbg").classList.add("hidden");
       }, 3000);
     } else if (typeofanim == "steal") {
       document.getElementById("animimage").src = "stealframe1.png";
@@ -834,8 +829,6 @@ Click here to reveal the answer (after everyone has answered)
       setTimeout(function() {
         document.getElementById("animations").classList.add("hidden");
         document.getElementById("transbg").style.opacity = 1;
-        document.getElementById("animimage").classList.add("hidden");
-        document.getElementById("transbg").classList.add("hidden");
       }, 2875);
     } else {
       document.getElementById("animimage").src = "doubleframe1.png";
@@ -871,8 +864,6 @@ Click here to reveal the answer (after everyone has answered)
       }, 3600);
       setTimeout(function() {
         document.getElementById("animations").classList.add("hidden");
-        document.getElementById("animimage").classList.add("hidden");
-        document.getElementById("transbg").classList.add("hidden");
         document.getElementById("transbg").style.opacity = 1;
       }, 4700);
     }
