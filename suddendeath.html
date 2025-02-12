@@ -776,7 +776,7 @@ Click here to reveal the answer (after everyone has answered)
              nxtone++;
              document.getElementById("animimage").src = "infinityframe".concat(nxtone.toString(), ".png");
              if (nxtone == 12) {
-               document.getElementById("transbg").opacity = 0;
+               document.getElementById("transbg").style.opacity = 0;
              }
            }, (i - 1) * 50);
          }
@@ -785,11 +785,12 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("animimage").style.transition = 2 + "s";
         document.getElementById("animimage").style.opacity = 0;
         document.getElementById("animations").classList.add("hidden");
+        document.getElementById("animimage").offsetHeight;
         document.getElementById("animimage").style.transition = "none";
         document.getElementById("animimage").style.opacity = 1;
         document.getElementById("transbg").style.opacity = 1;
         document.getElementById("animimage").classList.add("hidden");
-    document.getElementById("transbg").classList.add("hidden");
+        document.getElementById("transbg").classList.add("hidden");
       }, 3000);
     } else if (typeofanim == "steal") {
       document.getElementById("animimage").src = "stealframe1.png";
@@ -873,7 +874,7 @@ Click here to reveal the answer (after everyone has answered)
       setTimeout(function() {
         document.getElementById("animations").classList.add("hidden");
         document.getElementById("animimage").classList.add("hidden");
-    document.getElementById("transbg").classList.add("hidden");
+        document.getElementById("transbg").classList.add("hidden");
         document.getElementById("transbg").style.opacity = 1;
       }, 4700);
     }
