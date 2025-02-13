@@ -847,7 +847,7 @@ Click here to reveal the answer (after everyone has answered)
       document.getElementById("animimage").src = "infinityframe1.png";
       setTimeout(function() {
         nxtone = 1;
-         for (i = 2; i <= 12; i++) {
+         for (i = 2; i <= 14; i++) {
            setTimeout(function() {
              nxtone++;
              document.getElementById("animimage").src = "infinityframe".concat(nxtone.toString(), ".png");
@@ -865,7 +865,7 @@ Click here to reveal the answer (after everyone has answered)
         document.getElementById("animimage").style.opacity = 1;
         document.getElementById("transbg").style.opacity = 1;
       }, 2000);
-      }, 3000);
+      }, 3100);
     } else if (typeofanim == "steal") {
       document.getElementById("animimage").src = "stealframe1.png";
       setTimeout(function() {
