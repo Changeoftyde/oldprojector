@@ -593,11 +593,10 @@ Click here to reveal the answer (after everyone has answered)
       }
       }
     } else if (powerplay == "infinity") {
-      try {
       atd = totalTeams;
       for (i = 1; i <= totalTeams; i++) {
         if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-          atd--;
+          atd-=1;
           willanimate = true;
           willevaporate = true;
         }
@@ -608,11 +607,11 @@ Click here to reveal the answer (after everyone has answered)
       }
       if (willevaporate == true) {
         for (i = 1; i <= newatd; i++) {
-          randomNum = Math.floor(Math.random() * atd) + 1;
+          randomNum = Math.floor(Math.random() * totalTeams) + 1;
           if ((window["t".concat(randomNum.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(randomNum.toString(), "bg")] == 2 && penalization != true)) {
-            i--;
+            i-=1;
           } else if (document.getElementById("score".concat(randomNum.toString())).innerHTML == "o") {
-            i--;
+            i-=1;
           } else {
             document.getElementById("score".concat(randomNum.toString())).innerHTML = "o";
           }
@@ -623,7 +622,6 @@ Click here to reveal the answer (after everyone has answered)
           document.getElementById("score".concat(i.toString())).innerHTML = "0";
         }
       }
-      } catch(err) { alert(err) }
     } else {
       for (i = 1; i <= totalTeams; i++) {
         if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
