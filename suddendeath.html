@@ -601,14 +601,25 @@ Click here to reveal the answer (after everyone has answered)
           willevaporate = true;
         }
       }
+      newatd = Math.floor(atd / 2);
+      if (atd % 2 != 0) {
+        newatd+=1;
+      }
       if (willevaporate == true) {
-        for (i = 1; i <= Math.floor(atd); i++) {
+        for (i = 1; i <= newatd; i++) {
           randomNum = Math.floor(Math.random() * atd) + 1;
           if ((window["t".concat(randomNum.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(randomNum.toString(), "bg")] == 2 && penalization != true)) {
             i--;
+          } else if (document.getElementById("score".concat(randomNum.toString())).innerHTML == "o") {
+            i--;
           } else {
-            document.getElementById("score".concat(randomNum.toString())).innerHTML = "0";
+            document.getElementById("score".concat(randomNum.toString())).innerHTML = "o";
           }
+        }
+      }
+      for (i = 1; i <= totalTeams; i++) {
+        if (document.getElementById("score".concat(i.toString())).innerHTML == "o") {
+          document.getElementById("score".concat(i.toString())).innerHTML = "0";
         }
       }
     } else {
