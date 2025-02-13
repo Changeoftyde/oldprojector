@@ -538,6 +538,18 @@ Click here to reveal the answer (after everyone has answered)
   calculate();
   document.getElementById("questioncycle").addEventListener("keydown", calculate);
   document.getElementById("questioncycle").addEventListener("paste", calculate);
+  for (i = 1; i <= 14; i++) {
+    preload_image("infinityframe".concat(i.toString()));
+  }
+  for (i = 1; i <= 25; i++) {
+    preload_image("doubleframe".concat(i.toString()));
+  for (i = 1; i <= 34; i++) {
+    preload_image("stealframe".concat(i.toString()));
+  }
+  function preload_image(im_url) {
+  let img = new Image();
+  img.src = im_url;
+  }
   function calculate() {
     setTimeout(function() {
     value = parseInt(document.getElementById("questioncycle").value);
