@@ -781,10 +781,12 @@ Click here to reveal the answer (after everyone has answered)
       }, 1000);
       setTimeout(function() {
         document.getElementById("animimage").style.opacity = 0;
+        setTimeout(function() {
         document.getElementById("animations").classList.add("hidden");
         document.getElementById("animimage").offsetHeight;
         document.getElementById("animimage").style.opacity = 1;
         document.getElementById("transbg").style.opacity = 1;
+      }, 2000);
       }, 3000);
     } else if (typeofanim == "steal") {
       document.getElementById("animimage").src = "stealframe1.png";
