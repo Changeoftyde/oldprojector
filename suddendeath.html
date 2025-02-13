@@ -593,6 +593,7 @@ Click here to reveal the answer (after everyone has answered)
       }
       }
     } else if (powerplay == "infinity") {
+      try {
       atd = totalTeams;
       for (i = 1; i <= totalTeams; i++) {
         if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
@@ -622,6 +623,7 @@ Click here to reveal the answer (after everyone has answered)
           document.getElementById("score".concat(i.toString())).innerHTML = "0";
         }
       }
+      } catch(err) { alert(err) }
     } else {
       for (i = 1; i <= totalTeams; i++) {
         if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
