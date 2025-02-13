@@ -548,7 +548,9 @@ Click here to reveal the answer (after everyone has answered)
     preload_image("stealframe".concat(i.toString()));
   }
   function preload_image(im_url) {
-  let img = new Image();
+  img = document.createElement("img");
+  img.width = 0;
+  img.height = 0;
   img.src = im_url;
   }
   function calculate() {
