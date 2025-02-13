@@ -986,14 +986,15 @@ Click here to reveal the answer (after everyone has answered)
     loadbar.offsetHeight;
     document.getElementById("loadbar").style.transition = 5 + "s";
     document.getElementById("loadbar").style.width = 80 + "vw";
-    setTimeout(function() {
-      if (skipthis != true) {
+    setTimeout(function(wiwio) {
+      if (cq3 == wiwio) {
+      cq3++;
       document.getElementById("prelude").classList.add("hidden");
-      switchToQuestionSlide();
-      }
       document.getElementById("loadbar").style.transition = 0 + "s";
       document.getElementById("loadbar").style.width = 0;
-    }, 5000);
+      switchToQuestionSlide();
+      } 
+    }, 5000, cq3);
   }
   cq = 0;
   cq2 = 0;
@@ -1048,13 +1049,13 @@ Click here to reveal the answer (after everyone has answered)
     //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString());
     renderel();
   }
+  cq3 = 0;
   function skip() {
+    cq3++;
     document.getElementById("prelude").classList.add("hidden");
-    skipthis = true;
-    switchToQuestionSlide();
-    setTimeout(function() {
-      skipthis = false;
-    }, 5000)
+    document.getElementById("loadbar").style.transition = 0 + "s";
+    document.getElementById("loadbar").style.width = 0;
+    switchToQuestionSlide()
   }
   function onoff() {
     happened = false;
