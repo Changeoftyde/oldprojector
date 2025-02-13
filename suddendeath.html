@@ -568,6 +568,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     hap3 = true;
     if (powerplay != false) {
+    if (powerplay == "random") {
     randomNum = Math.floor(Math.random() * 3) + 1;
     switch (randomNum) {
       case 1:
@@ -579,6 +580,7 @@ Click here to reveal the answer (after everyone has answered)
       case 3:
         powerplay = "double";
         break;
+    }
     }
     willanimate = false;
     willevaporate = false;
