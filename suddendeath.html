@@ -216,7 +216,7 @@ Click here to reveal the answer (after everyone has answered)
    width: auto;
    position: fixed;
    right: 2.5vh;
-   z-index: 75000;
+   z-index: 10000;
    top: 2.5vh;
   }
   #loadbaroutline {
@@ -567,20 +567,85 @@ Click here to reveal the answer (after everyone has answered)
       }
     }
     hap3 = true;
-    
+    if (powerplay != false) {
+    randomNum = Math.floor(Math.random() * 3) + 1;
+    switch (randomNum) {
+      case 1:
+        powerplay = "infinity";
+        break;
+      case 2:
+        powerplay = "steal";
+        break;
+      case 3:
+        powerplay = "double";
+        break;
+    }
+    willanimate = false;
+    willevaporate = false;
+    willsteal = false;
+    if (powerplay == "double") {
+      for (i = 1; i <= totalTeams; i++) {
+        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
+        document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) * 2;
+        willanimate = true;
+      }
+      }
+    } else if (powerplay == "infinity") {
+      atd = totalTeams;
+      for (i = 1; i <= totalTeams; i++) {
+        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
+          atd--;
+          willanimate = true;
+          willevaporate = true;
+        }
+      }
+      if (willevaporate == true) {
+        for (i = 1; i <= Math.floor(atd); i++) {
+          randomNum = Math.floor(Math.random() * atd) + 1;
+          if ((window["t".concat(randomNum.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(randomNum.toString(), "bg")] == 2 && penalization != true)) {
+            i--;
+          } else {
+            document.getElementById("score".concat(randomNum.toString())).innerHTML = "0";
+          }
+        }
+      }
+    } else {
+      for (i = 1; i <= totalTeams; i++) {
+        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
+          willanimate = true;
+          willsteal = true;
+        }
+      }
+      if (willsteal == true) {
+        currentbiggest = -1;
+        cbnum = 0;
+        for (i = 1; i <= totalTeams; i++) {
+          if (parseInt(document.getElementById("score".concat(i.toString())).innerHTML) > currentbiggest) {
+            currentbiggest = parseInt(document.getElementById("score".concat(i.toString())).innerHTML);
+            cbnum = i.toString();
+          }
+        }
+        document.getElementById("score".concat(cbnum)).innerHTML = "0";
+        for (i = 1; i <= totalTeams; i++) {
+          if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
+            document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + currentbiggest;
+          }
+        }
+      }
+    }
+    if (willanimate == true) {
+      animate(powerplay);
+    }
+    } else {
     for (i = 1; i <= totalTeams; i++) {
+      if (suddendeath == true && (window["t".concat(i.toString(), "bg")] == 2 && penalization == true)) {
+        document.getElementById("score".concat(i.toString())).innerHTML = "0";
+      }
       if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
         document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + nxtpts;
       }
     }
-    
-    if (powerplay != false) {
-      if (powerplay == "random") {
-        
-      }
-      animate(powerplay);
     }
-    
     renderscoreboardteams();
   }
   window.addEventListener("resize", renderscoreboardteams);
