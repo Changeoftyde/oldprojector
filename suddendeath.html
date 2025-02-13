@@ -96,6 +96,8 @@ Click here to reveal the answer (after everyone has answered)
   width: auto;
   z-index: 50001;
   left: 50%;
+  transition-property: opacity;
+  transition: 2s;
   top: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -778,11 +780,9 @@ Click here to reveal the answer (after everyone has answered)
          }
       }, 1000);
       setTimeout(function() {
-        document.getElementById("animimage").style.transition = 2 + "s";
         document.getElementById("animimage").style.opacity = 0;
         document.getElementById("animations").classList.add("hidden");
         document.getElementById("animimage").offsetHeight;
-        document.getElementById("animimage").style.transition = "none";
         document.getElementById("animimage").style.opacity = 1;
         document.getElementById("transbg").style.opacity = 1;
       }, 3000);
