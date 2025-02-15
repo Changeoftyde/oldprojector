@@ -82,12 +82,45 @@ Click here to reveal the answer (after everyone has answered)
 <div id="postgame">
 <img id="medals" src="IMG_0016.png">
 <img id="shine" src="IMG_0022.gif">
-<div id="gold"></div>
-<div id="silver"></div>
-<div id="bronze"></div>
+<div id="gold">
+<h1 id="goldtext">DJDJEJEJE</h1>
+</div>
+<div id="silver">
+<h1 id="silvertext">DJDJEJEJE</h1>
+</div>
+<div id="bronze">
+<h1 id="bronzetext">DJDJEJEJE</h1>
+</div>
 </div>
   
 <style>
+#goldtext {
+  font-size: 5vh;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #c79611;
+  font-family: archivoblack;
+}
+#silvertext {
+  font-size: 3.5vh;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #999897;
+  font-family: archivoblack;
+}
+#bronzetext {
+  font-size: 2vh;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #cc8d4d;
+  font-family: archivoblack;
+}
 #medals {
   z-index: 0;
   width: 100%;
@@ -107,7 +140,6 @@ Click here to reveal the answer (after everyone has answered)
   transform: translate(-50%, -50%);
 }
 #bronze {
-  background-color: blue;
   z-index: 2;
   width: 100%;
   height: auto;
@@ -119,7 +151,6 @@ Click here to reveal the answer (after everyone has answered)
   height: 10.25vw;
 }
 #gold {
-  background-color: blue;
   z-index: 2;
   width: 100%;
   height: auto;
@@ -131,7 +162,6 @@ Click here to reveal the answer (after everyone has answered)
   height: 20.63vw;
 }
 #silver {
-  background-color: blue;
   z-index: 2;
   width: 100%;
   height: auto;
@@ -357,6 +387,10 @@ Click here to reveal the answer (after everyone has answered)
   @font-face {
     font-family: codec;
     src: url("coolvetica.ttf");
+  }
+  @font-face {
+    font-family: archivoblack;
+    src: url("ArchivoBlack-Regular.ttf");
   }
   body {
     font-family: codec;
