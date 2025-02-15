@@ -78,7 +78,73 @@ Click here to reveal the answer (after everyone has answered)
 </div>
 
 <p class="hidden" id="score0">-1</p>
+
+<div id="postgame">
+<img id="medals" src="IMG_0016.png">
+<img id="shine" src="IMG_0015.gif">
+<div id="gold"></div>
+<div id="silver"></div>
+<div id="bronze"></div>
+</div>
+  
 <style>
+#medals {
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#shine {
+  z-index: 5;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#gold {
+  background-color: blue;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  transform: translate(0%, -50%);
+  top: 50%;
+  left: 11.1vw;
+  width: 10.25vw;
+  height: 10.25vw;
+}
+#silver {
+  background-color: blue;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 39.7vw;
+  height: 39.7vw;
+}
+#bronze {
+  background-color: blue;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  transform: translate(0%, -50%);
+  top: 50%;
+  left: 78%;
+  width: 13.14vw;
+  height: 13.14vw;
+}
+#postgame {
+  z-index: 60000;
+}
 #animations {
   z-index: 50000;
 }
