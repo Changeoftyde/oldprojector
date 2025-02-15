@@ -31,7 +31,7 @@
 <textarea id="art1" class="artitle">TEAM 1
 </textarea>
 <button onclick="remove()" class="remove" id="button1">Remove</button>
-<textarea id="ar1" class="autoresizing">
+<textarea placeholder="Insert Team Member Names. Separate each name with the enter key." id="ar1" class="autoresizing">
 </textarea>
 </div>
 </div>
@@ -1317,6 +1317,7 @@ Click here to reveal the answer (after everyone has answered)
     newTxt = document.createElement("textarea");
     newTxt.classList.add("autoresizing");
     newTxt.id = "ar".concat(totalTeams.toString());
+    newTxt.placeholder = "Insert Team Member Names. Separate each name with the enter key.";
     newDiv.appendChild(newTxt);
     renderel();
     }
