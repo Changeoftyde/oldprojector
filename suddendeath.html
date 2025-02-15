@@ -83,6 +83,7 @@ Click here to reveal the answer (after everyone has answered)
   <source src="My-Movie-30.ogg" type="audio/ogg">
   <source src="My Movie 30.mp3" type="audio/mpeg">
 </audio>
+<img id="iris" src="blackframe1.png">
 <img id="medals" src="IMG_0016.png">
 <img id="shine" src="IMG_0022.gif">
 <div id="gold">
@@ -97,6 +98,15 @@ Click here to reveal the answer (after everyone has answered)
 </div>
   
 <style>
+#iris {
+  width: 100%;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000000;
+  position: absolute;
+}
 #goldtext {
   font-size: 7.5vh;
   text-align: center;
@@ -670,10 +680,14 @@ Click here to reveal the answer (after everyone has answered)
   for (i = 1; i <= 34; i++) {
     preload_image("stealframe".concat(i.toString()));
   }
+  for (i = 1; i <= 15; i++) {
+    preload_image("blackframe".concat(i.toString()));
+  }
   function preload_image(im_url) {
   img = document.createElement("img");
-  img.width = 0;
-  img.height = 0;
+  img.width = 300;
+  img.height = 300;
+  img.classList.add("hidden");
   img.src = im_url;
   }
   function calculate() {
@@ -824,6 +838,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     document.getElementById("postgame").classList.remove("hidden");
     document.getElementById("drumroll").play();
+    irisanimation();
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     document.getElementById("prelude").classList.remove("hidden");
@@ -839,6 +854,18 @@ Click here to reveal the answer (after everyone has answered)
     } else {
       document.getElementById("medals").src = "IMG_0023.png";
       document.getElementById("shine").src = "IMG_0024.gif";
+    }
+  }
+  function irisanimation() {
+    currentframe = 1;
+    for (i = 2; i <= 15; i++) {
+      setTimeout(function() {
+        currentframe++;
+        document.getElementById("iris").src = "blackframe".concat(currentframe.toString());
+        if (currentframe == 15) {
+          document.getElementById("iris").classList.add("hidden");
+        }
+      }, ((i - 2) * 71.42) + 5280);
     }
   }
   function renderscoreboardteams() {
