@@ -72,7 +72,7 @@ Click here to reveal the answer (after everyone has answered)
 <div class="hidden" id="transbg"></div>
 </div>
 <h1 id="st">SCOREBOARD</h1>
-<img src="next.png" onclick="preludeQuestionSlide()" id="n1" class="next">
+<img src="next.png" onclick="preludeQuestionSlide()" id="n2" class="next">
 <div class="bgred"></div>
 </div>
 
@@ -825,11 +825,12 @@ Click here to reveal the answer (after everyone has answered)
     cq3 = -1;
     document.getElementById("goldtext").innerHTML = window["teamName".concat(window["place1"].toString())];
     document.getElementById("silvertext").innerHTML = window["teamName".concat(window["place2"].toString())];
-    document.getElementById("bronzetext").innerHTML = window["teamName".concat(window["place3"].toString())];
     document.getElementById("skip").remove();
-    document.getElementById("next").remove();
+    document.getElementById("n1").remove();
+    document.getElementById("n2").remove();
     document.getElementById("end").remove();
     if (window["place3"]) {
+      document.getElementById("bronzetext").innerHTML = window["teamName".concat(window["place3"].toString())];
     } else {
       document.getElementById("medals").src = "IMG_0023.png";
       document.getElementById("shine").src = "IMG_0024.png";
