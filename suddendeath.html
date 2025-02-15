@@ -861,7 +861,7 @@ Click here to reveal the answer (after everyone has answered)
     for (i = 2; i <= 15; i++) {
       setTimeout(function() {
         currentframe++;
-        document.getElementById("iris").src = "blackframe".concat(currentframe.toString());
+        document.getElementById("iris").src = "blackframe".concat(currentframe.toString(), ".png");
         if (currentframe == 15) {
           document.getElementById("iris").classList.add("hidden");
         }
