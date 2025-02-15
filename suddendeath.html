@@ -108,7 +108,7 @@ Click here to reveal the answer (after everyone has answered)
   position: absolute;
 }
 #goldtext {
-  font-size: 7.5vh;
+  font-size: 4.5vw;
   text-align: center;
   left: 50%;
   top: 50%;
@@ -120,7 +120,7 @@ Click here to reveal the answer (after everyone has answered)
   width: 100%;
 }
 #silvertext {
-  font-size: 4.2vh;
+  font-size: 2.52vw;
   text-align: center;
   left: 50%;
   top: 50%;
@@ -132,7 +132,7 @@ Click here to reveal the answer (after everyone has answered)
   width: 100%;
 }
 #bronzetext {
-  font-size: 3vh;
+  font-size: 1.8vw;
   text-align: center;
   left: 50%;
   top: 50%;
@@ -682,6 +682,17 @@ Click here to reveal the answer (after everyone has answered)
   }
   for (i = 1; i <= 15; i++) {
     preload_image("blackframe".concat(i.toString()));
+  }
+  for (i = 1; i <= 2048; i*=2) {
+    preload_image(i.toString());
+  }
+  preload_image("2500");
+  preload_image("2500sd");
+  for (i = 3000; i <= 9000; i+=1000) {
+    preload_image(i.toString());
+  }
+  for (i = 3000; i <= 10000; i+=1000) {
+    preload_image(i.toString().concat("sd");
   }
   function preload_image(im_url) {
   img = document.createElement("img");
