@@ -45,13 +45,12 @@
 </div>
 <div id="loadbaroutline"><div id="loadbar"></div></div>
 
-<img src="end.png" id="end" onclick="end()">
 </div>
 <div class="bgblack"></div>
 </div>
-
+<img class="hidden" src="end.png" id="end" onclick="end()">
 <div class="hidden" id="questionslide">
-<img src="end.png" id="end" onclick="end()">
+
 <div id="teams2">
 <img src="next.png" onclick="next()" id="n1" class="next">
 
@@ -68,7 +67,6 @@ Click here to reveal the answer (after everyone has answered)
 </div>
 
 <div class="hidden" id="scoreboard">
-<img src="end.png" id="end" onclick="end()">
 <div id="animations">
 <img id="animimage">
 <div class="hidden" id="transbg"></div>
@@ -84,13 +82,13 @@ Click here to reveal the answer (after everyone has answered)
 <img id="medals" src="IMG_0016.png">
 <img id="shine" src="IMG_0022.gif">
 <div id="gold">
-<span id="goldtext">DJDJEJEJE</span>
+<span id="goldtext"></span>
 </div>
 <div id="silver">
-<span id="silvertext">DJDJEJEJE</span>
+<span id="silvertext"></span>
 </div>
 <div id="bronze">
-<span id="bronzetext">DJDJEJEJE</span>
+<span id="bronzetext"></span>
 </div>
 </div>
   
@@ -688,6 +686,9 @@ Click here to reveal the answer (after everyone has answered)
   hap3 = false;
   powerplay = false;
   function next() {
+    if (cq2 == 1) {
+      document.getElementById("end").classList.remove("hidden");
+    }
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     if (hap3 == false) {
@@ -825,6 +826,14 @@ Click here to reveal the answer (after everyone has answered)
     document.getElementById("goldtext").innerHTML = window["teamName".concat(window["place1"].toString())];
     document.getElementById("silvertext").innerHTML = window["teamName".concat(window["place2"].toString())];
     document.getElementById("bronzetext").innerHTML = window["teamName".concat(window["place3"].toString())];
+    document.getElementById("skip").remove();
+    document.getElementById("next").remove();
+    document.getElementById("end").remove();
+    if (window["place3"]) {
+    } else {
+      document.getElementById("medals").src = "IMG_0023.png";
+      document.getElementById("shine").src = "IMG_0024.png";
+    }
   }
   function renderscoreboardteams() {
     for (i = 1; i <= totalTeams; i++) {
