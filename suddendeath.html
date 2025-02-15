@@ -45,13 +45,13 @@
 </div>
 <div id="loadbaroutline"><div id="loadbar"></div></div>
 
-
+<img src="end.png" id="end" onclick="end()">
 </div>
 <div class="bgblack"></div>
 </div>
 
 <div class="hidden" id="questionslide">
-
+<img src="end.png" id="end" onclick="end()">
 <div id="teams2">
 <img src="next.png" onclick="next()" id="n1" class="next">
 
@@ -68,6 +68,7 @@ Click here to reveal the answer (after everyone has answered)
 </div>
 
 <div class="hidden" id="scoreboard">
+<img src="end.png" id="end" onclick="end()">
 <div id="animations">
 <img id="animimage">
 <div class="hidden" id="transbg"></div>
@@ -79,7 +80,7 @@ Click here to reveal the answer (after everyone has answered)
 
 <p class="hidden" id="score0">-1</p>
 
-<div id="postgame">
+<div class="hidden" id="postgame">
 <img id="medals" src="IMG_0016.png">
 <img id="shine" src="IMG_0022.gif">
 <div id="gold">
@@ -185,7 +186,7 @@ Click here to reveal the answer (after everyone has answered)
   height: 13.14vw;
 }
 #postgame {
-  z-index: 60000;
+  z-index: 1000000;
 }
 #animations {
   z-index: 50000;
@@ -320,6 +321,14 @@ Click here to reveal the answer (after everyone has answered)
    transition-property: width;
    background-size: cover;
    background-position: 50% 50%;
+  }
+  .end {
+   height: 5vh;
+   width: auto;
+   position: fixed;
+   left: 2.5vh;
+   z-index: 10000;
+   top: 2.5vh;
   }
   .next {
    height: 5vh;
@@ -791,6 +800,32 @@ Click here to reveal the answer (after everyone has answered)
     renderscoreboardteams();
   }
   window.addEventListener("resize", renderscoreboardteams);
+  function end() {
+    for (i = 1; i <= totalTeams; i++) {
+      for (a = 1; a <= totalTeams; a++) {
+        if (parseInt(document.getElementById("score".concat(a.toString())).innerHTML) > parseInt(document.getElementById("score".concat(window["place".concat(i.toString())].toString())).innerHTML)) {
+          cantakespot = true;
+          for (b = 1; b <= totalTeams; b++) {
+            if (window["place".concat(b.toString())] == a) {
+              cantakespot = false;
+            }
+          }
+          if (cantakespot == true) {
+            window["place".concat(i.toString())] = a;
+          }
+        }
+        //alert(window["place".concat(i.toString())]);
+      }
+    }
+    document.getElementById("postgame").classList.remove("hidden");
+    document.getElementById("questionslide").classList.add("hidden");
+    document.getElementById("scoreboard").classList.remove("hidden");
+    document.getElementById("prelude").classList.remove("hidden");
+    cq3 = -1;
+    document.getElementById("goldtext").innerHTML = window["teamName".concat(window["place1"].toString())];
+    document.getElementById("silvertext").innerHTML = window["teamName".concat(window["place2"].toString())];
+    document.getElementById("bronzetext").innerHTML = window["teamName".concat(window["place3"].toString())];
+  }
   function renderscoreboardteams() {
     for (i = 1; i <= totalTeams; i++) {
       window["place".concat(i.toString())] = 0;
