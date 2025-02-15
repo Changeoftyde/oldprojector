@@ -79,6 +79,10 @@ Click here to reveal the answer (after everyone has answered)
 <p class="hidden" id="score0">-1</p>
 
 <div class="hidden" id="postgame">
+<audio id="drumroll">
+  <source src="My-Movie-30.ogg" type="audio/ogg">
+  <source src="My Movie 30.mp3" type="audio/mpeg">
+</audio>
 <img id="medals" src="IMG_0016.png">
 <img id="shine" src="IMG_0022.gif">
 <div id="gold">
@@ -819,6 +823,7 @@ Click here to reveal the answer (after everyone has answered)
       }
     }
     document.getElementById("postgame").classList.remove("hidden");
+    document.getElementById("drumroll").play();
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     document.getElementById("prelude").classList.remove("hidden");
