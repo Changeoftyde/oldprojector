@@ -96,7 +96,18 @@ Click here to reveal the answer (after everyone has answered)
 <span id="bronzetext"></span>
 </div>
 </div>
-  
+<audio id="infinityaudio">
+  <source src="My-Movie-31.ogg" type="audio/ogg">
+  <source src="My-Movie-31.mp3" type="audio/mpeg">
+</audio>
+<audio id="stealaudio">
+  <source src="My-Movie-32.ogg" type="audio/ogg">
+  <source src="My-Movie-32.mp3" type="audio/mpeg">
+</audio>
+<audio id="doubleaudio">
+  <source src="My-Movie-33.ogg" type="audio/ogg">
+  <source src="My-Movie-33.mp3" type="audio/mpeg">
+</audio>
 <style>
 #iris {
   width: 100%;
@@ -539,6 +550,10 @@ Click here to reveal the answer (after everyone has answered)
     transition: 0.5s;
     transition-property: left;
   }
+  audio {
+    opacity: 0;
+    pointer-events: none;
+  }
   .ts {
     transition: 0.5s;
     position: absolute;
@@ -815,6 +830,7 @@ Click here to reveal the answer (after everyone has answered)
       }
     }
     if (willanimate == true) {
+      document.getElementById(powerplay.concat("audio")).play();
       animate(powerplay);
     }
     } else {
