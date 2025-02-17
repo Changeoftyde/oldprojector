@@ -37,7 +37,7 @@
 </div>
 </div>
 <div class="hidden" id="prelude">
-<span class="wawe"></span>
+<span id="w1" class="wawe"></span>
 <img src="skip.png" onclick="skip()" id="skip" class="next">
 <div id="middle">
 <img id="graphic">
@@ -52,7 +52,7 @@
 </div>
 <img class="hidden" src="end.png" id="end" onclick="end()">
 <div class="hidden" id="questionslide">
-<span class="wawe"></span>
+<span id="w2" class="wawe"></span>
 <div id="teams2">
 <img src="next.png" onclick="next()" id="n1" class="next">
 
@@ -912,8 +912,8 @@ user-select: none;
     document.getElementById("goldtext").innerHTML = window["teamName".concat(window["place1"].toString())];
     document.getElementById("silvertext").innerHTML = window["teamName".concat(window["place2"].toString())];
     document.getElementById("skip").remove();
-    document.getElementsByClassName("wawe")[0].remove();
-    document.getElementsByClassName("wawe")[1].remove();
+    document.getElementById("w1").remove();
+    document.getElementById("w2").remove();
     document.getElementById("n1").remove();
     document.getElementById("n2").remove();
     document.getElementById("end").remove();
