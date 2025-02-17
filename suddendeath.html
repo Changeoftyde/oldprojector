@@ -1037,7 +1037,7 @@ user-select: none;
   function preludeQuestionSlide() {
     if (endlessmode == false) {
       for (i = 0; i <= 1; i++) {
-        document.getElementsByClassName("wawe")[i].innerHTML = (cq2 + 1).toString().concat("/", (questioncycle * parseInt(localStorage.getItem(current.concat("qat")))).toString());
+        document.getElementsByClassName("wawe")[i].innerHTML = (cq2 + 1).toString().concat("/", (questioncycle * parseInt(localStorage.getItem(current.concat("qat"))).toString()));
       }
     }
     document.getElementById("bgaudio").play();
