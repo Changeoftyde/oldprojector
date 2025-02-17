@@ -848,7 +848,7 @@ Click here to reveal the answer (after everyone has answered)
       }
     }
     }
-    document.getElementById("bgaudio").stop();
+    document.getElementById("bgaudio").pause();
     renderscoreboardteams();
   }
   }
@@ -873,7 +873,7 @@ Click here to reveal the answer (after everyone has answered)
     document.getElementById("postgame").classList.remove("hidden");
     document.getElementById("drumroll").play();
     irisanimation();
-    document.getElementById("bgaudio").stop();
+    document.getElementById("bgaudio").pause();
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     document.getElementById("prelude").classList.remove("hidden");
