@@ -765,6 +765,9 @@ user-select: none;
     if (cq2 == 1) {
       document.getElementById("end").classList.remove("hidden");
     }
+    if (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle)) {
+      end();
+    } else {
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     if (hap3 == false) {
@@ -877,6 +880,7 @@ user-select: none;
     }
     renderscoreboardteams();
     document.getElementById("bgaudio").pause();
+    }
   }
   window.addEventListener("resize", renderscoreboardteams);
   function end() {
