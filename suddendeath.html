@@ -837,8 +837,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     if (willanimate == true) {
       document.getElementById(powerplay.concat("audio")).play();
-      animate(powerplay) {
-    }
+      animate(powerplay) 
     } else {
     for (i = 1; i <= totalTeams; i++) {
       if (suddendeath == true && (window["t".concat(i.toString(), "bg")] == 2 && penalization == true)) {
@@ -851,6 +850,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     document.getElementById("bgaudio").stop();
     renderscoreboardteams();
+  }
   }
   window.addEventListener("resize", renderscoreboardteams);
   function end() {
