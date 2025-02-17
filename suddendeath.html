@@ -5,7 +5,7 @@
 <html>
 <body>
 <div id="pregame">
-<img src="Phase 1.png" onclick="toggle()" id="settings">
+<img src="settingsicon.png" onclick="toggle()" id="settings">
 <div id="menu"></div>
 
 <div class="hidden" id="menuoptions">
@@ -1432,22 +1432,12 @@ user-select: none;
       document.getElementById("menuoptions").style.bottom = 0 + "%";
       document.getElementById("menu").style.right = 0;
       document.getElementById("menu").style.top = 0;
-      for (i = 2; i < 7; i++) {
-        setTimeout(function() {
-          document.getElementById("settings").src = "Phase ".concat(i.toString());
-        }, (i - 1) * 300)
-      }
     } else {
       open = false;
       document.getElementById("menuoptions").classList.add("hidden");
       document.getElementById("menuoptions").style.bottom = 100 + "%";
       document.getElementById("menu").style.right = -300 + "%";
       document.getElementById("menu").style.top = -300 + "%";
-      for (i = 6; i > 1; i--) {
-        setTimeout(function() {
-          document.getElementById("settings").src = "Phase ".concat(i.toString());
-        }, (7 - i) * 300);
-      }
     }
   }
         window.addEventListener('keydown', autoResize);
