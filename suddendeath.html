@@ -43,6 +43,7 @@
 <div id="infodiv">
 <p id="info"></p>
 </div>
+<p class="wawe"></p>
 <div id="loadbaroutline"><div id="loadbar"></div></div>
 
 </div>
@@ -50,7 +51,7 @@
 </div>
 <img class="hidden" src="end.png" id="end" onclick="end()">
 <div class="hidden" id="questionslide">
-
+<p class="wawe"></p>
 <div id="teams2">
 <img src="next.png" onclick="next()" id="n1" class="next">
 
@@ -370,6 +371,17 @@ user-select: none;
    width: auto;
    position: fixed;
    right: 2.5vh;
+   z-index: 10000;
+   top: 2.5vh;
+  }
+  .wawe {
+   font-size: 5vh;
+   width: auto;
+   position: fixed;
+   left: 50%;
+   color: white;
+   font-family: archivoblack;
+   transform: translate(-50%, 0%);
    z-index: 10000;
    top: 2.5vh;
   }
@@ -1023,6 +1035,11 @@ user-select: none;
   }
   nxtpts = 0.5;
   function preludeQuestionSlide() {
+    if (endlessmode == false) {
+      for (i = 0; i <= 1; i++) {
+        document.getElementsByClassName("wawe")[i].innerHTML = (cq2 + 1).toString().concat("/", (questioncycle * parseInt(localStorage.getItem(current.concat("qat")))).toString());
+      }
+    }
     document.getElementById("bgaudio").play();
     document.getElementById("scoreboard").classList.add("hidden");
     powerplay = false;
