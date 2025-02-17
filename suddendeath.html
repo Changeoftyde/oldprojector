@@ -108,6 +108,10 @@ Click here to reveal the answer (after everyone has answered)
   <source src="My-Movie-33.ogg" type="audio/ogg">
   <source src="My-Movie-33.mp3" type="audio/mpeg">
 </audio>
+<audio id="bgaudio">
+  <source src="backgroundaudio.ogg" type="audio/ogg">
+  <source src="backgroundaudio.mp3" type="audio/mpeg">
+</audio>
 <style>
 #iris {
   width: 100%;
@@ -679,6 +683,7 @@ Click here to reveal the answer (after everyone has answered)
   endlessmode = false;
   universalquestions = true;
   penalization = true;
+  document.getElementById("bgaudio").play();
   document.getElementById("universalquestions").style.backgroundColor = "#8be283";
   document.getElementById("universalquestions".concat("slider")).style.left = 4.5 + "vh";
   document.getElementById("penalization").style.backgroundColor = "#8be283";
@@ -832,7 +837,7 @@ Click here to reveal the answer (after everyone has answered)
     }
     if (willanimate == true) {
       document.getElementById(powerplay.concat("audio")).play();
-      animate(powerplay);
+      animate(powerplay) {
     }
     } else {
     for (i = 1; i <= totalTeams; i++) {
@@ -844,6 +849,7 @@ Click here to reveal the answer (after everyone has answered)
       }
     }
     }
+    document.getElementById("bgaudio").stop();
     renderscoreboardteams();
   }
   window.addEventListener("resize", renderscoreboardteams);
@@ -867,6 +873,7 @@ Click here to reveal the answer (after everyone has answered)
     document.getElementById("postgame").classList.remove("hidden");
     document.getElementById("drumroll").play();
     irisanimation();
+    document.getElementById("bgaudio").stop();
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     document.getElementById("prelude").classList.remove("hidden");
@@ -1010,6 +1017,7 @@ Click here to reveal the answer (after everyone has answered)
   }
   nxtpts = 0.5;
   function preludeQuestionSlide() {
+    document.getElementById("bgaudio").play();
     document.getElementById("scoreboard").classList.add("hidden");
     powerplay = false;
     document.getElementById("prelude").classList.remove("hidden");
