@@ -769,7 +769,7 @@ user-select: none;
     }
     if (endlessmode == false && (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle))) {
       needtoend = true;
-    } else {
+    }
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
     if (hap3 == false) {
@@ -884,7 +884,6 @@ user-select: none;
     document.getElementById("bgaudio").pause();
     if (needtoend == true) {
       end();
-    }
     }
   }
   needtoend = false;
