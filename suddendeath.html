@@ -137,6 +137,13 @@ Click here to reveal the answer (after everyone has answered)
   word-wrap: break-word;
   width: 100%;
 }
+  img {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
 #silvertext {
   font-size: 2.52vw;
   text-align: center;
@@ -761,7 +768,7 @@ Click here to reveal the answer (after everyone has answered)
       document.getElementById("end").classList.remove("hidden");
     }
     if (endlessmode == false && (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle))) {
-      end();
+      needtoend = true;
     } else {
     document.getElementById("questionslide").classList.add("hidden");
     document.getElementById("scoreboard").classList.remove("hidden");
@@ -875,8 +882,11 @@ Click here to reveal the answer (after everyone has answered)
     }
     renderscoreboardteams();
     document.getElementById("bgaudio").pause();
+    if (needtoend == true) {
+      end();
     }
   }
+  needtoend = false;
   window.addEventListener("resize", renderscoreboardteams);
   function end() {
     for (i = 1; i <= totalTeams; i++) {
