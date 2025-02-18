@@ -766,7 +766,7 @@ user-select: none;
     if (cq2 == 1) {
       document.getElementById("end").classList.remove("hidden");
     }
-    if (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle)) {
+    if (endlessmode == false && (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle))) {
       end();
     } else {
     document.getElementById("questionslide").classList.add("hidden");
