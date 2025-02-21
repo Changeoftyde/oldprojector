@@ -82,6 +82,7 @@ input {
   -ms-transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
+  background-color: blue;
   position: absolute;
   text-shadow: 0 0 2vw black;
 }
@@ -110,6 +111,7 @@ select {
   overflow-x: hidden;
   background-size: cover;
   background-position: 50% 50%;
+  background-color: yellow;
 }
 #bar {
   font-size: 1vw;
@@ -228,7 +230,7 @@ ci2 = document.getElementById("chooseImage");
 bar = document.getElementById("bar");
 select = document.getElementById("select");
 function loaded() {
-document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.333) + "px";
+document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.0667) + "px";
 document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.315) + "px";
 if (window.innerWidth > window.innerHeight) {
   gotab();
@@ -239,7 +241,7 @@ if (window.innerWidth > window.innerHeight) {
 }
 setTimeout(loaded, 1000);
 window.addEventListener("resize", function() {
-document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.333) + "px";
+document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.0667) + "px";
 document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.315) + "px";
 if (window.innerWidth > window.innerHeight) {
   gosbs();
