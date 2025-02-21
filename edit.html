@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
-<body>
+<body onload="loaded()">
 <div onclick="create()" id="create"></div>
 <div id="manifest"><span style="line-height: 1">Set Details</span><br><span style="font-size: 1.5vw">Set Name: <input id="name" style="width: 40%; height: 1.5vw"></span><br><span style="font-size: 1.5vw">Set Author: <input id="author" style="width: 40%; height: 1.5vw"></span>
 <div id="chosenImage"><p id="cit"></p></div>
@@ -82,6 +82,7 @@ input {
   -ms-transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
+  background-color: blue;
   position: absolute;
   text-shadow: 0 0 2vw black;
 }
@@ -227,11 +228,17 @@ ci = document.getElementById("chosenImage");
 ci2 = document.getElementById("chooseImage");
 bar = document.getElementById("bar");
 select = document.getElementById("select");
+function loaded() {
+document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.333) + "px";
+document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.315) + "px";
 if (window.innerWidth > window.innerHeight) {
+  gotab();
   gosbs();
 } else {
   gotab();
 }
+}
+setTimeout(loaded, 1000);
 window.addEventListener("resize", function() {
 document.getElementById("questions").style.height = (window.innerHeight - window.innerWidth * 0.333) + "px";
 document.getElementById("manifest").style.height = (window.innerHeight - window.innerWidth * 0.315) + "px";
@@ -362,16 +369,16 @@ function gosbs() {
   }
   document.getElementById("cit").style.fontSize = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
   document.getElementById("cit").style.lineHeight = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) * 0.1 + "px";
+  ci2.style.top = 8.5 + "vw";
   ci.style.top = "auto";
-  ci2.style.top = "auto";
-  ci.style.width = 40 + "%";
-  ci.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) + "px";
-  ci.style.transform = "translate(0%, 0%)";
-  ci.style.left = 53.33 + "%";
   ci2.style.width = 40 + "%";
-  ci2.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.11)) + "px";
+  ci2.style.height = ((window.innerHeight - window.innerWidth * 0.35) - (window.innerWidth * 0.085)) + "px";
   ci2.style.transform = "translate(0%, 0%)";
   ci2.style.left = 6.67 + "%";
+  ci.style.width = 40 + "%";
+  ci.style.height = ((window.innerHeight - window.innerWidth * 0.35) - (window.innerWidth * 0.085)) + "px";
+  ci.style.transform = "translate(0%, 0%)";
+  ci.style.left = 53.33 + "%";
 }
 function gotab() {
   for (i = 0; i < 5; i++) {
@@ -388,6 +395,7 @@ function gotab() {
   ci.style.width = 86.67 + "%";
   ci.style.height = ((window.innerHeight - window.innerWidth * 0.4) - (window.innerWidth * 0.0667)) * 0.5 + "px";
   ci.style.transform = "translate(-50%, 0%)";
+  ci2.style.top = "auto";
   ci2.style.bottom = 1.5 + "vw";
   ci2.style.left = 50 + "%";
   ci2.style.width = 86.67 + "%";
