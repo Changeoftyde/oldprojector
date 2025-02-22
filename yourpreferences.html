@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<body>
+<div onclick="happylook()" id="jett">
+<img id="head" src="jettface.png">
+<img id="body" src="jettbody.png">
+</div>
+<style>
+  #jett {
+    bottom: 0;
+    height: 15%;
+    width: 12.575vh;
+    position: fixed;
+    z-index: 10000;
+  }
+  #head {
+    transition-property: rotate;
+    transition: 2s;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    position: absolute;
+    height: 56%;
+    width: auto;
+    z-index: 1;
+  }
+  #body {
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    position: absolute;
+    height: 62.586%;
+    width: auto;
+    z-index: 0;
+  }
+</style>
+<script>
+  renderjett();
+  window.addEventListener("resize", renderjett);
+  function renderjett() {
+    if ((window.innerHeight / window.innerWidth) > 1) {
+      document.getElementById("jett").style.left = 50 + "%";
+      document.getElementById("jett").style.transform = "translate(-50%, 0%)";
+    } else {
+      document.getElementById("jett").style.left = 10 + "%";
+      document.getElementById("jett").style.transform = "translate(0%, 0%)";
+    }
+  }
+  function happylook() {
+    document.getElementById("head").src = "jetthappyface.png";
+    document.getElementById("head").style.rotate = 30 + "deg";
+  }
+</script>
+</body>
+</html>
