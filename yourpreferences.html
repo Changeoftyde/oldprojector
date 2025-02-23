@@ -39,6 +39,7 @@
 <div id="jett">
 <img id="head" src="jettface.png">
 <img id="body" src="jettbody.png">
+<img id="jettshadow" src="jettshadow.png">
 </div>
 <style>
   body {
@@ -144,6 +145,15 @@
     width: 25.15vh;
     position: fixed;
     z-index: 10000;
+  }
+  #jettshadow {
+    z-index: -10000;
+    height: 131.81%;
+    width: auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
   }
   #head {
     transition-property: rotate;
