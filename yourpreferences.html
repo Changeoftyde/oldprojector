@@ -2,11 +2,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 <body>
-<div onclick="happylook()" id="jett">
+<div id="skip"><span class="middletext">Skip</span></div>
+<div onclick="next()" id="next"><span class="middletext">Next</span></div>
+
+<div id="loadbaroutline">
+<div id="loadbar"></div>
+</div>
+<div class="step" id="step1">
+<span class="instructions" id="instructions1">For the best possible study experience, take a second to answer two questions about your preferred study habits.</span>
+</div>
+
+<div class="hidden step" id="step2">
+<div id="title" style="width: 100%; height: 6vh; position: absolute"><span id="inst2" style="white-space: nowrap; font-size: 3vh" class="instructions">Select your Favorite Course</span></div>
+<div id="options" style="top: 6vh; position: absolute; width: 100%;">
+<div class="option"><span class="optiontext">Math</span></div>
+<div class="option"><span class="optiontext">Humanities</span></div>
+<div class="option"><span class="optiontext">Language Arts</span></div>
+<div class="option"><span class="optiontext">Social Sciences</span></div>
+<div class="option"><span class="optiontext">Natural Sciences</span></div>
+<div class="option"><span class="optiontext">Elective/Other</span></div>
+</div>
+</div>
+
+
+<div class="hidden step" id="step3">
+<div id="title2" style="width: 100%; height: 6vh; position: absolute"><span id="inst3" style="white-space: nowrap; font-size: 3vh" class="instructions">I learn best by...</span></div>
+<div id="options2" style="top: 6vh; position: absolute; width: 100%;">
+<div class="option"><span class="optiontext">Tactile Learner<span style="font-size: 2vh"><br>...using hands-on activities</span></span></div>
+<div class="option"><span class="optiontext">Visual Learner<span style="font-size: 2vh"><br>...looking at diagrams</span></span></div>
+<div class="option"><span class="optiontext">Logical Learner<span style="font-size: 2vh"><br>...making analogies</span></span></div>
+<div class="option"><span class="optiontext">Auditory Learner<span style="font-size: 2vh"><br>...speaking and listening</span></span></div>
+<div class="option"><span class="optiontext">Written Learner<span style="font-size: 2vh"><br>...reading and writing</span></span></div>
+<div class="option"><span class="optiontext">Social Learner<span style="font-size: 2vh"><br>...studying with friends</span></span></div>
+</div>
+</div>
+<div id="jett">
 <img id="head" src="jettface.png">
 <img id="body" src="jettbody.png">
 </div>
 <style>
+  body {
+    font-family: codec;
+  }
+  @font-face {
+    font-family: codec;
+    src: url("coolvetica.ttf");
+  }
+  .option {
+    padding: 1vh;
+    outline: 1vh solid black;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .optiontext {
+    line-height: 0vh;
+    white-space: nowrap;
+    font-size: 3vh;
+    width: auto;
+    text-align: center;
+  }
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #loadbar {
+    top: 2vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: 1.5s;
+    transition-property: width;
+    width: 0%;
+    height: 100%;
+    background-color: #ff8d34;
+    border-radius: 100vh;
+    position: absolute;
+  }
+  .middletext {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #next {
+    border-radius: 2vh;
+    font-size: 4vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 6vh;
+    width: 12vh;
+    bottom: 1vh;
+    right: 1vh;
+    position: fixed;
+  }
+  #skip {
+    border-radius: 2vh;
+    font-size: 4vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 6vh;
+    width: 12vh;
+    bottom: 1vh;
+    left: 1vh;
+    position: fixed;
+  }
+  .instructions {
+    text-align: center;
+    font-size: 4vh;
+    width: 80%;
+    height: auto;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #loadbaroutline {
+    top: 2vh;
+    height: 4vh;
+    outline: 1vh solid black;
+    border-radius: 100vh;
+    position: absolute;
+    left: 2vh;
+  }
+  .step {
+    left: 0;
+    height: 61%;
+    width: 100%;
+    top: 8vh;
+    position: fixed;
+    transition-property: opacity;
+    transition: 1s;
+  }
   #jett {
     bottom: 0;
     height: 30%;
@@ -39,18 +168,80 @@
 <script>
   renderjett();
   window.addEventListener("resize", renderjett);
-  function renderjett() {
+  function renderjett(tab) {
     if ((window.innerHeight / window.innerWidth) > 1) {
       document.getElementById("jett").style.left = 50 + "%";
       document.getElementById("jett").style.transform = "translate(-50%, 0%)";
+      document.getElementById("inst2").style.fontSize = 3 + "vh";
+      document.getElementById("options").style.top = 6 + "vh";
+      document.getElementById("title").style.height = 6 + "vh";
+      document.getElementById("inst3").style.fontSize = 3 + "vh";
+      document.getElementById("options2").style.top = 6 + "vh";
+      document.getElementById("title2").style.height = 6 + "vh";
+      for (i = 0; i < document.getElementsByClassName("option").length; i++) {
+        document.getElementsByClassName("option")[i].style.left = 50 + "%";
+        document.getElementsByClassName("option")[i].style.transform = "translate(-50%, 0%)";
+        if (i < 6) {
+        document.getElementsByClassName("option")[i].style.top = (i) * 8 + 1 + "vh";
+        } else {
+        document.getElementsByClassName("optiontext")[i].style.fontSize = 3 + "vh";
+        document.getElementsByClassName("option")[i].style.padding = 0.5 + "vh";
+        document.getElementsByClassName("option")[i].style.top = (i - 6) * 9.5 + 1 + "vh";
+        }
+        document.getElementsByClassName("optiontext")[i].style.fontSize = 3 + "vh";
+      }
     } else {
+      renderwide();
+    }
+    function renderwide() {
       document.getElementById("jett").style.left = 10 + "%";
       document.getElementById("jett").style.transform = "translate(0%, 0%)";
+      document.getElementById("inst2").style.fontSize = 5 + "vh";
+      document.getElementById("options").style.top = 15 + "vh";
+      document.getElementById("title").style.height = 15 + "vh";
+      document.getElementById("inst3").style.fontSize = 5 + "vh";
+      document.getElementById("options2").style.top = 15 + "vh";
+      document.getElementById("title2").style.height = 15 + "vh";
+      for (i = 0; i < document.getElementsByClassName("option").length; i++) {
+        if (i % 3 == 0) {
+          td = 3;
+        } else {
+          td = i % 3;
+        }
+        document.getElementsByClassName("option")[i].style.left = 25 * td + "%";
+        document.getElementsByClassName("option")[i].style.transform = "translate(-50%, 0%)";
+        if (i < 6) {
+        document.getElementsByClassName("option")[i].style.top = ((i - (i % 3)) / 3) * 8 + 1 + "vh";
+        } else {
+        document.getElementsByClassName("option")[i].style.top = (((i - (i % 3)) / 3) - 2) * 8 + 1 + "vh";
+        }
+        document.getElementsByClassName("optiontext")[i].style.fontSize = 3 + "vh";
+        document.getElementsByClassName("option")[i].style.padding = 0.5 + "vh";
+      }
+    }
+    document.getElementById("loadbaroutline").style.width = (window.innerWidth - window.innerHeight * 0.04) + "px";
+    for (i = 1; i <= document.getElementsByClassName("optiontext").length; i++) {
+      document.getElementsByClassName("option")[i - 1].style.width = (document.getElementsByClassName("optiontext")[i - 1].offsetWidth) + (window.innerWidth * 0.04) + "px";
     }
   }
   function happylook() {
     document.getElementById("head").src = "jetthappyface.png";
     document.getElementById("head").style.rotate = 30 + "deg";
+  }
+  function normallook() {
+    document.getElementById("head").src = "jettface.png";
+    document.getElementById("head").style.rotate = 0 + "deg";
+  }
+  currentpage = 1;
+  function next() {
+    document.getElementById("step".concat(currentpage.toString())).classList.add("hidden");
+    happylook();
+    setTimeout(normallook, 2500);
+    currentpage++;
+    setTimeout(function() {
+      document.getElementById("step".concat(currentpage.toString())).classList.remove("hidden");
+    }, 1000);
+    document.getElementById("loadbar").style.width = (currentpage - 1) * 33.33 + "%";
   }
 </script>
 </body>
