@@ -4,7 +4,7 @@
 <body>
 <div id="skip"><span class="middletext">Skip</span></div>
 <div onclick="next()" id="next"><span class="middletext">Next</span></div>
-
+<div id="loadbaroutline2"></div>
 <div id="loadbaroutline">
 <div id="loadbar"></div>
 </div>
@@ -43,8 +43,8 @@
 </div>
 <style>
   body {
-    color: #231913;
-    background-color: #f0d3ac;
+    color: #ff8d34;
+    background-color: black;
     font-family: codec;
   }
   @font-face {
@@ -73,7 +73,7 @@
     top: 2vh;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 1;
     transition: 1.5s;
     transition-property: width;
     width: 0%;
@@ -131,6 +131,17 @@
     border-radius: 100vh;
     position: absolute;
     left: 2vh;
+    background-color: #231913;
+    z-index: 0;
+  }
+  #loadbaroutline2 {
+    top: 2vh;
+    height: 4vh;
+    outline: 1vh solid #231913;
+    border-radius: 100vh;
+    position: absolute;
+    left: 2vh;
+    z-index: 2;
   }
   .step {
     left: 0;
@@ -146,7 +157,7 @@
     height: 30%;
     width: 25.15vh;
     position: fixed;
-    z-index: 10000;
+    z-index: 9000;
   }
   #jettshadow {
     z-index: -10000;
@@ -234,6 +245,7 @@
       }
     }
     document.getElementById("loadbaroutline").style.width = (window.innerWidth - window.innerHeight * 0.04) + "px";
+    document.getElementById("loadbaroutline2").style.width = (window.innerWidth - window.innerHeight * 0.04) + "px";
     for (i = 1; i <= document.getElementsByClassName("optiontext").length; i++) {
       document.getElementsByClassName("option")[i - 1].style.width = (document.getElementsByClassName("optiontext")[i - 1].offsetWidth) + (window.innerWidth * 0.04) + "px";
     }
