@@ -15,12 +15,12 @@
 <div class="hidden step" id="step2">
 <div id="title" style="width: 100%; height: 6vh; position: absolute"><span id="inst2" style="white-space: nowrap; font-size: 3vh" class="instructions">Select your Favorite Course</span></div>
 <div id="options" style="top: 6vh; position: absolute; width: 100%;">
-<div class="option"><span class="optiontext">Math</span></div>
-<div class="option"><span class="optiontext">Humanities</span></div>
-<div class="option"><span class="optiontext">Language Arts</span></div>
-<div class="option"><span class="optiontext">Social Sciences</span></div>
-<div class="option"><span class="optiontext">Natural Sciences</span></div>
-<div class="option"><span class="optiontext">Elective/Other</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Math</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Humanities</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Language Arts</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Social Sciences</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Natural Sciences</span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Elective/Other</span></div>
 </div>
 </div>
 
@@ -28,18 +28,21 @@
 <div class="hidden step" id="step3">
 <div id="title2" style="width: 100%; height: 6vh; position: absolute"><span id="inst3" style="white-space: nowrap; font-size: 3vh" class="instructions">I learn best by...</span></div>
 <div id="options2" style="top: 6vh; position: absolute; width: 100%;">
-<div class="option"><span class="optiontext">Tactile Learner<span style="font-size: 2vh"><br>...using hands-on activities</span></span></div>
-<div class="option"><span class="optiontext">Visual Learner<span style="font-size: 2vh"><br>...looking at diagrams</span></span></div>
-<div class="option"><span class="optiontext">Logical Learner<span style="font-size: 2vh"><br>...making analogies</span></span></div>
-<div class="option"><span class="optiontext">Auditory Learner<span style="font-size: 2vh"><br>...speaking and listening</span></span></div>
-<div class="option"><span class="optiontext">Written Learner<span style="font-size: 2vh"><br>...reading and writing</span></span></div>
-<div class="option"><span class="optiontext">Social Learner<span style="font-size: 2vh"><br>...studying with friends</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Tactile Learner<span class="optiontext2" style="font-size: 2vh"><br>...using hands-on activities</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Visual Learner<span class="optiontext2" style="font-size: 2vh"><br>...looking at diagrams</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Logical Learner<span class="optiontext2" style="font-size: 2vh"><br>...making analogies</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Auditory Learner<span class="optiontext2" style="font-size: 2vh"><br>...speaking and listening</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Written Learner<span class="optiontext2" style="font-size: 2vh"><br>...reading and writing</span></span></div>
+<div onclick="togglethecolor()" class="option"><span class="optiontext">Social Learner<span class="optiontext2" style="font-size: 2vh"><br>...studying with friends</span></span></div>
 </div>
 </div>
 <div id="jett">
 <img id="head" src="jettface.png">
 <img id="body" src="jettbody.png">
+</div>
+<div id="jett2">
 <img id="jettshadow" src="jettshadow.png">
+
 </div>
 <style>
   body {
@@ -161,6 +164,13 @@
     position: fixed;
     z-index: 9000;
   }
+  #jett2 {
+    bottom: 0;
+    height: 30%;
+    width: 25.15vh;
+    position: fixed;
+    z-index: -10000;
+  }
   #jettshadow {
     z-index: -10000;
     height: 131.81%;
@@ -195,10 +205,41 @@
 <script>
   renderjett();
   window.addEventListener("resize", renderjett);
+  function togglethecolor() {
+    extratext = "";
+    needtogoto6 = false;
+    if (event.target.tagName.toUpperCase() == "SPAN") {
+      if (event.target.classList.contains("optiontext2")) {
+      extratext = "text2";
+      needtogoto6 = true;
+      } else {
+      extratext = "text";
+      }
+    }
+    for (i = 0; i < document.getElementsByClassName("option").length; i++) {
+      if (event.target == document.getElementsByClassName("option".concat(extratext))[i]) {
+        totoggle = i;
+      }
+    }
+    if (needtogoto6 == true) {
+      totoggle += 6;
+    }
+    if (document.getElementsByClassName("optiontext")[totoggle].style.color != "rgb(105, 168, 207)") {
+      document.getElementsByClassName("option")[totoggle].style.outlineColor = "#69a8cf";
+      document.getElementsByClassName("option")[totoggle].style.backgroundColor = "#001d4e";
+      document.getElementsByClassName("optiontext")[totoggle].style.color = "#69a8cf";
+    } else {
+      document.getElementsByClassName("option")[totoggle].style.outlineColor = "#31221b";
+      document.getElementsByClassName("optiontext")[totoggle].style.color = "#ff8d34";
+      document.getElementsByClassName("option")[totoggle].style.backgroundColor = "black";
+    }
+  }
   function renderjett(tab) {
     if ((window.innerHeight / window.innerWidth) > 1) {
       document.getElementById("jett").style.left = 50 + "%";
       document.getElementById("jett").style.transform = "translate(-50%, 0%)";
+      document.getElementById("jett2").style.left = 50 + "%";
+      document.getElementById("jett2").style.transform = "translate(-50%, 0%)";
       document.getElementById("inst2").style.fontSize = 3 + "vh";
       document.getElementById("options").style.top = 6 + "vh";
       document.getElementById("title").style.height = 6 + "vh";
@@ -223,6 +264,8 @@
     function renderwide() {
       document.getElementById("jett").style.left = 10 + "%";
       document.getElementById("jett").style.transform = "translate(0%, 0%)";
+      document.getElementById("jett2").style.left = 10 + "%";
+      document.getElementById("jett2").style.transform = "translate(0%, 0%)";
       document.getElementById("inst2").style.fontSize = 5 + "vh";
       document.getElementById("options").style.top = 15 + "vh";
       document.getElementById("title").style.height = 15 + "vh";
@@ -274,3 +317,4 @@
 </script>
 </body>
 </html>
+
