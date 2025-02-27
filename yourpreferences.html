@@ -235,6 +235,13 @@
       totoggle += 6;
     }
     if (document.getElementsByClassName("optiontext")[totoggle].style.color != "rgb(105, 168, 207)") {
+      if (totoggle < 6) {
+        for (i = 0; i < 6; i++) {
+          document.getElementsByClassName("option")[i.toString()].style.outlineColor = "#31221b";
+          document.getElementsByClassName("optiontext")[i.toString()].style.color = "#ff8d34";
+          document.getElementsByClassName("option")[i.toString()].style.backgroundColor = "black";
+        }
+      }
       document.getElementsByClassName("option")[totoggle].style.outlineColor = "#69a8cf";
       document.getElementsByClassName("option")[totoggle].style.backgroundColor = "#001d4e";
       document.getElementsByClassName("optiontext")[totoggle].style.color = "#69a8cf";
