@@ -205,6 +205,16 @@
 <script>
   renderjett();
   window.addEventListener("resize", renderjett);
+  getSession();
+  function getSession() {
+    if (sessionStorage.getItem("wc3") == "0") {
+      window.location.href = "sets.html";
+    } else if (sessionStorage.getItem("wc3")) {
+      sessionStorage.setItem("wc3", "0");
+    } else {
+      window.location.href = "sets.html";
+    }
+  }
   function togglethecolor() {
     extratext = "";
     needtogoto6 = false;
@@ -307,12 +317,19 @@
   function next() {
     document.getElementById("step".concat(currentpage.toString())).classList.add("hidden");
     happylook();
-    setTimeout(normallook, 2500);
     currentpage++;
     setTimeout(function() {
       document.getElementById("step".concat(currentpage.toString())).classList.remove("hidden");
     }, 1000);
+    if (currentpage != 4) {
+    setTimeout(normallook, 2500);
     document.getElementById("loadbar").style.width = (currentpage - 1) * 33.33 + "%";
+    } else {
+    document.getElementById("loadbar").style.width = 100 + "%";
+    setTimeout(function() {
+      window.location.href = "study".concat(current, ".html");
+    }, 2500);
+    }
   }
 </script>
 </body>
