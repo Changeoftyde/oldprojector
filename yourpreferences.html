@@ -210,6 +210,7 @@
     if (sessionStorage.getItem("wc3") == "0") {
       window.location.href = "sets.html";
     } else if (sessionStorage.getItem("wc3")) {
+      current = sessionStorage.getItem("wc3");
       sessionStorage.setItem("wc3", "0");
     } else {
       window.location.href = "sets.html";
