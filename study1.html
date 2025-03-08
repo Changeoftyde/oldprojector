@@ -1,0 +1,329 @@
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<div style="top: 3vh" class="recommended">
+<h1 style="top: 52.5%" id="title" class="title">Recommended for You</h1>
+<p onclick="redirecttojett()" id="ifnorec">Answer Jett's Questions to Personalize your Experience. Click Here.</p>
+</div>
+<div id="magicmemorize">
+<img src="magicmemorize.png" id="mmlogo">
+</div>
+<div id="auditorysection">
+<h1 class="title">For Auditory Learners</h1>
+<div class="game2"><div class="middle"><span>Listen & Speak</span><br><span class="littleboi">Listen to Jett and use your voice to answer</span></div></div>
+<div class="game2"><div class="middle"><span>Speak</span><br><span class="littleboi">Use your voice to answer</span></div></div>
+<div class="game2"><div class="middle"><span>Explain</span><br><span class="littleboi">Explain the answer to a friend</span></div></div>
+<div class="game2"><div class="middle"><span>Quiz a Friend</span><br><span class="littleboi">Find a friend and quiz each other</span></div></div>
+</div>
+<div id="writtensection">
+<h1 class="title">For Written Learners</h1>
+<div class="game3"><div class="middle"><span>Write</span><br><span class="littleboi">Type out the full answer</span></div></div>
+<div class="game3"><div class="middle"><span>Fill-in-the-Blank</span><br><span class="littleboi">Fill in the gaps in the answer</span></div></div>
+<div class="game3"><div class="middle"><span>Practice Quiz</span><br><span class="littleboi">Take a Practice Quiz</span></div></div>
+<div class="game3"><div class="middle"><span>Read Notes & Write</span><br><span class="littleboi">Use your notes to answer conceptual questions</span></div></div>
+</div>
+<div id="tactilesection">
+<h1 class="title">For Tactile Learners</h1>
+<div class="game4"><div class="middle"><span>Flashcards</span><br><span class="littleboi">Two-sided cards with terms and definitions</span></div></div>
+<div class="game4"><div class="middle"><span>Targeted Flashcards</span><br><span class="littleboi">Two-sided cards that target question difficulty</span></div></div>
+<div class="game4"><div class="middle"><span>Matching</span><br><span class="littleboi">Match the term to the definition</span></div></div>
+</div>
+<div id="socialsection">
+<h1 class="title">For Social Learners</h1>
+<div class="game5"><div class="middle"><span>Explain</span><br><span class="littleboi">Explain the answer to a friend</span></div></div>
+<div class="game5"><div class="middle"><span>Quiz a Friend</span><br><span class="littleboi">Find a friend and quiz each other</span></div></div>
+<div class="game5"><div class="middle"><span>Continuous Tic-Tac-Toe</span><br><span class="littleboi">Play Tic-Tac-Toe with a Friend</span></div></div>
+</div>
+<div id="visualsection">
+<h1 class="title">For Visual Learners</h1>
+<div class="game6"><div class="middle"><span>Illustrate & Write</span><br><span class="littleboi">Draw a picture to represent the term</span></div></div>
+</div>
+<div id="logicalsection">
+<h1 class="title">For Logical Learners</h1>
+<div class="game7"><div class="middle"><span>Synonym and Antonym</span><br><span class="littleboi">Use a synonym or antonym to write out the term</span></div></div>
+<div class="game7"><div class="middle"><span>Practice Quiz</span><br><span class="littleboi">Take a Practie Quiz</span></div></div>
+<div class="game7"><div class="middle"><span>Explain</span><br><span class="littleboi">Explain the answer to a friend</span></div></div>
+</div>
+<style>
+  #mmlogo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #magicmemorize {
+    height: 47.5%;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    outline: 1vh solid white;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  #ifnorec {
+    position: absolute;
+    top: 5%;
+  }
+  .space {
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    height: 15vh;
+  }
+  .title {
+    top: 0%;
+    position: absolute;
+    margin-left: 3vh;
+    font-size: 4vh;
+  }
+  .game5 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game6 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game3 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game4 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game7 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game2 {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  .game {
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    padding: 1vh;
+    outline: 1vh solid white;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2vh;
+  }
+  body {
+    background-color: black;
+    color: white;
+  }
+  .hidden {
+    pointer-events: none;
+    opacity: 0;
+  }
+  .middle {
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+  }
+  .littleboi {
+    font-size: 1.8vh;
+    font-weight: normal;
+  }
+</style>
+<script>
+  game = ["Flashcards", "Write", "Speak", "Listen & Write", "Illustrate & Write", "Explain", "Fill-in-the-Blank", "Quiz a Friend", "Listen & Speak", "Practice Quiz", "Continuous Tic-Tac-Toe", "Targeted Flashcards", "Read Notes & Write", "Matching", "Memorize", "Synonym and Antonym"];
+  gametranslation = [["R", "T"], ["R"], ["A"], ["A", "R"], ["R", "V"], ["A", "L", "S"], ["R"], ["A", "L", "S"], ["A"], ["L", "R"], ["A", "R", "S"], ["R", "T"], ["R"], ["R", "T"], ["O"], ["L", "R"]];
+  gamelevel = [3, 5, 5, 4, 1, 2, 2, 4, 4, 5, 2, 3, 1, 2, 5, 2];
+  isgamerecommended = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  gamedescription = ["Two-sided cards with terms and definitions", "Type out the full answer", "Use your voice to answer", "Listen to Jett and type out the full answer", "Draw a picture to represent the term", "Explain the answer to a friend",  "Fill in the gaps in the answer",
+  "Find a friend and quiz each other",
+  "Listen to Jett and use your voice to answer",
+  "Take a Practice Quiz",
+  "Play Tic-Tac-Toe with a Friend",
+  "Two-sided cards that target question difficulty",
+  "Use your notes to answer conceptual questions",
+  "Match the term to the definition",
+  "Memorize the projection with a personalized study path",
+  "Use a synonym or antonym to write out the term"]
+  current = "1";
+  typesoflearners = 0;
+  originalarray = [];
+  renderall();
+  window.addEventListener("resize", renderall);
+  learners = ["auditory", "logical", "reading", "social", "tactile", "visual"];
+  hasrec = false;
+  if (localStorage.getItem("cda") == "1") {
+    hasrec = true;
+    document.getElementById("ifnorec").classList.add("hidden");
+    runthealgorithm();
+  }
+  function renderall() {
+    nopr = parseInt((1 / (((window.innerHeight / window.innerWidth) * (2 / 3)) / 2)) * 1.5);
+    document.getElementById("magicmemorize").style.width = window.innerWidth - window.innerHeight * 0.1;
+    a = 0;
+    padding = 0.525 * window.innerHeight;
+    if ((window.innerWidth - window.innerHeight * 0.1) / (window.innerHeight * 0.475) < 2.923) {
+      document.getElementById("mmlogo").style.width = 95 + "%";
+      document.getElementById("mmlogo").style.height = "auto";
+    } else {
+      document.getElementById("mmlogo").style.height = 95 + "%";
+      document.getElementById("mmlogo").style.width = "auto";
+    }
+    if (localStorage.getItem("cda") == "1") {
+    for (i = 0; i < document.getElementsByClassName("game").length; i++) {
+      document.getElementsByClassName("game")[i].style.width = (window.innerWidth - (window.innerHeight * 0.05 * (nopr + 1))) / nopr + "px";
+      document.getElementsByClassName("game")[i].style.height = 15 + "%";
+      i++;
+      if (i % nopr == 0 || i == 0) {
+        remainder = nopr;
+      } else {
+        remainder = i % nopr;
+      }
+      i--;
+      document.getElementsByClassName("game")[i].style.top = 0.525 * window.innerHeight + window.innerHeight * 0.11+ (((i + 1) - remainder) / nopr) * (0.20 * window.innerHeight)
+      document.getElementsByClassName("game")[i].style.left = (remainder - 1) * (window.innerHeight * 0.05 + (window.innerWidth - (window.innerHeight * 0.05 * (nopr + 1))) / nopr) + window.innerHeight * 0.05;
+      ab = (((i + 1) - remainder) / nopr) + 1;
+    }
+    } else {
+      ab = 0;
+      padding = 0.6 * window.innerHeight;
+      document.getElementById("ifnorec").style.top = 0.575 * window.innerHeight;
+      document.getElementById("ifnorec").style.left = 0.04 * window.innerHeight;
+    }
+    letters = ["ab", "bc", "cd", "de", "ef", "fa"];
+    words = ["auditory", "written", "tactile", "social", "visual", "logical"];
+    for (i = 1; i <= 6; i++) {
+      document.getElementById(words[i - 1].concat("section")).style.top = window[letters[i - 1]] * (window.innerHeight * 0.2) + (window.innerHeight * -0.01) + "px";
+      document.getElementsByClassName("title")[i].style.top = padding + window[letters[i - 1]] * (window.innerHeight * 0.2) + i * (window.innerHeight * 0.06) + "px";
+      window[words[i - 1].concat("top")] = window[letters[i - 1]] * (0.2 * window.innerHeight) + i * window.innerHeight * 0.06;
+      for (a = 0; a < document.getElementsByClassName("game".concat((i + 1).toString())).length; a++) {
+        document.getElementsByClassName("game" + (i + 1))[a].style.width = (window.innerWidth - (window.innerHeight * 0.05 * (nopr + 1))) / nopr + "px";
+        document.getElementsByClassName("game" + (i + 1))[a].style.height = 15 + "%";
+        a++;
+        if (a % nopr == 0 || a == 0) {
+          remainder = nopr;
+        } else {
+          remainder = a % nopr;
+        }
+        a--;
+        document.getElementsByClassName("game" + (i + 1))[a].style.top = padding + window[words[i - 1].concat("top")] + window.innerHeight * 0.11 + (((a + 1) - remainder) / nopr) * (0.20 * window.innerHeight)
+        document.getElementsByClassName("game" + (i + 1))[a].style.left = (remainder - 1) * (window.innerHeight * 0.05 + (window.innerWidth - (window.innerHeight * 0.05 * (nopr + 1))) / nopr) + window.innerHeight * 0.05;
+        
+        window[letters[i]] = (((a + 1) - remainder) / nopr) + 1 + window[letters[i - 1]];
+      }
+    }
+  }
+  function create() {
+    for (i = 0; i < order.length; i++) {
+      newDiv = document.createElement("div");
+      newDiv.id = "recgame".concat((i + 1).toString());
+      newDiv.classList.add("game");
+      newDiv2 = document.createElement("div");
+      newDiv2.classList.add("middle");
+      newSpan = document.createElement("span");
+      newBr = document.createElement("br");
+      newSpan2 = document.createElement("span");
+      newSpan2.classList.add("littleboi");
+      newDiv2.appendChild(newSpan);
+      newDiv2.appendChild(newBr);
+      newDiv2.appendChild(newSpan2);
+      newSpan.innerHTML = game[order[i]];
+      newSpan2.innerHTML = gamedescription[order[i]];
+      newDiv.appendChild(newDiv2);
+      document.getElementsByClassName("recommended")[0].appendChild(newDiv);
+    }
+    renderall();
+  }
+  function runthealgorithm() {
+    for (i = 0; i <= 5; i++) {
+      if (localStorage.getItem(learners[i]) == "1") {
+        originalarray.push((learners[i].substring(0, 1)).toUpperCase());
+        window[learners[i]] = true;
+        typesoflearners++;
+      }
+    }
+    for (i = 0; i <= (originalarray.length); i++) {
+      if (originalarray[i] != "R") {
+        for (a = 0; a < (gametranslation.length); a++) {
+          secondaryarray = gametranslation[a];
+          if (secondaryarray.indexOf(originalarray[i]) > -1) {
+            isgamerecommended[a] = 1;
+          }
+        }
+      }
+    }
+    for (i = 0; i <= (gametranslation.length); i++) {
+      if (JSON.stringify(gametranslation[i]) === JSON.stringify(originalarray)) {
+        isgamerecommended[i] = 3;
+      }
+    }
+    newarray = originalarray.concat(originalarray);
+    newsize = originalarray.length;
+    for (b = 0; b <= (originalarray.length); b++) {
+    newsize--;
+    for (i = 0; i <= (originalarray.length); i++) {
+      for (a = 0; a <= (gametranslation.length); a++) {
+      if (JSON.stringify(gametranslation[a]) === JSON.stringify(newarray.slice(i, i + (newsize)))) {
+        isgamerecommended[a] = 2;
+      }
+      }
+    }
+    }
+    order = [];
+    for (i = 0; i < gametranslation.length; i++) {
+      if (isgamerecommended[i] == 3) {
+        order.push(i);
+      }
+    }
+    for (i = 0; i < gametranslation.length; i++) {
+      if (isgamerecommended[i] == 2) {
+        order.push(i);
+      }
+    }
+    for (i = 0; i < gametranslation.length; i++) {
+      if (isgamerecommended[i] == 1) {
+        order.push(i);
+      }
+    }
+    create();
+  }
+  function redirecttojett() {
+    sessionStorage.setItem("wc3", current);
+    window.location.href = "yourpreferences.html";
+  }
+</script>
