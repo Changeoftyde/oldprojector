@@ -334,8 +334,16 @@
     document.getElementById("loadbar").style.width = (currentpage - 1) * 33.33 + "%";
     } else {
     document.getElementById("loadbar").style.width = 100 + "%";
+    for (i = 0; i < 6; i++) {
+      if (document.getElementsByClassName("optiontext")[i + 6].style.color != "rgb(105, 168, 207)") {
+      localStorage.setItem(typesoflearners[i], "0");
+      } else {
+      localStorage.setItem(typesoflearners[i], "1");
+      }
+      localStorage.setItem("cda", "1");
+    }
     setTimeout(function() {
-      window.location.href = "study.html";
+      window.location.href = "study1.html";
     }, 2500);
     }
   }
