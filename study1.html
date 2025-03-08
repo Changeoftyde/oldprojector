@@ -173,6 +173,9 @@
   }
 </style>
 <script>
+  if (localStorage.getItem("cda") != "1") {
+    localStorage.setItem("cda", "0");
+  }
   game = ["Flashcards", "Write", "Speak", "Listen & Write", "Illustrate & Write", "Explain", "Fill-in-the-Blank", "Quiz a Friend", "Listen & Speak", "Practice Quiz", "Continuous Tic-Tac-Toe", "Targeted Flashcards", "Read Notes & Write", "Matching", "Memorize", "Synonym and Antonym"];
   gametranslation = [["R", "T"], ["R"], ["A"], ["A", "R"], ["R", "V"], ["A", "L", "S"], ["R"], ["A", "L", "S"], ["A"], ["L", "R"], ["A", "R", "S"], ["R", "T"], ["R"], ["R", "T"], ["O"], ["L", "R"]];
   gamelevel = [3, 5, 5, 4, 1, 2, 2, 4, 4, 5, 2, 3, 1, 2, 5, 2];
@@ -192,7 +195,7 @@
   originalarray = [];
   renderall();
   window.addEventListener("resize", renderall);
-  learners = ["auditory", "logical", "written", "social", "tactile", "visual"];
+  learners = ["auditory", "logical", "reading", "social", "tactile", "visual"];
   hasrec = false;
   if (localStorage.getItem("cda") == "1") {
     hasrec = true;
