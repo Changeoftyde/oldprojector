@@ -7,13 +7,14 @@
 <div onclick="check()" id="next"><span class="middletext">Check</span></div>
 <div id="loadbaroutline2"></div>
 <div id="loadbaroutline">
-<div id="loadbar"></div></div>
+<div id="loadbar"><div id="loadbar2"></div></div></div>
 <div class="step" id="step1">
 <span class="instructions" id="instructions1"></span>
 <textarea placeholder="Type the answer here..." id="answerblank2"></textarea>
 </div>
 <div style="z-index: -2; top: 8vh; position: absolute; left: 0">
-<textarea id="answerblank"></textarea>
+<div id="answerblank"><div id="correctanswerarea"></div>
+</div>
 </div>
 
 <div id="jett">
@@ -27,11 +28,19 @@
 </div>
 <div class="screen hidden" id="resultsscreen">
 <div id="circle"></div>
-<div id="circle2"></div>
+<div id="circle2"><span class="middie">100%</span></div>
 </div>
 <style>
+  .middie {
+    margin-left: 50%;
+    margin-top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 1s;
+  }
   #circle {
-    background-color: #e2f4ff;
+    background-color: #31221b;
     border-radius: 50%;
     position: absolute;
     z-index: 1;
@@ -89,10 +98,10 @@
     top: 0;
     left: 0;
     z-index: 1;
-    transition: 1.5s;
-    transition-property: width;
+    transition: width 1.5s;
     width: 0%;
     height: 100%;
+    overflow: hidden;
     background-image: url("loadbar.png");
     background-size: cover;
     background-position: 50% 50%;
@@ -141,6 +150,7 @@
     font-family: codec;
     font-size: 3vh;
     z-index: 2;
+    transition: width 0.5s;
   }
   #answerblank {
     height: auto;
@@ -155,6 +165,7 @@
     z-index: -2;
     transition: 1.5s;
     transition-property: opacity;
+    overflow: hidden;
   }
   .instructions {
     text-align: center;
@@ -186,6 +197,15 @@
     position: absolute;
     left: 2vh;
     z-index: 2;
+  }
+  #loadbar2 {
+    width: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    height: 200%;
+    opacity: 0;
   }
   .step {
     left: 0;
@@ -219,6 +239,19 @@
     left: 50%;
     transform: translate(-50%, 0%);
   }
+  #correctanswerarea {
+    height: 100%;
+    right: 0;
+    top: 0;
+    width: 0;
+    position: absolute;
+    background-color: #ff8d34;
+    word-wrap: break-word;
+    transition: 0.5s;
+    color: black;
+    font-family: codec;
+    font-size: 3vh;
+  }
   #head {
     transition-property: rotate;
     transition: 2s;
@@ -246,6 +279,7 @@
   }
 </style>
 <script>
+  isrn = false;
   renderjett();
   window.addEventListener("resize", renderjett);
   function renderjett(tab) {
@@ -253,17 +287,23 @@
       document.getElementById("circle").style.height = 90 + "%";
       document.getElementById("circle").style.width = 0.9 * window.innerHeight + "px";
       document.getElementById("circle2").style.height = 75 + "%";
+      document.getElementsByClassName("middie")[0].style.fontSize = 27.5 + "vh";
       document.getElementById("circle2").style.width = 0.75 * window.innerHeight + "px";
     } else {
       document.getElementById("circle").style.width = 90 + "%";
+      document.getElementsByClassName("middie")[0].style.fontSize = 27.5 + "vw";
       document.getElementById("circle").style.height = 0.9 * window.innerWidth + "px";
       document.getElementById("circle2").style.width = 70 + "%";
       document.getElementById("circle2").style.height = 0.7 * window.innerWidth + "px";
     }
-    document.getElementById("answerblank").style.width = window.innerWidth - window.innerHeight * 0.05 + "px";
+    document.getElementById("answerblank").style.width = window.innerWidth - window.innerHeight * 0.03 + "px";
     document.getElementById("answerblank").style.top = document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.05 + "px";
     document.getElementById("answerblank").style.height = document.getElementById("step1").offsetHeight - (document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.075) + "px";
-    document.getElementById("answerblank2").style.width = window.innerWidth - window.innerHeight * 0.05 + "px";
+    if (isrn == true) {
+      document.getElementById("answerblank2").style.width = (window.innerWidth - window.innerHeight * 0.06) * 0.5 + "px";
+    } else {
+      document.getElementById("answerblank2").style.width = window.innerWidth - window.innerHeight * 0.06 + "px";
+    }
     document.getElementById("answerblank2").style.top = document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.05 + "px";
     document.getElementById("answerblank2").style.height = document.getElementById("step1").offsetHeight - (document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.075) + "px";
     if ((window.innerHeight / window.innerWidth) > 1) {
@@ -304,23 +344,93 @@
     document.getElementById("head").src = "jettface.png";
     document.getElementById("head").style.rotate = 0 + "deg";
   }
+  modifier = 1;
   function progress(howfar) {
-  for (i = 0; i <= parseInt(howfar); i++) {
-    setTimeout(change, i * 10, i.toString());
+  howfar = parseInt(howfar);
+  pct = Math.round((parseInt(howfar) / 360) * 100);
+      if (pct > 80) {
+        document.getElementsByClassName("middie")[0].style.color = "#98ff89";
+      } else if (pct > 60) {
+        document.getElementsByClassName("middie")[0].style.color = "#f4fc5d";
+      } else if (pct > 40) {
+        document.getElementsByClassName("middie")[0].style.color = "#ff8d34";
+      } else {
+        document.getElementsByClassName("middie")[0].style.color = "#ff7877";
+      }
+  for (i = 0; i <= (howfar); i++) {
+    if (howfar - i <= 30) {
+      
+      document.getElementsByClassName("middie")[0].innerHTML = Math.round((parseInt(howfar) / 360) * 100) + "%";
+      document.getElementsByClassName("middie")[0].style.opacity = 1;
+    }
+    if (howfar - i <= 90) {
+      modifier = 1;
+      for (b = 0; b < (90 - (howfar - i)); b++) {
+        modifier = modifier * 1.008;
+      }
+    } else {
+      modifier = 1;
+    }
+    setTimeout(change, i * 5 * modifier, i.toString());
   }
 }
 function change(para) {
+      if (pct > 80) {
+        colorofbar = "#98ff89";
+      } else if (pct > 60) {
+        colorofbar = "#f4fc5d";
+      } else if (pct > 40) {
+        colorofbar = "#ff8d34";
+      } else {
+        colorofbar = "#ff7877";
+      }
   if (para == 360) {
     document.getElementById("circle").style.backgroundImage = "none";
-    document.getElementById("circle").style.backgroundColor = "#69a8cf";
+    document.getElementById("circle").style.backgroundColor = "#98ff89";
   } else {
-  document.getElementById("circle").style.backgroundImage = "conic-gradient(#69a8cf 0deg, #69a8cf " + para.toString() + "deg, #e2f4ff " + para.toString() + "deg, #e2f4ff 360deg)";
+  document.getElementById("circle").style.backgroundImage = "conic-gradient(" + colorofbar + " 0deg, " + colorofbar + " " + para.toString() + "deg, #31221b " + para.toString() + "deg, #31221b 360deg)";
 }
 }
-  
+  localStorage.setItem("1qat", "2");
+  localStorage.setItem("1q1", "a?");
+  localStorage.setItem("1q2", "b?");
+  localStorage.setItem("1a1", "a");
+  localStorage.setItem("1a2", "b");
   current = 1;
   currentpage = 1;
   firsttimethru = true;
+  function trueorfalse(tof) {
+    if (tof == true) {
+      document.getElementById("loadbar").style.transition = "width 1.5s";
+      document.getElementById("answerblank2").style.color = "#98ff89";
+      document.getElementById("loadbar2").style.backgroundColor = "#98ff89";
+      document.getElementById("loadbar2").style.opacity = 1; 
+      document.getElementById("loadbar2").offsetHeight;
+      document.getElementById("loadbar2").style.transition = "opacity 0.5s";
+      document.getElementById("loadbar2").offsetHeight;
+      setTimeout(function() {
+        document.getElementById("loadbar2").style.opacity = 0;
+        document.getElementById("loadbar2").offsetHeight;
+        document.getElementById("loadbar2").style.transition = "0s";
+      }, 1000)
+    } else {
+      document.getElementById("answerblank2").style.color = "#ff7877";
+      document.getElementById("correctanswerarea").innerHTML = localStorage.getItem(current.toString().concat("a", currentpage.toString()));
+      document.getElementById("correctanswerarea").style.width = 50 + "%";
+      document.getElementById("loadbar2").style.backgroundColor = "#ff7877";
+      document.getElementById("loadbar2").style.opacity = 1; 
+      document.getElementById("loadbar2").offsetHeight;
+      document.getElementById("loadbar2").style.transition = "opacity 0.5s";
+      document.getElementById("loadbar2").offsetHeight;
+      isrn = true;
+      renderjett();
+      setTimeout(function() {
+        document.getElementById("loadbar2").style.opacity = 0;
+        document.getElementById("loadbar2").offsetHeight;
+        document.getElementById("loadbar2").style.transition = "0s";
+      }, 1000)
+    }
+  }
   function convert(conversiontext) {
     correctanswer = conversiontext.toString().toLowerCase().concat(" ");
     correctanswer = correctanswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -386,15 +496,18 @@ function change(para) {
       happylook();
       whatwehave++;
       numcorrect++;
+      trueorfalse(true);
       document.getElementById("loadbar").style.width = 100 / localStorage.getItem(current.toString().concat("qat")) * whatwehave + "%";
     } else if (aretheycloseenough) {
       happylook();
       whatwehave++
       numcorrect++;
+      trueorfalse(true);
       document.getElementById("loadbar").style.width = 100 / localStorage.getItem(current.toString().concat("qat")) * whatwehave + "%";
     } else {
       sadlook();
       ntr.push(currentpage);
+      trueorfalse(false);
     }
     setTimeout(function() {
       normallook();
@@ -423,6 +536,9 @@ function change(para) {
     setTimeout(progress, 3250, 360 * (numcorrect / currentspace));
   }
   function next() {
+    document.getElementById("correctanswerarea").style.width = 0;
+    isrn = false;
+    renderjett();
     showingresults = false;
     currentspace++;
     if (ntr.length == currentspace) {
@@ -442,6 +558,7 @@ function change(para) {
     setTimeout(function() {
       document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
       document.getElementById("answerblank2").value = "";
+      document.getElementById("answerblank2").style.color = "white";
     }, 750)
     document.getElementById("next").setAttribute("onclick", "check()");
     document.getElementById("next").innerHTML = "Check";
