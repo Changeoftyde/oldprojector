@@ -75,22 +75,27 @@
 <div id="circle"></div>
 <div id="circle2"><span class="middie">100%</span></div>
 <div class="jettthe2nd" id="jett">
-<img class="head" src="jettamazedface.png">
-<img class="eye" id="lefteye" style="left: 19%" src="lefteye.png">
-<img class="eye" id="righteye" style="left: 56.88%" src="righteye.png">
+<img id="headresults" class="head" src="jettface.png">
+<img class="eye" id="lefteye" style="left: 31%" src="noeye.png">
+<img class="eye" id="righteye" style="left: 68.87%" src="noeye.png">
 <img id="body" src="jettbody.png">
 </div>
 <div class="jettthe2nd2" id="jett2">
 <img id="jettshadow" src="jettshadow.png">
 </div>
+</div>
 </body>
 <style>
   .eye {
-    height: 21.62%;
+    height: 10%;
     width: auto;
-    top: 15.8%;
+    top: 26.6%;
+    transform: translate(-50%, -50%);
+    rotate: 0deg;
     position: absolute;
     z-index: 10;
+    transition: 2s;
+    transform-origin: 0% 0%;
   }
   .middie {
     margin-left: 50%;
@@ -479,6 +484,37 @@
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
+  function jettlookatyourscore(score) {
+    document.getElementById("lefteye").src = "noeye.png";
+    document.getElementById("righteye").src = "noeye.png";
+    document.getElementById("headresults").style.transition = 2 + "s";
+    if (score > 95) {
+      document.getElementById("lefteye").style.rotate = 0 + "deg";
+      document.getElementById("righteye").style.rotate = 0 + "deg";
+      document.getElementById("lefteye").style.height = 30 + "%";
+      document.getElementById("righteye").style.height = 30 + "%";
+      document.getElementById("headresults").src = "jettamazedface.png";
+      document.getElementById("lefteye").src = "lefteye.png";
+      document.getElementById("righteye").src = "righteye.png";
+    } else if (score > 79) {
+      document.getElementById("headresults").style.rotate = 30 + "deg";
+      document.getElementById("headresults").src = "jetthappyface.png";
+    } else if (score > 49) {
+      document.getElementById("headresults").style.rotate = 15 + "deg";
+      document.getElementById("headresults").src = "jettconfusedface.png";
+    } else {
+      document.getElementById("headresults").style.transition = 1 + "s";
+      document.getElementById("headresults").offsetHeight;
+      document.getElementById("headresults").style.rotate = 30 + "deg";
+      document.getElementById("headresults").src = "jettsadface.png";
+      setTimeout(function() {
+        document.getElementById("headresults").style.rotate = -30 + "deg";
+      }, 1000)
+      setTimeout(function() {
+        document.getElementById("headresults").style.rotate = 0 + "deg";
+      }, 2000)
+    }
+  }
   function resizehishead() {}
   function jettthe2ndfunc() {
     if ((window.innerHeight / window.innerWidth) > 1) {
@@ -724,6 +760,7 @@
   function progress(howfar) {
   howfar = parseInt(howfar);
   pct = Math.round((parseInt(howfar) / 360) * 100);
+  jettlookatyourscore(pct);
       if (pct > 80) {
         document.getElementsByClassName("middie")[0].style.color = "#98ff89";
       } else if (pct > 60) {
@@ -766,7 +803,12 @@
   } else {
   document.getElementById("circle").style.backgroundImage = "conic-gradient(" + colorofbar + " 0deg, " + colorofbar + " " + para.toString() + "deg, #31221b " + para.toString() + "deg, #31221b 360deg)";
 }
-  }
+}
+  localStorage.setItem("1qat", "2");
+  localStorage.setItem("1q1", "a?");
+  localStorage.setItem("1q2", "b?");
+  localStorage.setItem("1a1", "a");
+  localStorage.setItem("1a2", "b");
   current = 1;
   currentpage = 1;
   firsttimethru = true;
