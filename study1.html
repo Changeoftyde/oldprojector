@@ -75,10 +75,9 @@
 <div id="circle"></div>
 <div id="circle2"><span class="middie">100%</span></div>
 <div class="jettthe2nd" id="jett">
-<div id="headarea"><img class="head" src="jettface.png">
-<img class="eye" id="lefteye" style="left: 16.8%" src="lefteye.png">
-<img class="eye" id="righteye" style="left: 56.34%" src="righteye.png">
-</div>
+<img class="head" src="jettamazedface.png">
+<img class="eye" id="lefteye" style="left: 19%" src="lefteye.png">
+<img class="eye" id="righteye" style="left: 56.88%" src="righteye.png">
 <img id="body" src="jettbody.png">
 </div>
 <div class="jettthe2nd2" id="jett2">
@@ -87,9 +86,9 @@
 </body>
 <style>
   .eye {
-    height: 42.27%;
+    height: 21.62%;
     width: auto;
-    top: 26.39%;
+    top: 15.8%;
     position: absolute;
     z-index: 10;
   }
@@ -480,7 +479,8 @@
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
-  window.addEventListener("resize", function() {
+  function resizehishead() {}
+  function jettthe2ndfunc() {
     if ((window.innerHeight / window.innerWidth) > 1) {
       document.getElementsByClassName("jettthe2nd")[0].style.left = 50 + "%";
       document.getElementsByClassName("jettthe2nd")[0].style.transform = "translate(-50%, 0%)";
@@ -492,7 +492,9 @@
       document.getElementsByClassName("jettthe2nd2")[0].style.left = 10 + "%";
       document.getElementsByClassName("jettthe2nd2")[0].style.transform = "translate(0%, 0%)";
     }
-  })
+  }
+  window.addEventListener("resize", resizehishead);
+  window.addEventListener("resize", jettthe2ndfunc);
   game = ["Flashcards", "Write", "Speak", "Listen & Write", "Illustrate & Write", "Explain", "Fill-in-the-Blank", "Quiz a Friend", "Listen & Speak", "Practice Quiz", "Continuous Tic-Tac-Toe", "Targeted Flashcards", "Read Notes & Write", "Matching", "Memorize", "Synonym and Antonym"];
   gametranslation = [["R", "T"], ["R"], ["A"], ["A", "R"], ["R", "V"], ["A", "L", "S"], ["R"], ["A", "L", "S"], ["A"], ["L", "R"], ["A", "R", "S"], ["R", "T"], ["R"], ["R", "T"], ["O"], ["L", "R"]];
   gamelevel = [3, 5, 5, 4, 1, 2, 2, 4, 4, 5, 2, 3, 1, 2, 5, 2];
@@ -764,7 +766,7 @@
   } else {
   document.getElementById("circle").style.backgroundImage = "conic-gradient(" + colorofbar + " 0deg, " + colorofbar + " " + para.toString() + "deg, #31221b " + para.toString() + "deg, #31221b 360deg)";
 }
-}
+  }
   current = 1;
   currentpage = 1;
   firsttimethru = true;
@@ -944,4 +946,7 @@
     document.getElementById("next").innerHTML = "Check";
     }
   }
+  resizehishead();
+  jettthe2ndfunc();
+  
 </script>
