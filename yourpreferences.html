@@ -252,8 +252,12 @@
       document.getElementsByClassName("option")[totoggle].style.backgroundColor = "black";
     }
     taskcompleted = false;
-    for (i = 0; i < 6; i++) {
-      if (document.getElementsByClassName("option")[totoggle].style.outlineColor == "#69a8cf") {
+    toadd = 0;
+    if (totoggle >= 6) {
+      toadd = 6;
+    }
+    for (i = 0 + toadd; i < 6 + toadd; i++) {
+      if (document.getElementsByClassName("option")[i].style.outlineColor == "#69a8cf") {
         taskcompleted = true;
       }
     }  
