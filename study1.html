@@ -506,22 +506,25 @@
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
-  localStorage.setItem("1q0", " ");
-  localStorage.setItem("1a0", " ");
   function restart() {
     currentpage = 1;
     currentspace = 0;
+    firsttimethru = true;
+    whatwehave = 0;
     document.getElementById("step1").style.opacity = 1;
     document.getElementById("answerblank").style.opacity = 1;
     document.getElementById("answerblank2").value = "";
     document.getElementById("answerblank2").style.color = "#ff8d34";
     document.getElementById("loadbar").style.width = 0;
-    document.getElementById("loadbar2").style.width = 0;
     document.getElementById("correctanswerarea").style.width = 0;
     isrn = false;
     renderjett();
+    numcorrect = 0;
+    ntr = [];
+    for (i = 1; i <= parseInt(localStorage.getItem(current.toString().concat("qat"))); i++) {
+      ntr.push(i);
+    }
     showingresults = false;
-    currentspace++;
     document.getElementById("step1").style.opacity = 0;
     document.getElementById("answerblank").style.opacity = 0;
     if (!showingresults) {
@@ -565,11 +568,7 @@
     }
     document.getElementById("area").offsetHeight;
   }
-  localStorage.setItem("1qat", "2");
-  localStorage.setItem("1q1", "whats up dog");
-  localStorage.setItem("1q2", "lol");
-  localStorage.setItem("1a1", "what up");
-  localStorage.setItem("1a2", "the sky");
+  
   function jettlookatyourscore(score) {
     document.getElementById("lefteye").src = "noeye.png";
     document.getElementById("righteye").src = "noeye.png";
@@ -1030,6 +1029,8 @@
     ntr.push(i);
   }
   function showhide(whichoneshow) {
+    window.scrollTo(0, 0);
+    document.getElementById("circle").style.backgroundColor = "#31221b";
     for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
       document.getElementsByClassName("screen")[i].style.zIndex = 0;
       document.getElementsByClassName("screen")[i].classList.add("hidden");
