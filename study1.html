@@ -701,6 +701,7 @@
   function create() {
     for (i = 0; i < order.length; i++) {
       newDiv = document.createElement("div");
+      newDiv.setAttribute("onclick", "showhide('writesection')");
       newDiv.id = "recgame".concat((i + 1).toString());
       newDiv.classList.add("game");
       newDiv2 = document.createElement("div");
