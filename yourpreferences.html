@@ -251,6 +251,12 @@
       document.getElementsByClassName("optiontext")[totoggle].style.color = "#ff8d34";
       document.getElementsByClassName("option")[totoggle].style.backgroundColor = "black";
     }
+    taskcompleted = false;
+    for (i = 0; i < 6; i++) {
+      if (document.getElementsByClassName("option")[totoggle].style.outlineColor == "#69a8cf") {
+        taskcompleted = true;
+      }
+    }  
   }
   function renderjett(tab) {
     if ((window.innerHeight / window.innerWidth) > 1) {
@@ -323,7 +329,10 @@
   }
   typesoflearners = ["tactile", "visual", "logical", "auditory", "reading", "social"];
   currentpage = 1;
+  taskcompleted = true;
   function next() {
+    if (taskcompleted == true) {
+    taskcompleted = false;
     document.getElementById("step".concat(currentpage.toString())).classList.add("hidden");
     happylook();
     currentpage++;
@@ -346,6 +355,7 @@
     setTimeout(function() {
       window.location.href = "study1.html";
     }, 2500);
+    }
     }
   }
 </script>
