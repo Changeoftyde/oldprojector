@@ -1029,6 +1029,12 @@
     ntr.push(i);
   }
   function showhide(whichoneshow) {
+    if (whichoneshow.toString() != "homescreen") {
+      document.getElementById("righteye").style.height = 10 + "%";
+      document.getElementById("lefteye").style.height = 10 + "%";
+      document.getElementById("righteye").src = "noeye.png";
+      document.getElementById("lefteye").src = "noeye.png";
+    }
     window.scrollTo(0, 0);
     document.getElementById("circle").style.backgroundColor = "#31221b";
     for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
