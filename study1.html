@@ -74,6 +74,10 @@
 <div class="screen hidden" id="resultsscreen">
 <div id="circle"></div>
 <div id="circle2"><span class="middie">100%</span></div>
+<div id="area">
+  <img onclick="showhide('writesection')" src="restart.png" class="startswithR">
+  <img onclick="showhide('homescreen')" src="finish.png" class="startswithR">
+</div>
 <div class="jettthe2nd" id="jett">
 <img id="headresults" class="head" src="jettface.png">
 <img class="eye" id="lefteye" style="left: 31%" src="noeye.png">
@@ -479,11 +483,93 @@
     font-size: 1.8vh;
     font-weight: normal;
   }
+  .startswithR {
+    width: 7.5vh;
+    height: 7.5vh;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  .tallarea {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .widearea {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 </style>
 <script>
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
+  localStorage.setItem("1q0", " ");
+  localStorage.setItem("1a0", " ");
+  function restart() {
+    currentpage = 1;
+    currentspace = 0;
+    document.getElementById("step1").style.opacity = 1;
+    document.getElementById("answerblank").style.opacity = 1;
+    document.getElementById("answerblank2").value = "";
+    document.getElementById("answerblank2").style.color = "#ff8d34";
+    document.getElementById("loadbar").style.width = 0;
+    document.getElementById("loadbar2").style.width = 0;
+    document.getElementById("correctanswerarea").style.width = 0;
+    isrn = false;
+    renderjett();
+    showingresults = false;
+    currentspace++;
+    document.getElementById("step1").style.opacity = 0;
+    document.getElementById("answerblank").style.opacity = 0;
+    if (!showingresults) {
+    setTimeout(function() {
+      document.getElementById("step1").style.opacity = 1;
+      document.getElementById("answerblank").style.opacity = 1;
+      renderjett();
+    }, 1500)
+    setTimeout(function() {
+      document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
+      document.getElementById("answerblank2").value = "";
+      document.getElementById("answerblank2").style.color = "white";
+    }, 750)
+    document.getElementById("next").setAttribute("onclick", "check()");
+    document.getElementById("next").innerHTML = "Check";
+    }
+  }
+  renderbuttons();
+  window.addEventListener("resize", renderbuttons);
+  function renderbuttons() {
+    if (window.innerHeight / window.innerWidth < 1) {
+      //wide
+      document.getElementById("area").classList.remove("tallarea");
+      document.getElementById("area").classList.add("widearea");
+      document.getElementById("area").style.width = (window.innerWidth - window.innerHeight * 0.9) * 0.5;
+      document.getElementById("area").style.height = window.innerHeight;
+      document.getElementsByClassName("startswithR")[0].style.left = 50 + "%";
+      document.getElementsByClassName("startswithR")[0].style.top = 42.5 + "%";
+      document.getElementsByClassName("startswithR")[1].style.left = 50 + "%";
+      document.getElementsByClassName("startswithR")[1].style.top = 57.5 + "%";
+    } else {
+      //height 
+      document.getElementById("area").classList.remove("widearea");
+      document.getElementById("area").classList.add("tallarea");
+      document.getElementById("area").style.height = (window.innerHeight - window.innerWidth * 0.9) * 0.5;
+      document.getElementById("area").style.width = window.innerWidth;
+      document.getElementsByClassName("startswithR")[0].style.top = 50 + "%";
+      document.getElementsByClassName("startswithR")[0].style.left = ((0.5 * window.innerWidth) - (window.innerHeight * 0.075)) + "px";
+      document.getElementsByClassName("startswithR")[1].style.top = 50 + "%";
+      document.getElementsByClassName("startswithR")[1].style.left = ((0.5 * window.innerWidth) + (window.innerHeight * 0.075)) + "px";
+    }
+    document.getElementById("area").offsetHeight;
+  }
+  localStorage.setItem("1qat", "2");
+  localStorage.setItem("1q1", "whats up dog");
+  localStorage.setItem("1q2", "lol");
+  localStorage.setItem("1a1", "what up");
+  localStorage.setItem("1a2", "the sky");
   function jettlookatyourscore(score) {
     document.getElementById("lefteye").src = "noeye.png";
     document.getElementById("righteye").src = "noeye.png";
@@ -758,6 +844,7 @@
   }
   modifier = 1;
   function progress(howfar) {
+    restart();
   howfar = parseInt(howfar);
   pct = Math.round((parseInt(howfar) / 360) * 100);
   jettlookatyourscore(pct);
