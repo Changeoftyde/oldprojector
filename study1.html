@@ -17,10 +17,10 @@
 </div>
 <div id="writtensection">
 <h1 class="title">For Written Learners</h1>
-<div onclick="showhide('writesection')" class="game3"><div class="middle"><span>Write</span><br><span class="littleboi">Type out the full answer</span></div></div>
+<div onclick="showhide('writesection', 'write')" class="game3"><div class="middle"><span>Write</span><br><span class="littleboi">Type out the full answer</span></div></div>
 <div class="game3"><div class="middle"><span>Fill-in-the-Blank</span><br><span class="littleboi">Fill in the gaps in the answer</span></div></div>
 <div class="game3"><div class="middle"><span>Practice Quiz</span><br><span class="littleboi">Take a Practice Quiz</span></div></div>
-<div class="game3"><div class="middle"><span>Read Notes & Write</span><br><span class="littleboi">Use your notes to answer conceptual questions</span></div></div>
+<div onclick="showhide('writesection', 'double')"  class="game3"><div class="middle"><span>Read Notes & Write</span><br><span class="littleboi">Use your notes to answer conceptual questions</span></div></div>
 </div>
 <div id="tactilesection">
 <h1 class="title">For Tactile Learners</h1>
@@ -76,7 +76,7 @@
 <div id="circle2"><span class="middie">100%</span></div>
 <div id="area">
   <img onclick="showhide('writesection')" src="restart.png" class="startswithR">
-  <img onclick="showhide('homescreen')" src="finish.png" class="startswithR">
+  <img onclick="window.location.href = 'study'.concat(current.toString(), '.html');" src="finish.png" class="startswithR">
 </div>
 <div class="jettthe2nd" id="jett">
 <img id="headresults" class="head" src="jettface.png">
@@ -503,6 +503,11 @@
   }
 </style>
 <script>
+  localStorage.setItem("1q1", "a");
+  localStorage.setItem("1q2", "b");
+  localStorage.setItem("1a1", "a");
+  localStorage.setItem("1a2", "b");
+  localStorage.setItem("1qat", "2");
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
@@ -511,6 +516,9 @@
     currentspace = 0;
     firsttimethru = true;
     whatwehave = 0;
+    document.getElementById("answerblank2").style.opacity = 1;
+    document.getElementById("answerblank").style.opacity = 1;
+    document.getElementById("instructions1").style.opacity = 1;
     document.getElementById("step1").style.opacity = 1;
     document.getElementById("answerblank").style.opacity = 1;
     document.getElementById("answerblank2").value = "";
@@ -534,12 +542,22 @@
       renderjett();
     }, 1500)
     setTimeout(function() {
+      nexttodo = 1;
+      if (typeofgame == "write") {
       document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
+      document.getElementById("answerblank2").style.opacity = 1;
+       document.getElementById("next").setAttribute("onclick", "check()");
+      document.getElementById("next").innerHTML = "Check";
+      } else if (typeofgame == "double") {
+      document.getElementById("instructions1").innerHTML = "Read the section in your notes that addresses the following topic/question: '" + localStorage.getItem(current.toString().concat("q", currentpage.toString())) + "'";
+      document.getElementById("next").setAttribute("onclick", "next()");
+      document.getElementById("next").innerHTML = "Next";
+      document.getElementById("answerblank2").style.opacity = 0;
+      document.getElementById("answerblank").style.opacity = 0;
+      } else {}
       document.getElementById("answerblank2").value = "";
       document.getElementById("answerblank2").style.color = "white";
     }, 750)
-    document.getElementById("next").setAttribute("onclick", "check()");
-    document.getElementById("next").innerHTML = "Check";
     }
   }
   renderbuttons();
@@ -613,6 +631,19 @@
       document.getElementsByClassName("jettthe2nd2")[0].style.left = 10 + "%";
       document.getElementsByClassName("jettthe2nd2")[0].style.transform = "translate(0%, 0%)";
     }
+  }
+  typeofgame = "";
+  function rerunthis() {
+    nexttodo = 1;
+    if (typeofgame == "write") {
+    document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
+    } else if (typeofgame == "double") {
+    document.getElementById("instructions1").innerHTML = "Read the section in your notes that addresses the following topic/question: '" + localStorage.getItem(current.toString().concat("q", currentpage.toString())) + "'";
+    document.getElementById("next").setAttribute("onclick", "next()");
+    document.getElementById("next").innerHTML = "Next";
+    document.getElementById("answerblank2").style.opacity = 0;
+    document.getElementById("answerblank").style.opacity = 0;
+    } else {}
   }
   window.addEventListener("resize", resizehishead);
   window.addEventListener("resize", jettthe2ndfunc);
@@ -871,7 +902,7 @@
     } else {
       modifier = 1;
     }
-    setTimeout(change, i * 5 * modifier, i.toString());
+    setTimeout(change, i * 5, i.toString());
   }
 }
   function change(para) {
@@ -1023,13 +1054,29 @@
   }
   whatwehave = 0;
   currentspace = 0;
+  nexttodo = 1;
+  if (typeofgame == "write") {
   document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
+  } else if (typeofgame == "double") {
+  document.getElementById("instructions1").innerHTML = "Read the section in your notes that addresses the following topic/question: '" + localStorage.getItem(current.toString().concat("q", currentpage.toString())) + "'";
+  document.getElementById("next").setAttribute("onclick", "next()");
+  document.getElementById("next").innerHTML = "Next";
+  document.getElementById("answerblank2").style.opacity = 0;
+  document.getElementById("answerblank").style.opacity = 0;
+  } else {}
   renderjett();
   ntr = [];
   for (i = 1; i <= parseInt(localStorage.getItem(current.toString().concat("qat"))); i++) {
     ntr.push(i);
   }
-  function showhide(whichoneshow) {
+  function showhide(whichoneshow, ttyw) {
+    if (ttyw) { 
+    typeofgame = ttyw;
+    rerunthis(); 
+    }
+    renderjett();
+    resizehishead();
+    jettthe2ndfunc();
     if (whichoneshow.toString() != "homescreen") {
       document.getElementById("righteye").style.height = 10 + "%";
       document.getElementById("lefteye").style.height = 10 + "%";
@@ -1050,7 +1097,9 @@
     setTimeout(showhide, 3000, "resultsscreen");
     setTimeout(progress, 3250, 360 * (numcorrect / currentspace));
   }
+
   function next() {
+  if (typeofgame == "write") {
     document.getElementById("correctanswerarea").style.width = 0;
     isrn = false;
     renderjett();
@@ -1078,8 +1127,70 @@
     document.getElementById("next").setAttribute("onclick", "check()");
     document.getElementById("next").innerHTML = "Check";
     }
-  }
+  
+  } else if (typeofgame == "double") {
+    if (nexttodo == 1) {
+    nexttodo = 0;
+    document.getElementById("correctanswerarea").style.width = 0;
+    isrn = false;
+    renderjett();
+    showingresults = false;
+    if (ntr.length == currentspace) {
+      showingresults = true;
+      showresults();
+    } else {
+      currentpage = ntr[currentspace];
+    }
+    document.getElementById("step1").style.opacity = 0;
+    document.getElementById("answerblank").style.opacity = 0;
+    if (!showingresults) {
+    setTimeout(function() {
+      document.getElementById("step1").style.opacity = 1;
+      document.getElementById("answerblank").style.opacity = 1;
+      document.getElementById("answerblank2").style.opacity = 1;
+      renderjett();
+    }, 1500)
+    setTimeout(function() {
+      document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
+      document.getElementById("answerblank2").value = "";
+      document.getElementById("answerblank2").style.color = "white";
+    }, 750)
+    document.getElementById("next").setAttribute("onclick", "check()");
+    document.getElementById("next").innerHTML = "Check";
+    }
+    currentspace++;
+    } else {
+    nexttodo = 1;
+    document.getElementById("correctanswerarea").style.width = 0;
+    isrn = false;
+    renderjett();
+    showingresults = false;
+    if (ntr.length == currentspace) {
+      showingresults = true;
+      showresults();
+    } else {
+      currentpage = ntr[currentspace];
+    }
+    document.getElementById("instructions1").style.opacity = 0;
+    document.getElementById("answerblank").style.opacity = 0;
+    document.getElementById("answerblank2").style.opacity = 0;
+    if (!showingresults) {
+    setTimeout(function() {
+      document.getElementById("instructions1").style.opacity = 1;
+      renderjett();
+    }, 1500)
+    setTimeout(function() {
+      document.getElementById("instructions1").innerHTML = "Read the section in your notes that addresses the following topic/question: '" + localStorage.getItem(current.toString().concat("q", currentpage.toString())) + "'";
+      document.getElementById("answerblank2").value = "";
+      document.getElementById("answerblank2").style.color = "white";
+    }, 750)
+    document.getElementById("next").setAttribute("onclick", "next()");
+    document.getElementById("next").innerHTML = "Next";
+    }
+    }
+    
+  } else {}
   resizehishead();
   jettthe2ndfunc();
-  
+  }
 </script>
