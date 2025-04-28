@@ -1,4 +1,4 @@
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+ <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body>
 <div id="homescreen" class="screen">
 <div style="top: 3vh" class="recommended">
@@ -503,15 +503,52 @@
   }
 </style>
 <script>
-  localStorage.setItem("1q1", "a");
+  current = 1;
+  function showhide(whichoneshow, ttyw) {
+    if (ttyw) { 
+    typeofgame = ttyw;
+    rerunthis(); 
+    }
+    nameNeededForReset = typeofgame;
+    renderjett();
+    resizehishead();
+    jettthe2ndfunc();
+    if (whichoneshow.toString() != "homescreen") {
+      document.getElementById("righteye").style.height = 10 + "%";
+      document.getElementById("lefteye").style.height = 10 + "%";
+      document.getElementById("righteye").src = "noeye.png";
+      document.getElementById("lefteye").src = "noeye.png";
+      document.getElementById("headresults").style.rotate = 0 + "deg";
+    }
+    window.scrollTo(0, 0);
+    document.getElementById("circle").style.backgroundColor = "#31221b";
+    for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
+      document.getElementsByClassName("screen")[i].style.zIndex = 0;
+      document.getElementsByClassName("screen")[i].classList.add("hidden");
+    }
+    document.getElementById(whichoneshow).classList.remove("hidden");
+    document.getElementById(whichoneshow).style.zIndex = 1;
+  }
+  goToPage();
+  function goToPage() {
+    if (localStorage.getItem("whichpage".concat(current.toString())) && localStorage.getItem("whichpage".concat(current.toString())) != "0") {
+      showhide("writesection", localStorage.getItem("whichpage".concat(current.toString())));
+    }
+    localStorage.setItem("whichpage".concat(current.toString()), "0");
+  }
+  /*localStorage.setItem("1q1", "a");
   localStorage.setItem("1q2", "b");
   localStorage.setItem("1a1", "a");
   localStorage.setItem("1a2", "b");
-  localStorage.setItem("1qat", "2");
+  localStorage.setItem("1qat", "2");*/
   if (localStorage.getItem("cda") != "1") {
     localStorage.setItem("cda", "0");
   }
   function restart() {
+    localStorage.setItem("whichpage".concat(current.toString()), nameNeededForReset);
+    window.location.href = "study".concat(current.toString(), ".html");
+  }
+  /*function restart() {
     currentpage = 1;
     currentspace = 0;
     firsttimethru = true;
@@ -559,7 +596,7 @@
       document.getElementById("answerblank2").style.color = "white";
     }, 750)
     }
-  }
+  }*/
   renderbuttons();
   window.addEventListener("resize", renderbuttons);
   function renderbuttons() {
@@ -875,7 +912,6 @@
   }
   modifier = 1;
   function progress(howfar) {
-    restart();
   howfar = parseInt(howfar);
   pct = Math.round((parseInt(howfar) / 360) * 100);
   jettlookatyourscore(pct);
@@ -1069,9 +1105,11 @@
   for (i = 1; i <= parseInt(localStorage.getItem(current.toString().concat("qat"))); i++) {
     ntr.push(i);
   }
+  nameNeededForReset = "";
   function showhide(whichoneshow, ttyw) {
     if (ttyw) { 
     typeofgame = ttyw;
+    nameNeededForReset = typeofgame;
     rerunthis(); 
     }
     renderjett();
@@ -1127,7 +1165,7 @@
     document.getElementById("next").setAttribute("onclick", "check()");
     document.getElementById("next").innerHTML = "Check";
     }
-  
+    
   } else if (typeofgame == "double") {
     if (nexttodo == 1) {
     nexttodo = 0;
