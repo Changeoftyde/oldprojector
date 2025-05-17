@@ -127,10 +127,13 @@ for (i = 1; i <= 10; i++) {
     creategroup(i.toString());
   }
 }
+function redirect(url) {
+  window.location.href = url;
+}
 function creategroup(n2c) {
   nDiv = document.createElement("div");
   nDiv.classList.add("group");
-  nDiv.setAttribute("onclick", "set" + n2c + ".html");
+  nDiv.setAttribute("onclick", "redirect('set" + n2c + ".html')";
   nDiv.style.backgroundImage = "url('p".concat(localStorage.getItem(n2c + "p"), ".png')");
   document.getElementById("groups").appendChild(nDiv);
   nDivi = document.createElement("div");
