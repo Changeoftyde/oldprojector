@@ -108,6 +108,18 @@ body {
   height: 100%;
   right: 0;
   top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+}
+.halfwhite {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 #sidebar {
   background-color: white;
@@ -139,6 +151,9 @@ function creategroup(n2c) {
   nDivi = document.createElement("div");
   nDivi.classList.add("insidetext");
   nDiv.appendChild(nDivi);
+  nDivw = document.createElement("div");
+  nDivw.classList.add("halfwhite");
+  nDiv.appendChild(nDivw);
   nSpann = document.createElement("span");
   nSpann.innerHTML = localStorage.getItem(n2c + "n");
   nSpann.classList.add("name");
