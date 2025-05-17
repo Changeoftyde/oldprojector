@@ -1,146 +1,175 @@
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><body>
-<h1>Projections</h1>
-<div class="projection" id="pro1"><p class="protxt"><span id="pt1"></span><br><span id="auth1"></span></p></div>
-<div class="projection" id="pro2"><p class="protxt"><span id="pt2"></span><br><span id="auth2"></span></p></div>
-<div class="projection" id="pro3"><p class="protxt"><span id="pt3"></span><br><span id="auth3"></span></p></div>
-<div class="projection" id="pro4"><p class="protxt"><span id="pt4"></span><br><span id="auth4"></span></p></div>
-<div class="projection" id="pro5"><p class="protxt"><span id="pt5"></span><br><span id="auth5"></span></p></div>
-<div class="projection" id="pro6"><p class="protxt"><span id="pt6"></span><br><span id="auth6"></span></p></div>
-<div class="projection" id="pro7"><p class="protxt"><span id="pt7"></span><br><span id="auth7"></span></p></div>
-<div class="projection" id="pro8"><p class="protxt"><span id="pt8"></span><br><span id="auth8"></span></p></div>
-<div class="projection" id="pro9"><p class="protxt"><span id="pt9"></span><br><span id="auth9"></span></p></div>
-<div class="projection" id="pro10"><p class="protxt"><span id="pt10"></span><br><span id="auth10"></span></p></div>
-<style> 
-  @font-face {
-    font-family: codec;
-    src: url("coolvetica.ttf");
-  }
-  body {
-    font-family: codec;
-  }
-  body {
-    background-image: url("IMG_8508.png");
-    background-size: cover;
-    background-repeat: repeat;
-  }
-  h1 {
-    color: white;
-    text-align: center;
-    font-size: 5vh;
-    position: absolute;
-    top: 2vw;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .projection {
-    background-size: cover;
-    background-position: 50% 50%;
-    overflow-x: hidden;
-    transform: translate(0%, 0%);
-    position: absolute;
-    outline: 0.6vh solid white;
-    border-radius: 2vh;
-  }
-  .protxt {
-    transform: translate(-50%, -50%);
-    position: absolute;
-    width: 100%;
-    color: white;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    margin: 0;
-    z-index: 2000;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+<div id="sidebar">
+<a href="home.html"><div style="top: 0vh" class="hyperlink"><img class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img class="hpimg"><p class="hplabel">Play</p></div></a>
+<a><div style="top: 40.5vh" class="hyperlink selected"><img class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading"><img src="projecttorstudymode.png" id="logo"></div>
+<div id="groups">
+
+</div>
+</div>
+</body>
+<style>
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: -1.25vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  
+}
+.author {
+  font-size: 2vh;
+  font-weight: normal;
+}
+.insidetext {
+  font-weight: bold;
+  font-size: 3vh;
+  position: absolute;
+  padding: 0;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.group {
+  height: 15vh;
+  outline: 1.5vh solid black;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: brightness(150%);
+}
+#groups {
+  width: 100%;
+  position: absolute;
+  top: 21vh;
+  height: 200%;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
 </style>
 <script>
-adjust();
-initial();
-window.addEventListener("resize", adjust);
-function blank() {
-  allow = "";
-  if (event.target.tagName == "DIV") {
-    allow = event.target.id.substring(3);
-  } else if (event.target.tagName == "SPAN" && event.target.id.substring(0, 4) == "auth") {
-    allow = event.target.id.substring(4);
-  } else if (event.target.tagName == "P") { 
-    allow = event.target.children[0].id.substring(2);
-  } else {
-    allow = event.target.id.substring(2);
-  }
-  sessionStorage.setItem("wic", allow);
-  sessionStorage.setItem("c", "2");
-  window.location.href = "edit.html";
-}
-function filled() {
-  allow = "";
-  if (event.target.tagName == "DIV") {
-    allow = event.target.id.substring(3);
-  } else if (event.target.tagName == "SPAN" && event.target.id.substring(0, 4) == "auth") {
-    allow = event.target.id.substring(4);
-  } else if (event.target.tagName == "P") { 
-    allow = event.target.children[0].id.substring(2);
-  } else {
-    allow = event.target.id.substring(2);
-  }
-  sessionStorage.setItem("whichclicked", allow);
-  window.location.href = "projection.html";
-}
-function initial() {
-  for (i = 1; i < 11; i++) {
-    if (localStorage.getItem(i.toString().concat("f"))) {
-      if (localStorage.getItem(i.toString().concat("f")) == "true") {
-        document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
-        document.getElementById("pro".concat(i.toString())).onclick = blank;
-      } else {
-        document.getElementById("pt".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("n"));
-        document.getElementById("auth".concat(i.toString())).innerHTML = localStorage.getItem(i.toString().concat("a"));
-        document.getElementById("pro".concat(i.toString())).style.backgroundImage = "url('p".concat(localStorage.getItem(i.toString().concat("p")), ".png')");
-        document.getElementById("pro".concat(i.toString())).onclick = filled;
-      }
-    } else {
-      document.getElementById("pt".concat(i.toString())).textContent = "Create a Projection in this Spot!";
-      document.getElementById("pro".concat(i.toString())).onclick = blank;
-    }
+localStorage.setItem("1n", "hello1");
+localStorage.setItem("1a", "hello2");
+localStorage.setItem("2n", "hello3");
+localStorage.setItem("2a", "hello4");
+localStorage.setItem("3n", "hello5");
+localStorage.setItem("3a", "hello6");
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+for (i = 1; i <= 10; i++) {
+  if (localStorage.getItem(i.toString() + "n")) {
+    creategroup(i.toString());
   }
 }
-function adjust() {
-  if (window.innerHeight > window.innerWidth) {
-    for (i = 1; i < 11; i++) {
-      document.getElementById("pt".concat(i.toString())).style.fontSize = 5 + "vw";
-      document.getElementById("auth".concat(i.toString())).style.fontSize = 2.5 + "vw";
-    }
-    for (i = 1; i < 11; i++) {
-      document.getElementById("pro".concat(i.toString())).style.width = 40 + "%";
-      document.getElementById("pro".concat(i.toString())).style.height = 30 + "vw";
-      if (i % 2 == 0) {
-        document.getElementById("pro".concat(i.toString())).style.left = 53.33 + "%";
-        document.getElementById("pro".concat(i.toString())).style.top = ((0.08 + (i / 2 - 1) * (0.367)) * window.innerWidth) + (0.05 * window.innerHeight) + "px";
-      } else {
-        document.getElementById("pro".concat(i.toString())).style.left = 6.67 + "%";
-        document.getElementById("pro".concat(i.toString())).style.top = ((0.08 + ((i + 1) / 2 - 1) * (0.367)) * window.innerWidth) + (0.05 * window.innerHeight) + "px";
-      }
-    }
-  } else {
-    for (i = 1; i < 11; i++) {
-      document.getElementById("pt".concat(i.toString())).style.fontSize = 1.5 + "vw";
-      document.getElementById("auth".concat(i.toString())).style.fontSize = 0.75 + "vw";
-    }
-    for (i = 1; i < 11; i++) {
-      document.getElementById("pro".concat(i.toString())).style.width = 15 + "%";
-      document.getElementById("pro".concat(i.toString())).style.height = 10 + "vw";
-      if ((i - 5) < 1) {
-        document.getElementById("pro".concat(i.toString())).style.top = (0.08 * window.innerWidth) + (0.05 * window.innerHeight) + "px";
-        document.getElementById("pro".concat(i.toString())).style.left = (4.16 + (i - 1) * 19.16) + "%";
-      } else {
-        document.getElementById("pro".concat(i.toString())).style.left = (4.16 + (i - 6) * 19.16) + "%";
-        document.getElementById("pro".concat(i.toString())).style.top = (0.22 * window.innerWidth) + (0.05 * window.innerHeight) + "px";
-      }
-    }
+function creategroup(n2c) {
+  nDiv = document.createElement("div");
+  nDiv.classList.add("group");
+  nDiv.setAttribute("onclick", "set" + n2c + ".html");
+  nDiv.style.backgroundImage = "url('p".concat(localStorage.getItem(n2c + "p"), ".png')");
+  document.getElementById("groups").appendChild(nDiv);
+  nDivi = document.createElement("div");
+  nDivi.classList.add("insidetext");
+  nDiv.appendChild(nDivi);
+  nSpann = document.createElement("span");
+  nSpann.innerHTML = localStorage.getItem(n2c + "n");
+  nSpann.classList.add("name");
+  nDivi.appendChild(nSpann);
+  nBR = document.createElement("br");
+  nDivi.appendChild(nBR);
+  nSpana = document.createElement("span");
+  nSpana.innerHTML = localStorage.getItem(n2c + "a");
+  nSpana.classList.add("author");
+  nDivi.appendChild(nSpana);
+  resizeeverything();
+}
+function resizeeverything() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio = height / width;
+  ratio = (ratio / 3) * 2;
+  margin = window.innerHeight * 0.02;
+  nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
+  for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+    widthVal = (space - (window.innerHeight * 0.03) * nopr - margin * (nopr + 2)) / nopr;
+    document.getElementsByClassName("group")[i].style.width = widthVal;
+    remainder = (i + 1)%nopr;
+    if (remainder == 0) { remainder=nopr; }
+    document.getElementsByClassName("group")[i].style.left = (margin + window.innerHeight * 0.015) + (remainder - 1) * (widthVal + (margin + window.innerHeight * 0.03));
+    level = ((i + 1) - remainder) / nopr;
+    document.getElementsByClassName("group")[i].style.top = level * (0.2 * window.innerHeight);
   }
 }
 </script>
-</body>
-</html>
