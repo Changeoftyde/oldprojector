@@ -133,7 +133,7 @@ function redirect(url) {
 function creategroup(n2c) {
   nDiv = document.createElement("div");
   nDiv.classList.add("group");
-  nDiv.setAttribute("onclick", "redirect('set" + n2c + ".html')";
+  nDiv.setAttribute("onclick", "redirect('set" + n2c + ".html')");
   nDiv.style.backgroundImage = "url('p".concat(localStorage.getItem(n2c + "p"), ".png')");
   document.getElementById("groups").appendChild(nDiv);
   nDivi = document.createElement("div");
@@ -167,6 +167,15 @@ function resizeeverything() {
     document.getElementsByClassName("group")[i].style.left = (margin + window.innerHeight * 0.015) + (remainder - 1) * (widthVal + (margin + window.innerHeight * 0.03));
     level = ((i + 1) - remainder) / nopr;
     document.getElementsByClassName("group")[i].style.top = level * (0.2 * window.innerHeight);
+  }
+  ratio4heading = space / (window.innerHeight * 0.175);
+  ratiotocompareto = document.getElementById("logo").offsetWidth / document.getElementById("logo").offsetHeight;
+  if (ratio4heading < ratiotocompareto) {
+    document.getElementById("logo").style.height = 90 + "%";
+    document.getElementById("logo").style.width = "auto";
+  } else {
+    document.getElementById("logo").style.width = 90 + "%";
+    document.getElementById("logo").style.height = "auto";
   }
 }
 </script>
