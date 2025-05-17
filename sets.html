@@ -170,7 +170,7 @@ function resizeeverything() {
   }
   ratio4heading = space / (window.innerHeight * 0.175);
   ratiotocompareto = document.getElementById("logo").offsetWidth / document.getElementById("logo").offsetHeight;
-  if (ratio4heading < ratiotocompareto) {
+  if (ratio4heading > ratiotocompareto) {
     document.getElementById("logo").style.height = 90 + "%";
     document.getElementById("logo").style.width = "auto";
   } else {
