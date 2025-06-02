@@ -163,7 +163,6 @@ body {
 }
 </style>
 <script>
-  localStorage.setItem("darkmode", "1");
 if (localStorage.getItem("darkmode")) {} else {
   localStorage.setItem("darkmode", "0");
 }
@@ -179,7 +178,8 @@ if (localStorage.getItem("darkmode") == "1") {
       document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
       document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
       document.getElementsByClassName("hplabel")[i].style.color = "black";
-      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hpimg")[i].style.filter = "invert(1)";
     } else {
       document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
       document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
