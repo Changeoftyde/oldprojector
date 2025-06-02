@@ -1,564 +1,262 @@
-<!DOCTYPE html>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<html> 
 <body>
-<div class="screen" id="write">
-<div id="skip"><span class="middletext">Skip</span></div>
-<div onclick="check()" id="next"><span class="middletext">Check</span></div>
-<div id="loadbaroutline2"></div>
-<div id="loadbaroutline">
-<div id="loadbar"><div id="loadbar2"></div></div></div>
-<div class="step" id="step1">
-<span class="instructions" id="instructions1"></span>
-<textarea placeholder="Type the answer here..." id="answerblank2"></textarea>
-</div>
-<div style="z-index: -2; top: 8vh; position: absolute; left: 0">
-<div id="answerblank"><div id="correctanswerarea"></div>
-</div>
-</div>
+<div id="sidebar">
+<a href="home.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
 
-<div id="jett">
-<img id="head" src="jettface.png">
-<img id="body" src="jettbody.png">
 </div>
-<div id="jett2">
-<img id="jettshadow" src="jettshadow.png">
+<div id="content">
+<div id="heading"><img src="setslogo.png" id="logo"></div>
+<div id="groups">
 
 </div>
 </div>
-<div class="screen hidden" id="resultsscreen">
-<div id="circle"></div>
-<div id="circle2"><span class="middie">100%</span></div>
-</div>
+</body>
 <style>
-  .middie {
-    margin-left: 50%;
-    margin-top: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 1s;
-  }
-  #circle {
-    background-color: #31221b;
-    border-radius: 50%;
-    position: absolute;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-  }
-  #circle2 {
-    background-color: black;
-    border-radius: 50%;
-    z-index: 1;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-  }
-  #resultsscreen {
-    background-color: black;
-    color: white;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-  }
-  body {
-    color: #ff8d34;
-    background-color: black;
-    font-family: codec;
-  }
-  @font-face {
-    font-family: codec;
-    src: url("coolvetica.ttf");
-  }
-  .option {
-    padding: 1vh;
-    outline: 1vh solid #31221b;
-    box-sizing: border-box;
-    position: absolute;
-    border-radius: 2vh;
-  }
-  .optiontext {
-    line-height: 0vh;
-    white-space: nowrap;
-    font-size: 3vh;
-    width: auto;
-    text-align: center;
-  }
-  .hidden {
-    pointer-events: none;
-    opacity: 0;
-  }
-  #loadbar {
-    top: 2vh;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    transition: width 1.5s;
-    width: 0%;
-    height: 100%;
-    overflow: hidden;
-    background-image: url("loadbar.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    border-radius: 100vh;
-    position: absolute;
-  }
-  .middletext {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  #next {
-    border-radius: 2vh;
-    font-size: 4vh;
-    background-color: #31221b;
-    color: #ff8d34;
-    text-align: center;
-    height: 6vh;
-    width: 12vh;
-    bottom: 1vh;
-    right: 1vh;
-    position: fixed;
-    z-index: 10000;
-  }
-  #skip {
-    border-radius: 2vh;
-    font-size: 4vh;
-    background-color: #31221b;
-    color: #ff8d34;
-    text-align: center;
-    height: 6vh;
-    width: 12vh;
-    bottom: 1vh;
-    left: 1vh;
-    position: fixed;
-    z-index: 10000;
-  }
-  #answerblank2 {
-    height: auto;
-    left: 1.5vh;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: white;
-    font-family: codec;
-    font-size: 3vh;
-    z-index: 2;
-    transition: width 0.5s;
-  }
-  #answerblank {
-    height: auto;
-    left: 1.5vh;
-    position: absolute;
-    background-color: #31221b;
-    border: none;
-    color: white;
-    font-family: codec;
-    font-size: 2vh;
-    border-radius: 3vh;
-    z-index: -2;
-    transition: 1.5s;
-    transition-property: opacity;
-    overflow: hidden;
-  }
-  .instructions {
-    text-align: center;
-    font-size: 4vh;
-    width: 80%;
-    word-wrap: break-word;
-    height: auto;
-    left: 50%;
-    position: absolute;
-    top: 1.5vh;
-    transform: translate(-50%, 0%);
-    font-weight: bold;
-  }
-  #loadbaroutline {
-    top: 2vh;
-    height: 4vh;
-    outline: 1vh solid #31221b;
-    border-radius: 100vh;
-    position: absolute;
-    left: 2vh;
-    background-color: #31221b;
-    z-index: 0;
-  }
-  #loadbaroutline2 {
-    top: 2vh;
-    height: 4vh;
-    outline: 1vh solid #31221b;
-    border-radius: 100vh;
-    position: absolute;
-    left: 2vh;
-    z-index: 2;
-  }
-  #loadbar2 {
-    width: 200%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    height: 200%;
-    opacity: 0;
-  }
-  .step {
-    left: 0;
-    height: 61%;
-    width: 100%;
-    top: 8vh;
-    position: fixed;
-    transition-property: opacity;
-    transition: 1.5s;
-  }
-  #jett {
-    bottom: 0;
-    height: 30%;
-    width: 25.15vh;
-    position: fixed;
-    z-index: 9000;
-  }
-  #jett2 {
-    bottom: 0;
-    height: 30%;
-    width: 25.15vh;
-    position: fixed;
-    z-index: -10000;
-  }
-  #jettshadow {
-    z-index: -1;
-    height: 131.81%;
-    width: auto;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0%);
-  }
-  #correctanswerarea {
-    height: 100%;
-    right: 0;
-    top: 0;
-    width: 0;
-    position: absolute;
-    background-color: #ff8d34;
-    word-wrap: break-word;
-    transition: 0.5s;
-    color: black;
-    font-family: codec;
-    font-size: 3vh;
-  }
-  #head {
-    transition-property: rotate;
-    transition: 2s;
-    top: 27.94%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    height: 56%;
-    width: auto;
-    z-index: 1;
-    transform-origin: 0% 0%;
-  }
-  #body {
-    bottom: 0%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    position: absolute;
-    height: 62.586%;
-    width: auto;
-    z-index: 0;
-  }
-  .shown {
-    pointer-events: auto;
-    opacity: 1;
-  }
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.darkmodeselected {
+  color: black;
+  background-color: white;
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+.author {
+  font-size: 2vh;
+  font-weight: normal;
+}
+.insidetext {
+  font-weight: bold;
+  font-size: 3vh;
+  position: absolute;
+  padding: 0;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.group {
+  height: 15vh;
+  outline: 1.5vh solid black;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: brightness(150%);
+}
+.groupdarkmode {
+  height: 15vh;
+  color: white;
+  outline: 1.5vh solid white;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+#groups {
+  width: 100%;
+  position: absolute;
+  top: 21vh;
+  height: 200%;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+}
+.halfwhite {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.halfblack {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
 </style>
 <script>
-  isrn = false;
-  renderjett();
-  window.addEventListener("resize", renderjett);
-  function renderjett(tab) {
-    if ((window.innerWidth / window.innerHeight) > 1) {
-      document.getElementById("circle").style.height = 90 + "%";
-      document.getElementById("circle").style.width = 0.9 * window.innerHeight + "px";
-      document.getElementById("circle2").style.height = 75 + "%";
-      document.getElementsByClassName("middie")[0].style.fontSize = 27.5 + "vh";
-      document.getElementById("circle2").style.width = 0.75 * window.innerHeight + "px";
+  localStorage.setItem("darkmode", "1");
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  document.getElementById("logo").style.filter = "invert(1)";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
     } else {
-      document.getElementById("circle").style.width = 90 + "%";
-      document.getElementsByClassName("middie")[0].style.fontSize = 27.5 + "vw";
-      document.getElementById("circle").style.height = 0.9 * window.innerWidth + "px";
-      document.getElementById("circle2").style.width = 70 + "%";
-      document.getElementById("circle2").style.height = 0.7 * window.innerWidth + "px";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
     }
-    document.getElementById("answerblank").style.width = window.innerWidth - window.innerHeight * 0.03 + "px";
-    document.getElementById("answerblank").style.top = document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.05 + "px";
-    document.getElementById("answerblank").style.height = document.getElementById("step1").offsetHeight - (document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.075) + "px";
-    if (isrn == true) {
-      document.getElementById("answerblank2").style.width = (window.innerWidth - window.innerHeight * 0.06) * 0.5 + "px";
-    } else {
-      document.getElementById("answerblank2").style.width = window.innerWidth - window.innerHeight * 0.06 + "px";
-    }
-    document.getElementById("answerblank2").style.top = document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.05 + "px";
-    document.getElementById("answerblank2").style.height = document.getElementById("step1").offsetHeight - (document.getElementById("instructions1").offsetHeight + window.innerHeight * 0.075) + "px";
-    if ((window.innerHeight / window.innerWidth) > 1) {
-      document.getElementById("jett").style.left = 50 + "%";
-      document.getElementById("jett").style.transform = "translate(-50%, 0%)";
-      document.getElementById("jett2").style.left = 50 + "%";
-      document.getElementById("jett2").style.transform = "translate(-50%, 0%)";
-    } else {
-      renderwide();
-    }
-    function renderwide() {
-      document.getElementById("jett").style.left = 10 + "%";
-      document.getElementById("jett").style.transform = "translate(0%, 0%)";
-      document.getElementById("jett2").style.left = 10 + "%";
-      document.getElementById("jett2").style.transform = "translate(0%, 0%)";
-    }
-    document.getElementById("loadbaroutline").style.width = (window.innerWidth - window.innerHeight * 0.04) + "px";
-    document.getElementById("loadbaroutline2").style.width = (window.innerWidth - window.innerHeight * 0.04) + "px";
-    for (i = 1; i <= document.getElementsByClassName("optiontext").length; i++) {
-      document.getElementsByClassName("option")[i - 1].style.width = (document.getElementsByClassName("optiontext")[i - 1].offsetWidth) + (window.innerWidth * 0.04) + "px";
-    }
-  }
-  function happylook() {
-    document.getElementById("head").src = "jetthappyface.png";
-    document.getElementById("head").style.transition = 2 + "s";
-    document.getElementById("head").style.rotate = 30 + "deg";
-  }
-  function sadlook() {
-    document.getElementById("head").src = "jettsadface.png";
-    document.getElementById("head").style.transition = 1 + "s";
-    document.getElementById("head").style.rotate = 30 + "deg";
-    setTimeout(function() {
-      document.getElementById("head").style.rotate = -30 + "deg";
-    }, 1000)
-    
-  }
-  function normallook() {
-    document.getElementById("head").src = "jettface.png";
-    document.getElementById("head").style.rotate = 0 + "deg";
-  }
-  modifier = 1;
-  function progress(howfar) {
-  howfar = parseInt(howfar);
-  pct = Math.round((parseInt(howfar) / 360) * 100);
-      if (pct > 80) {
-        document.getElementsByClassName("middie")[0].style.color = "#98ff89";
-      } else if (pct > 60) {
-        document.getElementsByClassName("middie")[0].style.color = "#f4fc5d";
-      } else if (pct > 40) {
-        document.getElementsByClassName("middie")[0].style.color = "#ff8d34";
-      } else {
-        document.getElementsByClassName("middie")[0].style.color = "#ff7877";
-      }
-  for (i = 0; i <= (howfar); i++) {
-    if (howfar - i <= 30) {
-      
-      document.getElementsByClassName("middie")[0].innerHTML = Math.round((parseInt(howfar) / 360) * 100) + "%";
-      document.getElementsByClassName("middie")[0].style.opacity = 1;
-    }
-    if (howfar - i <= 90) {
-      modifier = 1;
-      for (b = 0; b < (90 - (howfar - i)); b++) {
-        modifier = modifier * 1.008;
-      }
-    } else {
-      modifier = 1;
-    }
-    setTimeout(change, i * 5 * modifier, i.toString());
   }
 }
-function change(para) {
-      if (pct > 80) {
-        colorofbar = "#98ff89";
-      } else if (pct > 60) {
-        colorofbar = "#f4fc5d";
-      } else if (pct > 40) {
-        colorofbar = "#ff8d34";
-      } else {
-        colorofbar = "#ff7877";
-      }
-  if (para == 360) {
-    document.getElementById("circle").style.backgroundImage = "none";
-    document.getElementById("circle").style.backgroundColor = "#98ff89";
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+for (i = 1; i <= 10; i++) {
+  if (localStorage.getItem(i.toString() + "n")) {
+    creategroup(i.toString());
+  }
+}
+function redirect(url) {
+  window.location.href = url;
+}
+function creategroup(n2c) {
+  nDiv = document.createElement("div");
+  nDiv.classList.add("group");
+  nDiv.classList.add("grpfilter");
+  nDiv.setAttribute("onclick", "redirect('set" + n2c + ".html')");
+  nDiv.style.backgroundImage = "url('p".concat(localStorage.getItem(n2c + "p"), ".png')");
+  document.getElementById("groups").appendChild(nDiv);
+  nDivi = document.createElement("div");
+  nDivi.classList.add("insidetext");
+  nDiv.appendChild(nDivi);
+  nDivw = document.createElement("div");
+  if (localStorage.getItem("darkmode") == "1") {
+  nDivw.classList.add("halfblack");
   } else {
-  document.getElementById("circle").style.backgroundImage = "conic-gradient(" + colorofbar + " 0deg, " + colorofbar + " " + para.toString() + "deg, #31221b " + para.toString() + "deg, #31221b 360deg)";
+  nDivw.classList.add("halfwhite");
+  }
+  nDiv.appendChild(nDivw);
+  nSpann = document.createElement("span");
+  nSpann.innerHTML = localStorage.getItem(n2c + "n");
+  nSpann.classList.add("name");
+  nDivi.appendChild(nSpann);
+  nBR = document.createElement("br");
+  nDivi.appendChild(nBR);
+  nSpana = document.createElement("span");
+  nSpana.innerHTML = localStorage.getItem(n2c + "a");
+  nSpana.classList.add("author");
+  nDivi.appendChild(nSpana);
+  resizeeverything();
+}
+if (localStorage.getItem("darkmode") == "1") {
+ll = document.getElementsByClassName("group").length;
+for (i = 0; i < ll; i++) {
+  document.getElementsByClassName("group")[i].classList.add("groupdarkmode");
+  document.getElementsByClassName("group")[i].classList.remove("grpfilter");
 }
 }
-  current = 1;
-  currentpage = 1;
-  firsttimethru = true;
-  function trueorfalse(tof) {
-    if (tof == true) {
-      document.getElementById("loadbar").style.transition = "width 1.5s";
-      document.getElementById("answerblank2").style.color = "#98ff89";
-      document.getElementById("loadbar2").style.backgroundColor = "#98ff89";
-      document.getElementById("loadbar2").style.opacity = 1; 
-      document.getElementById("loadbar2").offsetHeight;
-      document.getElementById("loadbar2").style.transition = "opacity 0.5s";
-      document.getElementById("loadbar2").offsetHeight;
-      setTimeout(function() {
-        document.getElementById("loadbar2").style.opacity = 0;
-        document.getElementById("loadbar2").offsetHeight;
-        document.getElementById("loadbar2").style.transition = "0s";
-      }, 1000)
-    } else {
-      document.getElementById("answerblank2").style.color = "#ff7877";
-      document.getElementById("correctanswerarea").innerHTML = localStorage.getItem(current.toString().concat("a", currentpage.toString()));
-      document.getElementById("correctanswerarea").style.width = 50 + "%";
-      document.getElementById("loadbar2").style.backgroundColor = "#ff7877";
-      document.getElementById("loadbar2").style.opacity = 1; 
-      document.getElementById("loadbar2").offsetHeight;
-      document.getElementById("loadbar2").style.transition = "opacity 0.5s";
-      document.getElementById("loadbar2").offsetHeight;
-      isrn = true;
-      renderjett();
-      setTimeout(function() {
-        document.getElementById("loadbar2").style.opacity = 0;
-        document.getElementById("loadbar2").offsetHeight;
-        document.getElementById("loadbar2").style.transition = "0s";
-      }, 1000)
-    }
+function resizeeverything() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio = height / width;
+  ratio = (ratio / 3) * 2;
+  margin = window.innerHeight * 0.02;
+  nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
+  for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+    widthVal = (space - (window.innerHeight * 0.03) * nopr - margin * (nopr + 2)) / nopr;
+    document.getElementsByClassName("group")[i].style.width = widthVal;
+    remainder = (i + 1)%nopr;
+    if (remainder == 0) { remainder=nopr; }
+    document.getElementsByClassName("group")[i].style.left = (margin + window.innerHeight * 0.015) + (remainder - 1) * (widthVal + (margin + window.innerHeight * 0.03));
+    level = ((i + 1) - remainder) / nopr;
+    document.getElementsByClassName("group")[i].style.top = level * (0.2 * window.innerHeight);
   }
-  function convert(conversiontext) {
-    correctanswer = conversiontext.toString().toLowerCase().concat(" ");
-    correctanswer = correctanswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    bannedwords = ["a", "an", "and", "as", "at", "but", "by", "for", "if", "in", "nor", "of", "on", "or", "so", "the", "to", "up", "via", "yet", "with"];
-    accchars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0', '1', '2', '3', '4', '5', '6', '7', '8', '9', "'",'$', '£', '¥', '€'];
-    ogcurrentwords = [];
-    numbers = [];
-    wasagoodcharacter = false;
-    newword = "";
-    for (i = 0; i < correctanswer.length; i++) {
-      wasiagoodboy = wasagoodcharacter;
-      wasagoodcharacter = false;
-      for (a = 0; a < accchars.length; a++) {
-        if (accchars[a] == correctanswer.substring(i, i + 1)) {
-          newword = newword.concat(correctanswer.substring(i, i + 1));
-          wasagoodcharacter = true;
-          break;
-        }
-      }
-      if (wasagoodcharacter == false) {
-        if (newword != "") {
-        ogcurrentwords.push(newword);
-        numbers.push(1);
-        }
-        newword = "";
-      }
-    }
-    for (i = 0; i < ogcurrentwords.length; i++) {
-      for (a = 0; a < bannedwords.length; a++) {
-      if (ogcurrentwords[i] == bannedwords[a]) {
-        numbers[i] = 0;
-      }
-      }
-    }
-    currentwords = [];
-    for (i = 0; i < ogcurrentwords.length; i++) {
-      if (1 == numbers[i]) {
-        currentwords.push(ogcurrentwords[i]);
-      }
-    }
-    result = currentwords;
+  ratio4heading = space / (window.innerHeight * 0.175);
+  ratiotocompareto = document.getElementById("logo").offsetWidth / document.getElementById("logo").offsetHeight;
+  if (ratio4heading > ratiotocompareto) {
+    document.getElementById("logo").style.height = 90 + "%";
+    document.getElementById("logo").style.width = "auto";
+  } else {
+    document.getElementById("logo").style.width = 90 + "%";
+    document.getElementById("logo").style.height = "auto";
   }
-  numcorrect = 0;
-  needtorepeat = [];
-  function check() {
-    convert(localStorage.getItem(current.toString().concat("a", currentpage.toString())));
-    cresult = result;
-    convert(document.getElementById("answerblank2").value);
-    aresult = result;
-    aretheycloseenough = false;
-    if (cresult.length == aresult.length && cresult.toString().length == aresult.toString().length) {
-      numofcorrect = 0;
-      for (i = 0; i < cresult.toString().length; i++) {
-        if (cresult.toString().substring(i, i + 1) == aresult.toString().substring(i, i + 1)) {
-          numofcorrect++;
-        }
-      }
-      if (numofcorrect >= cresult.toString().length - 3) {
-        aretheycloseenough = true;
-      }
-    }
-    if (cresult.toString() == aresult.toString()) {
-      happylook();
-      whatwehave++;
-      numcorrect++;
-      trueorfalse(true);
-      document.getElementById("loadbar").style.width = 100 / localStorage.getItem(current.toString().concat("qat")) * whatwehave + "%";
-    } else if (aretheycloseenough) {
-      happylook();
-      whatwehave++
-      numcorrect++;
-      trueorfalse(true);
-      document.getElementById("loadbar").style.width = 100 / localStorage.getItem(current.toString().concat("qat")) * whatwehave + "%";
-    } else {
-      sadlook();
-      ntr.push(currentpage);
-      trueorfalse(false);
-    }
-    setTimeout(function() {
-      normallook();
-    }, 2000)
-    document.getElementById("next").setAttribute("onclick", "next()");
-    document.getElementById("next").innerHTML = "Next";
-  }
-  whatwehave = 0;
-  currentspace = 0;
-  document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
-  renderjett();
-  ntr = [];
-  for (i = 1; i <= parseInt(localStorage.getItem(current.toString().concat("qat"))); i++) {
-    ntr.push(i);
-  }
-  function showhide(whichoneshow) {
-    for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
-      document.getElementsByClassName("screen")[i].classList.add("hidden");
-      document.getElementsByClassName("screen")[i].style.zIndex = 0;
-    }
-    document.getElementById(whichoneshow).classList.remove("hidden");
-    document.getElementById(whichoneshow).style.zIndex = 1;
-  }
-  function showresults() {
-    setTimeout(showhide, 3000, "resultsscreen");
-    setTimeout(progress, 3250, 360 * (numcorrect / currentspace));
-  }
-  function next() {
-    document.getElementById("correctanswerarea").style.width = 0;
-    isrn = false;
-    renderjett();
-    showingresults = false;
-    currentspace++;
-    if (ntr.length == currentspace) {
-      showingresults = true;
-      showresults();
-    } else {
-      currentpage = ntr[currentspace];
-    }
-    document.getElementById("step1").style.opacity = 0;
-    document.getElementById("answerblank").style.opacity = 0;
-    if (!showingresults) {
-    setTimeout(function() {
-      document.getElementById("step1").style.opacity = 1;
-      document.getElementById("answerblank").style.opacity = 1;
-      renderjett();
-    }, 1500)
-    setTimeout(function() {
-      document.getElementById("instructions1").innerHTML = localStorage.getItem(current.toString().concat("q", currentpage.toString()));
-      document.getElementById("answerblank2").value = "";
-      document.getElementById("answerblank2").style.color = "white";
-    }, 750)
-    document.getElementById("next").setAttribute("onclick", "check()");
-    document.getElementById("next").innerHTML = "Check";
-    }
-  }
+}
 </script>
-</body>
-</html>
