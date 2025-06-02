@@ -34,16 +34,13 @@ body {
   position: absolute;
   transform: translate(-50%, -50%);
 }
+.darkmodeselected {
+  color: black;
+  background-color: white;
+}
 .selected {
   color: white;
   background-color: #c12020;
-}
-.hpimg {
-  top: 1.5vh;
-  left: 1.5vh;
-  width: 9vh;
-  position: absolute;
-  height: 9vh;
 }
 .hplabel {
   width: 100%;
@@ -57,6 +54,21 @@ body {
 }
 .hyperlink {
   color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.darkmodehyperlink {
+  color: white;
   position: absolute;
   width: 9vh;
   padding: 1.5vh;
@@ -86,6 +98,16 @@ body {
   background-size: cover;
   background-position: 50% 50%;
   filter: brightness(150%);
+}
+.groupdarkmode {
+  height: 15vh;
+  color: white;
+  outline: 1.5vh solid white;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 #groups {
   width: 100%;
@@ -121,6 +143,15 @@ body {
   z-index: -1;
   background-color: rgba(255, 255, 255, 0.5);
 }
+.halfblack {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 #sidebar {
   background-color: white;
   outline: 3vh solid #c12020;
@@ -132,6 +163,30 @@ body {
 }
 </style>
 <script>
+localStorage.setItem("darkmode", "1");
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  document.getElementById("logo").style.filter = "invert(1)";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hpimg")[i].style.filter = "invert(1)";
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+}
 resizeeverything();
 window.addEventListener("resize", resizeeverything);
 for (i = 1; i <= 10; i++) {
@@ -145,6 +200,7 @@ function redirect(url) {
 function creategroup(n2c) {
   nDiv = document.createElement("div");
   nDiv.classList.add("group");
+  nDiv.classList.add("grpfilter");
   nDiv.setAttribute("onclick", "redirect('set" + n2c + ".html')");
   nDiv.style.backgroundImage = "url('p".concat(localStorage.getItem(n2c + "p"), ".png')");
   document.getElementById("groups").appendChild(nDiv);
@@ -152,7 +208,11 @@ function creategroup(n2c) {
   nDivi.classList.add("insidetext");
   nDiv.appendChild(nDivi);
   nDivw = document.createElement("div");
+  if (localStorage.getItem("darkmode") == "1") {
+  nDivw.classList.add("halfblack");
+  } else {
   nDivw.classList.add("halfwhite");
+  }
   nDiv.appendChild(nDivw);
   nSpann = document.createElement("span");
   nSpann.innerHTML = localStorage.getItem(n2c + "n");
@@ -165,6 +225,13 @@ function creategroup(n2c) {
   nSpana.classList.add("author");
   nDivi.appendChild(nSpana);
   resizeeverything();
+}
+if (localStorage.getItem("darkmode") == "1") {
+ll = document.getElementsByClassName("group").length;
+for (i = 0; i < ll; i++) {
+  document.getElementsByClassName("group")[i].classList.add("groupdarkmode");
+  document.getElementsByClassName("group")[i].classList.remove("grpfilter");
+}
 }
 function resizeeverything() {
   width = window.innerWidth;
