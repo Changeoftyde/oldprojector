@@ -1,0 +1,361 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+<div id="sidebar">
+<a href="home.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading">
+<div id="fadedbg"></div><span id="nameofset"></span></div>
+<div id="toolbar">
+<div id="insidetoolbar">
+<div style="width: 11vh; left: 1.5vh" class="obj">Study</div>
+<div style="width: 9vh; left: 16.5vh" class="obj">Play</div>
+<div style="width: 4vh; left: 29.5vh" class="obj"></div>
+<div style="width: 4vh; left: 37.5vh" class="obj"></div>
+
+</div>
+</div>
+<div id="manifest">Manifest
+<p style="top: 1vh" class="lfm">Set Name: </p>
+<textarea placeholder="Set Name Here..." style="top: 7vh" class="mb"></textarea>
+<p style="top: 8.5vh" class="lfm">Set Author: </p>
+<textarea placeholder="Author's Name Here..." style="top: 14.5vh" class="mb"></textarea>
+<div id="picture">
+<select onchange="changeimgs()" id="category"></select>
+<div id="actualpics">
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+</div>
+</div>
+</div>
+</div>
+</body>
+<style>
+#actualpics {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - 3vh);
+  left: 0;
+  position: absolute;
+  bottom: 0;
+}
+.selectedpic {
+  filter: brightness(150%);
+  outline: 1vh solid black;
+}
+.picselection {
+  outline-offset: -1vh;
+  position: absolute;
+  top: 1vh;
+  height: 8vh;
+  border-radius: 1vh;
+}
+#category {
+  width: 100%;
+  height: 3vh;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 0;
+  border: 0;
+  background-color: black;
+  color: white;
+}
+#picture {
+  width: calc(0.5 * (100% - 5vh));
+  height: 13vh;
+  outline: 0.5vh solid black;
+  border-radius: 0.5vh;
+  position: absolute;
+  right: 1.5vh;
+  bottom: 2vh;
+}
+.mb {
+  position: absolute;
+  outline: 0.5vh solid black;
+  font-size: 2.5vh;
+  height: 3.5vh;
+  width: calc(0.5 * (100% - 5vh));
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  font-family: fredokaone;
+  border-radius: 0.5vh;
+  left: 1.5vh;
+  resize: none;
+}
+.lfm {
+  position: absolute;
+  left: 1vh;
+  text-align: left;
+  font-size: 2.5vh;
+  font-weight: normal;
+}
+#manifest {
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+  width: calc(100% - 8vh);
+  height: 20vh;
+  left: 50%;
+  border-radius: 1vh;
+  transform: translate(-50%, 0%);
+  top: 31vh;
+  position: absolute;
+  outline: 1.5vh solid black;
+}
+.obj {
+  position: absolute;
+  height: 4vh;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+  top: 1.5vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+}
+#insidetoolbar {
+  width: 43vh;
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0%);
+}
+#toolbar {
+  width: 100%;
+  height: 7vh;
+  top: 20vh;
+  position: absolute;
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6vh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+.author {
+  font-size: 2vh;
+  font-weight: normal;
+}
+.insidetext {
+  font-weight: bold;
+  font-size: 3vh;
+  position: absolute;
+  padding: 0;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.group {
+  height: 15vh;
+  outline: 1.5vh solid black;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: brightness(150%);
+}
+#groups {
+  width: 100%;
+  position: absolute;
+  top: 21vh;
+  height: 200%;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+.halfwhite {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+select {
+  font-family: fredokaone;
+}
+</style>
+<script>
+current = "1";
+function changeimgs() {
+  whichcategory = (parseInt(document.getElementById("category").value)) - 1;
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    document.getElementsByClassName("picselection")[i].style.backgroundImage = "url('".concat(((whichcategory * 10) + (i + 1)).toString(), ".png')");
+    document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+  }
+}
+currentselectedpic = 0;
+function selectapic() {
+  event.target.classList.add("selectedpic");
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    if (event.target == document.getElementsByClassName("picselection")[i]) {
+      numIndex = i + 1;
+    }
+  }
+  currentselectedpic = ((parseInt(document.getElementById("category").value) - 1) * 10) + numIndex;
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    if (document.getElementsByClassName("picselection")[i] != event.target) {
+      document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+    }
+  }
+}
+document.getElementsByClassName("mb")[0].value = localStorage.getItem(current.concat("n"));
+document.getElementsByClassName("mb")[1].value = localStorage.getItem(current.concat("a"));
+window.addEventListener("cut", palmtree);
+window.addEventListener("keydown", palmtree);
+window.addEventListener("paste", palmtree);
+function palmtree() {
+  setTimeout(function() {
+  document.getElementById("nameofset").innerHTML = document.getElementsByClassName("mb")[0].value;
+  resizeeverything();
+  if (document.getElementsByClassName("mb")[0].value.length > 50) {
+    document.getElementsByClassName("mb")[0].value = document.getElementsByClassName("mb")[0].value.substring(0, 50);
+  }
+  if (document.getElementsByClassName("mb")[1].value.length > 50) {
+    document.getElementsByClassName("mb")[1].value = document.getElementsByClassName("mb")[1].value.substring(0, 50);
+  }
+  }, 100);
+}
+categories = ["Biology and Life Science", "Chemistry and Molecules", "Physics and Engineering", "Math and Symbols", "Anatomy and Medicine", "Geology and Earth Science", "Astronomy and Space", "Ancient History", "Modern History and Politics", "Literature", "Language and Linguistics", "Philosophy and Critical Thinking", "Visual Arts", "Music and Performing Arts", "Culture and World Religions", "Technology and Computing", "Economics and Finance", "Psychology and Neuroscience", "Geography and Maps", "Sociology and Society", "Environmental Science", "Architecture and Design", "Education", "Law and Ethics", "Pop Culture and Media", "Animals", "Sports"];
+for (i = 0; i < categories.length; i++) {
+  newOption = document.createElement("option");
+  newOption.value = (i + 1).toString();
+  newOption.innerHTML = categories[i];
+  document.getElementById("category").appendChild(newOption);
+}
+changeimgs();
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+document.getElementById("nameofset").innerHTML = localStorage.getItem(current + "n");
+document.getElementById("fadedbg").style.backgroundImage = "url('p" + localStorage.getItem(current + "p") + ".png')";
+function redirect(url) {
+  window.location.href = url;
+}
+function resizeeverything() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio = height / width;
+  ratio = (ratio / 3) * 2;
+  margin = window.innerHeight * 0.02;
+  nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    document.getElementsByClassName("picselection")[i].style.width = (document.getElementById("actualpics").offsetWidth - (((1 + nopr) / 100) * window.innerHeight)) / nopr;
+    widthVal = (document.getElementById("actualpics").offsetWidth - (((1 + nopr) / 100) * window.innerHeight)) / nopr;
+    remainder = (i + 1) % nopr;
+    if (remainder == 0) { remainder = nopr }
+    document.getElementsByClassName("picselection")[i].style.left = (0.01 * window.innerHeight) + ((remainder - 1) * (widthVal + (0.01 * window.innerHeight)));
+    level = ((i + 1) - remainder) / nopr;
+    document.getElementsByClassName("picselection")[i].style.top = 0.01 * window.innerHeight + (level * (0.09 * window.innerHeight));
+  }
+  //resize the text/name
+}
+</script>
+
