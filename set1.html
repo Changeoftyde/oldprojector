@@ -334,7 +334,7 @@ changeimgs();
 resizeeverything();
 window.addEventListener("resize", resizeeverything);
 document.getElementById("nameofset").innerHTML = localStorage.getItem(current + "n");
-document.getElementById("fadedbg").style.backgroundImage = "url('p" + localStorage.getItem(current + "p") + ".png')";
+document.getElementById("fadedbg").style.backgroundImage = "url('" + localStorage.getItem(current + "p") + ".png')";
 function redirect(url) {
   window.location.href = url;
 }
