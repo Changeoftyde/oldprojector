@@ -5,7 +5,7 @@
 <a href="home.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
 <a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
 <a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
-<a><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="sets.html"><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
 <a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
 <a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
 <a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
@@ -290,9 +290,18 @@ function changeimgs() {
   whichcategory = (parseInt(document.getElementById("category").value)) - 1;
   for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
     document.getElementsByClassName("picselection")[i].style.backgroundImage = "url('".concat(((whichcategory * 10) + (i + 1)).toString(), ".png')");
+    rem = currentselectedpic % 10;
+    if (rem == 0) { rem = 10; } 
+    leveltwo = ((currentselectedpic - rem) / 10) + 1;
+    rem--;
+    if (rem == i %% leveltwo == parseInt(document.getElementById("category").value)) {
+    document.getElementsByClassName("picselection")[i].classList.add("selectedpic");
+    } else {
     document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+    }
   }
 }
+
 currentselectedpic = 0;
 function selectapic() {
   event.target.classList.add("selectedpic");
@@ -302,6 +311,7 @@ function selectapic() {
     }
   }
   currentselectedpic = ((parseInt(document.getElementById("category").value) - 1) * 10) + numIndex;
+  document.getElementById("fadedbg").style.backgroundImage = "url('".concat(currentselectedpic.toString(), ".png')");
   for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
     if (document.getElementsByClassName("picselection")[i] != event.target) {
       document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
