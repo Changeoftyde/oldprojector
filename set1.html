@@ -294,14 +294,13 @@ function changeimgs() {
     if (rem == 0) { rem = 10; } 
     leveltwo = ((currentselectedpic - rem) / 10) + 1;
     rem--;
-    if (rem == i %% leveltwo == parseInt(document.getElementById("category").value)) {
+    if (rem == i && leveltwo == parseInt(document.getElementById("category").value)) {
     document.getElementsByClassName("picselection")[i].classList.add("selectedpic");
     } else {
     document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
     }
   }
 }
-
 currentselectedpic = 0;
 function selectapic() {
   event.target.classList.add("selectedpic");
