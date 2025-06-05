@@ -286,6 +286,10 @@ select {
 </style>
 <script>
 current = "1";
+currentselectedpic = parseInt(localStorage.getItem(current.concat("p")));
+if (currentselectedpic < 11) {
+  document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpic");
+}
 function changeimgs() {
   whichcategory = (parseInt(document.getElementById("category").value)) - 1;
   for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
