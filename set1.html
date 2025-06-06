@@ -44,9 +44,117 @@
 </div>
 </div>
 </div>
+
+<div id="qaa">Questions/Answers
+<img onclick="addgroup()" src="add.png" id="addquestion">
+<div id="actualquestions">
+</div>
+</div>
+
+<div onclick="save()" id="savebutton">Save</div>
+
 </div>
 </body>
 <style>
+.deletegroup {
+  width: 4vh;
+  height: 4vh;
+  top: 50%;
+  transform: translate(0%, -50%);
+  right: 1vh;
+  position: absolute;
+}
+.blank {
+  color: white;
+  font-family: fredokaone;
+  width: 100%;
+  border: none;
+  resize: none;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+  height: calc(100% - 3vh);
+  bottom: 0;
+  position: absolute;
+}
+.answer {
+  overflow: hidden;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: normal;
+  text-align: left;
+  width: calc((100% - 8vh) / 2);
+  height: 12vh;
+  border-radius: 1vh;
+  background-color: black;
+  position: absolute;
+  right: 6vh;
+  top: 1vh;
+}
+.question {
+  overflow: hidden;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: normal;
+  text-align: left;
+  width: calc((100% - 8vh) / 2);
+  height: 12vh;
+  border-radius: 1vh;
+  background-color: black;
+  position: absolute;
+  left: 1vh;
+  top: 1vh;
+}
+#actualquestions {
+  width: 100%;
+  height: calc(100% - 10vh);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  overflow-y: scroll;
+}
+.qgroup {
+  top: 0.5vh;
+  width: calc(100% - 3vh);
+  height: 14vh;
+  border-radius: 1vh;
+  left: 1.5vh;
+  outline: 0.5vh solid black;
+  position: absolute;
+}
+#addquestion {
+  height: 4vh;
+  width: 4vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  top: 4.5vh;
+  position: absolute;
+}
+#qaa {
+  width: calc(100% - 8vh);
+  height: 40vh;
+  border-radius: 1vh;
+  position: absolute;
+  outline: 1.5vh solid black;
+  left: 4vh;
+  bottom: 4vh;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+}
+#savebutton {
+  background-color: white;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  bottom: 1.5vh;
+  width: 10vh;
+  height: 5vh;
+  font-size: 4vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+  text-align: center;
+  color: black;
+  position: absolute;
+}
 #actualpics {
   width: 100%;
   overflow-y: scroll;
@@ -286,6 +394,106 @@ select {
 </style>
 <script>
 current = "1";
+if (localStorage.getItem(current.concat("n"))) {} else {
+  window.location.href = "setnotfound.html";
+}
+numq = 0;
+function removegroup() {
+  for (i = 0; i < document.getElementsByClassName("deletegroup").length; i++) {
+    if (event.target == document.getElementsByClassName("deletegroup")[i]) {
+      groupToDelete = i;
+      break;
+    }
+  }
+  numq--;
+  document.getElementsByClassName("qgroup")[groupToDelete].remove();
+  for (i = groupToDelete; i < document.getElementsByClassName("qgroup").length; i++) {
+    document.getElementsByClassName("questionspan")[i].textContent = "Question ".concat((i + 1).toString(), ": ");
+    document.getElementsByClassName("answerspan")[i].textContent = "Answer ".concat((i + 1).toString(), ": ");
+    document.getElementsByClassName("qgroup")[i].style.top =  0.005 * window.innerHeight + (i * window.innerHeight * 0.16);
+  }
+}
+for (i = 0; i < parseInt(localStorage.getItem(current.concat("qat"))); i++) {
+  addgroup();
+  document.getElementsByClassName("qblank")[i].value = localStorage.getItem(current.concat("q", (i + 1).toString()));
+  document.getElementsByClassName("ablank")[i].value = localStorage.getItem(current.concat("a", (i + 1).toString()));
+}
+function addgroup() {
+  if (numq != 300) {
+  numq++;
+  /*<div class="qgroup">
+  <div class="question">Question 1: <span class="count"></span><textarea class="blank"></textarea></div>
+  <div class="answer">Answer 1: <span class="count"></span><textarea class="blank"></textarea></div>
+  <img src="remove.png" class="deletegroup">
+  </div>*/
+  newGroup = document.createElement("div");
+  newGroup.classList.add("qgroup");
+  document.getElementById("actualquestions").appendChild(newGroup);
+  newQ = document.createElement("div");
+  newQ.classList.add("question");
+  newSpan = document.createElement("span");
+  newSpan.innerHTML = "Question ".concat(numq.toString(), ": ");
+  newSpan.classList.add("questionspan");
+  newQ.appendChild(newSpan);  
+  newSpan = document.createElement("span");
+  newSpan.classList.add("count");
+  newSpan.innerHTML = "(0/500)";
+  newQ.appendChild(newSpan);
+  newTxtArea = document.createElement("textarea");
+  newTxtArea.classList.add("blank");
+  newTxtArea.classList.add("qblank");
+  newQ.appendChild(newTxtArea);
+  newGroup.appendChild(newQ);
+  newQ = document.createElement("div");
+  newQ.classList.add("answer");
+  newSpan = document.createElement("span");
+  newSpan.innerHTML = "Answer ".concat(numq.toString(), ": ");
+  newSpan.classList.add("answerspan");
+  newQ.appendChild(newSpan);
+  newSpan = document.createElement("span");
+  newSpan.classList.add("count2");
+  newSpan.innerHTML = "(0/1000)";
+  newQ.appendChild(newSpan);
+  newTxtArea = document.createElement("textarea");
+  newTxtArea.classList.add("blank");
+  newTxtArea.classList.add("ablank");
+  newQ.appendChild(newTxtArea);
+  newGroup.appendChild(newQ);
+  newRemove = document.createElement("img");
+  newRemove.classList.add("deletegroup");
+  newRemove.src = "remove.png";
+  newGroup.appendChild(newRemove);
+  newGroup.style.top = 0.005 * window.innerHeight + ((numq - 1) * window.innerHeight * 0.16);
+  newRemove.setAttribute("onclick", "removegroup()");
+  }
+}
+function save() {
+  isempty = false;
+  for (i = 0; i < document.getElementsByClassName("qblank").length; i++) {
+    if (document.getElementsByClassName("qblank")[i].value == "" || document.getElementsByClassName("ablank")[i].value == "") {
+      isempty = true;
+    }
+  }
+  if (numq == 0) {
+    alert("You need at least one question in your set.")
+  } else if (document.getElementsByClassName("mb")[0].value == "") {
+    alert("You need a set name.")
+  } else if (document.getElementsByClassName("mb")[1].value == "") {
+    alert("You need a set author.")
+  } else if (isempty) {
+    alert("One of your questions or answers is missing text.")
+  } else {
+    localStorage.setItem(current.concat("qat"), numq.toString());
+    localStorage.setItem(current.concat("n"), document.getElementsByClassName("mb")[0].value);
+    localStorage.setItem(current.concat("a"), document.getElementsByClassName("mb")[1].value);
+    localStorage.setItem(current.concat("p"), currentselectedpic.toString());
+    for (i = 0; i < document.getElementsByClassName("qblank").length; i++) {
+      localStorage.setItem(current.concat("q", (i + 1).toString()), document.getElementsByClassName("qblank")[i].value);
+      localStorage.setItem(current.concat("a", (i + 1).toString()), document.getElementsByClassName("ablank")[i].value);
+    }
+    window.location.href = "sets.html";
+  }
+}
 currentselectedpic = parseInt(localStorage.getItem(current.concat("p")));
 if (currentselectedpic < 11) {
   document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpic");
@@ -327,13 +535,23 @@ window.addEventListener("keydown", palmtree);
 window.addEventListener("paste", palmtree);
 function palmtree() {
   setTimeout(function() {
-  document.getElementById("nameofset").innerHTML = document.getElementsByClassName("mb")[0].value;
-  resizeeverything();
   if (document.getElementsByClassName("mb")[0].value.length > 50) {
     document.getElementsByClassName("mb")[0].value = document.getElementsByClassName("mb")[0].value.substring(0, 50);
   }
+  document.getElementById("nameofset").innerHTML = document.getElementsByClassName("mb")[0].value;
+  resizeeverything();
   if (document.getElementsByClassName("mb")[1].value.length > 50) {
     document.getElementsByClassName("mb")[1].value = document.getElementsByClassName("mb")[1].value.substring(0, 50);
+  }
+  for (i = 0; i < document.getElementsByClassName("question").length; i++) {
+    if (document.getElementsByClassName("qblank")[i].value.length > 500) {
+      document.getElementsByClassName("qblank")[i].value = document.getElementsByClassName("qblank")[i].value.substring(0, 500); 
+    }
+    document.getElementsByClassName("count")[i].innerHTML = "(".concat(document.getElementsByClassName("qblank")[i].value.length.toString(), "/500)");
+    if (document.getElementsByClassName("ablank")[i].value.length > 1000) {
+      document.getElementsByClassName("ablank")[i].value = document.getElementsByClassName("ablank")[i].value.substring(0, 1000); 
+    }
+    document.getElementsByClassName("count2")[i].innerHTML = "(".concat(document.getElementsByClassName("ablank")[i].value.length.toString(), "/1000)");
   }
   }, 100);
 }
