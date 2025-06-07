@@ -188,10 +188,8 @@ if (localStorage.getItem("darkmode") == "1") {
 }
 resizeeverything();
 window.addEventListener("resize", resizeeverything);
-for (i = 1; i <= 10; i++) {
-  if (localStorage.getItem(i.toString().concat("n"))) {
-    creategroup(i.toString());
-  }
+for (i = 1; i <= parseInt(localStorage.getItem("numofsets")); i++) {
+  creategroup(i.toString());
 }
 function redirect(url) {
   window.location.href = url;
