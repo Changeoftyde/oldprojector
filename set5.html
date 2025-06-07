@@ -420,6 +420,9 @@ if (localStorage.getItem("numofsets")) {} else {
 if (localStorage.getItem(current.concat("n"))) {} else {
   window.location.href = "setnotfound.html";
 }
+if (parseInt(localStorage.getItem("numofsets")) < parseInt(current)) {
+  window.location.href = "setnotfound.html";
+}
 numq = 0;
 function removegroup() {
   for (i = 0; i < document.getElementsByClassName("deletegroup").length; i++) {
@@ -654,7 +657,7 @@ function deleteset() {
     localStorage.setItem((i - 1).toString().concat("a"), localStorage.getItem(i.toString().concat("a")));
     localStorage.setItem((i - 1).toString().concat("qat"), localStorage.getItem(i.toString().concat("qat")));
     localStorage.setItem((i - 1).toString().concat("p"), localStorage.getItem(i.toString().concat("p")));
-    for (a = 1; a <= parseInt(localStorage.getItem(i.toStaring().concat("qat")); a++) {
+    for (a = 1; a <= parseInt(localStorage.getItem(i.toString().concat("qat"))); a++) {
       localStorage.setItem((i - 1).toString().concat("q", a.toString()), localStorage.getItem(i.toString().concat("q", a.toString())));
       localStorage.setItem((i - 1).toString().concat("a", a.toString()), localStorage.getItem(i.toString().concat("a", a.toString())));
     }
