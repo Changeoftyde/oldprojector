@@ -1,0 +1,183 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+<div id="sidebar">
+<a href="home.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading"></div>
+<!-- <div id="fadedbg"></div><span id="nameofset"></span></div> -->
+<div id="message">Error 404:<br><span style="font-size: 7vh">Set not Found.</span><img id="jatis" src="jatis.png"><a href="sets.html"><div id="returnhome">Return Home</div></a></div>
+</div>
+</body>
+<style>
+#returnhome {
+  outline: 1vh solid black;
+  height: 5vh;
+  border-radius: 1vh;
+  width: 25vh;
+  top: 38vh;
+  position: absolute;
+  font-size: 4vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: white;
+}
+#jatis {
+  height: 20vh;
+  width: auto;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 22vh;
+}
+#message {
+  white-space: nowrap;
+  text-align: center;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6vh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+</style>
+<script>
+  localStorage.setItem("darkmode", "0");
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("message").style.color = "White";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+}
+</script>
+
