@@ -1,5 +1,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script 
+  src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
+  integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer">
+</script>
 <body>
 <div id="sidebar">
 <a href="home.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
@@ -16,10 +22,10 @@
 <div id="fadedbg"></div><span id="nameofset"></span></div>
 <div id="toolbar">
 <div id="insidetoolbar">
-<div style="width: 11vh; left: 1.5vh" class="obj">Study</div>
-<div style="width: 9vh; left: 16.5vh" class="obj">Play</div>
-<div style="width: 4vh; left: 29.5vh" class="obj"></div>
-<div style="width: 4vh; left: 37.5vh" class="obj"></div>
+<div onclick="redirectstudy()" style="width: 11vh; left: 1.5vh" class="obj">Study</div>
+<div onclick="redirectplay()" style="width: 9vh; left: 16.5vh" class="obj">Play</div>
+<div onclick="download()" style="width: 4vh; left: 29.5vh; background-image: url('download.png')" class="obj"></div>
+<div onclick="deleteset()" style="width: 4vh; left: 37.5vh; background-image: url('delete.png')" class="obj"></div>
 
 </div>
 </div>
@@ -168,6 +174,10 @@
   filter: brightness(150%);
   outline: 1vh solid black;
 }
+.selectedpicdarkmode {
+  backdrop-filter: brightness(67%);
+  outline: 1vh solid white;
+}
 .picselection {
   outline-offset: -1vh;
   background-size: cover;
@@ -231,6 +241,8 @@
   outline: 1.5vh solid black;
 }
 .obj {
+  background-size: cover;
+  background-position: 50% 50%;
   position: absolute;
   height: 4vh;
   text-align: center;
@@ -388,6 +400,14 @@ body {
   height: 100%;
   position: fixed;
 }
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
 select {
   font-family: fredokaone;
 }
@@ -444,27 +464,36 @@ function addgroup() {
   newTxtArea.classList.add("qblank");
   newQ.appendChild(newTxtArea);
   newGroup.appendChild(newQ);
-  newQ = document.createElement("div");
-  newQ.classList.add("answer");
+  newA = document.createElement("div");
+  newA.classList.add("answer");
   newSpan = document.createElement("span");
   newSpan.innerHTML = "Answer ".concat(numq.toString(), ": ");
   newSpan.classList.add("answerspan");
-  newQ.appendChild(newSpan);
+  newA.appendChild(newSpan);
   newSpan = document.createElement("span");
   newSpan.classList.add("count2");
   newSpan.innerHTML = "(0/1000)";
-  newQ.appendChild(newSpan);
-  newTxtArea = document.createElement("textarea");
-  newTxtArea.classList.add("blank");
-  newTxtArea.classList.add("ablank");
-  newQ.appendChild(newTxtArea);
-  newGroup.appendChild(newQ);
+  newA.appendChild(newSpan);
+  newTxtArea2 = document.createElement("textarea");
+  newTxtArea2.classList.add("blank");
+  newTxtArea2.classList.add("ablank");
+  newA.appendChild(newTxtArea2);
+  newGroup.appendChild(newA);
   newRemove = document.createElement("img");
   newRemove.classList.add("deletegroup");
-  newRemove.src = "remove.png";
+  newRemove.src = "delete.png";
   newGroup.appendChild(newRemove);
   newGroup.style.top = 0.005 * window.innerHeight + ((numq - 1) * window.innerHeight * 0.16);
   newRemove.setAttribute("onclick", "removegroup()");
+  if (localStorage.getItem("darkmode") == "1") {
+    newGroup.style.outline = "0.5vh solid white";
+    newA.style.backgroundColor = "white";
+    newQ.style.backgroundColor = "white";
+    newA.style.color = "black";
+    newQ.style.color = "black";
+    newTxtArea.style.color = "black";
+    newTxtArea2.style.color = "black";
+  }
   }
 }
 function save() {
@@ -496,7 +525,11 @@ function save() {
 }
 currentselectedpic = parseInt(localStorage.getItem(current.concat("p")));
 if (currentselectedpic < 11) {
+  if (localStorage.getItem("darkmode") == "1") {
+  document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpicdarkmode");
+  } else {
   document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpic");
+  }
 }
 function changeimgs() {
   whichcategory = (parseInt(document.getElementById("category").value)) - 1;
@@ -507,14 +540,26 @@ function changeimgs() {
     leveltwo = ((currentselectedpic - rem) / 10) + 1;
     rem--;
     if (rem == i && leveltwo == parseInt(document.getElementById("category").value)) {
+    if (localStorage.getItem("darkmode") == "1") {
+    document.getElementsByClassName("picselection")[i].classList.add("selectedpicdarkmode");
+    } else {
     document.getElementsByClassName("picselection")[i].classList.add("selectedpic");
+    }
+    } else {
+    if (localStorage.getItem("darkmode") == "1") {
+    document.getElementsByClassName("picselection")[i].classList.remove("selectedpicdarkmode");
     } else {
     document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
     }
+    }
   }
 }
-  function selectapic() {
+function selectapic() {
+  if (localStorage.getItem("darkmode") == "1") {
+  event.target.classList.add("selectedpicdarkmode");
+  } else {
   event.target.classList.add("selectedpic");
+  }
   for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
     if (event.target == document.getElementsByClassName("picselection")[i]) {
       numIndex = i + 1;
@@ -524,7 +569,11 @@ function changeimgs() {
   document.getElementById("fadedbg").style.backgroundImage = "url('".concat(currentselectedpic.toString(), ".png')");
   for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
     if (document.getElementsByClassName("picselection")[i] != event.target) {
+      if (localStorage.getItem("darkmode") == "1") {
+      document.getElementsByClassName("picselection")[i].classList.remove("selectedpicdarkmode");
+      } else {
       document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+      }
     }
   }
 }
@@ -589,5 +638,71 @@ function resizeeverything() {
   }
   //resize the text/name
 }
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+ses = current;
+function redirectstudy() {
+  window.location.href = "study".concat(current, ".html");
+}
+function deleteset() {
+  localStorage.removeItem(current.concat("n"));
+  localStorage.removeItem(current.concat("a"));
+  localStorage.removeItem(current.concat("p"));
+  localStorage.removeItem(current.concat("qat"));
+  window.location.href = "sets.html";
+}
+function redirectplay() {
+  window.location.href = "play".concat(current, ".html");
+}
+function download() {
+  qaaa = "";
+  for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
+    qaaa = qaaa.concat(localStorage.getItem(ses.concat("q", i.toString())), "///", localStorage.getItem(ses.toString().concat("a", i.toString())), "///");
+  }
+  var blob = new Blob([localStorage.getItem(ses.concat("n")).concat("[]", localStorage.getItem(ses.concat("a")), "[]", localStorage.getItem(ses.concat("p")), "[]", qaaa)], {
+    type: "text/plain;charset=utf-8",
+    });
+  saveAs(blob, localStorage.getItem(ses.concat("n")).concat(".projection"));
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+  document.getElementsByClassName("mb")[0].style.color = "white";
+  document.getElementsByClassName("mb")[0].style.outline = "0.5vh solid white";
+  document.getElementsByClassName("mb")[1].style.color = "white";
+  document.getElementsByClassName("mb")[1].style.outline = "0.5vh solid white";
+  document.getElementById("manifest").style.outline = "1.5vh solid white";
+  document.getElementById("manifest").style.color = "white";
+  document.getElementById("category").style.backgroundColor = "white";
+  document.getElementById("category").style.color = "black";
+  document.getElementById("picture").style.outline = "0.5vh solid white";
+  document.getElementById("nameofset").style.color = "black";
+  document.getElementById("qaa").style.outline = "1.5vh solid white";
+  document.getElementById("qaa").style.color = "white";
+  for (i = 0; i < document.getElementsByClassName("obj").length; i++) {
+    document.getElementsByClassName("obj")[i].style.color = "white";
+    document.getElementsByClassName("obj")[i].style.outline = "1.5vh solid white";
+    if (i == 2) {
+      document.getElementsByClassName("obj")[i].style.backgroundImage = "url('downloaddarkmode.png')";
+    }
+  }
+  document.getElementById("addquestion").src = "adddarkmode.png";
+}
+
 </script>
 
