@@ -420,6 +420,9 @@ if (localStorage.getItem("numofsets")) {} else {
 if (localStorage.getItem(current.concat("n"))) {} else {
   window.location.href = "setnotfound.html";
 }
+if (parseInt(localStorage.getItem("numofsets")) < parseInt(current)) {
+  window.location.href = "setnotfound.html";
+}
 numq = 0;
 function removegroup() {
   for (i = 0; i < document.getElementsByClassName("deletegroup").length; i++) {
