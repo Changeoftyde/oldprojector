@@ -12,7 +12,7 @@
 <a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
 <a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
 <a href="sets.html"><div style="top: 40.5vh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
-<a href="create.html"><div style="top: 54vh" class="hyperlink selected"><img src="createselected.png" class="hpimg"><p class="hplabel selected">Create</p></div></a>
+<a><div style="top: 54vh" class="hyperlink selected"><img src="createselected.png" class="hpimg"><p class="hplabel selected">Create</p></div></a>
 <a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
 <a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
 
@@ -411,6 +411,7 @@ if (localStorage.getItem("numofsets") == "10") {
   window.location.href = "toomanysets.html";
 } else {
   current = (parseInt(localStorage.getItem("numofsets")) + 1).toString();
+  localStorage.setItem("numofsets", (parseInt(localStorage.getItem("numofsets")) + 1).toString());
 }
 numq = 0;
 function removegroup() {
