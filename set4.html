@@ -1,0 +1,708 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script 
+  src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
+  integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer">
+</script>
+<body>
+<div id="sidebar">
+<a href="index.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading">
+<div id="fadedbg"></div><span id="nameofset"></span></div>
+<div id="toolbar">
+<div id="insidetoolbar">
+<div onclick="redirectstudy()" style="width: 11vh; left: 1.5vh" class="obj">Study</div>
+<div onclick="redirectplay()" style="width: 9vh; left: 16.5vh" class="obj">Play</div>
+<div onclick="download()" style="width: 4vh; left: 29.5vh; background-image: url('download.png')" class="obj"></div>
+<div onclick="deleteset()" style="width: 4vh; left: 37.5vh; background-image: url('delete.png')" class="obj"></div>
+
+</div>
+</div>
+<div id="manifest">Manifest
+<p style="top: 1vh" class="lfm">Set Name: </p>
+<textarea placeholder="Set Name Here..." style="top: 7vh" class="mb"></textarea>
+<p style="top: 8.5vh" class="lfm">Set Author: </p>
+<textarea placeholder="Author's Name Here..." style="top: 14.5vh" class="mb"></textarea>
+<div id="picture">
+<select onchange="changeimgs()" id="category"></select>
+<div id="actualpics">
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+<div onclick="selectapic()" class="picselection"></div>
+</div>
+</div>
+</div>
+
+<div id="qaa">Questions/Answers
+<img onclick="addgroup()" src="add.png" id="addquestion">
+<div id="actualquestions">
+</div>
+</div>
+
+<div onclick="save()" id="savebutton">Save</div>
+
+</div>
+</body>
+<style>
+.deletegroup {
+  width: 4vh;
+  height: 4vh;
+  top: 50%;
+  transform: translate(0%, -50%);
+  right: 1vh;
+  position: absolute;
+}
+.blank {
+  color: white;
+  font-family: fredokaone;
+  width: 100%;
+  border: none;
+  resize: none;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+  height: calc(100% - 3vh);
+  bottom: 0;
+  position: absolute;
+}
+.answer {
+  overflow: hidden;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: normal;
+  text-align: left;
+  width: calc((100% - 8vh) / 2);
+  height: 12vh;
+  border-radius: 1vh;
+  background-color: black;
+  position: absolute;
+  right: 6vh;
+  top: 1vh;
+}
+.question {
+  overflow: hidden;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: normal;
+  text-align: left;
+  width: calc((100% - 8vh) / 2);
+  height: 12vh;
+  border-radius: 1vh;
+  background-color: black;
+  position: absolute;
+  left: 1vh;
+  top: 1vh;
+}
+#actualquestions {
+  width: 100%;
+  height: calc(100% - 10vh);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  overflow-y: scroll;
+}
+.qgroup {
+  top: 0.5vh;
+  width: calc(100% - 3vh);
+  height: 14vh;
+  border-radius: 1vh;
+  left: 1.5vh;
+  outline: 0.5vh solid black;
+  position: absolute;
+}
+#addquestion {
+  height: 4vh;
+  width: 4vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  top: 4.5vh;
+  position: absolute;
+}
+#qaa {
+  width: calc(100% - 8vh);
+  height: 40vh;
+  border-radius: 1vh;
+  position: absolute;
+  outline: 1.5vh solid black;
+  left: 4vh;
+  bottom: 4vh;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+}
+#savebutton {
+  background-color: white;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  bottom: 1.5vh;
+  width: 10vh;
+  height: 5vh;
+  font-size: 4vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+  text-align: center;
+  color: black;
+  position: absolute;
+}
+#actualpics {
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - 3vh);
+  left: 0;
+  position: absolute;
+  bottom: 0;
+}
+.selectedpic {
+  filter: brightness(150%);
+  outline: 1vh solid black;
+}
+.selectedpicdarkmode {
+  backdrop-filter: brightness(67%);
+  outline: 1vh solid white;
+}
+.picselection {
+  outline-offset: -1vh;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  top: 1vh;
+  height: 8vh;
+  border-radius: 1vh;
+}
+#category {
+  width: 100%;
+  height: 3vh;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 0;
+  border: 0;
+  background-color: black;
+  color: white;
+}
+#picture {
+  width: calc(0.5 * (100% - 5vh));
+  height: 13vh;
+  outline: 0.5vh solid black;
+  border-radius: 0.5vh;
+  position: absolute;
+  right: 1.5vh;
+  bottom: 2vh;
+}
+.mb {
+  position: absolute;
+  outline: 0.5vh solid black;
+  font-size: 2.5vh;
+  height: 3.5vh;
+  width: calc(0.5 * (100% - 5vh));
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  font-family: fredokaone;
+  border-radius: 0.5vh;
+  left: 1.5vh;
+  resize: none;
+}
+.lfm {
+  position: absolute;
+  left: 1vh;
+  text-align: left;
+  font-size: 2.5vh;
+  font-weight: normal;
+}
+#manifest {
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+  width: calc(100% - 8vh);
+  height: 20vh;
+  left: 50%;
+  border-radius: 1vh;
+  transform: translate(-50%, 0%);
+  top: 31vh;
+  position: absolute;
+  outline: 1.5vh solid black;
+}
+.obj {
+  background-size: cover;
+  background-position: 50% 50%;
+  position: absolute;
+  height: 4vh;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.5vh;
+  top: 1.5vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+}
+#insidetoolbar {
+  width: 43vh;
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0%);
+}
+#toolbar {
+  width: 100%;
+  height: 7vh;
+  top: 20vh;
+  position: absolute;
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6vh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+.author {
+  font-size: 2vh;
+  font-weight: normal;
+}
+.insidetext {
+  font-weight: bold;
+  font-size: 3vh;
+  position: absolute;
+  padding: 0;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.group {
+  height: 15vh;
+  outline: 1.5vh solid black;
+  border-radius: 1.5vh;
+  overflow: hidden;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: brightness(150%);
+}
+#groups {
+  width: 100%;
+  position: absolute;
+  top: 21vh;
+  height: 200%;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+.halfwhite {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+select {
+  font-family: fredokaone;
+}
+</style>
+<script>
+current = "4";
+if (localStorage.getItem(current.concat("n"))) {} else {
+  window.location.href = "setnotfound.html";
+}
+numq = 0;
+function removegroup() {
+  for (i = 0; i < document.getElementsByClassName("deletegroup").length; i++) {
+    if (event.target == document.getElementsByClassName("deletegroup")[i]) {
+      groupToDelete = i;
+      break;
+    }
+  }
+  numq--;
+  document.getElementsByClassName("qgroup")[groupToDelete].remove();
+  for (i = groupToDelete; i < document.getElementsByClassName("qgroup").length; i++) {
+    document.getElementsByClassName("questionspan")[i].textContent = "Question ".concat((i + 1).toString(), ": ");
+    document.getElementsByClassName("answerspan")[i].textContent = "Answer ".concat((i + 1).toString(), ": ");
+    document.getElementsByClassName("qgroup")[i].style.top =  0.005 * window.innerHeight + (i * window.innerHeight * 0.16);
+  }
+}
+for (i = 0; i < parseInt(localStorage.getItem(current.concat("qat"))); i++) {
+  addgroup();
+  document.getElementsByClassName("qblank")[i].value = localStorage.getItem(current.concat("q", (i + 1).toString()));
+  document.getElementsByClassName("ablank")[i].value = localStorage.getItem(current.concat("a", (i + 1).toString()));
+}
+function addgroup() {
+  if (numq != 300) {
+  numq++;
+  /*<div class="qgroup">
+  <div class="question">Question 1: <span class="count"></span><textarea class="blank"></textarea></div>
+  <div class="answer">Answer 1: <span class="count"></span><textarea class="blank"></textarea></div>
+  <img src="remove.png" class="deletegroup">
+  </div>*/
+  newGroup = document.createElement("div");
+  newGroup.classList.add("qgroup");
+  document.getElementById("actualquestions").appendChild(newGroup);
+  newQ = document.createElement("div");
+  newQ.classList.add("question");
+  newSpan = document.createElement("span");
+  newSpan.innerHTML = "Question ".concat(numq.toString(), ": ");
+  newSpan.classList.add("questionspan");
+  newQ.appendChild(newSpan);  
+  newSpan = document.createElement("span");
+  newSpan.classList.add("count");
+  newSpan.innerHTML = "(0/500)";
+  newQ.appendChild(newSpan);
+  newTxtArea = document.createElement("textarea");
+  newTxtArea.classList.add("blank");
+  newTxtArea.classList.add("qblank");
+  newQ.appendChild(newTxtArea);
+  newGroup.appendChild(newQ);
+  newA = document.createElement("div");
+  newA.classList.add("answer");
+  newSpan = document.createElement("span");
+  newSpan.innerHTML = "Answer ".concat(numq.toString(), ": ");
+  newSpan.classList.add("answerspan");
+  newA.appendChild(newSpan);
+  newSpan = document.createElement("span");
+  newSpan.classList.add("count2");
+  newSpan.innerHTML = "(0/1000)";
+  newA.appendChild(newSpan);
+  newTxtArea2 = document.createElement("textarea");
+  newTxtArea2.classList.add("blank");
+  newTxtArea2.classList.add("ablank");
+  newA.appendChild(newTxtArea2);
+  newGroup.appendChild(newA);
+  newRemove = document.createElement("img");
+  newRemove.classList.add("deletegroup");
+  newRemove.src = "delete.png";
+  newGroup.appendChild(newRemove);
+  newGroup.style.top = 0.005 * window.innerHeight + ((numq - 1) * window.innerHeight * 0.16);
+  newRemove.setAttribute("onclick", "removegroup()");
+  if (localStorage.getItem("darkmode") == "1") {
+    newGroup.style.outline = "0.5vh solid white";
+    newA.style.backgroundColor = "white";
+    newQ.style.backgroundColor = "white";
+    newA.style.color = "black";
+    newQ.style.color = "black";
+    newTxtArea.style.color = "black";
+    newTxtArea2.style.color = "black";
+  }
+  }
+}
+function save() {
+  isempty = false;
+  for (i = 0; i < document.getElementsByClassName("qblank").length; i++) {
+    if (document.getElementsByClassName("qblank")[i].value == "" || document.getElementsByClassName("ablank")[i].value == "") {
+      isempty = true;
+    }
+  }
+  if (numq == 0) {
+    alert("You need at least one question in your set.")
+  } else if (document.getElementsByClassName("mb")[0].value == "") {
+    alert("You need a set name.")
+  } else if (document.getElementsByClassName("mb")[1].value == "") {
+    alert("You need a set author.")
+  } else if (isempty) {
+    alert("One of your questions or answers is missing text.")
+  } else {
+    localStorage.setItem(current.concat("qat"), numq.toString());
+    localStorage.setItem(current.concat("n"), document.getElementsByClassName("mb")[0].value);
+    localStorage.setItem(current.concat("a"), document.getElementsByClassName("mb")[1].value);
+    localStorage.setItem(current.concat("p"), currentselectedpic.toString());
+    for (i = 0; i < document.getElementsByClassName("qblank").length; i++) {
+      localStorage.setItem(current.concat("q", (i + 1).toString()), document.getElementsByClassName("qblank")[i].value);
+      localStorage.setItem(current.concat("a", (i + 1).toString()), document.getElementsByClassName("ablank")[i].value);
+    }
+    window.location.href = "sets.html";
+  }
+}
+currentselectedpic = parseInt(localStorage.getItem(current.concat("p")));
+if (currentselectedpic < 11) {
+  if (localStorage.getItem("darkmode") == "1") {
+  document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpicdarkmode");
+  } else {
+  document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpic");
+  }
+}
+function changeimgs() {
+  whichcategory = (parseInt(document.getElementById("category").value)) - 1;
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    document.getElementsByClassName("picselection")[i].style.backgroundImage = "url('".concat(((whichcategory * 10) + (i + 1)).toString(), ".png')");
+    rem = currentselectedpic % 10;
+    if (rem == 0) { rem = 10; } 
+    leveltwo = ((currentselectedpic - rem) / 10) + 1;
+    rem--;
+    if (rem == i && leveltwo == parseInt(document.getElementById("category").value)) {
+    if (localStorage.getItem("darkmode") == "1") {
+    document.getElementsByClassName("picselection")[i].classList.add("selectedpicdarkmode");
+    } else {
+    document.getElementsByClassName("picselection")[i].classList.add("selectedpic");
+    }
+    } else {
+    if (localStorage.getItem("darkmode") == "1") {
+    document.getElementsByClassName("picselection")[i].classList.remove("selectedpicdarkmode");
+    } else {
+    document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+    }
+    }
+  }
+}
+function selectapic() {
+  if (localStorage.getItem("darkmode") == "1") {
+  event.target.classList.add("selectedpicdarkmode");
+  } else {
+  event.target.classList.add("selectedpic");
+  }
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    if (event.target == document.getElementsByClassName("picselection")[i]) {
+      numIndex = i + 1;
+    }
+  }
+  currentselectedpic = ((parseInt(document.getElementById("category").value) - 1) * 10) + numIndex;
+  document.getElementById("fadedbg").style.backgroundImage = "url('".concat(currentselectedpic.toString(), ".png')");
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    if (document.getElementsByClassName("picselection")[i] != event.target) {
+      if (localStorage.getItem("darkmode") == "1") {
+      document.getElementsByClassName("picselection")[i].classList.remove("selectedpicdarkmode");
+      } else {
+      document.getElementsByClassName("picselection")[i].classList.remove("selectedpic");
+      }
+    }
+  }
+}
+document.getElementsByClassName("mb")[0].value = localStorage.getItem(current.concat("n"));
+document.getElementsByClassName("mb")[1].value = localStorage.getItem(current.concat("a"));
+window.addEventListener("cut", palmtree);
+window.addEventListener("keydown", palmtree);
+window.addEventListener("paste", palmtree);
+function palmtree() {
+  setTimeout(function() {
+  if (document.getElementsByClassName("mb")[0].value.length > 50) {
+    document.getElementsByClassName("mb")[0].value = document.getElementsByClassName("mb")[0].value.substring(0, 50);
+  }
+  document.getElementById("nameofset").innerHTML = document.getElementsByClassName("mb")[0].value;
+  resizeeverything();
+  if (document.getElementsByClassName("mb")[1].value.length > 50) {
+    document.getElementsByClassName("mb")[1].value = document.getElementsByClassName("mb")[1].value.substring(0, 50);
+  }
+  for (i = 0; i < document.getElementsByClassName("question").length; i++) {
+    if (document.getElementsByClassName("qblank")[i].value.length > 500) {
+      document.getElementsByClassName("qblank")[i].value = document.getElementsByClassName("qblank")[i].value.substring(0, 500); 
+    }
+    document.getElementsByClassName("count")[i].innerHTML = "(".concat(document.getElementsByClassName("qblank")[i].value.length.toString(), "/500)");
+    if (document.getElementsByClassName("ablank")[i].value.length > 1000) {
+      document.getElementsByClassName("ablank")[i].value = document.getElementsByClassName("ablank")[i].value.substring(0, 1000); 
+    }
+    document.getElementsByClassName("count2")[i].innerHTML = "(".concat(document.getElementsByClassName("ablank")[i].value.length.toString(), "/1000)");
+  }
+  }, 100);
+}
+categories = ["Biology and Life Science", "Chemistry and Molecules", "Physics and Engineering", "Math and Symbols", "Anatomy and Medicine", "Geology and Earth Science", "Astronomy and Space", "Ancient History", "Modern History and Politics", "Literature", "Language and Linguistics", "Philosophy and Critical Thinking", "Visual Arts", "Music and Performing Arts", "Culture and World Religions", "Technology and Computing", "Economics and Finance", "Psychology and Neuroscience", "Geography and Maps", "Sociology and Society", "Environmental Science", "Architecture and Design", "Education", "Law and Ethics", "Pop Culture and Media", "Animals", "Sports"];
+for (i = 0; i < categories.length; i++) {
+  newOption = document.createElement("option");
+  newOption.value = (i + 1).toString();
+  newOption.innerHTML = categories[i];
+  document.getElementById("category").appendChild(newOption);
+}
+changeimgs();
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+document.getElementById("nameofset").innerHTML = localStorage.getItem(current + "n");
+document.getElementById("fadedbg").style.backgroundImage = "url('" + localStorage.getItem(current + "p") + ".png')";
+function redirect(url) {
+  window.location.href = url;
+}
+function resizeeverything() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio = height / width;
+  ratio = (ratio / 3) * 2;
+  margin = window.innerHeight * 0.02;
+  nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
+  for (i = 0; i < document.getElementsByClassName("picselection").length; i++) {
+    document.getElementsByClassName("picselection")[i].style.width = (document.getElementById("actualpics").offsetWidth - (((1 + nopr) / 100) * window.innerHeight)) / nopr;
+    widthVal = (document.getElementById("actualpics").offsetWidth - (((1 + nopr) / 100) * window.innerHeight)) / nopr;
+    remainder = (i + 1) % nopr;
+    if (remainder == 0) { remainder = nopr }
+    document.getElementsByClassName("picselection")[i].style.left = (0.01 * window.innerHeight) + ((remainder - 1) * (widthVal + (0.01 * window.innerHeight)));
+    level = ((i + 1) - remainder) / nopr;
+    document.getElementsByClassName("picselection")[i].style.top = 0.01 * window.innerHeight + (level * (0.09 * window.innerHeight));
+  }
+  //resize the text/name
+}
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+ses = current;
+function redirectstudy() {
+  window.location.href = "study".concat(current, ".html");
+}
+function deleteset() {
+  localStorage.removeItem(current.concat("n"));
+  localStorage.removeItem(current.concat("a"));
+  localStorage.removeItem(current.concat("p"));
+  localStorage.removeItem(current.concat("qat"));
+  window.location.href = "sets.html";
+}
+function redirectplay() {
+  window.location.href = "play".concat(current, ".html");
+}
+function download() {
+  qaaa = "";
+  for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
+    qaaa = qaaa.concat(localStorage.getItem(ses.concat("q", i.toString())), "///", localStorage.getItem(ses.toString().concat("a", i.toString())), "///");
+  }
+  var blob = new Blob([localStorage.getItem(ses.concat("n")).concat("[]", localStorage.getItem(ses.concat("a")), "[]", localStorage.getItem(ses.concat("p")), "[]", qaaa)], {
+    type: "text/plain;charset=utf-8",
+    });
+  saveAs(blob, localStorage.getItem(ses.concat("n")).concat(".projection"));
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+  document.getElementsByClassName("mb")[0].style.color = "white";
+  document.getElementsByClassName("mb")[0].style.outline = "0.5vh solid white";
+  document.getElementsByClassName("mb")[1].style.color = "white";
+  document.getElementsByClassName("mb")[1].style.outline = "0.5vh solid white";
+  document.getElementById("manifest").style.outline = "1.5vh solid white";
+  document.getElementById("manifest").style.color = "white";
+  document.getElementById("category").style.backgroundColor = "white";
+  document.getElementById("category").style.color = "black";
+  document.getElementById("picture").style.outline = "0.5vh solid white";
+  document.getElementById("nameofset").style.color = "black";
+  document.getElementById("qaa").style.outline = "1.5vh solid white";
+  document.getElementById("qaa").style.color = "white";
+  for (i = 0; i < document.getElementsByClassName("obj").length; i++) {
+    document.getElementsByClassName("obj")[i].style.color = "white";
+    document.getElementsByClassName("obj")[i].style.outline = "1.5vh solid white";
+    if (i == 2) {
+      document.getElementsByClassName("obj")[i].style.backgroundImage = "url('downloaddarkmode.png')";
+    }
+  }
+  document.getElementById("addquestion").src = "adddarkmode.png";
+}
+palmtree();
+</script>
+
