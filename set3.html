@@ -414,7 +414,13 @@ select {
 </style>
 <script>
 current = "3";
+if (localStorage.getItem("numofsets")) {} else {
+  localStorage.setItem("numofsets", "0");
+}
 if (localStorage.getItem(current.concat("n"))) {} else {
+  window.location.href = "setnotfound.html";
+}
+if (parseInt(localStorage.getItem("numofsets")) < parseInt(current)) {
   window.location.href = "setnotfound.html";
 }
 numq = 0;
@@ -646,10 +652,17 @@ function redirectstudy() {
   window.location.href = "study".concat(current, ".html");
 }
 function deleteset() {
-  localStorage.removeItem(current.concat("n"));
-  localStorage.removeItem(current.concat("a"));
-  localStorage.removeItem(current.concat("p"));
-  localStorage.removeItem(current.concat("qat"));
+  for (i = (parseInt(current) + 1); i < 11; i++) {
+    localStorage.setItem((i - 1).toString().concat("n"), localStorage.getItem(i.toString().concat("n")));
+    localStorage.setItem((i - 1).toString().concat("a"), localStorage.getItem(i.toString().concat("a")));
+    localStorage.setItem((i - 1).toString().concat("qat"), localStorage.getItem(i.toString().concat("qat")));
+    localStorage.setItem((i - 1).toString().concat("p"), localStorage.getItem(i.toString().concat("p")));
+    for (a = 1; a <= parseInt(localStorage.getItem(i.toString().concat("qat"))); a++) {
+      localStorage.setItem((i - 1).toString().concat("q", a.toString()), localStorage.getItem(i.toString().concat("q", a.toString())));
+      localStorage.setItem((i - 1).toString().concat("a", a.toString()), localStorage.getItem(i.toString().concat("a", a.toString())));
+    }
+  }
+  localStorage.setItem("numofsets", (parseInt(localStorage.getItem("numofsets")) - 1).toString());
   window.location.href = "sets.html";
 }
 function redirectplay() {
