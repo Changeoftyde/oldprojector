@@ -411,7 +411,6 @@ if (localStorage.getItem("numofsets") == "10") {
   window.location.href = "toomanysets.html";
 } else {
   current = (parseInt(localStorage.getItem("numofsets")) + 1).toString();
-  localStorage.setItem("numofsets", (parseInt(localStorage.getItem("numofsets")) + 1).toString());
 }
 numq = 0;
 function removegroup() {
@@ -504,6 +503,7 @@ function save() {
   } else if (isempty) {
     alert("One of your questions or answers is missing text.")
   } else {
+    localStorage.setItem("numofsets", (parseInt(localStorage.getItem("numofsets")) + 1).toString());
     localStorage.setItem(current.concat("qat"), numq.toString());
     localStorage.setItem(current.concat("n"), document.getElementsByClassName("mb")[0].value);
     localStorage.setItem(current.concat("a"), document.getElementsByClassName("mb")[1].value);
