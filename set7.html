@@ -8,13 +8,13 @@
 </script>
 <body>
 <div id="sidebar">
-<a href="index.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
-<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
-<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
-<a href="sets.html"><div style="top: 40.5vh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
-<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
-<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
-<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+<a href="index.html"><div style="top: 0svh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5svh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27svh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5svh" class="hyperlink selected"><img src="setsselected.png" class="hpimg"><p class="hplabel selected">Sets</p></div></a>
+<a href="create.html"><div style="top: 54svh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5svh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5svh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
 
 </div>
 <div id="content">
@@ -22,18 +22,18 @@
 <div id="fadedbg"></div><span id="nameofset"></span></div>
 <div id="toolbar">
 <div id="insidetoolbar">
-<div onclick="redirectstudy()" style="width: 11vh; left: 1.5vh" class="obj">Study</div>
-<div onclick="redirectplay()" style="width: 9vh; left: 16.5vh" class="obj">Play</div>
-<div onclick="download()" style="width: 4vh; left: 29.5vh; background-image: url('download.png')" class="obj"></div>
-<div onclick="deleteset()" style="width: 4vh; left: 37.5vh; background-image: url('delete.png')" class="obj"></div>
+<div onclick="redirectstudy()" style="width: 11svh; left: 1.5svh" class="obj">Study</div>
+<div onclick="redirectplay()" style="width: 9svh; left: 16.5svh" class="obj">Play</div>
+<div onclick="download()" style="width: 4svh; left: 29.5svh; background-image: url('download.png')" class="obj"></div>
+<div onclick="deleteset()" style="width: 4svh; left: 37.5svh; background-image: url('delete.png')" class="obj"></div>
 
 </div>
 </div>
 <div id="manifest">Manifest
-<p style="top: 1vh" class="lfm">Set Name: </p>
-<textarea placeholder="Set Name Here..." style="top: 7vh" class="mb"></textarea>
-<p style="top: 8.5vh" class="lfm">Set Author: </p>
-<textarea placeholder="Author's Name Here..." style="top: 14.5vh" class="mb"></textarea>
+<p style="top: 1svh" class="lfm">Set Name: </p>
+<textarea placeholder="Set Name Here..." style="top: 7svh" class="mb"></textarea>
+<p style="top: 8.5svh" class="lfm">Set Author: </p>
+<textarea placeholder="Author's Name Here..." style="top: 14.5svh" class="mb"></textarea>
 <div id="picture">
 <select onchange="changeimgs()" id="category"></select>
 <div id="actualpics">
@@ -63,11 +63,11 @@
 </body>
 <style>
 .deletegroup {
-  width: 4vh;
-  height: 4vh;
+  width: 4svh;
+  height: 4svh;
   top: 50%;
   transform: translate(0%, -50%);
-  right: 1vh;
+  right: 1svh;
   position: absolute;
 }
 .blank {
@@ -78,85 +78,85 @@
   resize: none;
   left: 0;
   background-color: rgba(0, 0, 0, 0);
-  height: calc(100% - 3vh);
+  height: calc(100% - 3svh);
   bottom: 0;
   position: absolute;
 }
 .answer {
   overflow: hidden;
   color: white;
-  font-size: 2.5vh;
+  font-size: 2.5svh;
   font-weight: normal;
   text-align: left;
-  width: calc((100% - 8vh) / 2);
-  height: 12vh;
-  border-radius: 1vh;
+  width: calc((100% - 8svh) / 2);
+  height: 12svh;
+  border-radius: 1svh;
   background-color: black;
   position: absolute;
-  right: 6vh;
-  top: 1vh;
+  right: 6svh;
+  top: 1svh;
 }
 .question {
   overflow: hidden;
   color: white;
-  font-size: 2.5vh;
+  font-size: 2.5svh;
   font-weight: normal;
   text-align: left;
-  width: calc((100% - 8vh) / 2);
-  height: 12vh;
-  border-radius: 1vh;
+  width: calc((100% - 8svh) / 2);
+  height: 12svh;
+  border-radius: 1svh;
   background-color: black;
   position: absolute;
-  left: 1vh;
-  top: 1vh;
+  left: 1svh;
+  top: 1svh;
 }
 #actualquestions {
   width: 100%;
-  height: calc(100% - 10vh);
+  height: calc(100% - 10svh);
   bottom: 0;
   left: 0;
   position: absolute;
   overflow-y: scroll;
 }
 .qgroup {
-  top: 0.5vh;
-  width: calc(100% - 3vh);
-  height: 14vh;
-  border-radius: 1vh;
-  left: 1.5vh;
-  outline: 0.5vh solid black;
+  top: 0.5svh;
+  width: calc(100% - 3svh);
+  height: 14svh;
+  border-radius: 1svh;
+  left: 1.5svh;
+  outline: 0.5svh solid black;
   position: absolute;
 }
 #addquestion {
-  height: 4vh;
-  width: 4vh;
+  height: 4svh;
+  width: 4svh;
   left: 50%;
   transform: translate(-50%, 0%);
-  top: 4.5vh;
+  top: 4.5svh;
   position: absolute;
 }
 #qaa {
-  width: calc(100% - 8vh);
-  height: 40vh;
-  border-radius: 1vh;
+  width: calc(100% - 8svh);
+  height: 40svh;
+  border-radius: 1svh;
   position: absolute;
-  outline: 1.5vh solid black;
-  left: 4vh;
-  bottom: 4vh;
+  outline: 1.5svh solid black;
+  left: 4svh;
+  bottom: 4svh;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5vh;
+  font-size: 3.5svh;
 }
 #savebutton {
   background-color: white;
   left: 50%;
   transform: translate(-50%, 0%);
-  bottom: 1.5vh;
-  width: 10vh;
-  height: 5vh;
-  font-size: 4vh;
-  border-radius: 1vh;
-  outline: 1.5vh solid black;
+  bottom: 1.5svh;
+  width: 10svh;
+  height: 5svh;
+  font-size: 4svh;
+  border-radius: 1svh;
+  outline: 1.5svh solid black;
   text-align: center;
   color: black;
   position: absolute;
@@ -165,31 +165,31 @@
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - 3vh);
+  height: calc(100% - 3svh);
   left: 0;
   position: absolute;
   bottom: 0;
 }
 .selectedpic {
   filter: brightness(150%);
-  outline: 1vh solid black;
+  outline: 1svh solid black;
 }
 .selectedpicdarkmode {
   backdrop-filter: brightness(67%);
-  outline: 1vh solid white;
+  outline: 1svh solid white;
 }
 .picselection {
-  outline-offset: -1vh;
+  outline-offset: -1svh;
   background-size: cover;
   background-position: 50% 50%;
   position: absolute;
-  top: 1vh;
-  height: 8vh;
-  border-radius: 1vh;
+  top: 1svh;
+  height: 8svh;
+  border-radius: 1svh;
 }
 #category {
   width: 100%;
-  height: 3vh;
+  height: 3svh;
   left: 0;
   top: 0;
   position: absolute;
@@ -199,61 +199,61 @@
   color: white;
 }
 #picture {
-  width: calc(0.5 * (100% - 5vh));
-  height: 13vh;
-  outline: 0.5vh solid black;
-  border-radius: 0.5vh;
+  width: calc(0.5 * (100% - 5svh));
+  height: 13svh;
+  outline: 0.5svh solid black;
+  border-radius: 0.5svh;
   position: absolute;
-  right: 1.5vh;
-  bottom: 2vh;
+  right: 1.5svh;
+  bottom: 2svh;
 }
 .mb {
   position: absolute;
-  outline: 0.5vh solid black;
-  font-size: 2.5vh;
-  height: 3.5vh;
-  width: calc(0.5 * (100% - 5vh));
+  outline: 0.5svh solid black;
+  font-size: 2.5svh;
+  height: 3.5svh;
+  width: calc(0.5 * (100% - 5svh));
   background-color: rgba(0, 0, 0, 0);
   color: black;
   font-family: fredokaone;
-  border-radius: 0.5vh;
-  left: 1.5vh;
+  border-radius: 0.5svh;
+  left: 1.5svh;
   resize: none;
 }
 .lfm {
   position: absolute;
-  left: 1vh;
+  left: 1svh;
   text-align: left;
-  font-size: 2.5vh;
+  font-size: 2.5svh;
   font-weight: normal;
 }
 #manifest {
   text-align: center;
   font-weight: bold;
-  font-size: 3.5vh;
-  width: calc(100% - 8vh);
-  height: 20vh;
+  font-size: 3.5svh;
+  width: calc(100% - 8svh);
+  height: 20svh;
   left: 50%;
-  border-radius: 1vh;
+  border-radius: 1svh;
   transform: translate(-50%, 0%);
-  top: 31vh;
+  top: 31svh;
   position: absolute;
-  outline: 1.5vh solid black;
+  outline: 1.5svh solid black;
 }
 .obj {
   background-size: cover;
   background-position: 50% 50%;
   position: absolute;
-  height: 4vh;
+  height: 4svh;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5vh;
-  top: 1.5vh;
-  border-radius: 1vh;
-  outline: 1.5vh solid black;
+  font-size: 3.5svh;
+  top: 1.5svh;
+  border-radius: 1svh;
+  outline: 1.5svh solid black;
 }
 #insidetoolbar {
-  width: 43vh;
+  width: 43svh;
   height: 100%;
   left: 50%;
   position: absolute;
@@ -261,8 +261,8 @@
 }
 #toolbar {
   width: 100%;
-  height: 7vh;
-  top: 20vh;
+  height: 7svh;
+  top: 20svh;
   position: absolute;
 }
 #fadedbg {
@@ -282,7 +282,7 @@
   position: absolute;
   word-wrap: break-word;
   left: 50%;
-  font-size: 6vh;
+  font-size: 6svh;
   top: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -307,11 +307,11 @@ body {
   background-color: #c12020;
 }
 .hpimg {
-  top: 1.5vh;
-  left: 1.5vh;
-  width: 9vh;
+  top: 1.5svh;
+  left: 1.5svh;
+  width: 9svh;
   position: absolute;
-  height: 9vh;
+  height: 9svh;
 }
 .hplabel {
   width: 100%;
@@ -319,25 +319,25 @@ body {
   font-weight: bold;
   text-align: center;
   left: 50%;
-  bottom: 0.75vh;
+  bottom: 0.75svh;
   height: auto;
   transform: translate(-50%, 0%);
 }
 .hyperlink {
   color: #c12020;
   position: absolute;
-  width: 9vh;
-  padding: 1.5vh;
-  height: 12vh;
-  font-size: 2vh;
+  width: 9svh;
+  padding: 1.5svh;
+  height: 12svh;
+  font-size: 2svh;
 }
 .author {
-  font-size: 2vh;
+  font-size: 2svh;
   font-weight: normal;
 }
 .insidetext {
   font-weight: bold;
-  font-size: 3vh;
+  font-size: 3svh;
   position: absolute;
   padding: 0;
   text-align: center;
@@ -346,9 +346,9 @@ body {
   transform: translate(-50%, -50%);
 }
 .group {
-  height: 15vh;
-  outline: 1.5vh solid black;
-  border-radius: 1.5vh;
+  height: 15svh;
+  outline: 1.5svh solid black;
+  border-radius: 1.5svh;
   overflow: hidden;
   position: absolute;
   background-size: cover;
@@ -358,22 +358,22 @@ body {
 #groups {
   width: 100%;
   position: absolute;
-  top: 21vh;
+  top: 21svh;
   height: 200%;
 }
 #heading {
   z-index: 2;
   position: fixed;
   overflow: hidden;
-  width: calc(100% - 14.75vh);
-  height: 17.5vh;
+  width: calc(100% - 14.75svh);
+  height: 17.5svh;
   background-color: #c12020;
   right: 0;
   top: 0;
 }
 #content {
   position: absolute;
-  width: calc(100% - 14.75vh);
+  width: calc(100% - 14.75svh);
   height: 100%;
   right: 0;
   top: 0;
@@ -393,8 +393,8 @@ body {
 }
 #sidebar {
   background-color: white;
-  outline: 3vh solid #c12020;
-  width: 12vh;
+  outline: 3svh solid #c12020;
+  width: 12svh;
   left: 0;
   top: 0;
   height: 100%;
@@ -403,10 +403,10 @@ body {
 .darkmodehyperlink {
   color: white;
   position: absolute;
-  width: 9vh;
-  padding: 1.5vh;
-  height: 12vh;
-  font-size: 2vh;
+  width: 9svh;
+  padding: 1.5svh;
+  height: 12svh;
+  font-size: 2svh;
 }
 select {
   font-family: fredokaone;
@@ -492,7 +492,7 @@ function addgroup() {
   newGroup.style.top = 0.005 * window.innerHeight + ((numq - 1) * window.innerHeight * 0.16);
   newRemove.setAttribute("onclick", "removegroup()");
   if (localStorage.getItem("darkmode") == "1") {
-    newGroup.style.outline = "0.5vh solid white";
+    newGroup.style.outline = "0.5svh solid white";
     newA.style.backgroundColor = "white";
     newQ.style.backgroundColor = "white";
     newA.style.color = "black";
@@ -682,7 +682,7 @@ arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "set
 if (localStorage.getItem("darkmode") == "1") {
   document.body.style.backgroundColor = "black";
   document.getElementById("heading").style.backgroundColor = "white";
-  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.outline = "3svh solid white";
   document.getElementById("sidebar").style.backgroundColor = "black";
   for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
     if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
@@ -696,20 +696,20 @@ if (localStorage.getItem("darkmode") == "1") {
     }
   }
   document.getElementsByClassName("mb")[0].style.color = "white";
-  document.getElementsByClassName("mb")[0].style.outline = "0.5vh solid white";
+  document.getElementsByClassName("mb")[0].style.outline = "0.5svh solid white";
   document.getElementsByClassName("mb")[1].style.color = "white";
-  document.getElementsByClassName("mb")[1].style.outline = "0.5vh solid white";
-  document.getElementById("manifest").style.outline = "1.5vh solid white";
+  document.getElementsByClassName("mb")[1].style.outline = "0.5svh solid white";
+  document.getElementById("manifest").style.outline = "1.5svh solid white";
   document.getElementById("manifest").style.color = "white";
   document.getElementById("category").style.backgroundColor = "white";
   document.getElementById("category").style.color = "black";
-  document.getElementById("picture").style.outline = "0.5vh solid white";
+  document.getElementById("picture").style.outline = "0.5svh solid white";
   document.getElementById("nameofset").style.color = "black";
-  document.getElementById("qaa").style.outline = "1.5vh solid white";
+  document.getElementById("qaa").style.outline = "1.5svh solid white";
   document.getElementById("qaa").style.color = "white";
   for (i = 0; i < document.getElementsByClassName("obj").length; i++) {
     document.getElementsByClassName("obj")[i].style.color = "white";
-    document.getElementsByClassName("obj")[i].style.outline = "1.5vh solid white";
+    document.getElementsByClassName("obj")[i].style.outline = "1.5svh solid white";
     if (i == 2) {
       document.getElementsByClassName("obj")[i].style.backgroundImage = "url('downloaddarkmode.png')";
     }
