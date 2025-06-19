@@ -1,0 +1,266 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+<div id="sidebar">
+<a href="index.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5vh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink selected"><img src="importselected.png" class="hpimg"><p class="hplabel selected">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content"><div id="actualcontent"><p id="instructions"><span style="font-weight: bold; font-size: 5vh">Instructions:</span><br>
+We are sorry we can't show you how to import due to some copyright issues...but we can tell you!<br>
+Make sure you follow these instructions carefully to ensure your file gets imported correctly. :)<br><br>
+- Step 1: Go to the Quizlet <b>website,</b> not the <b>app.</b><br>
+- Step 2: Open one of <b>your</b> Quizlet sets. If you want to import someone else's, make a copy and then open the copy in your library.<br>
+- Step 3: Find the icon (it should be in the top-right corner) that displays three dots (•••).<br>
+- Step 4: Click <b>"Export."</b><br>
+- Step 5: Under <b>"Between term and definition,"</b> click <b>"Custom"</b> and enter <b>\\\</b> in the blank. Make sure you use backslashes (\\\) and not slashes (///).<br>
+- Step 6: Under <b>"Between rows,"</b> click <b>"Custom"</b> and enter <b>\\\</b> in the blank. Make sure you use backslashes (\\\) and not slashes (///).<br>
+- Step 7: Click <b>"Copy Text."</b><br>
+- Step 8: Paste your text in the blank below.<br><br>
+<span style="font-weight: bold; font-size: 5vh">Paste Below:</span>
+<textarea placeholder="Paste Here..." id="pastebelow"></textarea><div id="extra"></div>
+</div>
+</p>
+<div id="heading"><img src="importfromquizletlogo.png" id="logo">
+<!-- <div id="fadedbg"></div><span id="nameofset"></span> -->
+
+</div>
+</body>
+<style>
+#extra {
+  position: absolute;
+  width: 100%;
+  height: 2.5vh;
+  left: 0;
+}
+#pastebelow {
+  resize: none;
+  font-family: fredokaone;
+  font-size: 2.5vh;
+  width: calc(100% - 4vh);
+  height: 20vh;
+  margin-top: 1vh;
+  margin-left: 1.5vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+}
+#actualcontent {
+  width: 100%;
+  height: 82.5vh;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  overflow-y: scroll;
+}
+#instructions {
+  width: calc(100% - 4vh);
+  word-wrap: break-word;
+  top: -1vh;
+  left: 2vh;
+  position: absolute;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6vh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+</style>
+<script>
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+window.addEventListener("paste", function() {
+    setTimeout(function() {
+    ta = document.getElementById("pastebelow");
+    tav = ta.value;
+    qn = 1;
+    an = 0;
+    i = 0;
+    current = "q";
+    for (hamburger = 0; i < tav.length; hamburger++) {
+    if (tav.substring(i, i+3) == "\\\\\\") {
+      i += 2;
+      if (current == "q") { current = "a"; } else { current = "q" }
+      window[current.concat("n")] = window[current.concat("n")] + 1;
+    } else {
+      if (window[current.concat(window[current.concat("n")].toString())]) {
+      window[current.concat(window[current.concat("n")].toString())] = window[current.concat(window[current.concat("n")].toString())].concat(tav[i]);
+      } else {
+      window[current.concat(window[current.concat("n")].toString())] = tav[i];
+      }
+    }
+    i++;
+    }
+    qn -= 1;
+    
+    tstl = false;
+    for (i = 1; i < (qn + 1); i++) {
+      if (window["q".concat(i.toString())].length > 500) {
+        tstl = true;
+      }
+      if (window["a".concat(i.toString())].length > 1000) {
+        tstl = true;
+      }
+    }
+    if (an != qn) {
+      alert("Ensure that every question has an answer.")
+    } else if (an == 0) {
+      alert("Please check your text format.");
+    } else if (tstl == true) {
+      alert("Some Questions/Answers are too long. Ensure that all questions are at maximum 500 Characters long and all answers are at maximum 1000 Characters long.");
+    } else if (qn > 300) {
+      alert("You have too many Questions/Answers. Please limit your amount of questions to 300.");
+    } else {
+      sessionStorage.setItem("qat", (qn + an).toString());
+      for (a = 1; a < (qn + 1); a++) {
+        sessionStorage.setItem("a".concat(a.toString()), window["a".concat(a.toString())]);
+        sessionStorage.setItem("q".concat(a.toString()), window["q".concat(a.toString())]);
+      }
+      window.location.href = "finishimporting.html";
+    }
+    }, 100);
+})
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("logo").style.filter = "invert(1)";
+  document.getElementById("instructions").style.color = "white";
+  document.getElementById("pastebelow").style.backgroundColor = "black";
+  document.getElementById("pastebelow").style.outline = "1.5vh solid white";
+  document.getElementById("pastebelow").style.color = "white";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+}
+function resizeeverything() {
+  document.getElementById("extra").style.top = document.getElementById("instructions").offsetHeight + 0.02 * window.innerHeight;
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio4heading = space / (window.innerHeight * 0.175);
+  ratiotocompareto = document.getElementById("logo").offsetWidth / document.getElementById("logo").offsetHeight;
+  if (ratio4heading > ratiotocompareto) {
+    document.getElementById("logo").style.height = 90 + "%";
+    document.getElementById("logo").style.width = "auto";
+  } else {
+    document.getElementById("logo").style.width = 90 + "%";
+    document.getElementById("logo").style.height = "auto";
+  }
+}
+</script>
