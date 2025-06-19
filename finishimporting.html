@@ -428,7 +428,7 @@ function removegroup() {
     document.getElementsByClassName("qgroup")[i].style.top =  0.005 * window.innerHeight + (i * window.innerHeight * 0.16);
   }
 }
-for (i = 0; i < parseInt(sessionStorage.getItem("qat")); i++) {
+for (i = 0; i < parseInt(sessionStorage.getItem("qat") / 2); i++) {
   addgroup();
   document.getElementsByClassName("qblank")[i].value = sessionStorage.getItem("q".concat((i + 1).toString()));
   document.getElementsByClassName("ablank")[i].value = sessionStorage.getItem("a".concat((i + 1).toString()));
