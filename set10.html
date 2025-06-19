@@ -413,7 +413,7 @@ select {
 }
 </style>
 <script>
-current = "2";
+current = "10";
 if (localStorage.getItem("numofsets")) {} else {
   localStorage.setItem("numofsets", "0");
 }
@@ -671,7 +671,7 @@ function redirectplay() {
 function download() {
   qaaa = "";
   for (i = 1; i < (parseInt(localStorage.getItem(ses.concat("qat"))) + 1); i++) {
-    qaaa = qaaa.concat(localStorage.getItem(ses.concat("q", i.toString())), "///", localStorage.getItem(ses.toString().concat("a", i.toString())), "///");
+    qaaa = qaaa.concat(localStorage.getItem(ses.concat("q", i.toString())), "\\\", localStorage.getItem(ses.toString().concat("a", i.toString())), "\\\");
   }
   var blob = new Blob([localStorage.getItem(ses.concat("n")).concat("[]", localStorage.getItem(ses.concat("a")), "[]", localStorage.getItem(ses.concat("p")), "[]", qaaa)], {
     type: "text/plain;charset=utf-8",
