@@ -150,6 +150,9 @@ body {
 }
 </style>
 <script>
+if (localStorage.getItem("numofsets") == "10") {
+  window.location.href = "toomanysets.html";
+}
 resizeeverything();
 window.addEventListener("resize", resizeeverything);
 if (localStorage.getItem("darkmode")) {} else {
