@@ -8,23 +8,23 @@
 </script>
 <body>
 <div id="sidebar">
-<a href="index.html"><div style="top: 0svh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
-<a href="study.html"><div style="top: 13.5svh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
-<a href="play.html"><div style="top: 27svh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
-<a href="sets.html"><div style="top: 40.5svh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
-<a href="create.html"><div style="top: 54svh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
-<a href="import.html"><div style="top: 67.5svh" class="hyperlink selected"><img src="importselected.png" class="hpimg"><p class="hplabel selected">Import</p></div></a>
-<a href="settings.html"><div style="top: 85.5svh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+<a href="index.html"><div style="top: 0dvh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5dvh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27dvh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5dvh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
+<a href="create.html"><div style="top: 54dvh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5dvh" class="hyperlink selected"><img src="importselected.png" class="hpimg"><p class="hplabel selected">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5dvh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
 
 </div>
 <div id="content">
 <div id="heading">
 <div id="fadedbg"></div><span id="nameofset"></span></div>
 <div id="manifest">Manifest
-<p style="top: 1svh" class="lfm">Set Name: </p>
-<textarea placeholder="Set Name Here..." style="top: 7svh" class="mb"></textarea>
-<p style="top: 8.5svh" class="lfm">Set Author: </p>
-<textarea placeholder="Author's Name Here..." style="top: 14.5svh" class="mb"></textarea>
+<p style="top: 1dvh" class="lfm">Set Name: </p>
+<textarea placeholder="Set Name Here..." style="top: 7dvh" class="mb"></textarea>
+<p style="top: 8.5dvh" class="lfm">Set Author: </p>
+<textarea placeholder="Author's Name Here..." style="top: 14.5dvh" class="mb"></textarea>
 <div id="picture">
 <select onchange="changeimgs()" id="category"></select>
 <div id="actualpics">
@@ -54,11 +54,11 @@
 </body>
 <style>
 .deletegroup {
-  width: 4svh;
-  height: 4svh;
+  width: 4dvh;
+  height: 4dvh;
   top: 50%;
   transform: translate(0%, -50%);
-  right: 1svh;
+  right: 1dvh;
   position: absolute;
 }
 .blank {
@@ -69,85 +69,85 @@
   resize: none;
   left: 0;
   background-color: rgba(0, 0, 0, 0);
-  height: calc(100% - 3svh);
+  height: calc(100% - 3dvh);
   bottom: 0;
   position: absolute;
 }
 .answer {
   overflow: hidden;
   color: white;
-  font-size: 2.5svh;
+  font-size: 2.5dvh;
   font-weight: normal;
   text-align: left;
-  width: calc((100% - 8svh) / 2);
-  height: 12svh;
-  border-radius: 1svh;
+  width: calc((100% - 8dvh) / 2);
+  height: 12dvh;
+  border-radius: 1dvh;
   background-color: black;
   position: absolute;
-  right: 6svh;
-  top: 1svh;
+  right: 6dvh;
+  top: 1dvh;
 }
 .question {
   overflow: hidden;
   color: white;
-  font-size: 2.5svh;
+  font-size: 2.5dvh;
   font-weight: normal;
   text-align: left;
-  width: calc((100% - 8svh) / 2);
-  height: 12svh;
-  border-radius: 1svh;
+  width: calc((100% - 8dvh) / 2);
+  height: 12dvh;
+  border-radius: 1dvh;
   background-color: black;
   position: absolute;
-  left: 1svh;
-  top: 1svh;
+  left: 1dvh;
+  top: 1dvh;
 }
 #actualquestions {
   width: 100%;
-  height: calc(100% - 10svh);
+  height: calc(100% - 10dvh);
   bottom: 0;
   left: 0;
   position: absolute;
   overflow-y: scroll;
 }
 .qgroup {
-  top: 0.5svh;
-  width: calc(100% - 3svh);
-  height: 14svh;
-  border-radius: 1svh;
-  left: 1.5svh;
-  outline: 0.5svh solid black;
+  top: 0.5dvh;
+  width: calc(100% - 3dvh);
+  height: 14dvh;
+  border-radius: 1dvh;
+  left: 1.5dvh;
+  outline: 0.5dvh solid black;
   position: absolute;
 }
 #addquestion {
-  height: 4svh;
-  width: 4svh;
+  height: 4dvh;
+  width: 4dvh;
   left: 50%;
   transform: translate(-50%, 0%);
-  top: 4.5svh;
+  top: 4.5dvh;
   position: absolute;
 }
 #qaa {
-  width: calc(100% - 8svh);
-  height: 50.5svh;
-  border-radius: 1svh;
+  width: calc(100% - 8dvh);
+  height: 50.5dvh;
+  border-radius: 1dvh;
   position: absolute;
-  outline: 1.5svh solid black;
-  left: 4svh;
-  bottom: 4svh;
+  outline: 1.5dvh solid black;
+  left: 4dvh;
+  bottom: 4dvh;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5svh;
+  font-size: 3.5dvh;
 }
 #savebutton {
   background-color: white;
   left: 50%;
   transform: translate(-50%, 0%);
-  bottom: 1.5svh;
-  width: 10svh;
-  height: 5svh;
-  font-size: 4svh;
-  border-radius: 1svh;
-  outline: 1.5svh solid black;
+  bottom: 1.5dvh;
+  width: 10dvh;
+  height: 5dvh;
+  font-size: 4dvh;
+  border-radius: 1dvh;
+  outline: 1.5dvh solid black;
   text-align: center;
   color: black;
   position: absolute;
@@ -156,31 +156,31 @@
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - 3svh);
+  height: calc(100% - 3dvh);
   left: 0;
   position: absolute;
   bottom: 0;
 }
 .selectedpic {
   filter: brightness(150%);
-  outline: 1svh solid black;
+  outline: 1dvh solid black;
 }
 .selectedpicdarkmode {
   backdrop-filter: brightness(67%);
-  outline: 1svh solid white;
+  outline: 1dvh solid white;
 }
 .picselection {
-  outline-offset: -1svh;
+  outline-offset: -1dvh;
   background-size: cover;
   background-position: 50% 50%;
   position: absolute;
-  top: 1svh;
-  height: 8svh;
-  border-radius: 1svh;
+  top: 1dvh;
+  height: 8dvh;
+  border-radius: 1dvh;
 }
 #category {
   width: 100%;
-  height: 3svh;
+  height: 3dvh;
   left: 0;
   top: 0;
   position: absolute;
@@ -190,61 +190,61 @@
   color: white;
 }
 #picture {
-  width: calc(0.5 * (100% - 5svh));
-  height: 13svh;
-  outline: 0.5svh solid black;
-  border-radius: 0.5svh;
+  width: calc(0.5 * (100% - 5dvh));
+  height: 13dvh;
+  outline: 0.5dvh solid black;
+  border-radius: 0.5dvh;
   position: absolute;
-  right: 1.5svh;
-  bottom: 2svh;
+  right: 1.5dvh;
+  bottom: 2dvh;
 }
 .mb {
   position: absolute;
-  outline: 0.5svh solid black;
-  font-size: 2.5svh;
-  height: 3.5svh;
-  width: calc(0.5 * (100% - 5svh));
+  outline: 0.5dvh solid black;
+  font-size: 2.5dvh;
+  height: 3.5dvh;
+  width: calc(0.5 * (100% - 5dvh));
   background-color: rgba(0, 0, 0, 0);
   color: black;
   font-family: fredokaone;
-  border-radius: 0.5svh;
-  left: 1.5svh;
+  border-radius: 0.5dvh;
+  left: 1.5dvh;
   resize: none;
 }
 .lfm {
   position: absolute;
-  left: 1svh;
+  left: 1dvh;
   text-align: left;
-  font-size: 2.5svh;
+  font-size: 2.5dvh;
   font-weight: normal;
 }
 #manifest {
   text-align: center;
   font-weight: bold;
-  font-size: 3.5svh;
-  width: calc(100% - 8svh);
-  height: 20svh;
+  font-size: 3.5dvh;
+  width: calc(100% - 8dvh);
+  height: 20dvh;
   left: 50%;
-  border-radius: 1svh;
+  border-radius: 1dvh;
   transform: translate(-50%, 0%);
-  top: 21.5svh;
+  top: 21.5dvh;
   position: absolute;
-  outline: 1.5svh solid black;
+  outline: 1.5dvh solid black;
 }
 .obj {
   background-size: cover;
   background-position: 50% 50%;
   position: absolute;
-  height: 4svh;
+  height: 4dvh;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5svh;
-  top: 1.5svh;
-  border-radius: 1svh;
-  outline: 1.5svh solid black;
+  font-size: 3.5dvh;
+  top: 1.5dvh;
+  border-radius: 1dvh;
+  outline: 1.5dvh solid black;
 }
 #insidetoolbar {
-  width: 43svh;
+  width: 43dvh;
   height: 100%;
   left: 50%;
   position: absolute;
@@ -252,8 +252,8 @@
 }
 #toolbar {
   width: 100%;
-  height: 7svh;
-  top: 20svh;
+  height: 7dvh;
+  top: 20dvh;
   position: absolute;
 }
 #fadedbg {
@@ -273,7 +273,7 @@
   position: absolute;
   word-wrap: break-word;
   left: 50%;
-  font-size: 6svh;
+  font-size: 6dvh;
   top: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -298,11 +298,11 @@ body {
   background-color: #c12020;
 }
 .hpimg {
-  top: 1.5svh;
-  left: 1.5svh;
-  width: 9svh;
+  top: 1.5dvh;
+  left: 1.5dvh;
+  width: 9dvh;
   position: absolute;
-  height: 9svh;
+  height: 9dvh;
 }
 .hplabel {
   width: 100%;
@@ -310,25 +310,25 @@ body {
   font-weight: bold;
   text-align: center;
   left: 50%;
-  bottom: 0.75svh;
+  bottom: 0.75dvh;
   height: auto;
   transform: translate(-50%, 0%);
 }
 .hyperlink {
   color: #c12020;
   position: absolute;
-  width: 9svh;
-  padding: 1.5svh;
-  height: 12svh;
-  font-size: 2svh;
+  width: 9dvh;
+  padding: 1.5dvh;
+  height: 12dvh;
+  font-size: 2dvh;
 }
 .author {
-  font-size: 2svh;
+  font-size: 2dvh;
   font-weight: normal;
 }
 .insidetext {
   font-weight: bold;
-  font-size: 3svh;
+  font-size: 3dvh;
   position: absolute;
   padding: 0;
   text-align: center;
@@ -337,9 +337,9 @@ body {
   transform: translate(-50%, -50%);
 }
 .group {
-  height: 15svh;
-  outline: 1.5svh solid black;
-  border-radius: 1.5svh;
+  height: 15dvh;
+  outline: 1.5dvh solid black;
+  border-radius: 1.5dvh;
   overflow: hidden;
   position: absolute;
   background-size: cover;
@@ -349,22 +349,22 @@ body {
 #groups {
   width: 100%;
   position: absolute;
-  top: 21svh;
+  top: 21dvh;
   height: 200%;
 }
 #heading {
   z-index: 2;
   position: fixed;
   overflow: hidden;
-  width: calc(100% - 14.75svh);
-  height: 17.5svh;
+  width: calc(100% - 14.75dvh);
+  height: 17.5dvh;
   background-color: #c12020;
   right: 0;
   top: 0;
 }
 #content {
   position: absolute;
-  width: calc(100% - 14.75svh);
+  width: calc(100% - 14.75dvh);
   height: 100%;
   right: 0;
   top: 0;
@@ -384,8 +384,8 @@ body {
 }
 #sidebar {
   background-color: white;
-  outline: 3svh solid #c12020;
-  width: 12svh;
+  outline: 3dvh solid #c12020;
+  width: 12dvh;
   left: 0;
   top: 0;
   height: 100%;
@@ -394,10 +394,10 @@ body {
 .darkmodehyperlink {
   color: white;
   position: absolute;
-  width: 9svh;
-  padding: 1.5svh;
-  height: 12svh;
-  font-size: 2svh;
+  width: 9dvh;
+  padding: 1.5dvh;
+  height: 12dvh;
+  font-size: 2dvh;
 }
 select {
   font-family: fredokaone;
@@ -481,7 +481,7 @@ function addgroup() {
   newGroup.style.top = 0.005 * window.innerHeight + ((numq - 1) * window.innerHeight * 0.16);
   newRemove.setAttribute("onclick", "removegroup()");
   if (localStorage.getItem("darkmode") == "1") {
-    newGroup.style.outline = "0.5svh solid white";
+    newGroup.style.outline = "0.5dvh solid white";
     newA.style.backgroundColor = "white";
     newQ.style.backgroundColor = "white";
     newA.style.color = "black";
@@ -632,7 +632,7 @@ arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "set
 if (localStorage.getItem("darkmode") == "1") {
   document.body.style.backgroundColor = "black";
   document.getElementById("heading").style.backgroundColor = "white";
-  document.getElementById("sidebar").style.outline = "3svh solid white";
+  document.getElementById("sidebar").style.outline = "3dvh solid white";
   document.getElementById("sidebar").style.backgroundColor = "black";
   for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
     if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
@@ -646,16 +646,16 @@ if (localStorage.getItem("darkmode") == "1") {
     }
   }
   document.getElementsByClassName("mb")[0].style.color = "white";
-  document.getElementsByClassName("mb")[0].style.outline = "0.5svh solid white";
+  document.getElementsByClassName("mb")[0].style.outline = "0.5dvh solid white";
   document.getElementsByClassName("mb")[1].style.color = "white";
-  document.getElementsByClassName("mb")[1].style.outline = "0.5svh solid white";
-  document.getElementById("manifest").style.outline = "1.5svh solid white";
+  document.getElementsByClassName("mb")[1].style.outline = "0.5dvh solid white";
+  document.getElementById("manifest").style.outline = "1.5dvh solid white";
   document.getElementById("manifest").style.color = "white";
   document.getElementById("category").style.backgroundColor = "white";
   document.getElementById("category").style.color = "black";
-  document.getElementById("picture").style.outline = "0.5svh solid white";
+  document.getElementById("picture").style.outline = "0.5dvh solid white";
   document.getElementById("nameofset").style.color = "black";
-  document.getElementById("qaa").style.outline = "1.5svh solid white";
+  document.getElementById("qaa").style.outline = "1.5dvh solid white";
   document.getElementById("qaa").style.color = "white";
   document.getElementById("addquestion").src = "adddarkmode.png";
 }
