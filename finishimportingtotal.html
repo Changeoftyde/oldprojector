@@ -430,8 +430,8 @@ function removegroup() {
 }
 document.getElementsByClassName("mb")[0].value = sessionStorage.getItem("n");
 document.getElementsByClassName("mb")[1].value = sessionStorage.getItem("a");
-document.getElementById("fadedbg").style.backgroundImage = "url('".concat(currentselectedpic.toString(), ".png')");
 currentselectedpic = parseInt(sessionStorage.getItem("p"));
+document.getElementById("fadedbg").style.backgroundImage = "url('".concat(currentselectedpic.toString(), ".png')");
 if (currentselectedpic < 11) {
   if (localStorage.getItem("darkmode") == "1") {
   document.getElementsByClassName("picselection")[currentselectedpic - 1].classList.add("selectedpicdarkmode");
