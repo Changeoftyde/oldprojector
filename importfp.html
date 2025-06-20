@@ -3,13 +3,13 @@
 
 <body>
 <div id="sidebar">
-<a href="index.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
-<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
-<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
-<a href="sets.html"><div style="top: 40.5vh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
-<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
-<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
-<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+<a href="index.html"><div style="top: 0svh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5svh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27svh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5svh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
+<a href="create.html"><div style="top: 54svh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5svh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5svh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
 
 </div>
 <div id="content">
@@ -39,28 +39,28 @@
 }
 #actualcontent {
   width: 100%;
-  height: 82.5vh;
+  height: 82.5svh;
   bottom: 0;
   left: 0;
   position: absolute;
 }
 .drop-zone {
-  width: calc(100% - 15vh);
-  height: calc(100% - 15vh);
+  width: calc(100% - 15svh);
+  height: calc(100% - 15svh);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
   padding: 25px;
-  font-size: 5vh;
+  font-size: 5svh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  outline: 1.5vh dashed black;
+  outline: 1.5svh dashed black;
   cursor: pointer;
   color: black;
-  border-radius: 1vh;
+  border-radius: 1svh;
 }
 
 .drop-zone--over {
@@ -86,7 +86,7 @@
   position: absolute;
   word-wrap: break-word;
   left: 50%;
-  font-size: 6vh;
+  font-size: 6svh;
   top: 50%;
   transform: translate(-50%, -50%);
   color: white;
@@ -103,11 +103,11 @@ body {
   background-color: #c12020;
 }
 .hpimg {
-  top: 1.5vh;
-  left: 1.5vh;
-  width: 9vh;
+  top: 1.5svh;
+  left: 1.5svh;
+  width: 9svh;
   position: absolute;
-  height: 9vh;
+  height: 9svh;
 }
 .hplabel {
   width: 100%;
@@ -115,31 +115,31 @@ body {
   font-weight: bold;
   text-align: center;
   left: 50%;
-  bottom: 0.75vh;
+  bottom: 0.75svh;
   height: auto;
   transform: translate(-50%, 0%);
 }
 .hyperlink {
   color: #c12020;
   position: absolute;
-  width: 9vh;
-  padding: 1.5vh;
-  height: 12vh;
-  font-size: 2vh;
+  width: 9svh;
+  padding: 1.5svh;
+  height: 12svh;
+  font-size: 2svh;
 }
 #heading {
   z-index: 2;
   position: fixed;
   overflow: hidden;
-  width: calc(100% - 14.75vh);
-  height: 17.5vh;
+  width: calc(100% - 14.75svh);
+  height: 17.5svh;
   background-color: #c12020;
   right: 0;
   top: 0;
 }
 #content {
   position: absolute;
-  width: calc(100% - 14.75vh);
+  width: calc(100% - 14.75svh);
   height: 100%;
   right: 0;
   top: 0;
@@ -150,8 +150,8 @@ body {
 }
 #sidebar {
   background-color: white;
-  outline: 3vh solid #c12020;
-  width: 12vh;
+  outline: 3svh solid #c12020;
+  width: 12svh;
   left: 0;
   top: 0;
   height: 100%;
@@ -160,10 +160,10 @@ body {
 .darkmodehyperlink {
   color: white;
   position: absolute;
-  width: 9vh;
-  padding: 1.5vh;
-  height: 12vh;
-  font-size: 2vh;
+  width: 9svh;
+  padding: 1.5svh;
+  height: 12svh;
+  font-size: 2svh;
 }
 </style>
 <script>
@@ -302,10 +302,10 @@ function resizeeverything() {
 if (localStorage.getItem("darkmode") == "1") {
   document.body.style.backgroundColor = "black";
   document.getElementById("logo").style.filter = "invert(1)";
-  document.getElementsByClassName("drop-zone")[0].style.outline = "1.5vh dashed white";
+  document.getElementsByClassName("drop-zone")[0].style.outline = "1.5svh dashed white";
   document.getElementsByClassName("drop-zone")[0].style.color = "white";
   document.getElementById("heading").style.backgroundColor = "white";
-  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.outline = "3svh solid white";
   document.getElementById("sidebar").style.backgroundColor = "black";
   for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
     if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
