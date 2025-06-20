@@ -1,0 +1,322 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+<div id="sidebar">
+<a href="index.html"><div style="top: 0vh" class="hyperlink"><img src="home.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5vh" class="hyperlink"><img src="study.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27vh" class="hyperlink"><img src="play.png" class="hpimg"><p class="hplabel">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5vh" class="hyperlink"><img src="sets.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
+<a href="create.html"><div style="top: 54vh" class="hyperlink"><img src="create.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5vh" class="hyperlink"><img src="import.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5vh" class="hyperlink"><img src="settings.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading"><img src="importfromprojecttorlogo.png" id="logo">
+<!-- <div id="fadedbg"></div><span id="nameofset"></span> -->
+
+</div>
+<div id="actualcontent">
+<div class="drop-zone">
+    <span class="drop-zone__prompt">Click to Upload Projecttor File (or Drag and Drop)</span>
+    <input type="file" name="myFile" class="drop-zone__input">
+</div>
+</div>
+  </div>
+</body>
+<style>
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.drop-zone__prompt:hover {
+  text-decoration: underline;
+}
+#actualcontent {
+  width: 100%;
+  height: 82.5vh;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+.drop-zone {
+  width: calc(100% - 15vh);
+  height: calc(100% - 15vh);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 25px;
+  font-size: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  outline: 1.5vh dashed black;
+  cursor: pointer;
+  color: black;
+  border-radius: 1vh;
+}
+
+.drop-zone--over {
+  outline-style: solid;
+}
+.drop-zone__input {
+  display: none;
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6vh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+.selected {
+  color: white;
+  background-color: #c12020;
+}
+.hpimg {
+  top: 1.5vh;
+  left: 1.5vh;
+  width: 9vh;
+  position: absolute;
+  height: 9vh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75vh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #c12020;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75vh);
+  height: 17.5vh;
+  background-color: #c12020;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75vh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+#sidebar {
+  background-color: white;
+  outline: 3vh solid #c12020;
+  width: 12vh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9vh;
+  padding: 1.5vh;
+  height: 12vh;
+  font-size: 2vh;
+}
+</style>
+<script>
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+fr = new FileReader();
+document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+  const dropZoneElement = inputElement.closest(".drop-zone");
+
+  dropZoneElement.addEventListener("click", (e) => {
+    inputElement.click();
+  });
+
+  inputElement.addEventListener("change", (e) => {
+    if (inputElement.files.length) {
+      updateThumbnail(dropZoneElement, inputElement.files[0]);
+    }
+  });
+
+  dropZoneElement.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZoneElement.classList.add("drop-zone--over");
+  });
+
+  ["dragleave", "dragend"].forEach((type) => {
+    dropZoneElement.addEventListener(type, (e) => {
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+
+  dropZoneElement.addEventListener("drop", (e) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      fr.onload = () => {
+        rawsd = fr.result;
+        au();
+      }
+      fr.readAsText(document.getElementsByClassName("drop-zone__input")[0].files[0]);
+    }
+    dropZoneElement.classList.remove("drop-zone--over");
+  });
+});
+document.getElementsByClassName("drop-zone__input")[0].addEventListener("change", function(){
+  fr.onload = () => {
+    rawsd = fr.result;
+    au();
+  }
+  fr.readAsText(this.files[0]);
+});
+
+function au() {
+  hamburger = 0;
+  gti = false;
+  gt = 1;
+  qn = 1;
+  an = 0;
+  sd = fr.result.toString();
+  current = "q";
+  for (i = 0; i < sd.length; hamburger++) {
+    if (sd.substring(i, i + 2) == "[]" && gti == false) {
+      gt += 1;
+      i += 1;
+      if (gt == 4) { gti = true }
+    } else if (sd.substring(i, i + 3) == "\\\\\\" && gti == true) {
+      i += 2;
+      if (current == "q") { current = "a"; } else { current = "q" }
+      window[current.concat("n")] = window[current.concat("n")] + 1;
+    } else if (gti == false) {
+      if (window["g".concat(gt.toString())]) { window["g".concat(gt.toString())] = window["g".concat(gt.toString())].concat(sd[i]) } else { window["g".concat(gt.toString())] = sd[i]; }
+    } else {
+      if (window[current.concat(window[current.concat("n")].toString())]) {
+        window[current.concat(window[current.concat("n")].toString())] = window[current.concat(window[current.concat("n")].toString())].concat(sd[i]);
+      } else {
+        window[current.concat(window[current.concat("n")].toString())] = sd[i];
+      }
+    }
+    i++;
+  }
+  qn -= 1;
+  name = g1;
+  author = g2;
+  pic = g3;
+  tstl = false;
+  for (i = 1; i < (qn + 1); i++) {
+    if (window["q".concat(i.toString())].length > 500) {
+      tstl = true;
+    }
+    if (window["a".concat(i.toString())].length > 1000) {
+      tstl = true;
+    }
+  }
+  if (an != qn || name == "" || author == "" || pic == "" || an < 1 || parseInt(pic) > 270 || parseInt(pic) < 1 || parseFloat(pic) % 1 != 0) {
+    alert("File could not be read as a Projecttor Set.");
+  } else if (tstl == true) {
+    alert("Some Questions/Answers are too long. Ensure that all questions are at maximum 500 Characters long and all answers are at maximum 1000 Characters long.");
+  } else if (qn > 300) {
+    alert("You have too many Questions/Answers. Please limit your amount of questions to 300.");
+  } else {
+      sessionStorage.setItem("qat", (qn + an).toString());
+      for (a = 1; a < (qn + 1); a++) {
+        sessionStorage.setItem("a".concat(a.toString()), window["a".concat(a.toString())]);
+        sessionStorage.setItem("q".concat(a.toString()), window["q".concat(a.toString())]);
+      }
+      sessionStorage.setItem("n", name);
+      sessionStorage.setItem("p", pic);
+      sessionStorage.setItem("a", author);
+      sessionStorage.setItem("c", "0");
+      window.location.href = "finishimporting.html";  
+  }
+}
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+resizeeverything();
+window.addEventListener("resize", resizeeverything);
+function resizeeverything() {
+  space = (window.innerWidth) - window.innerHeight * 0.1475;
+  ratio4heading = space / (window.innerHeight * 0.175);
+  ratiotocompareto = document.getElementById("logo").offsetWidth / document.getElementById("logo").offsetHeight;
+  if (ratio4heading > ratiotocompareto) {
+    document.getElementById("logo").style.height = 90 + "%";
+    document.getElementById("logo").style.width = "auto";
+  } else {
+    document.getElementById("logo").style.width = 90 + "%";
+    document.getElementById("logo").style.height = "auto";
+  }
+}
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("logo").style.filter = "invert(1)";
+  document.getElementsByClassName("drop-zone")[0].style.outline = "1.5vh dashed white";
+  document.getElementsByClassName("drop-zone")[0].style.color = "white";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3vh solid white";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+}
+</script>
