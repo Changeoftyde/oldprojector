@@ -1259,6 +1259,7 @@ body {
   }
   ptcolors = ["white", "white", "white", "white", "white", "white", "white", "white", "white", "white"];
   powerplays = ["double", "steal", "splice", "eliminate", "random"];
+  powerplaycolors = ["white", "white", "white", "white", "white"];
   powerplaydesc = ["Double your score!", "Steal all of the team in first place's points!", "Split every other team's score in half!", "Wipe all of the team in first place's points (unless you're in first)!", "A random power play is in effect!"];
   questionnumber = 0;
   qn = 0;
@@ -1309,7 +1310,6 @@ body {
     document.getElementById("loadbar").style.transition = loadval.toString().concat("s width");
     document.getElementById("loadbar").offsetHeight;
     document.getElementById("loadbar").style.width = "100%";
-    document.getElementById("loadbar").style.backgroundColor = ptcolors[(questionnumber - 1) % ptvalues.length];
     pointVal = ptvalues[(questionnumber - 1) % ptvalues.length];
     window.innerHeight;
     if (powerplaysenabled && pointVal > 33 && pointVal < 100) {
@@ -1348,9 +1348,11 @@ body {
       document.getElementById("pointvalue").src = game.concat(pointVal.toString(), ".png");
       document.getElementById("ptdescription").innerHTML = "<br>This next question is worth ".concat(((ptvalues[(questionnumber - 1) % ptvalues.length]).toString()), " points.");
       if (((questionnumber - 1) % ptvalues.length) == (ptvalues.length) - 1) { document.getElementById("ptdescription").innerHTML = document.getElementById("ptdescription").innerHTML.concat("<br>Don't mess up, or you'll lose everything!") }
+      document.getElementById("loadbar").style.backgroundColor = ptcolors[(questionnumber - 1) % ptvalues.length];
     } else {
       document.getElementById("pointvalue").src = game.concat(powerplay, ".png");
       document.getElementById("ptdescription").innerHTML = "<br>".concat(powerplaydesc[chance - 1]);
+      document.getElementById("loadbar").style.backgroundColor = powerplaycolors[powerplays.indexOf(powerplay)];
     }
     setTimeout(resetLoadBar, 1000 * loadval, questionnumber);
   }
