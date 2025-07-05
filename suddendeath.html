@@ -1,257 +1,579 @@
-<!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 </head>
+<!DOCTYPE html>
 <html>
 <body>
-<div id="pregame">
-<img src="settingsicon.png" onclick="toggle()" id="settings">
-<div id="menu"></div>
+  <div class="screen" id="pregame">
+    <div onclick="togglesettings()" id="settings"><span style="position: absolute; right: 4vh; bottom: 0vh">Settings</span></div><div id="settingsarea">
+      <img onclick="togglesettings()" src="closesettings.png" id="closesettings">
+      <span style="position: absolute; right: 2vh; top: 3vh; font-size: 5vh; width: calc(100% - 10.5vh); text-decoration: underline">Game Settings</span>
+      <span style="position: absolute; right: 2vh; top: 12vh; font-size: 4.5vh; width: 100%; text-decoration: underline">Game Length</span>
+      <span style="position: absolute; right: 14vh; top: 17.5vh; font-size: 3.5vh; width: 100%">Endless Mode</span><div style="top: 18vh" onclick="toggler(0)" class="setval slidergroup"><div class="slider"></div></div>
+      <span style="position: absolute; right: 2vh; top: 21.5vh; font-size: 2vh; width: 100%">The Game doesn't end until you click "Finish."</span>
+      <span class="n" style="position: absolute; right: 14vh; top: 24vh; font-size: 3.5vh; width: 100%">Number of Cycles</span><input placeholder="1-100" style="top: 24.5vh; transition: 1s opacity" class="setval svi">
+      <span class="n" style="position: absolute; right: 2vh; top: 28vh; font-size: 2vh; width: 100%">The number of question cycles until the game ends.<br>Range is anywhere between 1-100.<br><br><span>Predicted Game Length: <span style="color: #ff8d34" id="prediction">...</span></span></span>
+      <span style="position: absolute; right: 2vh; top: 40vh; font-size: 4.5vh; width: 100%; text-decoration: underline">Gameplay</span>
+      <span style="position: absolute; right: 14vh; top: 45.5vh; font-size: 3.5vh; width: 100%">Power Plays Enabled</span><div style="top: 46vh" onclick="toggler(1)" class="setval slidergroup"><div class="slider"></div></div>
+      <span style="position: absolute; right: 2vh; top: 49.5vh; font-size: 2vh; width: 100%">Also known as powerups.</span>
+      <span style="position: absolute; right: 14vh; top: 52vh; font-size: 3.5vh; width: 100%">Animations Enabled</span><div style="top: 52.5vh" onclick="toggler(2)" class="setval slidergroup"><div class="slider"></div></div>
+      <span style="position: absolute; right: 14vh; top: 56vh; font-size: 3.5vh; width: 100%">Loading Bar Duration (s)</span><input placeholder="1-15" style="top: 56.5vh" class="setval svi">
+      <span style="position: absolute; right: 2vh; top: 60vh; font-size: 2vh; width: 100%">How long it takes for upcoming players and scores to be announced.<br>Counted in seconds.</span>
+      <span style="position: absolute; right: 2vh; top: 67.5vh; font-size: 4.5vh; width: 100%; text-decoration: underline">Audio</span>
+      <span style="position: absolute; right: 14vh; top: 73vh; font-size: 3.5vh; width: 100%">Background Music</span><div style="top: 73.5vh" onclick="toggler(3)" class="setval slidergroup"><div class="slider"></div></div>
+      <span style="position: absolute; right: 14vh; top: 77vh; font-size: 3.5vh; width: 100%">Sound Effects</span><div style="top: 77.5vh" onclick="toggler(4)" class="setval slidergroup"><div class="slider"></div></div>
+      <img src="jettcog.gif" id="jettcog">
+    </div>
+    <div onclick="home()" id="homepregame"><span style="position: absolute; right: 4vh; bottom: 0vh">Home</span></div>
+    <div id="titleslide"><div id="logocomponents"><img id="logotop" src="suddendeathlogo.png"><p style="margin-top: 9vh" id="nameofset"></p></div></div>
+    <div id="toggler"><div onclick="toggletype()" class="groupbased selected">Group-Based</div><div onclick="toggletype()" class="individualbased">Individual-Based</div></div>
+    <div id="groups">
+      <img src="add.png" onclick="addgroup()" id="add">
+      <div id="actualgroups">
+        <div class="group"><input placeholder="Team Name..." class="teamname"><textarea placeholder="Enter this team's members' names like this...
+ex: John
+Sue
+Stacy" class="names"></textarea><img class="remove" onclick="remove()" src="delete.png"></div>
+      </div>
+    </div>
+    <div class="hidden" id="individuals">
+      <textarea placeholder="Enter all players' names here, following this example...
+ex: John
+Ethan
+Tanner
+Theo
+Taylor
+Olivia
+Rachel
+Adelaide..." id="individnames"></textarea>
+    </div>
+  <div onclick="start()" id="startbutton">Start</div>
+  <div class="bg" style="background-image: url('suddendeathbackground.gif')"></div>
+  </div>
+  <div class="hidden screen" id="prelude">
+    <div id="jett">
+      <img src="jettheadnormal.png" id="jetthead">
+      <img src="jettbody.png" id="jettbody">
+      <img id="speechtriangle" src="speechtrianglejett.png">
+      <div id="speech"><span id="text4speech"></div></span>
+    </div>
+    <img id="pointvalue">
+    <p id="ptdescription"></p>
+    <div id="loadbaroutline"><div id="loadbar"></div></div>
+    <div style="background-color: black; background-image: url('suddendeathblackbackground.gif')" class="bg"></div>
+    <div id="toolbar">
+      <div class="questionval"></div>
+      <div onclick="skip()" style="left: 1vh" class="toolbarbutton">Skip</div>
+      <div onclick="home()" style="left: 14vh" class="toolbarbutton">Home</div>
+      <div onclick="finish()" style="left: 27vh" class="toolbarbutton">Finish</div>
 
-<div class="hidden" id="menuoptions">
-<h1 id="ttitle">Settings</h1>
-<p id="endlessmodelabel" class="label">Endless Mode</p><div style="left: 23vh" class="ts" id="endlessmode" onclick="onoff()"><div id="endlessmodeslider" class="tss"></div></div>
-<p id="universalquestionslabel" style="top: 10vh" class="label">Universal Questions</p><div style="left: 23vh; top: 10vh" class="ts" id="universalquestions" onclick="onoff()"><div id="universalquestionsslider" class="tss"></div></div>
-<p class="smalllabel" id="uql2">Dictates Whether or Not Certain Questions can be Answered by all Students</p>
-<p id="penalizationlabel" style="top: 15vh" class="label">Wrong Answers Penalizable</p><div style="left: 23vh; top: 15vh" class="ts" id="penalization" onclick="onoff()"><div id="penalizationslider" class="tss"></div></div>
-<p id="questioncyclelabel" style="top: 5vh; margin-left: 8vh; transition: 0.5s; transition-property: opacity" class="label">Amount of Question Cycles:</p><input style="transition: 0.5s; transition-property: opacity" id="questioncycle" value="1">
-<p class="smalllabel" id="uql2" style="margin-left: 8vh; ; transition: 0.5s; transition-property: opacity">Estimated Game Duration: </p>
-<p id="maxpointslabel" style="top: 25vh" class="label">Maximum Amount of Points: 10,000</p><div style="left: 60vh; top: 25vh" class="plusminus" id="maxpoints"><img src="plusdisabled.png" onclick="plus()" id="plus"><img src="minus.png" onclick="minus()" id="minus"></div>
-</div>
-
-<div id="logo">
-<img src="IMG_8934.png" id="logo2">
-</div>
-<button onclick="addteam()" id="addteam">Add Team</button>
-<div id="backgroundDiv"></div>
-<button onclick="play()" id="play">PLAY
-</button>
-<div id="teams">
-<div class="team" id="team1">
-<textarea id="art1" class="artitle">TEAM 1
-</textarea>
-<button onclick="remove()" class="remove" id="button1">Remove</button>
-<textarea placeholder="Insert Team Member Names. Separate each name with the enter key." id="ar1" class="autoresizing">
-</textarea>
-</div>
-</div>
-</div>
-<div class="hidden" id="prelude">
-<span id="w1" class="wawe"></span>
-<img src="skip.png" onclick="skip()" id="skip" class="next">
-<div id="middle">
-<img id="graphic">
-<div id="infodiv">
-<p id="info"></p>
-</div>
-
-<div id="loadbaroutline"><div id="loadbar"></div></div>
-
-</div>
-<div class="bgblack"></div>
-</div>
-<img class="hidden" src="end.png" id="end" onclick="end()">
-<div class="hidden" id="questionslide">
-<span id="w2" class="wawe"></span>
-<div id="teams2">
-<img src="next.png" onclick="next()" id="n1" class="next">
-
-</div>
-<div id="questionspace">
-<h1 id="q">
-
-</h1>
-<div onclick="reveal()" id="answer">
-Click here to reveal the answer (after everyone has answered)
-</div>
-</div>
-<div class="bgred"></div>
-</div>
-
-<div class="hidden" id="scoreboard">
-<div id="animations">
-<img id="animimage">
-<div class="hidden" id="transbg"></div>
-</div>
-<h1 id="st">SCOREBOARD</h1>
-<img src="next.png" onclick="preludeQuestionSlide()" id="n2" class="next">
-<div class="bgred"></div>
-</div>
-
-<p class="hidden" id="score0">-1</p>
-
-<div class="hidden" id="postgame">
-<audio id="drumroll">
-  <source src="My-Movie-30 2.ogg" type="audio/ogg">
-  <source src="My-Movie-30.mp3" type="audio/mpeg">
-</audio>
-<img id="iris" src="blackframe1.png">
-<img id="medals" src="IMG_0016.png">
-<img id="shine" src="IMG_0022.gif">
-<div id="gold">
-<span id="goldtext"></span>
-</div>
-<div id="silver">
-<span id="silvertext"></span>
-</div>
-<div id="bronze">
-<span id="bronzetext"></span>
-</div>
-</div>
-<audio id="infinityaudio">
-  <source src="My-Movie-31.ogg" type="audio/ogg">
-  <source src="My-Movie-31.mp3" type="audio/mpeg">
-</audio>
-<audio id="stealaudio">
-  <source src="My-Movie-32.ogg" type="audio/ogg">
-  <source src="My-Movie-32.mp3" type="audio/mpeg">
-</audio>
-<audio id="doubleaudio">
-  <source src="My-Movie-33.ogg" type="audio/ogg">
-  <source src="My-Movie-33.mp3" type="audio/mpeg">
-</audio>
-<audio id="bgaudio" loop>
-  <source src="backgroundaudio.ogg" type="audio/ogg">
-  <source src="backgroundaudio.mp3" type="audio/mpeg">
-</audio>
+    </div>
+  </div>
+  <div class="hidden screen" id="questionsslide">
+    <div id="cgroups">
+    </div>
+    <div id="qag">
+    <div id="combo"><span id="question"></span><br>
+    <span onclick="reveal()" id="answer">Click here to reveal the answer...</span>
+    </div></div>
+    <div id="desccgroups">Click the teams below to toggle between correct, incorrect, or did not answer. Points are awarded for correct answers, but may be deducted for incorrect answers.</div>
+    <div id="toolbar">
+      <div class="questionval"></div>
+      <div style="left: 1vh" onclick="scoreboardSlide()" class="toolbarbutton">Next</div>
+      <div style="left: 14vh" onclick="home()" class="toolbarbutton">Home</div>
+      <div style="left: 27vh" onclick="finish()" class="toolbarbutton">Finish</div>
+    </div>
+    <div style="background-color: red; background-image: url('suddendeathbackground.gif')" class="bg"></div>
+  </div>
+  <div class="hidden screen" id="scoreboard">
+    <div id="animationsdiv" class="hidden"></div>
+    <div id="returntohome2" class="hidden" onclick="home()">Return Home</div>
+    <div id="backtoendslide" class="hidden" onclick="hideallbutone('endofgame')">Show Results</div>
+    <div class="t2">
+    <div id="titlescore">SCOREBOARD</div>
+    <div id="toolbar">
+      <div class="questionval2"></div>
+      <div id="tools">
+        <div style="top: 0; left: 1vh" onclick="preludeSlide()" class="toolbarbutton">Next</div>
+        <div style="top: 0; left: 14vh" onclick="home()" class="toolbarbutton">Home</div>
+        <div style="top: 0; left: 27vh" onclick="finish()" class="toolbarbutton">Finish</div>
+      </div>
+    </div>
+    </div>
+    <div id="sbteams">
+    </div>
+    <div style="background-color: red; background-image: url('suddendeathbackground.gif')" class="bg"></div>
+  </div>
+  <div class="hidden screen" id="endofgame">
+    <div onclick="home()" id="returntohome">Return Home</div>
+    <div onclick="hideallbutone('scoreboard')" id="showscoreboard">Show Scoreboard</div>
+    <img src="jettendslide.gif" id="jettendslide">
+    <div class="medal" id="gold">
+      <div class="medaltext"><span style="font-size: 4vh" class="mts">
+      </span></div>
+    </div>
+    <div class="medal" id="silver">
+      <div class="medaltext"><span style="font-size: 3.5vh" class="mts">
+      </span></div>
+    </div>
+    <div class="medal" id="bronze">
+      <div class="medaltext"><span style="font-size: 3vh" class="mts">
+      </span></div>
+    </div>
+    <div style="background-color: black; background-image: url('suddendeathblackbackground.gif')" class="bg"></div>
+  </div>
+</body>
 <style>
-#iris {
+#animationsdiv {
   width: 100%;
-  height: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000000;
-  position: absolute;
-}
-
-#goldtext {
-  font-size: 4.5vw;
-  text-align: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #c79611;
-  font-family: archivoblack;
-  position: absolute;
-  word-wrap: break-word;
-  width: 100%;
-}
-  img {
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--o-user-select: none;
-user-select: none;
-}
-#silvertext {
-  font-size: 2.52vw;
-  text-align: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #999897;
-  font-family: archivoblack;
-  position: absolute;
-  word-wrap: break-word;
-  width: 100%;
-}
-#bronzetext {
-  font-size: 1.8vw;
-  text-align: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #cc8d4d;
-  font-family: archivoblack;
-  position: absolute;
-  word-wrap: break-word;
-  width: 100%;
-}
-#medals {
-  z-index: 0;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-}
-#shine {
-  z-index: 5;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-}
-#bronze {
-  z-index: 2;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  transform: translate(0%, -50%);
-  top: 50%;
-  left: 11.1vw;
-  width: 10.25vw;
-  height: 10.25vw;
-  overflow: hidden;
-}
-#gold {
-  z-index: 2;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  width: 20.63vw;
-  height: 20.63vw;
-}
-#silver {
-  z-index: 2;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  transform: translate(0%, -50%);
-  top: 50%;
-  left: 78%;
-  width: 13.14vw;
-  height: 13.14vw;
-}
-#postgame {
-  z-index: 1000000;
-}
-#animations {
-  z-index: 50000;
-}
-#transbg {
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
-  transition-property: opacity;
-  transition: 1s;
-  width: 100vw;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 50000;
+  background-size: cover;
+  background-position: 50% 50%;
+  position: fixed;
+  z-index: 10000;
+  transition: none;
 }
-#animimage {
-  height: 100vh;
-  width: auto;
-  z-index: 50001;
-  left: 50%;
-  transition-property: opacity;
-  transition: 2s;
-  top: 50%;
+.loadimages {
+  width: 0;
+  height: 0;
   position: absolute;
+  top: 0;
+  left: 0;
+}
+.svi {
+  position: absolute;
+  height: 3.5vh;
+  border-radius: 1vh;
+  font-size: 2.25vh;
+  background-color: black;
+  color: white;
+  width: 7vh;
+  right: 1.5vh;
+  border: none;
+}
+.slider {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5vh;
+  height: 2.5vh;
+  background-color: #ff8d34;
+  border-radius: 4vh;
+}
+.slidergroup {
+  outline: 0.5vh solid white;
+  border-radius: 4vh;
+  position: absolute;
+  right: 2vh;
+  height: 2.5vh;
+  top: 2vh;
+  width: 6vh;
+  background-color: black;
+}
+#jettcog {
+  height: 16vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  bottom: 3vh;
+  position: absolute;
+  width: auto;
+}
+#closesettings {
+  width: 6.5vh;
+  height: 6.5vh;
+  position: absolute;
+  left: 2vh;
+  top: 3vh;
+}
+#settingsarea {
+  overflow: hidden;
+  width: 100%;
+  top: -1vh;
+  height: calc(100% + 2vh);
+  outline: 1vh solid white;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 2001;
+  color: white;
+  text-align: right;
+  position: fixed;
+  font-size: 3vh;
+  left: calc(100% + 1vh);
+  transition: 1s left;
+}
+#settings {
+  transition: 1s right;
+  right: -2vh;
+  top: -1vh;
+  position: fixed;
+  height: 8vh;
+  color: white;
+  width: 22vh;
+  font-size: 5vh;
+  text-align: left;
+  outline: 1vh solid white;
+  background-color: black;
+  border-radius: 1vh;
+  z-index: 2000;
+}
+#homepregame {
+  transition: 1s right;
+  right: -2vh;
+  top: 6vh;
+  position: fixed;
+  height: 8vh;
+  color: white;
+  width: 22vh;
+  font-size: 5vh;
+  text-align: left;
+  outline: 1vh solid white;
+  background-color: black;
+  border-radius: 1vh;
+  z-index: 1999;
+}
+#jettendslide {
+  left: 2vh;
+  bottom: 1vh;
+  position: absolute;
+  width: auto;
+  height: 26vh;
+  z-index: -2;
+}
+#backtoendslide {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 4vh;
+  position: fixed;
+  left: 50%;
+  top: 3vh;
+  width: 30vh;
+  height: 5vh;
+  outline: 1vh solid white;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  border-radius: 1vh;
+}
+#showscoreboard {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 4vh;
+  position: absolute;
+  left: 50%;
+  top: 3vh;
+  width: 35vh;
+  height: 5vh;
+  outline: 1vh solid white;
+  transform: translate(-50%, 0%);
+  transition: 3s opacity;
+  text-align: center;
+  border-radius: 1vh;
+}
+#returntohome {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 4vh;
+  position: absolute;
+  left: 50%;
+  bottom: 3vh;
+  width: 30vh;
+  height: 5vh;
+  outline: 1vh solid white;
+  transform: translate(-50%, 0%);
+  transition: 3s opacity;
+  text-align: center;
+  border-radius: 1vh;
+}
+#returntohome2 {
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 4vh;
+  position: fixed;
+  left: 50%;
+  bottom: 3vh;
+  width: 30vh;
+  height: 5vh;
+  outline: 1vh solid white;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  border-radius: 1vh;
+}
+.mts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
-.bgblack {
-  z-index: -2000;
+.medaltext {
+  backface-visibility: hidden;
+  width: 70%;
+  height: 70%;
+  word-wrap: break-word;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%) rotateY(0deg);
+}
+.medal {
+  background-size: cover;
+  background-position: 50% 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  overflow: hidden;
+  border-radius: 30vh;
+  transition: 6s;
+  transition-property: opacity;
+  opacity: 0;
+}
+#gold {
+  background-image: url("goldstill.png");
+  left: 50%;
+  top: 50%;
+  height: 30vh;
+  width: 30vh;
+}
+#silver {
+  background-image: url("silverstill.png");
+  height: 25vh;
+  width: 25vh;
+}
+#bronze {
+  background-image: url("bronzestill.png");
+  height: 20vh;
+  width: 20vh;
+}
+#sbteams {
+  width: calc(100% - 4vh);
+  height: 76vh;
+  bottom: 2vh;
+  overflow-y: scroll;
+  position: absolute;
+  left: 2vh;
+}
+.sbteam {
+  padding: 1vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 4vh;
+  width: calc(100% - 2vh);
+  overflow: hidden;
+  height: 4vh;
+  color: white;
+  border-radius: 1vh;
+  position: absolute;
+  left: 0;
+}
+#tools {
+  top: 8vh;
+  width: 38vh;
+  left: calc(50vw - 2vh);
+  height: 4vh;
+  transform: translate(-50%, 0%);
+  position: absolute;
+}
+#titlescore {
+  text-decoration: underline;
+  color: white;
+  font-size: 5vh;
+  position: absolute;
+  text-align: center;
+  top: 2vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.cn {
+  font-size: 4vh;
+}
+#combo {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  height: auto;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 4vh);
+}
+#desccgroups {
+  width: calc(100% - 4vh);
+  word-wrap: break-word;
+  bottom: 26vh;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  position: absolute;
+  color: white;
+  font-size: 2vh;
+}
+#cgroups {
+  width: 100%;
+  position: absolute;
+  height: 24vh;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.cgroup {
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  border-radius: 1vh;
+  height: 10vh;
+  background-image: url("halfblack.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  position: absolute;
+}
+#answer {
+  font-size: 2vh;
+}
+#question {
+  font-size: 5vh;
+}
+#qag {
+  word-wrap: break-word;
+  width: 100%;
+  height: 45vh;
+  top: 17vh;
+  color: white;
+  text-align: center;
+  left: 0;
+  position: absolute;
+}
+.questionval {
+  color: white;
+  font-size: 6vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+}
+.questionval2 {
+  color: white;
+  white-space: nowrap;
+  font-size: 3vh;
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  height: 3.5vh;
+  top: 14vh;
+  left: calc(50vw - 2vh);
+  transform: translate(-50%, 0%);
+}
+.toolbarbutton {
+  color: white;
+  text-align: center;
+  border-radius: 1vh;
+  width: 10vh;
+  top: 8vh;
+  height: 4vh;
+  font-size: 3.5vh;
+  outline: 1vh solid white;
+  position: absolute;
+}
+#toolbar {
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+}
+#speechtriangle {
+  width: 7vh;
+  height: 5vh;
+  position: absolute;
+  left: 18.5vh;
+  bottom: 19vh;
+}
+#ptdescription {
+  word-wrap: break-word;
+  width: calc(100% - 8vh);
+  left: 50%;
+  text-align: center;
+  color: white;
+  top: 49vh;
+  position: absolute;
+  transform: translate(-50%, 0%);
+  font-size: 2.5vh;
+}
+#pointvalue {
+  height: 10vh;
+  width: auto;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  position: absolute;
+  top: 30.5vh;
+  
+}
+#loadbar {
+  width: 0%;
+  border-radius: 10vh;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#text4speech {
+  width: 100%;
+  height: auto;
+  color: #ff8d34;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+#loadbaroutline {
+  width: calc(100% - 7vh);
+  height: 5vh;
+  outline: 1.5vh solid white;
+  border-radius: 3vh;
+  transform: translate(-50%, -100%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+#speech {
+  overflow: hidden;
+  padding: 1vh;
+  font-weight: bold;
+  width: calc(100vw - 31.5vh);
+  height: 19vh;
+  outline: 1.5vh solid #ff8d34;
+  font-size: 3vh;
+  color: #ff8d34;
+  left: 24vh;
+  bottom: 1.5vh;
+  border-radius: 1vh;
+  text-align: center;
+  word-wrap: break-word;
+  position: absolute;
+}
+#jetthead {
+  transform: translate(-50%, -50%);
+  left: 42.59%;
+  bottom: 2.1459vh;
+  height: 14.35vh;
+  width: 16.91vh;
+  position: absolute;
+}
+#jettbody {
+  width: 20vh;
+  height: 15.34vh;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#jett {
+  position: absolute;
+  bottom: 2vh;
+  width: 20vh;
+  height: auto;
+  left: 2vh;
+}
+.bg {
+  z-index: -1000;
+  pointer-events: none;
   width: 100vw;
   height: 100vh;
   left: 0;
@@ -259,1346 +581,1066 @@ user-select: none;
   position: fixed;
   background-size: cover;
   background-position: 50% 50%;
-  background-image: url("bgpreludeslide.png");
 }
-.bgred {
-  z-index: -2000;
+textarea {
+  font-family: fredokaone;
+}
+input {
+  font-family: fredokaone;
+}
+body {
+  font-family: frdokaone;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+#startbutton {
+  background-color: black;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  bottom: 1.5vh;
+  width: 10vh;
+  height: 5vh;
+  font-size: 4vh;
+  border-radius: 1vh;
+  outline: 1.5vh solid black;
+  text-align: center;
+  color: white;
+  position: absolute;
+}
+#individuals {
+  width: calc(100% - 6vh);
+  left: 3vh;
+  bottom: 3vh;
+  position: absolute;
+  height: 56vh;
+}
+#individnames {
+  border-radius: 1vh;
+  outline: 1vh solid black;
+  border: none;
+  resize: none;
+  background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  font-size: 3vh;
+}
+.remove {
+  width: 4vh;
+  height: 4vh;
+  position: absolute;
+  top: 5.5vh;
+  right: 2vh;
+}
+.names {
+  background-color: rgba(0, 0, 0, 0);
+  height: 11vh;
+  width: calc(100% - 8vh);
+  resize: none;
+  border: none;
+  bottom: 0;
+  text-align: center;
+  font-size: 2vh;
+  left: 0;
+  position: absolute;
+}
+.teamname {
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  font-size: 3.5vh;
+  height: 4vh;
+  width: calc(100% - 8vh);
+  text-align: center;
+}
+.group {
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  left: 1vh;
+  top: 1vh;
+  position: absolute;
+  width: calc(100% - 2vh);
+  height: 15vh;
+  border-radius: 1vh;
+  outline: 1vh solid black;
+}
+#actualgroups {
+  border-radius: 1vh;
+  width: 100%;
+  height: 52vh;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+#groups {
+  width: calc(100% - 4vh);
+  height: 58vh;
+  top: 39.5vh;
+  left: 2vh;
+  position: absolute;
+}
+#add {
+  width: 4vh;
+  height: 4vh;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  top: 0;
+  position: absolute;
+}
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+#logotop {
+  height: 15vh;
+  width: 30vh;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+#logocomponents {
+  word-wrap: break-word;
+  text-align: center;
+  height: auto;
+  color: black;
+  width: auto;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 70%;
+  position: absolute;
+}
+.groupbased {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 50%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 2vh;
+}
+.selected {
+  background-color: black;
+  color: white;
+}
+.individualbased {
+  position: absolute;
   height: 100%;
   left: 0;
   top: 0;
-  position: fixed;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-image: url("bgqasslide.png");
-}
-.score {
-  text-align: right;
-  position: absolute;
-  top: -3vh;
-  right: 1vh;
-  color: white;
-}
-#st {
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, 0%);
-  top: 0;
-  color: white;
-  font-family: archivoblack;
-}
-.teamscore {
-  width: 90%;
-  background-color: rgba(0, 0, 0, 0.5);
-  transform: translate(-50%, 0%);
-  left: 50%;
-  padding: 1vh;
-  font-size: 4vh;
-  border-radius: 1vh;
-  color: white;
-  position: absolute;
-}
-#space2 {
-  height: 5vh;
-  opacity: 0;
-  z-index: -2000;
-}
-#q {
-  position: relative;
-  width: 80vw;
-  word-wrap: break-word;
+  width: 50%;
   text-align: center;
-  left: 50%;
-  color: white;
-  transform: translate(-50%, 0%);
+  font-size: 2vh;
+  background-color: rgba(255, 255, 255, 0.8);
 }
-#answer {
-  width: 80vw;
-  height: 7.5vh;
-  text-align: center;
-  word-wrap: break-word;
-  position: absolute;
-  left: 50%;
-  color: white;
-  transform: translate(-50%, 0%);
-  overflow-y: scroll;
+.n {
+  transition: 1s opacity;
 }
-#questionspace {
-  top: 35%;
-  left: 50%;
-  width: 80%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-}
-#space {
-  margin-left: 50%;
-  width: 1px;
-  height: 1px;
-  top: 5vh;
-  position: relative;
-  background-color: red;
-}
-#middle {
-  position: absolute;
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-#graphic {
-  height: 10vh;
-  margin-left: 50%;
-  transform: translate(-50%, 0%);
-}
-  #loadbar {
-   width: 80%;
-   height: 5vh;
-   border-radius: 5vh;
-   left: 10%;
-   width: 0;
-   transition-property: width;
-   background-size: cover;
-   background-position: 50% 50%;
-  }
-  #end {
-   height: 5vh;
-   width: auto;
-   position: fixed;
-   left: 2.5vh;
-   z-index: 10000;
-   top: 2.5vh;
-  }
-  .next {
-   height: 5vh;
-   width: auto;
-   position: fixed;
-   right: 2.5vh;
-   z-index: 10000;
-   top: 2.5vh;
-  }
-  .wawe {
-   font-size: 5vh;
-   width: auto;
-   position: fixed;
-   left: 50%;
-   color: white;
-   box-sizing: border-box;
-   font-family: archivoblack;
-   transform: translate(-50%, 0%);
-   z-index: 10000;
-   top: 2.5vh;
-  }
-  #loadbaroutline {
-    width: 80%;
-    height: 5vh;
-    top: 2.5vh;
-    position: relative;
-    border-radius: 5vh;
-    outline: white solid 2vh;
-    margin-left: 50%;
-    transform: translate(-50%, 0%);
-  }
-  #info {
-    width: auto;
-    padding: 1vh;
-    word-wrap: break-word;
-  }
-  #infodiv {
-    font-size: 3vh;
-    outline: white solid 1vh;
-    box-sizing: border-box;
-    border-radius: 5vh;
-    margin-left: 50%;
-    position: relative;
-    width: 80%;
-    transform: translate(-50%, 0%);
-    text-align: center;
-    color: white;
-  }
-  .hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-  #teams2 {
-    height: 34.5%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    overflow-y: scroll;
-  }
-  #play {
-    transform: translate(-50%, 0%);
-    left: 50%;
-    bottom: 2vh;
-    height: 10vh;
-    width: 20vh;
-    font-size: 7vh;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    border-radius: 2vh;
-    text-align: center;
-    position: fixed;
-    z-index: 1000;
-  }
-  button {
-    border: 0;
-    outline: 0;
-    font-family: codec;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-  input {
-    font-family: codec;
-  }
-  textarea {
-    font-family: codec;
-  }
-  #prelude {
-    width: 100%:
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-  }
-  @font-face {
-    font-family: codec;
-    src: url("coolvetica.ttf");
-  }
-  @font-face {
-    font-family: archivoblack;
-    src: url("ArchivoBlack-Regular.ttf");
-  }
-  body {
-    font-family: codec;
-  }
-  .smalllabel {
-    font-size: 2vh;
-    position: absolute;
-    line-height: 2vh;
-  }
-  .plusminus {
+  #toggler {
     overflow: hidden;
-    width: 8vh;
-    height: 4vh;
-    text-align: center;
-    font-size: 3vh;
-    position: absolute;
-    top: 5vh;
-    border: 0;
-    outline: 0;
-    border-radius: 2vh;
-    left: 46vh;
-  }
-  #plus {
-    top: 0;
-    width: 50%;
-    height: 100%;
-    left: 0;
-    position: absolute;
-  }
-  #minus {
-    top: 0;
-    width: 50%;
-    height: 100%;
-    left: 50%;
-    position: absolute;
-  }
-  #prelude {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-  }
-  #questioncycle {
-    width: 5vh;
+    width: calc(100% - 7vh);
     height: 2.5vh;
-    text-align: center;
-    font-size: 3vh;
+    outline: 1.5vh solid black;
+    border-radius: 1vh;
     position: absolute;
-    top: 5vh;
-    border: 0;
-    outline: 0;
-    border-radius: 2vh;
-    left: 46vh;
+    left: 3.5vh;
+    top: 33.5vh;
   }
-  #ttitle {
-    transform: translate(-50%, 0%);
-    left: 50vw;
-    position: absolute;
-    top: 1vh;
-    margin: 0;
-    padding: 0;
-    font-size: 5vh;
-  }
-  .label {
-    padding: 0;
-    margin: 0;
-    line-height: 4vh;
-    position: absolute;
-    word-wrap: break-word;
-  }
-  #menu {
-    position: fixed;
-    width: 300%;
-    height: 300%;
-    top: -300%;
-    right: -300%;
-    transition: 1.5s;
-    transform: translate(0%, 0%);
-    background-image: url("settingsbackground.png");
-    background-size: cover;
-    background-position: 0% 100%;
-    z-index: 1999;
-  }
-  #settings {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2000;
-    height: 10vh;
-    width: 10vh;
-  }
-  .remove {
-    width: 9vh;
-    height: 3vh;
-    font-size: 1.5vh;
-    border: 0;
-    outline: 0;
-    border-radius: 0.5vh;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-  }
-  .tss {
-    left: 0.5vh;
-    height: 3vh;
-    transform: translate(0%, -50%);
-    top: 50%;
-    width: 3vh;
-    border-radius: 3vh;
-    background-color: white;
-    position: absolute;
-    transition: 0.5s;
-    transition-property: left;
-  }
-  audio {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .ts {
-    transition: 0.5s;
-    position: absolute;
-    height: 4vh;
-    width: 8vh;
-    border-radius: 4vh;
-    background-color: #dddddd;
-    z-index: 2000;
-    transition-property: background-color;
-  }
-  #menuoptions {
-    font-size: 4vh;
-    color: white;
-    z-index: 2000;
-    position: absolute;
-    bottom: 100%;
-    height: 100%;
-    transition: 1.5s;
-  }
-  .artitle {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    font-size: 4vh;
-    display: block;
-    overflow: hidden;
-    resize: none;
-    width: 100%;
-    border-radius: 0;
-    outline: 0;
-    border: 0;
-    height: 10vh;
-    color: white;
-    background-color: transparent;
-  }
-  .autoresizing {
-    margin-top: 2vh;
-    text-align: center;
-    padding: 0;
-    font-size: 3vh;
-    display: block;
-    overflow: hidden;
-    resize: none;
-    width: 100%;
-    border-radius: 0;
-    outline: 0;
-    border: 0;
-    height: 5vh;
-    color: white;
-    background-color: transparent;
-  }
-  #backgroundDiv {
-    width: 100%;
-    height: 100%;
+  #titleslide {
     background-size: cover;
     background-position: 50% 50%;
+    backdrop-filter: brightness(150%);
+    overflow: hidden;
+    width: calc(100% - 7vh);
+    height: 25vh;
+    color: white;
+    outline: 1.5vh solid black;
+    position: absolute;
+    left: 3.5vh;
+    top: 3.5vh;
+    border-radius: 1vh;
+  }
+  #pregame {
+    width: 100%;
+    height: 100%;
     position: fixed;
-    z-index: -2000;
-    top: 0;
     left: 0;
-  }
-  #teams {
-    position: absolute;
-    width: 100%;
-  }
-  .team {
-    background-color: rgba(0, 0, 0, 0.5);
-    height: auto;
-    width: 30vh;
-    background-size: cover;
-    background-position: 50% 50%;
-    position: absolute;
-    overflow-y: hidden;
-    border-radius: 1vh;
-    color:white;
-    text-align:center;
-  }
-  .tndisplay {
-    font-size: 3vh;
-  }
-  .ndisplay {
-    font-size: 5vh;
-  }
-  #addteam {
-    width: 40%;
-    left: 50%;
-    width: 20vh;
-    height: 5vh;
-    font-size: 3vh;
-    border-radius: 2vh;
-    transform: translate(-50%, 0%);
-    position: absolute;
-  }
-  #logo2 {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-  }
-  #logo {
-    border-radius: 1vh;
-    overflow-x: hidden;
-    width: 80%;
-    height: 20%;
-    background-size: cover;
-    background-position: 50% 50%;
-    position: absolute;
-    background-image: url("sdbg.png");
-    top: 10vw;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    top: 0;
   }
 </style>
 <script>
-  colors = ["#2f5cf0", "#2f94f0", "#81e6e9", "#15f99b", "#42de3e", "#9dde3e", "#d5de3e", "#efc634", "#efa234", "#ff6a02", "#ff4b02", "#ff020e", "#ff4a00", "#283ab8", "#488d2f", "#9946b9", "#123c42", "#91c0c6", "#ff7b00", "#96558d"];
-  coordcolor = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 2500, 3000, 4000, 5000, 6000, 7000, 8000, 9000];
-  pucolors = ["#f5a616", "#692cab", "#f13334"];
-  pucoordcolor = ["infinity", "steal", "double"];
-  totalTeams = 1;
-  window.addEventListener("resize", renderel);
-  renderel();
-  endlessmode = false;
-  universalquestions = true;
-  penalization = true;
-  document.getElementById("universalquestions").style.backgroundColor = "#8be283";
-  document.getElementById("universalquestions".concat("slider")).style.left = 4.5 + "vh";
-  document.getElementById("penalization").style.backgroundColor = "#8be283";
-  document.getElementById("penalization".concat("slider")).style.left = 4.5 + "vh";
-  getSession();
-  calculate();
-  document.getElementById("questioncycle").addEventListener("keydown", calculate);
-  document.getElementById("questioncycle").addEventListener("paste", calculate);
-  for (i = 1; i <= 14; i++) {
-    preload_image("infinityframe".concat(i.toString()));
+  if (sessionStorage.getItem("setToUse")) {
+    current = sessionStorage.getItem("setToUse");
+    sessionStorage.removeItem("setToUse");
+  } else {
+    window.location.href = "urlerror.html";
   }
-  for (i = 1; i <= 25; i++) {
-    preload_image("doubleframe".concat(i.toString()));
+  { //load images
+  imgToLoad = ["goldstill.png", "silverstill.png", "bronzestill.png", "goldmoving.gif", "silvermoving.gif", "bronzemoving.gif"];
+  ptvalues = [2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+  game = "sd";
+  powerplayanimlength = ["doubleanim", "spliceanim", "stealanim", "eliminateanim"];
+  doubleanim = 48;
+  spliceanim = 48;
+  stealanim = 48;
+  eliminateanim = 48;
+  for (i = 0; i < ptvalues.length; i++) {
+    imgToLoad.push(game.concat(ptvalues[i].toString()));
   }
-  for (i = 1; i <= 34; i++) {
-    preload_image("stealframe".concat(i.toString()));
-  }
-  for (i = 1; i <= 15; i++) {
-    preload_image("blackframe".concat(i.toString()));
-  }
-  for (i = 1; i <= 2048; i*=2) {
-    preload_image(i.toString());
-  }
-  preload_image("2500");
-  preload_image("2500sd");
-  for (i = 3000; i <= 9000; i+=1000) {
-    preload_image(i.toString());
-  }
-  for (i = 3000; i <= 10000; i+=1000) {
-    preload_image(i.toString().concat("sd"));
-  }
-  function preload_image(im_url) {
-  img = document.createElement("img");
-  img.width = 300;
-  img.height = 300;
-  img.classList.add("hidden");
-  img.src = im_url.concat(".png");
-  }
-  function calculate() {
-    setTimeout(function() {
-    value = parseInt(document.getElementById("questioncycle").value);
-    medium = value * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
-    high = parseInt(medium + 2.5);
-    low = parseInt(medium - 2.5);
-    if (low < 1) { low = 1 }
-    document.getElementsByClassName("smalllabel")[1].innerHTML = "Estimated Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
-    }, 50);
-  }
-  max = 10000;
-  hap3 = false;
-  powerplay = false;
-  function next() {
-    if (cq2 == 1) {
-      document.getElementById("end").classList.remove("hidden");
+  for (i = 0; i < powerplayanimlength.length; i++) {
+    for (a = 1; a <= window[powerplayanimlength[i]].length; a++) {
+      imgToLoad.push(powerplayanimlength[i] + "f" + a.toString());
     }
-    if (endlessmode == false && (cq2 == (parseInt(localStorage.getItem(current.concat("qat"))) * questioncycle))) {
-      needtoend = true;
+  }
+  for (i = 0; i < imgToLoad.length; i++) {
+    Img = document.createElement("img");
+    Img.classList.add("loadimages");
+    Img.setAttribute("rel", "preload");
+    Img.src = imgToLoad[i] + ".png";
+  }
+  }
+  { //resize function
+  window.addEventListener("resize", resizee);
+  function resizee() {
+    for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+      document.getElementsByClassName("group")[i].style.top = (i * window.innerHeight * 0.19) + window.innerHeight * 0.01;
     }
-    document.getElementById("questionslide").classList.add("hidden");
-    document.getElementById("scoreboard").classList.remove("hidden");
-    if (hap3 == false) {
-      for (i = 1; i <= totalTeams; i++) {
-        newDiv = document.createElement("div");
-        newDiv.id = "ts".concat(i.toString());
-        newDiv.classList.add("teamscore");
-        newDiv.innerHTML = window["teamName".concat(i.toString())];
-        document.getElementById("scoreboard").appendChild(newDiv);
-        newP = document.createElement("p");
-        newP.id = "score".concat(i.toString());
-        newP.classList.add("score");
-        newP.innerHTML = "0";
-        newDiv.appendChild(newP);
-      }
+    width = window.innerWidth;
+    height = window.innerHeight;
+    ratio = (height / width) * 0.5;
+    margin = height * 0.02;
+    nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
+    for (i = 0; i < document.getElementsByClassName("cgroup").length; i++) {
+      widthVal = ((width - margin) - (margin * nopr)) / nopr;
+      document.getElementsByClassName("cgroup")[i].style.width = widthVal;
+      remainder = (i + 1)%nopr;
+      if (remainder == 0) { remainder = nopr; }
+      document.getElementsByClassName("cgroup")[i].style.left = margin + ((remainder - 1) * (margin + widthVal));
+      level = ((i + 1) - remainder) / nopr;
+      document.getElementsByClassName("cgroup")[i].style.top = (level * (margin + window.innerHeight * 0.1));
     }
-    hap3 = true;
-    if (powerplay != false) {
-    if (powerplay == "random") {
-    randomNum = Math.floor(Math.random() * 3) + 1;
-    switch (randomNum) {
-      case 1:
-        powerplay = "infinity";
-        break;
-      case 2:
-        powerplay = "steal";
-        break;
-      case 3:
-        powerplay = "double";
-        break;
-    }
-    }
-    willanimate = false;
-    willevaporate = false;
-    willsteal = false;
-    if (powerplay == "double") {
-      for (i = 1; i <= totalTeams; i++) {
-        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-        document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) * 2;
-        willanimate = true;
-      }
-      }
-    } else if (powerplay == "infinity") {
-      atd = totalTeams;
-      for (i = 1; i <= totalTeams; i++) {
-        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-          atd-=1;
-          willanimate = true;
-          willevaporate = true;
-        }
-      }
-      newatd = Math.floor(atd / 2);
-      if (atd % 2 != 0) {
-        newatd+=1;
-      }
-      if (willevaporate == true) {
-        for (i = 1; i <= newatd; i++) {
-          randomNum = Math.floor(Math.random() * totalTeams) + 1;
-          if ((window["t".concat(randomNum.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(randomNum.toString(), "bg")] == 2 && penalization != true)) {
-            i-=1;
-          } else if (document.getElementById("score".concat(randomNum.toString())).innerHTML == "o") {
-            i-=1;
-          } else {
-            document.getElementById("score".concat(randomNum.toString())).innerHTML = "o";
-          }
-        }
-      }
-      for (i = 1; i <= totalTeams; i++) {
-        if (document.getElementById("score".concat(i.toString())).innerHTML == "o") {
-          document.getElementById("score".concat(i.toString())).innerHTML = "0";
-        }
-      }
+    if (ratio > 0.5) {
+      document.getElementById("gold").style.width = "20vh";
+      document.getElementById("gold").style.height = "20vh";
+      document.getElementById("silver").style.width = "15vh";
+      document.getElementById("silver").style.height = "15vh";
+      document.getElementById("bronze").style.width = "10vh";
+      document.getElementById("bronze").style.height = "10vh";
+      document.getElementById("silver").style.top = "30vh";
+      document.getElementById("bronze").style.top = "67.5vh";
+      document.getElementById("silver").style.left = "50%";
+      document.getElementById("bronze").style.left = "50%";
     } else {
-      for (i = 1; i <= totalTeams; i++) {
-        if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-          willanimate = true;
-          willsteal = true;
-        }
-      }
-      if (willsteal == true) {
-        currentbiggest = -1;
-        cbnum = 0;
-        for (i = 1; i <= totalTeams; i++) {
-          if (parseInt(document.getElementById("score".concat(i.toString())).innerHTML) > currentbiggest && ((window["t".concat(i.toString(), "bg")] != 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] != 2 && penalization != true))) {
-            currentbiggest = parseInt(document.getElementById("score".concat(i.toString())).innerHTML);
-            cbnum = i.toString();
-          }
-        }
-        document.getElementById("score".concat(cbnum)).innerHTML = "0";
-        for (i = 1; i <= totalTeams; i++) {
-          if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-            document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + currentbiggest;
-          }
-        }
-      }
-    }
-    if (willanimate == true) {
-      document.getElementById(powerplay.concat("audio")).play();
-      animate(powerplay) 
-    }
-    } else {
-    for (i = 1; i <= totalTeams; i++) {
-      if (suddendeath == true && (window["t".concat(i.toString(), "bg")] == 2 && penalization == true)) {
-        document.getElementById("score".concat(i.toString())).innerHTML = "0";
-      }
-      if ((window["t".concat(i.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(i.toString(), "bg")] == 2 && penalization != true)) {
-        document.getElementById("score".concat(i.toString())).innerHTML = parseInt(document.getElementById("score".concat(i.toString())).innerHTML) + nxtpts;
-      }
-    }
-    }
-    renderscoreboardteams();
-    document.getElementById("bgaudio").pause();
-    if (needtoend == true) {
-      end();
+      document.getElementById("gold").style.width = "30vh";
+      document.getElementById("gold").style.height = "30vh";
+      document.getElementById("silver").style.width = "25vh";
+      document.getElementById("silver").style.height = "25vh";
+      document.getElementById("bronze").style.width = "20vh";
+      document.getElementById("bronze").style.height = "20vh";
+      document.getElementById("silver").style.left = (window.innerWidth * 0.5) - window.innerHeight * 0.325;
+      document.getElementById("bronze").style.left = (window.innerWidth * 0.5) + window.innerHeight * 0.3;
+      document.getElementById("silver").style.top = "50%";
+      document.getElementById("bronze").style.top = "50%";
     }
   }
-  needtoend = false;
-  window.addEventListener("resize", renderscoreboardteams);
-  function end() {
-    for (i = 1; i <= totalTeams; i++) {
-      for (a = 1; a <= totalTeams; a++) {
-        if (parseInt(document.getElementById("score".concat(a.toString())).innerHTML) > parseInt(document.getElementById("score".concat(window["place".concat(i.toString())].toString())).innerHTML)) {
-          cantakespot = true;
-          for (b = 1; b <= totalTeams; b++) {
-            if (window["place".concat(b.toString())] == a) {
-              cantakespot = false;
-            }
-          }
-          if (cantakespot == true) {
-            window["place".concat(i.toString())] = a;
-          }
-        }
-        //alert(window["place".concat(i.toString())]);
+  }
+  resizee();
+  document.getElementById("nameofset").innerHTML = localStorage.getItem(current.concat("n"));
+  document.getElementById("titleslide").style.backgroundImage = "url('".concat(localStorage.getItem(current.concat("p")), ".png')");
+  ar = false;
+  document.addEventListener('keydown', (event) => {
+  if (event.key == "ArrowRight" && ar == false) {
+    for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
+      if (document.getElementsByClassName("screen")[i].classList.contains("hidden")) {} else {
+        screenOn = document.getElementsByClassName("screen")[i].id;
       }
     }
-    document.getElementById("postgame").classList.remove("hidden");
-    document.getElementById("drumroll").play();
-    irisanimation();
-    document.getElementById("bgaudio").pause();
-    document.getElementById("questionslide").classList.add("hidden");
-    document.getElementById("scoreboard").classList.remove("hidden");
-    document.getElementById("prelude").classList.remove("hidden");
-    cq3 = -1;
-    document.getElementById("goldtext").innerHTML = window["teamName".concat(window["place1"].toString())];
-    document.getElementById("silvertext").innerHTML = window["teamName".concat(window["place2"].toString())];
-    document.getElementById("skip").remove();
-    document.getElementById("w1").remove();
-    document.getElementById("w2").remove();
-    document.getElementById("n1").remove();
-    document.getElementById("n2").remove();
-    document.getElementById("end").remove();
-    if (window["place3"]) {
-      document.getElementById("bronzetext").innerHTML = window["teamName".concat(window["place3"].toString())];
-    } else {
-      document.getElementById("medals").src = "IMG_0023.png";
-      document.getElementById("shine").src = "IMG_0024.gif";
+    if (screenOn == "prelude") {
+      skip();
+    }
+    if (screenOn == "questionsslide") {
+      scoreboardSlide();
+    }
+    if (screenOn == "scoreboard") {
+      preludeSlide();
     }
   }
-  function irisanimation() {
-    currentframe = 1;
-    for (i = 2; i <= 15; i++) {
-      setTimeout(function() {
-        currentframe++;
-        document.getElementById("iris").src = "blackframe".concat(currentframe.toString(), ".png");
-        if (currentframe == 15) {
-          document.getElementById("iris").classList.add("hidden");
-        }
-      }, ((i - 2) * 71.42) + 5280);
-    }
-  }
-  function renderscoreboardteams() {
-    for (i = 1; i <= totalTeams; i++) {
-      window["place".concat(i.toString())] = 0;
-    }
-    for (i = 1; i <= totalTeams; i++) {
-      for (a = 1; a <= totalTeams; a++) {
-        if (parseInt(document.getElementById("score".concat(a.toString())).innerHTML) > parseInt(document.getElementById("score".concat(window["place".concat(i.toString())].toString())).innerHTML)) {
-          cantakespot = true;
-          for (b = 1; b <= totalTeams; b++) {
-            if (window["place".concat(b.toString())] == a) {
-              cantakespot = false;
-            }
-          }
-          if (cantakespot == true) {
-            window["place".concat(i.toString())] = a;
-          }
-        }
-        //alert(window["place".concat(i.toString())]);
-      }
-    }
-    for (i = 1; i <= totalTeams; i++) {
-      document.getElementById("ts".concat(window["place".concat(i.toString())].toString())).style.top = 12 + (8 * (i - 1)) + "vh";
-    }
-  }
-  function plus()  {
-    if (max == 9000) {
-      max = 10000;
-      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 10,000";
-    } else if (max == 2500) {
-      max = 3000;
-      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 3,000";
-    } else if (max != 10000) {
-      max += 1000;
-      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
-    }
-    if (max == 10000) {
-      document.getElementById("plus").src = "plusdisabled.png";
-    } else {
-      document.getElementById("plus").src = "plus.png";
-    }
-    if (max == 2500) {
-      document.getElementById("minus").src = "minusdisabled.png";
-    } else {
-      document.getElementById("minus").src = "minus.png";
-    }
-  }
-  function minus() {
-    if (max == 3000) {
-      max = 2500;
-      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: 2,500";
-    } else if (max != 2500) {
-      max -= 1000;
-      document.getElementById("maxpointslabel").innerHTML = "Maximum Amount of Points: ".concat(max.toString().substring(0, 1), ",000");
-    }
-    if (max == 10000) {
-      document.getElementById("plus").src = "plusdisabled.png";
-    } else {
-      document.getElementById("plus").src = "plus.png";
-    }
-    if (max == 2500) {
-      document.getElementById("minus").src = "minusdisabled.png";
-    } else {
-      document.getElementById("minus").src = "minus.png";
-    }
-  }
-  
-  function getSession() {
-    if (sessionStorage.getItem("whichclicked2")) {
-    if (sessionStorage.getItem("whichclicked2") == "0") {
-      window.location.href = "sets.html";
-    }
-    current = sessionStorage.getItem("whichclicked2");
-    sessionStorage.setItem("whichclicked2", "0");
-    document.getElementById("backgroundDiv").style.backgroundImage = "url('p".concat(localStorage.getItem(current.concat("p")), ".png')");
-    } else {
-      window.location.href = "sets.html";
-    }
-  }
-  function cyclethru() {
-    if (event.target.tagName == "DIV") {
-      tsguy = parseInt(event.target.id.substring(4));
-    } else {
-      tsguy = "";
-      for (i = 0; i < event.target.id.length; i++) {
-        if (parseInt(event.target.id.substring(i, i + 1)) > 0) {
-          tsguy = tsguy.concat(event.target.id.substring(i, i + 1));
-        } else {
-          break;
-        }
-      }
-      tsguy = parseInt(tsguy);
-    }
-    teamel = document.getElementById("team".concat(tsguy.toString()));
-    if (window["t".concat(tsguy.toString(), "bg")] == 1 && penalization == true) {
-      window["t".concat(tsguy.toString(), "bg")] = 2;
-      teamel.style.backgroundImage = "url('incorrect.png')";
-    } else if (window["t".concat(tsguy.toString(), "bg")] == 2) {
-      window["t".concat(tsguy.toString(), "bg")] = 0;
-      teamel.style.backgroundImage = "url('neutral.png')";
-    } else {
-      /*for (a = 1; a <= totalTeams; a++) {
-        if ((window["t".concat(a.toString(), "bg")] == 1 && penalization == true) || (window["t".concat(a.toString(), "bg")] == 2 && penalization == false) && a != tsguy) {
-          window["t".concat(a.toString(), "bg")] = 0;
-          document.getElementById("team".concat(a.toString())).style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        }
-}*/
-      if (penalization == true) {
-      window["t".concat(tsguy.toString(), "bg")] = 1;
-      } else { window["t".concat(tsguy.toString(), "bg")] = 2; }
-      teamel.style.backgroundImage = "url('correct.png')";
-    }
-  }
-  nxtpts = 0.5;
-  function preludeQuestionSlide() {
-    if (endlessmode == false) {
-      for (i = 0; i <= 1; i++) {
-        document.getElementsByClassName("wawe")[i].innerHTML = (cq2 + 1).toString().concat("/", (questioncycle * parseInt(localStorage.getItem(current.concat("qat")))).toString());
-      }
-    }
-    document.getElementById("bgaudio").play();
-    document.getElementById("scoreboard").classList.add("hidden");
-    powerplay = false;
-    document.getElementById("prelude").classList.remove("hidden");
-    if (nxtpts < 2048) {
-      nxtpts = nxtpts * 2;
-      suddendeath = false;
-    } else if (nxtpts == max) {
-      nxtpts = 1;
-      suddendeath = false;
-    } else {
-      suddendeath = false;
-      if (nxtpts == 2048) {
-        nxtpts = 2500;
-      } else if (nxtpts == 2500) {
-        nxtpts = 3000;
+  });
+  { /*functions for pregame slide*/ 
+  dgr = true;
+  function toggletype() {
+    if (!(event.target.classList.contains("selected"))) {
+      if (document.getElementsByClassName("groupbased")[0] == event.target) {
+        document.getElementsByClassName("groupbased")[0].classList.add("selected");
+        document.getElementsByClassName("individualbased")[0].style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+        document.getElementsByClassName("individualbased")[0].style.color = "black";
+        document.getElementById("groups").classList.remove("hidden");
+        document.getElementById("individuals").classList.add("hidden");
+        dgr = true;
       } else {
-        nxtpts += 1000;
-      }
-      if (nxtpts == max) {
-        suddendeath = true;
-      }
-    }
-    if (suddendeath == true || nxtpts < 2500) {
-      powerplay = false;
-    } else {
-      randomNum = Math.floor(Math.random() * 5) + 1;
-      powerplay = false;
-      if (randomNum == 1) {
-        randomNum = Math.floor(Math.random() * 4) + 1;
-        switch (randomNum) {
-          case 1: 
-            powerplay = "infinity";
-            break;
-          case 2:
-            powerplay = "double";
-            break;
-          case 3:
-            powerplay = "steal";
-            break;
-          case 4:
-            powerplay = "random";
-            break;
-        }
+        dgr = false;
+        document.getElementsByClassName("individualbased")[0].style.backgroundColor = "black";
+        document.getElementsByClassName("individualbased")[0].style.color = "white";
+        document.getElementsByClassName("groupbased")[0].classList.remove("selected");
+        document.getElementById("groups").classList.add("hidden");
+        document.getElementById("individuals").classList.remove("hidden");
       }
     }
-    if (powerplay != false) {
-      document.getElementById("graphic").src = powerplay.concat(".png");
-      document.getElementById("info").innerHTML = ppt[randomNum - 1];
-    } else if (suddendeath == true) {
-      document.getElementById("graphic").src = nxtpts.toString().concat("sd.png");
-      document.getElementById("info").innerHTML = "This question is worth ".concat(nxtpts.toString(), " points! But don't mess up, or you'll lose everything!");
-    } else {
-      document.getElementById("graphic").src = nxtpts.toString().concat(".png");
-      if (nxtpts != 1) {
-      document.getElementById("info").innerHTML = "This question is worth ".concat(nxtpts.toString(), " points!");
-      } else {
-      document.getElementById("info").innerHTML = "This question is worth ".concat(nxtpts.toString(), " point!");
-      }
-    }
-    
-    loadingScreen();
   }
-  function reveal() {
-    document.getElementById("answer").innerHTML = localStorage.getItem(current.concat("a", cq.toString()));
-  }
-  function animate(typeofanim) {
-    document.getElementById("animations").classList.remove("hidden");
-    if (typeofanim == "infinity") {
-      document.getElementById("animimage").src = "infinityframe1.png";
-      setTimeout(function() {
-        nxtone = 1;
-         for (i = 2; i <= 14; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "infinityframe".concat(nxtone.toString(), ".png");
-             if (nxtone == 12) {
-               document.getElementById("transbg").style.opacity = 0;
-             }
-           }, (i - 1) * 50);
-         }
-      }, 1000);
-      setTimeout(function() {
-        document.getElementById("animimage").style.opacity = 0;
-        setTimeout(function() {
-        document.getElementById("animations").classList.add("hidden");
-        document.getElementById("animimage").offsetHeight;
-        document.getElementById("animimage").style.opacity = 1;
-        document.getElementById("transbg").style.opacity = 1;
-      }, 2000);
-      }, 3100);
-    } else if (typeofanim == "steal") {
-      document.getElementById("animimage").src = "stealframe1.png";
-      setTimeout(function() {
-        nxtone = 1;
-         for (i = 2; i <= 4; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
-           }, (i - 1) * 25);
-         }
-      }, 1000);
-      setTimeout(function() {
-        nxtone = 4;
-         for (i = 5; i <= 7; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
-           }, (i - 4) * 25);
-         }
-      }, 1575);
-      setTimeout(function() {
-        nxtone = 7;
-         for (i = 8; i <= 10; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
-             if (nxtone == 10) {
-               document.getElementById("transbg").style.opacity = 0;
-             }
-           }, (i - 7) * 25);
-         }
-      }, 2150);
-      setTimeout(function() {
-         nxtone = 10;
-         for (i = 11; i <= 34; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "stealframe".concat(nxtone.toString(), ".png");
-           }, (i - 10) * 25);
-         }
-      }, 2350);
-      setTimeout(function() {
-        document.getElementById("animations").classList.add("hidden");
-        document.getElementById("transbg").style.opacity = 1;
-      }, 2875);
-    } else {
-      document.getElementById("animimage").src = "doubleframe1.png";
-      setTimeout(function() {
-        nxtone = 1;
-         for (i = 2; i <= 5; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "doubleframe".concat(nxtone.toString(), ".png");
-           }, (i - 1) * 100);
-         }
-      }, 1000);
-      setTimeout(function() {
-        nxtone = 5;
-         for (i = 6; i <= 17; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "doubleframe".concat(nxtone.toString(), ".png");
-             if (nxtone == 17) {
-               document.getElementById("transbg").style.opacity = 0;
-             }
-           }, (i - 5) * 100);
-         }
-      }, 1900);
-      setTimeout(function() {
-        nxtone = 17;
-         for (i = 18; i <= 25; i++) {
-           setTimeout(function() {
-             nxtone++;
-             document.getElementById("animimage").src = "doubleframe".concat(nxtone.toString(), ".png");
-           }, (i - 17) * 100);
-         }
-      }, 3600);
-      setTimeout(function() {
-        document.getElementById("animations").classList.add("hidden");
-        document.getElementById("transbg").style.opacity = 1;
-      }, 4700);
-    }
-  }
-  skipthis = false;
-  function loadingScreen() {
-    document.getElementById("loadbar").style.transition = 0 + "s";
-    if (suddendeath == true) {
-      document.getElementById("loadbar").style.backgroundColor = "#f43f3f";
-      document.getElementById("loadbar").style.backgroundImage = "none";
-    } else if (powerplay != false) {
-      if (powerplay != "random") {
-        document.getElementById("loadbar").style.backgroundColor = pucolors[pucoordcolor.indexOf(powerplay)];
-        document.getElementById("loadbar").style.backgroundImage = "none";
-      } else {
-        document.getElementById("loadbar").style.backgroundImage = "url('randomcolors.png')";
-      }
-    } else {
-      document.getElementById("loadbar").style.backgroundColor = colors[coordcolor.indexOf(nxtpts)];
-      document.getElementById("loadbar").style.backgroundImage = "none";
-    }
-    loadbar.offsetHeight;
-    document.getElementById("loadbar").style.transition = 5 + "s";
-    document.getElementById("loadbar").style.width = 80 + "vw";
-    setTimeout(function(wiwio) {
-      if (cq3 == wiwio) {
-      cq3++;
-      document.getElementById("prelude").classList.add("hidden");
-      document.getElementById("loadbar").style.transition = 0 + "s";
-      document.getElementById("loadbar").style.width = 0;
-      switchToQuestionSlide();
-      } 
-    }, 5000, cq3);
-  }
-  cq = 0;
-  cq2 = 0;
-  ppt = ["Eliminate half of the other teams!", "Double your score!", "Steal all of the team in first place's points!", "A random power play is in effect!"];
-  hap2 = false;
-  function switchToQuestionSlide() {
-    cq2++;
-    document.getElementById("answer").innerHTML = "Click here to reveal the answer (after everyone has answered)";
-    if (hap2 == false) {
-    for (i = 1; i <= totalTeams; i++) {
-      newDiv = document.createElement("div");
-      newDiv.classList.add("team");
-      newDiv.id = "team".concat(i.toString());
-      newDiv.setAttribute("onclick", "cyclethru()");
-      /*newBr = document.createElement("br");
-      newDiv.appendChild(newBr);*/
-      newSpan = document.createElement("span");
-      newSpan.id = i.toString().concat("tndisplay");
-      newSpan.classList.add("tndisplay");
-      newSpan.innerHTML = window["teamName".concat(i.toString())];
-      newDiv.appendChild(newSpan);
-      newBr = document.createElement("br");
-      newBr.id = i.toString().concat("brurhrhrj");
-      newDiv.appendChild(newBr)
-      newSpan = document.createElement("span");
-      newSpan.id = i.toString().concat("ndisplay");
-      newSpan.classList.add("ndisplay");
-      newDiv.appendChild(newSpan);
-      document.getElementById("teams2").appendChild(newDiv);
-    }
-    }
-    for (i = 1; i <= totalTeams; i++) {
-      window["t".concat(i.toString(), "bg")] = 0;
-      document.getElementById("team".concat(i.toString())).style.backgroundImage = "url('neutral.png')";
-    }
-    for (i = 1; i <= totalTeams; i++) {
-      if (window["currentname".concat(i.toString())] != window["non".concat(i.toString())]) {
-      window["currentname".concat(i.toString())] = window["currentname".concat(i.toString())] + 1;
-      } else {
-      window["currentname".concat(i.toString())] = window["currentname".concat(i.toString())] = 1;
-      }
-      document.getElementById(i.toString().concat("ndisplay")).innerHTML = window["t".concat(i.toString(), "n", window["currentname".concat(i.toString())].toString())];
-    }
-    hap2 = true;
-    if (cq2 > parseInt(localStorage.getItem(current.concat("qat")))) {
-    cq = 1;
-    } else {
-    cq++;
-    }
-    document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString()));
-    document.getElementById("questionslide").classList.remove("hidden");
-    //document.getElementById("q").innerHTML = localStorage.getItem(current.concat("q", cq.toString());
-    renderel();
-  }
-  cq3 = 0;
-  function skip() {
-    cq3++;
-    document.getElementById("prelude").classList.add("hidden");
-    document.getElementById("loadbar").style.transition = 0 + "s";
-    document.getElementById("loadbar").style.width = 0;
-    switchToQuestionSlide()
-  }
-  function onoff() {
-    happened = false;
-    
-    for (i = 0; i < event.target.id.length; i++) {
-      if (event.target.id.substring(i, i + 6) == "slider") {
-        wslider = event.target.id.substring(0, event.target.id.length - 6);
-        happened = true;
-      }
-    }
-    if (happened == false) { wslider = event.target.id; }
-    if (window[wslider] == false) {
-      window[wslider] = true;
-      document.getElementById(wslider).style.backgroundColor = "#8be283";
-      document.getElementById(wslider.concat("slider")).style.left = 4.5 + "vh";
-    } else {
-      window[wslider] = false;
-      document.getElementById(wslider).style.backgroundColor = "#dddddd";
-      document.getElementById(wslider.concat("slider")).style.left = 0.5 + "vh";
-    }
-    renderel();
-  }
-  function play() {
-    works = true;
-    for (i = 1; i < totalTeams + 1; i++) {
-      if (document.getElementById("art".concat(i.toString())).value == "") {
-        message = "One or More Team Names Missing";
-        works = false;
-      } else if (document.getElementById("ar".concat(i.toString())).value == "") {
-        message = "One or More Teams Missing Members";
-        works = false;
-      }
-    }
-    if (works == false) {
-    alert(message);
-    } else if (totalTeams < 2) {
-    alert("At Least Two Teams Required to Play");
-    } else if (parseInt(document.getElementById("questioncycle").value) < 1) {
-    alert("You Need a Question Cycle Value of At Least 1");
-    } else if (parseFloat(document.getElementById("questioncycle").value) % 1 != 0) {
-    alert("You Need a Question Cycle Value that is a Whole Number");
-    } else if (parseInt(document.getElementById("questioncycle").value) > 100) {
-    alert("You Need a Question Cycle Value that is less than or equal to 100");
-    } else {
-    //remember current
-    questioncycle = parseInt(document.getElementById("questioncycle").value);
-    not = document.getElementsByClassName("team").length;
-    for (i = 1; i < totalTeams + 1; i++) {
-      window["teamName".concat(i.toString())] = document.getElementById("art".concat(i.toString())).value;
-      txt = document.getElementById("ar".concat(i.toString())).value;
-      currentword = 1;
-      for (a = 0; a < txt.length; a++) {
-        if (txt.substring(a, a + 1) == "\n") {
-          currentword++;
-        } else if (txt.substring(a - 1, a) == "\n" || a == 0) {
-          window["t".concat(i.toString(), "n", currentword.toString())] = txt.substring(a, a + 1);
-        } else {
-          window["t".concat(i.toString(), "n", currentword.toString())] = window["t".concat(i.toString(), "n", currentword.toString())].concat(txt.substring(a, a + 1));
-        }
-      }
-      window["non".concat(i.toString())] = currentword;
-      window["currentname".concat(i.toString())] = 0;
-    }
-    document.getElementById("pregame").remove();
-    haP = true;
-    preludeQuestionSlide();
-  }
-  }
-  haP = false;
-  /*function addteam(vp) {
+  numgroups = 1;
+  function addgroup() {
+    if (numgroups != 10) {
+    numgroups++;
     newDiv = document.createElement("div");
-    newDiv.id = "team".concat(vp.toString());
-    newDiv.classList.add("team");
-    document.getElementById("teams2").appendChild(newDiv);
-    newH1 = document.createElement("h1");
-    newH1.classList.add("teamtitle");
-    newH1.innerHTML = ;
-    renderel();
-  }*/
-  function addteam() {
-    if (totalTeams != 25) {
-    totalTeams += 1;
-    newDiv = document.createElement("div");
-    newDiv.id = "team".concat(totalTeams.toString());
-    newDiv.classList.add("team");
-    document.getElementById("teams").appendChild(newDiv);
+    newDiv.classList.add("group");
+    document.getElementById("actualgroups").appendChild(newDiv);
+    newInput = document.createElement("input");
+    newInput.setAttribute("placeholder", "Team Name...");
+    newInput.classList.add("teamname");
+    newDiv.appendChild(newInput);
     newTxt = document.createElement("textarea");
-    newTxt.classList.add("artitle");
-    newTxt.innerHTML = "TEAM ".concat(totalTeams.toString());
-    newTxt.id = "art".concat(totalTeams.toString());
-    newDiv.appendChild(newTxt);
-    newButton = document.createElement("button");
-    newButton.id = "button".concat(totalTeams.toString());
-    newButton.setAttribute("onclick", "remove()");
-    newButton.innerHTML = "Remove";
-    newButton.classList.add("remove");
-    newDiv.appendChild(newButton);
-    newTxt = document.createElement("textarea");
-    newTxt.classList.add("autoresizing");
-    newTxt.id = "ar".concat(totalTeams.toString());
-    newTxt.placeholder = "Insert Team Member Names. Separate each name with the enter key.";
-    newDiv.appendChild(newTxt);
-    renderel();
-    }
-  }
-  open = false;
-  function toggle() {
-    if (open == false) {
-      open = true;
-      document.getElementById("menuoptions").classList.remove("hidden");
-      document.getElementById("menuoptions").style.bottom = 0 + "%";
-      document.getElementById("menu").style.right = 0;
-      document.getElementById("menu").style.top = 0;
+    if (numgroups == 1) {
+      newTxt.setAttribute("placeholder", "Enter this team's members' names like this...\nex: John\nSue\nStacy");
     } else {
-      open = false;
-      document.getElementById("menuoptions").classList.add("hidden");
-      document.getElementById("menuoptions").style.bottom = 100 + "%";
-      document.getElementById("menu").style.right = -300 + "%";
-      document.getElementById("menu").style.top = -300 + "%";
+      newTxt.setAttribute("placeholder", "Team Members' Names...");
+    }
+    newTxt.classList.add("names");
+    newDiv.appendChild(newTxt);
+    newImg = document.createElement("img");
+    newImg.src = "delete.png";
+    newImg.setAttribute("onclick", "remove()");
+    newImg.classList.add("remove");
+    newDiv.appendChild(newImg);
+    resizee();
     }
   }
-        window.addEventListener('keydown', autoResize);
-        window.addEventListener('cut', autoResize);
-        window.addEventListener('paste', autoResize);
-        window.addEventListener('keydown', renderel);
-        window.addEventListener('cut', renderel);
-        window.addEventListener('paste', renderel);
-        function autoResize() {
-          setTimeout(function() {
-          for (i = 0; i < (document.getElementsByClassName("artitle").length); i++) {
-            textarea = document.getElementsByClassName("artitle")[i];
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + 'px';
-            textarea = document.getElementsByClassName("autoresizing")[i];
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + 'px';
-          }
-          }, 80);
-        }
   function remove() {
-    num = parseInt(event.target.id.substring(6));
-    for (i = (num + 1); i < (totalTeams + 1); i++) {
-      document.getElementById("team".concat(i.toString())).id = "team".concat((i - 1).toString());
-      document.getElementById("art".concat(i.toString())).id = "art".concat((i - 1).toString());
-      document.getElementById("button".concat(i.toString())).id = "button".concat((i - 1).toString());
-      document.getElementById("ar".concat(i.toString())).id = "ar".concat((i - 1).toString());
+    for (i = 0; i < document.getElementsByClassName("remove").length; i++) {
+    if (event.target == document.getElementsByClassName("remove")[i]) {
+      groupToDelete = i;
+      break;
     }
-    document.getElementById("team".concat(num.toString())).remove();
-    totalTeams--;
-    renderel();
   }
-  endlessmodelength = 0.235;
-  universalquestionslength = 0.33;
-  penalizationlength = 0.46;
-  questioncyclelength = 0.54;
-  maxpointslength = 0.6;
-  document.getElementById("questioncycle").addEventListener("keydown", expected);
-  document.getElementById("questioncycle").addEventListener("paste", expected);
-  function expected() {
-    input = parseInt(document.getElementById("questioncycle").value);
-    middle = input * 0.5 * parseInt(localStorage.getItem(current.concat("qat")));
-    high = parseInt(middle + 2.5);
-    low = parseInt(middle - 2.5);
-    document.getElementsByClassName(smalllabel)[1].innerHTML = "Expected Game Duration: ".concat(low.toString(), "-", high.toString(), " Minutes");
+  numgroups--;
+  document.getElementsByClassName("group")[groupToDelete].remove();
+  if (numgroups != 0) {
+    document.getElementsByClassName("names")[0].setAttribute("placeholder", "Enter this team's members' names like this...\nex: John\nSue\nStacy");
   }
-  function renderel() {
-    setTimeout(function() {
-    if (haP == false) {
-    for (i = 0; i < document.getElementsByClassName("label").length; i++) {
-      document.getElementsByClassName("label")[i].style.width = window.innerWidth - (window.innerHeight * 0.2) + "px";
-    }
-    for (i = 0; i < document.getElementsByClassName("smalllabel").length; i++) {
-      document.getElementsByClassName("smalllabel")[i].style.width = window.innerWidth - (window.innerHeight * 0.11) + "px";
-    }  
-    document.getElementsByClassName("label")[3].style.width = window.innerWidth - (window.innerHeight * 0.29) + "px";
-    document.getElementsByClassName("smalllabel")[1].style.width = window.innerWidth - (window.innerHeight * 0.19) + "px";
-    ratio = window.innerHeight / window.innerWidth;
-    for (i = 0; i < document.getElementsByClassName("ts").length; i++) {
-      const tsElement = document.getElementsByClassName("ts")[i];
-      if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
-        tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
-      } else {
-        tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
-      }
-    }
-    document.getElementById("endlessmodelabel").style.top = 9 + "vh";
-    document.getElementById("endlessmode").style.top = 9 + "vh";
-    totalHeight = endlessmodelabel.offsetHeight / (0.04 * window.innerHeight);
-    if (endlessmode == true) {
-      document.getElementById("questioncyclelabel").style.opacity = 0;
-      document.getElementById("questioncycle").style.opacity = 0;
-      document.getElementsByClassName("smalllabel")[1].style.opacity = 0;
-      document.getElementById("maxpointslabel").style.top = (((totalHeight) * 0.04) + 0.125) * window.innerHeight + "px";
-      document.getElementById("maxpoints").style.top = (((totalHeight) * 0.04) + 0.125) * window.innerHeight + "px";
-      totalHeight += document.getElementById("maxpointslabel").offsetHeight / (window.innerHeight * 0.04);
-      document.getElementById("universalquestions").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
-      document.getElementById("universalquestionslabel").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
-      totalHeight += document.getElementById("universalquestionslabel").offsetHeight / (window.innerHeight * 0.04);
-      document.getElementsByClassName("smalllabel")[0].style.top = (((totalHeight) * 0.04) + 0.15) * window.innerHeight + "px";
-      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
-      document.getElementById("penalization").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
-      document.getElementById("penalizationlabel").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
-    } else {
-      document.getElementById("questioncyclelabel").style.opacity = 1;
-      document.getElementById("questioncycle").style.opacity = 1;
-      document.getElementsByClassName("smalllabel")[1].style.opacity = 1;
-      document.getElementById("questioncyclelabel").style.top = ((totalHeight * 0.04) + 0.11) * window.innerHeight + "px";
-      document.getElementById("questioncycle").style.top = ((totalHeight * 0.04) + 0.11) * window.innerHeight + "px";
-      totalHeight += document.getElementById("questioncyclelabel").offsetHeight / (window.innerHeight * 0.04);
-      document.getElementsByClassName("smalllabel")[1].style.top = ((parseInt(totalHeight) * 0.04) + 0.13) * window.innerHeight + "px";
-      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
-      document.getElementById("maxpointslabel").style.top = (((totalHeight) * 0.04) + 0.14) * window.innerHeight + "px";
-      document.getElementById("maxpoints").style.top = (((totalHeight) * 0.04) + 0.14) * window.innerHeight + "px";
-      totalHeight += document.getElementById("maxpointslabel").offsetHeight / (window.innerHeight * 0.04);
-      document.getElementById("universalquestions").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
-      document.getElementById("universalquestionslabel").style.top = (((totalHeight) * 0.04) + 0.16) * window.innerHeight + "px";
-      totalHeight += document.getElementById("universalquestionslabel").offsetHeight / (window.innerHeight * 0.04);
-      document.getElementsByClassName("smalllabel")[0].style.top = (((totalHeight) * 0.04) + 0.15) * window.innerHeight + "px";
-      totalHeight += 0.5 * (document.getElementsByClassName("smalllabel")[1].offsetHeight / (window.innerHeight * 0.02));
-      document.getElementById("penalization").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
-      document.getElementById("penalizationlabel").style.top = (((totalHeight) * 0.04) + 0.2) * window.innerHeight + "px";
-    }
-    tsElement = document.getElementById("questioncycle");
-    if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
-      tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
-    } else {
-      tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
-    }
-    tsElement = document.getElementById("maxpoints");
-    if ((window[tsElement.id.concat("length")] + 0.2) * window.innerHeight > window.innerWidth) {
-      tsElement.style.left = window.innerWidth - 0.2 * window.innerHeight + "px";
-    } else {
-      tsElement.style.left = (window[tsElement.id.concat("length")]) * window.innerHeight + "px";
-    }
-    ratio2 = ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) / ((window.innerWidth - (2 * (ratio * 0.025)) * window.innerWidth));
-    if (ratio2 > 1) {
-      document.getElementById("logo2").style.height = "auto";
-      document.getElementById("logo2").style.width = 100 + "%";
-    } else {
-      document.getElementById("logo2").style.width = "auto";
-      document.getElementById("logo2").style.height = 100 + "%";
-    }
-    ratio = (ratio / 3) * 2;
-    document.getElementById("logo").style.height = (0.2 * window.innerHeight) * ((ratio + 4) / 3) + "px";
-    document.getElementById("logo").style.width = (window.innerWidth - (2 * (ratio * 0.025)) * window.innerWidth) + "px";
-    document.getElementById("logo").style.top = (((ratio * 0.025)) * window.innerWidth) + "px";
-    document.getElementById("addteam").style.top = 2 * (((ratio * 0.025)) * window.innerWidth) + ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) + "px";
-    document.getElementById("teams").style.top = (0.05 * window.innerHeight) + 3 * (((ratio * 0.025)) * window.innerWidth) + ((0.2 * window.innerHeight) * ((ratio + 4) / 3)) + "px";
-    }
-    ratio = window.innerHeight / window.innerWidth;
-    ratio = (ratio / 3) * 2;
-    margin = (((ratio * 0.025)) * window.innerWidth);
-    nopr = parseInt((1 / (ratio / 2)) * 1.5);
-    bestHeight = 0;
-    topp = 0;
-    for (i = 1; i < (totalTeams + 1); i++) {
-      document.getElementById("team".concat(i.toString())).style.width = (window.innerWidth - ((nopr + 1) * margin)) / nopr + "px";
-      remainder = i % nopr;
-      ogr = remainder;
-      if (remainder == 0) { remainder = nopr }
-      dvsp = i - remainder;
-      dvsp = dvsp / nopr;
-      document.getElementById("team".concat(i.toString())).style.left = margin * 0.25 + (remainder - 1) * (margin + ((window.innerWidth - ((nopr + 1) * margin)) / nopr)) + "px";
-      if (dvsp != 0) {
-        topp = 0;
-        for (a = 1; a < (dvsp + 1); a++) {
-          topp += document.getElementById("team".concat((i - (nopr * a)).toString())).offsetHeight + margin;
+  resizee();
+  }
+  function start() {
+    if (dgr == true) {NamesTheSame = false;
+    TNtheSame = false;
+    notAllEntered = false;
+    for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+      for (a = 0; a < document.getElementsByClassName("group").length; a++) {
+        if (a == i) { continue; }
+        if (document.getElementsByClassName("teamname")[i].value == document.getElementsByClassName("teamname")[a].value) {
+          TNtheSame = true;
         }
-        document.getElementById("team".concat(i.toString())).style.top = topp + "px";
-        topp = 0;
-      } else {
-        document.getElementById("team".concat(i.toString())).style.top = 0;
+      }
+      if (document.getElementsByClassName("names")[i].value == "" || document.getElementsByClassName("teamname")[i].value == "") {
+        notAllEntered = true;
       }
     }
+    allnames = [];
+    for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+      vfl = document.getElementsByClassName("names")[i].value;
+      newname = "";
+      for (a = 0; a < vfl.length; a++) {
+        if ((a + 1) >= vfl.length) {
+          if (vfl.substring(a, a+1) != "\n") {
+            newname = newname.concat(vfl.substring(a, a+1));
+          }
+          allnames.push(newname.toUpperCase());
+          newname = "";
+        } else if (vfl.substring(a, a+1) == "\n") {
+          if (newname != "") {
+          allnames.push(newname.toUpperCase());
+          newname = "";
+          }
+        } else {
+          newname = newname.concat(vfl.substring(a, a + 1));
+        }
+      }
+    }
+    for (i = 0; i < allnames.length; i++) {
+      for (a = 0; a < allnames.length; a++) {
+        if (a == i) { continue; }
+        if (allnames[a] == allnames[i]) {
+          NamesTheSame = true;
+        }
+      }
+    }
+    cycval = parseFloat(document.getElementsByClassName("svi")[0].value);
+    loadval = parseFloat(document.getElementsByClassName("svi")[1].value);
+    if (NamesTheSame) { alert("Two or more of the players' names you entered are the same. Please make sure every player's name is unique. :)") }
+    else if (notAllEntered) { alert("One or more of the blanks (team names and team members blanks included) is not filled in.") }
+    else if (TNtheSame) { alert("Two or more team names are the same.") }
+    else if (numgroups < 2) { alert("Please add at least two groups to get started.");
+    } else if ((cycval % 1 != 0 || cycval < 1 || cycval > 100 || !(cycval > 0) || (cycval == 1 && document.getElementsByClassName("svi")[0].value != "1")) && !endlessmode) {
+      alert("The value for the amount of question cycles must be a whole number between 1 and 100.");
+    } else if ((loadval % 1 != 0 || loadval < 1 || loadval > 15 || !(loadval > 0) || (loadval == 1 && document.getElementsByClassName("svi")[1].value != "1"))) {
+      alert("The value for loadbar duration must be a whole number between 1 and 15.");
+    } else {
+      actstart();
+    }} else {
+      NamesTheSame = false;
+      allnames = [];
+      vfl = document.getElementById("individnames").value;
+      newname = "";
+      for (a = 0; a < vfl.length; a++) {
+        if ((a + 1) >= vfl.length) {
+          if (vfl.substring(a, a+1) != "\n") {
+            newname = newname.concat(vfl.substring(a, a+1));
+          }
+          allnames.push(newname.toUpperCase());
+          newname = "";
+        } else if (vfl.substring(a, a+1) == "\n" || (a + 1) >= vfl.length) {
+          if (newname != "") {
+          allnames.push(newname.toUpperCase());
+          newname = "";
+          }
+        } else {
+          newname = newname.concat(vfl.substring(a, a + 1));
+        }
+      }
+      for (i = 0; i < allnames.length; i++) {
+      for (a = 0; a < allnames.length; a++) {
+        if (a == i) { continue; }
+        if (allnames[a] == allnames[i]) {
+          NamesTheSame = true;
+        }
+      }
+    }
+    cycval = parseFloat(document.getElementsByClassName("svi")[0].value);
+    loadval = parseFloat(document.getElementsByClassName("svi")[1].value);
+    if (NamesTheSame) {
+      alert("Two or more players' names are the same. Please make sure every player has their own unique name.");
+    } else if (document.getElementById("individnames").value == "") {
+      alert("Please fill in the blank with player names to begin.");
+    } else if (allnames.length > 100) {
+      alert("Please keep the amount of players below 100.");
+    } else if (allnames.length < 2) {
+      alert("You need at least two players to start.");
+    } else if ((cycval % 1 != 0 || cycval < 1 || cycval > 100 || !(cycval > 0) || (cycval == 1 && document.getElementsByClassName("svi")[0].value != "1")) && !endlessmode) {
+      alert("The value for the amount of question cycles must be a whole number between 1 and 100.");
+    } else if ((loadval % 1 != 0 || loadval < 1 || loadval > 15 || !(loadval > 0) || (loadval == 1 && document.getElementsByClassName("svi")[1].value != "1"))) {
+      alert("The value for loadbar duration must be a whole number between 1 and 15.");
+    } else {
+      actstart(allnames);
+    }
+    }
+  }
+  function actstart(arraya) {
+    document.getElementById("loadbar").style.transition = loadval.toString().concat("s width");
+    numcgroups = 0;
+    numsbgroups = 0;
+    if (dgr) {
+      for (i = 0; i < numgroups; i++) {
+        addcgroup();
+        addsbgroup();
+      }
+      resizee();
+      for (i = 0; i < document.getElementsByClassName("group").length; i++) {
+      vfl = document.getElementsByClassName("names")[i].value;
+      window["names".concat((i + 1).toString())] = [];
+      newname = "";
+      for (a = 0; a < vfl.length; a++) {
+        if ((a + 1) >= vfl.length) {
+          if (vfl.substring(a, a+1) != "\n") {
+            newname = newname.concat(vfl.substring(a, a+1));
+          }
+          window["names".concat((i + 1).toString())].push(newname);
+          newname = "";
+        } else if (vfl.substring(a, a+1) == "\n") {
+          if (newname != "") {
+          window["names".concat((i + 1).toString())].push(newname);
+          newname = "";
+          }
+        } else {
+          newname = newname.concat(vfl.substring(a, a + 1));
+        }
+        }
+      }
+    } else {
+      names = [];
+      vfl = document.getElementById("individnames").value;
+      newname = "";
+      for (a = 0; a < vfl.length; a++) {
+        if ((a + 1) >= vfl.length) {
+          if (vfl.substring(a, a+1) != "\n") {
+            newname = newname.concat(vfl.substring(a, a+1));
+          }
+          names.push(newname);
+          newname = "";
+        } else if (vfl.substring(a, a+1) == "\n" || (a + 1) >= vfl.length) {
+          if (newname != "") {
+          names.push(newname);
+          newname = "";
+          }
+        } else {
+          newname = newname.concat(vfl.substring(a, a + 1));
+        }
+      }
+      for (i = 0; i < names.length; i++) {
+        addcgroupi(names[i]);
+        addsbgroupi(names[i]);
+      }
+      resizee();
+    }
+    preludeSlide();
+  }
+  function addsbgroup() {
+    numsbgroups++;
+    newDiv = document.createElement("div");
+    newDiv.classList.add("sbteam");
+    newDiv.innerHTML = document.getElementsByClassName("teamname")[numsbgroups - 1].value;
+    document.getElementById("sbteams").appendChild(newDiv);
+    newSpan = document.createElement("span");
+    newSpan.style.right = "1vh";
+    newSpan.style.position = "absolute";
+    newSpan.style.textAlign = "right";
+    newSpan.classList.add("score");
+    newSpan.innerHTML = "0";
+    newDiv.appendChild(newSpan);
+  }
+  function addsbgroupi(arraya) {
+    numsbgroups++;
+    newDiv = document.createElement("div");
+    newDiv.classList.add("sbteam");
+    newDiv.innerHTML = arraya;
+    document.getElementById("sbteams").appendChild(newDiv);
+    newSpan = document.createElement("span");
+    newSpan.style.right = "1vh";
+    newSpan.style.position = "absolute";
+    newSpan.style.textAlign = "right";
+    newSpan.classList.add("score");
+    newSpan.innerHTML = "0";
+    newDiv.appendChild(newSpan);
+  }
+  function addcgroup() {
+    numcgroups++;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("onclick", "togglebetween()");
+    newDiv.classList.add("cgroup");
+    document.getElementById("cgroups").appendChild(newDiv);
+    newSpan = document.createElement("span");
+    newSpan.style.fontSize = "1vh";
+    newDiv.appendChild(newSpan);
+    newBr = document.createElement("br");
+    newSpan.appendChild(newBr);
+    newSpan = document.createElement("span");
+    newSpan.classList.add("cn");
+    newDiv.appendChild(newSpan);
+    newBr = document.createElement("br");
+    newDiv.appendChild(newBr);
+    newSpan = document.createElement("span");
+    newSpan.classList.add("ctn");
+    newSpan.innerHTML = document.getElementsByClassName("teamname")[numcgroups - 1].value;
+    newDiv.appendChild(newSpan);
+  }
+  function addcgroupi(arraya) {
+    numcgroups++;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("onclick", "togglebetween()");
+    newDiv.classList.add("cgroup");
+    document.getElementById("cgroups").appendChild(newDiv);
+    newSpan = document.createElement("span");
+    newSpan.style.fontSize = "1vh";
+    newDiv.appendChild(newSpan);
+    newBr = document.createElement("br");
+    newSpan.appendChild(newBr);
+    newSpan = document.createElement("span");
+    newSpan.classList.add("cn");
+    newSpan.innerHTML = arraya;
+    newDiv.appendChild(newSpan);
+  }
+  so = false;
+  function togglesettings() {
+    if (!so) {
+      so = true;
+      document.getElementById("settings").style.right = "calc((100% - 2vh)";
+      document.getElementById("settingsarea").style.left = "0";
+      document.getElementById("homepregame").style.right = "calc(100% - 2vh)";
+    } else {
+      so = false;
+      document.getElementById("settings").style.right = "-2vh";
+      document.getElementById("settingsarea").style.left = "calc(100% + 1vh)";
+      document.getElementById("homepregame").style.right = "-2vh";
+    }
+  }
+  allsettings = ["endlessmode", "powerplaysenabled", "animationsenabled", "backgroundmusic", "soundeffects"];
+  endlessmode = true;
+  powerplaysenabled = false;
+  animationsenabled = false;
+  backgroundmusic = false;
+  soundeffects = false;
+  for (i = 0; i < allsettings.length; i++) {
+    toggler(i);
+    window.innerHeight;
+    document.getElementsByClassName("slider")[i].style.transition = "1s left";
+    document.getElementsByClassName("slidergroup")[i].style.transition = "1s background-color";
+  }
+  function toggler(paramt) {
+   numToToggle = parseInt(paramt);
+    if ((window[allsettings[numToToggle]]) == false) {
+      document.getElementsByClassName("slidergroup")[numToToggle].style.backgroundColor = "white";
+      document.getElementsByClassName("slider")[numToToggle].style.left = "3.5vh";
+      window[allsettings[numToToggle]] = true;
+    } else {
+      document.getElementsByClassName("slidergroup")[numToToggle].style.backgroundColor = "black";
+      document.getElementsByClassName("slider")[numToToggle].style.left = "0";
+      window[allsettings[numToToggle]] = false;
+    }
+    if (endlessmode) {
+      document.getElementsByClassName("n")[0].style.opacity = 0.3;
+      document.getElementsByClassName("n")[1].style.opacity = 0.3;
+      document.getElementsByClassName("svi")[0].style.opacity = 0.3;
+      document.getElementsByClassName("svi")[0].style.pointerEvents = "none";
+    } else {
+      document.getElementsByClassName("n")[0].style.opacity = 1;
+      document.getElementsByClassName("n")[1].style.opacity = 1;
+      document.getElementsByClassName("svi")[0].style.opacity = 1;
+      document.getElementsByClassName("svi")[0].style.pointerEvents = "all";
+    }
+  }
+  document.getElementsByClassName("svi")[0].value = "1";
+  document.getElementsByClassName("svi")[1].value = "5";
+  allinputss = ["numberofcycles", "loadbarduration"];
+  inputss(0);
+  inputss(1);
+  window.addEventListener("keydown", rui);
+  window.addEventListener("paste", rui);
+  window.addEventListener("cut", rui);
+  function rui() {
+    setTimeout(function() {
+    if (document.getElementsByClassName("svi")[0].value.length > 3) {
+      document.getElementsByClassName("svi")[0].value = document.getElementsByClassName("svi")[0].value.substring(0, 3);
+    }
+    if (document.getElementsByClassName("svi")[1].value.length > 2) {
+      document.getElementsByClassName("svi")[1].value = document.getElementsByClassName("svi")[1].value.substring(0, 2);
+    }
+    inputss(0);
+    inputss(1);
     }, 100);
   }
+  function inputss(paramt) {
+    paramt = parseInt(paramt);
+    window[allinputss[paramt]] = parseInt(document.getElementsByClassName("svi")[paramt].value);
+    predictedTime = Math.round((parseInt(localStorage.getItem(current.concat("qat"))) * parseInt(document.getElementsByClassName("svi")[0].value) * (40 + parseInt(document.getElementsByClassName("svi")[1].value))) / 60);
+    if (predictedTime < 1) {
+      min = 1;
+    } else {
+      min = predictedTime - 1;
+    }
+    max = predictedTime + 1;
+    if (!predictedTime) {
+    predictedTime = "...";
+    } else {
+    predictedTime = min.toString().concat("-", max.toString(), "min");
+    }
+    document.getElementById("prediction").innerHTML = predictedTime;
+  }
+  }
+  {  //functions for prelude slide
+  function hideallbutone(toShow) {
+    for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
+      document.getElementsByClassName("screen")[i].classList.add("hidden");
+    }
+    document.getElementById(toShow).classList.remove("hidden");
+  }
+  ptcolors = ["white", "white", "white", "white", "white", "white", "white", "white", "white", "white"];
+  powerplays = ["double", "steal", "splice", "eliminate", "random"];
+  powerplaydesc = ["Double your score!", "Steal all of the team in first place's points!", "Split every other team's score in half!", "Wipe all of the team in first place's points (unless you're in first)!", "A random power play is in effect!"];
+  questionnumber = 0;
+  qn = 0;
+  slidenum = 1;
+  function preludeSlide() {
+    if (questionnumber == 0) {
+      document.getElementsByClassName("toolbarbutton")[2].style.opacity = 0.5;
+      document.getElementsByClassName("toolbarbutton")[5].style.opacity = 0.5;
+      document.getElementsByClassName("toolbarbutton")[2].style.pointerEvents = "none";
+      document.getElementsByClassName("toolbarbutton")[5].style.pointerEvents = "none";
+      for (i = 0; i < numsbgroups; i++) {
+        window[(i + 1).toString().concat("score")] = 0;
+      }
+      if (dgr) {
+      for (i = 0; i < numgroups; i++) {
+        window[(i + 1).toString().concat("status")] = 0;
+      }
+      } else {
+      for (i = 0; i < names.length; i++) {
+        window[(i + 1).toString().concat("status")] = 0;
+      }
+      }
+    } else { document.getElementsByClassName("toolbarbutton")[2].style.opacity = 1;
+      document.getElementsByClassName("toolbarbutton")[5].style.opacity = 1;
+      document.getElementsByClassName("toolbarbutton")[2].style.pointerEvents = "all";
+      document.getElementsByClassName("toolbarbutton")[5].style.pointerEvents = "all"; }
+    for (i = 0; i < document.getElementsByClassName("cgroup").length; i++) {
+      document.getElementsByClassName("cgroup")[i].style.backgroundImage = "url('halfblack.png')";
+      window[(i + 1).toString().concat("status")] = 0;
+    }
+    if (qn == parseInt(localStorage.getItem(current.concat("qat")))) {
+      qn = 1;
+    } else {
+      qn++;
+    }
+    questionnumber++;
+    hideallbutone("prelude");
+    document.getElementById("answer").innerHTML = "Click here to reveal the answer...";
+    if (!endlessmode) {
+    document.getElementsByClassName("questionval")[0].innerHTML = "Question ".concat(questionnumber.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat"))) * numberofcycles));
+    document.getElementsByClassName("questionval")[1].innerHTML = "Question ".concat(questionnumber.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat"))) * numberofcycles));
+    document.getElementsByClassName("questionval2")[0].innerHTML = "Question ".concat(questionnumber.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat"))) * numberofcycles));
+    } else {
+    document.getElementsByClassName("questionval")[0].innerHTML = "Question ".concat(qn.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat")))));
+    document.getElementsByClassName("questionval")[1].innerHTML = "Question ".concat(qn.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat")))));
+    document.getElementsByClassName("questionval2")[0].innerHTML = "Question ".concat(qn.toString(), "/", (parseInt(localStorage.getItem(current.concat("qat")))));
+    }
+    document.getElementById("loadbar").style.transition = loadval.toString().concat("s width");
+    document.getElementById("loadbar").offsetHeight;
+    document.getElementById("loadbar").style.width = "100%";
+    document.getElementById("loadbar").style.backgroundColor = ptcolors[(questionnumber - 1) % ptvalues.length];
+    pointVal = ptvalues[(questionnumber - 1) % ptvalues.length];
+    window.innerHeight;
+    if (powerplaysenabled && pointVal > 33 && pointVal < 100) {
+      chance = Math.floor(Math.random() * 2) + 1;
+      if (chance == 1) {
+        chance = Math.floor(Math.random() * 5) + 1;
+        powerplay = powerplays[chance - 1];
+      } else {
+        powerplay = false;
+      }
+    } else {
+    powerplay = false;
+    }
+    document.getElementById("question").innerHTML = localStorage.getItem(current.concat("q", qn.toString()))
+    if (dgr) {
+    namesToUse = "";
+    if (dgr) {
+    for (i = 0; i < numgroups; i++) {
+      document.getElementsByClassName("cn")[i].innerHTML = window["names" + (i + 1).toString()][(questionnumber - 1) % window["names" + (i + 1).toString()].length];
+    }
+    }
+    for (i = 0; i < document.getElementsByClassName("teamname").length; i++) {
+      if ((i + 1) == document.getElementsByClassName("teamname").length) {
+      namesToUse = namesToUse.concat("and ", window["names" + (i + 1).toString()][(questionnumber - 1) % window["names" + (i + 1).toString()].length], "!");
+      } else if ((i + 2) == document.getElementsByClassName("teamname").length && document.getElementsByClassName("teamname").length == 2) {
+      namesToUse = namesToUse.concat(window["names" + (i + 1).toString()][(questionnumber - 1) % window["names" + (i + 1).toString()].length], " ");
+      } else {
+      namesToUse = namesToUse.concat(window["names" + (i + 1).toString()][(questionnumber - 1) % window["names" + (i + 1).toString()].length], ", ");
+      }
+    }
+    document.getElementById("text4speech").innerHTML = "Get Ready, ".concat(namesToUse);
+    } else {
+    document.getElementById("text4speech").innerHTML = "Get Ready, everyone!";
+    }
+    if (powerplay == false) {
+      document.getElementById("pointvalue").src = game.concat(pointVal.toString(), ".png");
+      document.getElementById("ptdescription").innerHTML = "<br>This next question is worth ".concat(((ptvalues[(questionnumber - 1) % ptvalues.length]).toString()), " points.");
+      if (((questionnumber - 1) % ptvalues.length) == (ptvalues.length) - 1) { document.getElementById("ptdescription").innerHTML = document.getElementById("ptdescription").innerHTML.concat("<br>Don't mess up, or you'll lose everything!") }
+    } else {
+      document.getElementById("pointvalue").src = game.concat(powerplay, ".png");
+      document.getElementById("ptdescription").innerHTML = "<br>".concat(powerplaydesc[chance - 1]);
+    }
+    setTimeout(resetLoadBar, 1000 * loadval, questionnumber);
+  }
+  function resetLoadBar(param) {
+    for (i = 0; i < document.getElementsByClassName("screen").length; i++) {
+      if (document.getElementsByClassName("screen")[i].classList.contains("hidden")) {} else {
+        screenOn = document.getElementsByClassName("screen")[i].id;
+      }
+    }
+    if (param == slidenum && screenOn != "endofgame") {
+      slidenum++;
+      questionSlide();
+      document.getElementById("loadbar").style.transition = "0s";
+      document.getElementById("loadbar").offsetHeight;
+      document.getElementById("loadbar").style.width = "0%";
+    }
+  }
+  function skip() {
+    slidenum++;
+    questionSlide();
+    document.getElementById("loadbar").style.transition = "0s";
+    document.getElementById("loadbar").offsetHeight;
+    document.getElementById("loadbar").style.width = "0%";
+  }
+  function home() {
+    window.location.href = "play.html";
+  }
+  }
+  { //questions and answers functions
+    function questionSlide() {
+      hideallbutone("questionsslide");
+    }
+    function togglebetween() {
+      if (event.target.tagName.toUpperCase() == "SPAN") {
+        if (event.target.classList.contains("ctn")) {
+          for (i = 0; i < document.getElementsByClassName("ctn").length; i++) {
+            if (document.getElementsByClassName("ctn")[i] == event.target) {
+              numToCC = (i + 1);
+              break;
+            }
+          }
+        } else {
+          for (i = 0; i < document.getElementsByClassName("cn").length; i++) {
+            if (document.getElementsByClassName("cn")[i] == event.target) {
+              numToCC = (i + 1);
+              break;
+            }
+          }
+        }
+      } else {
+        for (i = 0; i < document.getElementsByClassName("cgroup").length; i++) {
+            if (document.getElementsByClassName("cgroup")[i] == event.target) {
+              numToCC = (i + 1);
+              break;
+            }
+          }
+      }
+      if (window[numToCC.toString().concat("status")] == 0) {
+        window[numToCC.toString().concat("status")] = 1;
+        document.getElementsByClassName("cgroup")[numToCC - 1].style.backgroundImage = "url('correct.png')";
+      } else if (window[numToCC.toString().concat("status")] == 1) {
+        window[numToCC.toString().concat("status")] = 2;
+        document.getElementsByClassName("cgroup")[numToCC - 1].style.backgroundImage = "url('incorrect.png')";
+      } else {
+        window[numToCC.toString().concat("status")] = 0;
+        document.getElementsByClassName("cgroup")[numToCC - 1].style.backgroundImage = "url('halfblack.png')";
+      }
+    }
+    function reveal() {
+      event.target.innerHTML = localStorage.getItem(current.concat("a", qn.toString()));
+    }
+  }
+  { //functions for scoreboard slide 
+  function scoreboardSlide() {
+    if (questionnumber == numberofcycles * parseInt(localStorage.getItem(current.concat("qat"))) && !endlessmode) { finish(); } else {
+    if (powerplay == false) {for (i = 0; i < numsbgroups; i++) {
+      loopstatus = window[(i + 1).toString().concat("status")];
+      if (loopstatus == 1) {
+        window[(i + 1).toString().concat("score")] = window[(i + 1).toString().concat("score")] + pointVal;
+      }
+      if (loopstatus == 2 && pointVal == ptvalues[ptvalues.length - 1]) { //only for sudden death
+        window[(i + 1).toString().concat("score")] = 0;
+      }
+      document.getElementsByClassName("score")[i].innerHTML = window[(i + 1).toString().concat("score")];}
+    } else {
+      if (powerplay == "random") {
+        chance = Math.floor(Math.random() * 4);
+        powerplay = powerplays[chance];
+      }
+      oc = false;
+      for (i = 0; i < numsbgroups; i++) {
+        if (window[(i + 1).toString().concat("status")] == 1) {
+          oc = true;
+        }
+      }
+      ogarray = [];
+      for (i = 0; i < numsbgroups; i++) {
+      ogarray.push(window[(i + 1).toString().concat("score")]);
+      }
+      decorated = ogarray.map((value, index) => ({ value, index }));
+      decorated.sort((a, b) => b.value - a.value);
+      ogindex = decorated.map(item => item.index);
+      for (i = 0; i < numsbgroups; i++) {
+      loopstatus = window[(i + 1).toString().concat("status")];
+      if (powerplay == "splice") {
+        if (loopstatus != 1 && oc) {
+          window[(i + 1).toString().concat("score")] = Math.floor(window[(i + 1).toString().concat("score")] / 2);
+        }
+      } else if (powerplay == "double") {
+        if (loopstatus == 1) {
+          window[(i + 1).toString().concat("score")] = window[(i + 1).toString().concat("score")] * 2;
+        }
+      } else {}
+      }
+      if (powerplay == "steal" || powerplay == "eliminate") {
+      newindexes = [];
+      for (i = 0; i < ogindex.length; i++) {
+        if (window[(ogindex[i] + 1).toString().concat("status")] != 1) {
+          newindexes.push(ogindex[i]);
+        }
+      }
+      numcorrect = 0;
+          cindexes = [];
+          for (i = 0; i < ogindex.length; i++) {
+            if (window[(ogindex[i] + 1).toString().concat("status")] == 1) {
+              numcorrect++;
+              cindexes.push(ogindex[i]);
+            }
+          }
+      if (powerplay == "steal") {
+        if (newindexes.length > 0 && oc) {
+          std = window[(newindexes[0] + 1).toString().concat("score")];
+          
+          for (i = 0; i < cindexes.length; i++) {
+            window[(cindexes[i] + 1).toString().concat("score")] = window[(cindexes[i] + 1).toString().concat("score")] + Math.floor(std / numcorrect);
+          }
+          window[(newindexes[0] + 1).toString().concat("score")] = 0;
+        }
+      } else {
+        if (newindexes.length > 0 && cindexes.length > 0 && oc) {
+        window[(newindexes[0] + 1).toString().concat("score")] = 0; 
+        }
+      }
+      }
+      for (i = 0; i < numsbgroups; i++) {
+        document.getElementsByClassName("score")[i].innerHTML = window[(i + 1).toString().concat("score")];
+      }
+    }
+    renderscoreboardteams();
+    hideallbutone("scoreboard");
+    animation();
+    }
+  }
+  function animation() {
+    if (animationsenabled && oc && powerplay != false) {
+      ar = true;
+      document.getElementById("animationsdiv").style.transition = "0s opacity";
+      window.innerHeight;
+      document.getElementById("animationsdiv").classList.remove("hidden");
+      for (i = 0; i < window[powerplay.concat("anim")]; i++) {
+        setTimeout(newanimframe, i * 41.67, i);
+      }
+      setTimeout(function() {
+        document.getElementById("animationsdiv").style.transition = "1.5s opacity";
+        window.innerHeight;
+        document.getElementById("animationsdiv").classList.add("hidden");
+        setTimeout(function() {
+          ar = false;
+        }, 1500);
+      }, (window[powerplay.concat("anim")] + 2) * 41.67);
+    }
+  }
+  function newanimframe(frame) {
+    document.getElementById("animationsdiv").style.backgroundImage = "url('".concat(powerplay, "f", (frame + 1).toString(), "')");
+  }
+  function renderscoreboardteams() {
+    ogarray = [];
+    for (i = 0; i < numsbgroups; i++) {
+      ogarray.push(window[(i + 1).toString().concat("score")]);
+    }
+    decorated = ogarray.map((value, index) => ({ value, index }));
+    decorated.sort((a, b) => b.value - a.value);
+    ogindex = decorated.map(item => item.index);
+    for (i = 0; i < ogindex.length; i++) {
+      document.getElementsByClassName("sbteam")[ogindex[i]].style.top = i * window.innerHeight * 0.08;
+    }
+  }
+  }
+  { //end of game
+    function finish() {
+    document.getElementsByClassName("bg")[3].style.backgroundImage = "url('suddendeathblackbackground.gif')";
+    document.getElementsByClassName("t2")[0].classList.add("hidden");
+    document.getElementById("returntohome2").classList.remove("hidden");
+    document.getElementById("backtoendslide").classList.remove("hidden");
+      for (i = 0; i < numsbgroups; i++) {
+      loopstatus = window[(i + 1).toString().concat("status")];
+      if (loopstatus == 1) {
+        window[(i + 1).toString().concat("score")] = window[(i + 1).toString().concat("score")] + pointVal;
+      } 
+      if (loopstatus == 2 && pointVal == ptvalues[ptvalues.length - 1]) { //only for sudden death
+        window[(i + 1).toString().concat("score")] = 0;
+      } 
+      document.getElementsByClassName("score")[i].innerHTML = window[(i + 1).toString().concat("score")];
+      }
+      ogarray = [];
+    for (i = 0; i < numsbgroups; i++) {
+      ogarray.push(window[(i + 1).toString().concat("score")]);
+    }
+    decorated = ogarray.map((value, index) => ({ value, index }));
+    decorated.sort((a, b) => b.value - a.value);
+    ogindex = decorated.map(item => item.index);
+    sbh = false;
+    if (dgr) {
+      document.getElementsByClassName("mts")[0].innerHTML = document.getElementsByClassName("teamname")[ogindex[0]].value;
+      document.getElementsByClassName("mts")[1].innerHTML = document.getElementsByClassName("teamname")[ogindex[1]].value;
+      if (document.getElementsByClassName("teamname").length != 2) {
+      document.getElementsByClassName("mts")[2].innerHTML = document.getElementsByClassName("teamname")[ogindex[2]].value;
+      } else {
+        sbh = true;
+      }
+    } else {
+      document.getElementsByClassName("mts")[0].innerHTML = names[ogindex[0]];
+      document.getElementsByClassName("mts")[1].innerHTML = names[ogindex[1]];
+      if (names.length != 2) {
+      document.getElementsByClassName("mts")[2].innerHTML = names[ogindex[2]];
+      } else {
+        sbh = true;
+      }
+    }
+      hideallbutone("endofgame");
+      finalanimations();
+    }
+    medals = ["gold", "silver", "bronze"];
+    function finalanimations() {
+      for (i = 2; i >= 0; i--) {
+      if (sbh) {
+      if (i == 2) {
+        continue;
+      } else {
+      setTimeout(rotateMedal, (1 - i) * 3000, i);
+      }
+      } else {
+      setTimeout(rotateMedal, (2 - i) * 3000, i);
+        }
+      }
+      setTimeout(function() {
+        document.getElementById("returntohome").style.opacity = 1;
+        document.getElementById("showscoreboard").style.opacity = 1;
+      }, 8570);
+    }
+    function rotateMedal(wom) {
+      document.getElementById(medals[wom]).style.backgroundImage = "url('".concat(medals[wom], "moving.gif')");
+      document.getElementById(medals[wom]).style.opacity = 1;
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 0.5s ease-in";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(360deg)";
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 0.6s linear";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(0deg)";
+      }, 500);
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 0.72s linear";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(360deg)";
+      }, 1100);
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 0.9s linear";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(0deg)";
+      }, 1820);
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 1.25s linear";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(360deg)";
+      }, 2720);
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 1.6s linear";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(0deg)";
+      }, 3970);
+      setTimeout(function() {
+      document.getElementsByClassName("medaltext")[wom].style.transition = "transform 2s ease-out";
+      window.innerHeight;
+      document.getElementsByClassName("medaltext")[wom].style.transform = "translate(-50%, -50%) rotateY(360deg)";
+      }, 4570);
+      setTimeout(function() {
+      document.getElementById(medals[wom]).style.backgroundImage = "url('".concat(medals[wom], "still.png')");
+      }, 7000);
+    }
+  }
 </script>
-</body>
 </html>
