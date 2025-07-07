@@ -26,7 +26,7 @@
       <img src="jettcog.gif" id="jettcog">
     </div>
     <div onclick="home()" id="homepregame"><span style="position: absolute; right: 4dvh; bottom: 0dvh">Home</span></div>
-    <div id="titleslide"><div id="logocomponents"><img id="logotop" src="suddendeathlogo.png"><p style="margin-top: 9dvh" id="nameofset"></p></div></div>
+    <div id="titleslide"><div id="logocomponents"><img id="logotop" src="suddendeathlogo.png"><p style="margin-top: 9dvh" id="nameofset"></p></div><div id="halfwhite"></div></div>
     <div id="toggler"><div onclick="toggletype()" class="groupbased selected">Group-Based</div><div onclick="toggletype()" class="individualbased">Individual-Based</div></div>
     <div id="groups">
       <img src="add.png" onclick="addgroup()" id="add">
@@ -173,6 +173,15 @@ Adelaide..." id="individnames"></textarea>
   width: 6dvh;
   background-color: black;
 }
+#halfwhite {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: -3;
+}
 #jettcog {
   height: 16dvh;
   left: 50%;
@@ -210,7 +219,7 @@ Adelaide..." id="individnames"></textarea>
   position: fixed;
   height: 8dvh;
   color: white;
-  width: 22dvh;
+  width: 26dvh;
   font-size: 5dvh;
   text-align: left;
   outline: 1dvh solid white;
@@ -225,7 +234,7 @@ Adelaide..." id="individnames"></textarea>
   position: fixed;
   height: 8dvh;
   color: white;
-  width: 22dvh;
+  width: 26dvh;
   font-size: 5dvh;
   text-align: left;
   outline: 1dvh solid white;
