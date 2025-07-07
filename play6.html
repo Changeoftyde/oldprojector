@@ -196,7 +196,13 @@ if (localStorage.getItem("darkmode")) {} else {
   localStorage.setItem("darkmode", "0");
 }
 current = "6";
+if (localStorage.getItem("numofsets")) {} else {
+  localStorage.setItem("numofsets", "0");
+}
 if (localStorage.getItem(current.concat("n"))) {} else {
+  window.location.href = "setnotfound2.html";
+}
+if (parseInt(localStorage.getItem("numofsets")) < parseInt(current)) {
   window.location.href = "setnotfound2.html";
 }
 document.getElementById("nameofset").innerHTML = localStorage.getItem(current.concat("n"));
