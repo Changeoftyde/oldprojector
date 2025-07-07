@@ -1,0 +1,182 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+<div id="sidebar">
+<a href="index.html"><div style="top: 0dvh" class="hyperlink"><img src="homeorange.png" class="hpimg"><p class=" hplabel">Home</p></div></a>
+<a href="study.html"><div style="top: 13.5dvh" class="hyperlink"><img src="studyorange.png" class="hpimg"><p class="hplabel">Study</p></div></a>
+<a href="play.html"><div style="top: 27dvh" class="hyperlink selected"><img src="playselected.png" class="hpimg"><p class="hplabel selected">Play</p></div></a>
+<a href="sets.html"><div style="top: 40.5dvh" class="hyperlink"><img src="setsorange.png" class="hpimg"><p class="hplabel">Sets</p></div></a>
+<a href="create.html"><div style="top: 54dvh" class="hyperlink"><img src="createorange.png" class="hpimg"><p class="hplabel">Create</p></div></a>
+<a href="import.html"><div style="top: 67.5dvh" class="hyperlink"><img src="importorange.png" class="hpimg"><p class="hplabel">Import</p></div></a>
+<a href="settings.html"><div style="top: 85.5dvh" class="hyperlink"><img src="settingsorange.png" class="hpimg"><p class="hplabel">Settings</p></div></a>
+
+</div>
+<div id="content">
+<div id="heading"></div>
+<!-- <div id="fadedbg"></div><span id="nameofset"></span></div> -->
+<div id="message">Oops!<br><span style="font-size: 7dvh">Something went wrong.</span><img id="jatis" src="jatsw.png"><a href="sets.html"><div id="returnhome">Return Home</div></a></div>
+</div>
+</body>
+<style>
+#returnhome {
+  outline: 1dvh solid black;
+  height: 5dvh;
+  border-radius: 1dvh;
+  width: 25dvh;
+  top: 38dvh;
+  position: absolute;
+  font-size: 4dvh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  background-color: white;
+}
+#jatis {
+  height: 20dvh;
+  width: auto;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 22dvh;
+}
+#message {
+  white-space: nowrap;
+  text-align: center;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+#logo {
+  height: 90%;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+#fadedbg {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.5;
+}
+#nameofset {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  position: absolute;
+  word-wrap: break-word;
+  left: 50%;
+  font-size: 6dvh;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+@font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+}
+body {
+  font-family: fredokaone;
+}
+.selected {
+  color: white;
+  background-color: #ff8500;
+}
+.hpimg {
+  top: 1.5dvh;
+  left: 1.5dvh;
+  width: 9dvh;
+  position: absolute;
+  height: 9dvh;
+}
+.hplabel {
+  width: 100%;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  left: 50%;
+  bottom: 0.75dvh;
+  height: auto;
+  transform: translate(-50%, 0%);
+}
+.hyperlink {
+  color: #ff8500;
+  position: absolute;
+  width: 9dvh;
+  padding: 1.5dvh;
+  height: 12dvh;
+  font-size: 2dvh;
+}
+#heading {
+  z-index: 2;
+  position: fixed;
+  overflow: hidden;
+  width: calc(100% - 14.75dvh);
+  height: 17.5dvh;
+  background-color: #ff8500;
+  right: 0;
+  top: 0;
+}
+#content {
+  position: absolute;
+  width: calc(100% - 14.75dvh);
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-image: url("whitebg.png");
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+#sidebar {
+  background-color: white;
+  outline: 3dvh solid #ff8500;
+  width: 12dvh;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+}
+.darkmodehyperlink {
+  color: white;
+  position: absolute;
+  width: 9dvh;
+  padding: 1.5dvh;
+  height: 12dvh;
+  font-size: 2dvh;
+}
+</style>
+<script>
+if (localStorage.getItem("darkmode")) {} else {
+  localStorage.setItem("darkmode", "0");
+}
+arrayOfPictureNames = ["home", "study", "play", "sets", "create", "import", "settings"];
+if (localStorage.getItem("darkmode") == "1") {
+  document.body.style.backgroundColor = "black";
+  document.getElementById("heading").style.backgroundColor = "white";
+  document.getElementById("sidebar").style.outline = "3dvh solid white";
+  document.getElementById("message").style.color = "White";
+  document.getElementById("sidebar").style.backgroundColor = "black";
+  for (i = 0; i < document.getElementsByClassName("hpimg").length; i++) {
+    if (document.getElementsByClassName("hyperlink")[i].classList.contains("selected")) {
+      document.getElementsByClassName("hyperlink")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.backgroundColor = "white";
+      document.getElementsByClassName("hplabel")[i].style.color = "black";
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("black.png");
+    } else {
+      document.getElementsByClassName("hpimg")[i].src = arrayOfPictureNames[i].concat("selected.png");
+      document.getElementsByClassName("hyperlink")[i].classList.add("darkmodehyperlink");
+    }
+  }
+}
+</script>
+
