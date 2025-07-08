@@ -74,15 +74,15 @@ Adelaide..." id="individnames"></textarea>
     <div id="cgroups">
     </div>
     <div id="qag">
-    <div id="combo"><span id="question"></span><br>
-    <span onclick="reveal()" id="answer">Click here to reveal the answer...</span>
+    <div id="combo"><span style="color: black" id="question"></span><br>
+    <span style="color: black" onclick="reveal()" id="answer">Click here to reveal the answer...</span>
     </div></div>
-    <div id="desccgroups">Click the teams below to toggle between correct, incorrect, or did not answer. Points are awarded for correct answers, but may be deducted for incorrect answers.</div>
+    <div style="color: black" id="desccgroups">Click the teams below to toggle between correct, incorrect, or did not answer. Points are awarded for correct answers, but may be deducted for incorrect answers.</div>
     <div id="toolbar">
-      <div class="questionval"></div>
-      <div style="left: 1dvh" onclick="scoreboardSlide()" class="toolbarbutton">Next</div>
-      <div style="left: 14dvh" onclick="home()" class="toolbarbutton">Home</div>
-      <div style="left: 27dvh" onclick="finish()" class="toolbarbutton">Finish</div>
+      <div style="color: black" class="questionval"></div>
+      <div style="left: 1dvh; color: black; outline: 1dvh solid black" onclick="scoreboardSlide()" class="toolbarbutton">Next</div>
+      <div style="left: 14dvh; color: black; outline: 1dvh solid black" onclick="home()" class="toolbarbutton">Home</div>
+      <div style="left: 27dvh; color: black; outline: 1dvh solid black" onclick="finish()" class="toolbarbutton">Finish</div>
     </div>
     <div style="background-color: red; background-image: url('suddendeathbackground.gif')" class="bg"></div>
   </div>
@@ -91,13 +91,13 @@ Adelaide..." id="individnames"></textarea>
     <div id="returntohome2" class="hidden" onclick="home()">Return Home</div>
     <div id="backtoendslide" class="hidden" onclick="hideallbutone('endofgame')">Show Results</div>
     <div class="t2">
-    <div id="titlescore">SCOREBOARD</div>
+    <div style="color: black" id="titlescore">SCOREBOARD</div>
     <div id="toolbar">
-      <div class="questionval2"></div>
+      <div style="color: black" class="questionval2"></div>
       <div id="tools">
-        <div style="top: 0; left: 1dvh" onclick="preludeSlide()" class="toolbarbutton">Next</div>
-        <div style="top: 0; left: 14dvh" onclick="home()" class="toolbarbutton">Home</div>
-        <div style="top: 0; left: 27dvh" onclick="finish()" class="toolbarbutton">Finish</div>
+        <div style="top: 0; left: 1dvh; color: black; outline: 1dvh solid black" onclick="preludeSlide()" class="toolbarbutton">Next</div>
+        <div style="top: 0; left: 14dvh; color: black; outline: 1dvh solid black" onclick="home()" class="toolbarbutton">Home</div>
+        <div style="top: 0; left: 27dvh; color: black; outline: 1dvh solid black" onclick="finish()" class="toolbarbutton">Finish</div>
       </div>
     </div>
     </div>
@@ -526,7 +526,7 @@ Adelaide..." id="individnames"></textarea>
 #text4speech {
   width: 100%;
   height: auto;
-  color: #ff8d34;
+  color: white;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -548,7 +548,7 @@ Adelaide..." id="individnames"></textarea>
   font-weight: bold;
   width: calc(100vw - 31.5dvh);
   height: 19dvh;
-  outline: 1.5dvh solid #ff8d34;
+  outline: 1.5dvh solid white;
   font-size: 3dvh;
   color: #ff8d34;
   left: 24dvh;
