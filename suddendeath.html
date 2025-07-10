@@ -792,6 +792,27 @@ body {
   }
 </style>
 <script>
+  { //ios textarea blur fix
+  function iosTextareaFix() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if (!isIOS) return;
+
+  document.addEventListener('touchend', (e) => {
+      const active = document.activeElement;
+      if (active && active.tagName === 'TEXTAREA' && !e.target.closest('textarea')) {
+        // Force blur textarea
+        active.blur();
+
+        // Force a layout recalculation (this is key)
+        window.scrollTo(window.scrollX, window.scrollY);
+      }
+    },
+    { passive: true }
+  );
+}
+
+iosTextareaFix();
+  }
   if (sessionStorage.getItem("setToUse")) {
     current = sessionStorage.getItem("setToUse");
     sessionStorage.removeItem("setToUse");
@@ -807,12 +828,6 @@ body {
   spliceanim = 48;
   stealanim = 48;
   eliminateanim = 48;
-  document.addEventListener('touchstart', function (e) {
-  const active = document.activeElement;
-  if (active && active.tagName === 'TEXTAREA' && !e.target.closest('textarea')) {
-    active.blur();
-  }
-  }, { passive: true });
   for (i = 0; i < ptvalues.length; i++) {
     imgToLoad.push(game.concat(ptvalues[i].toString()));
   }
