@@ -6,7 +6,7 @@
 <html>
 <body>
   <div class="screen" id="pregame">
-    <div onclick="togglesettings()" id="settings"><span style="position: absolute; right: 4dvh; bottom: 0dvh">Settings</span></div><div id="settingsarea">
+    <button onclick="togglesettings()" id="settings"><span style="position: absolute; right: 4dvh; bottom: 0dvh">Settings</span></button><div id="settingsarea">
       <img onclick="togglesettings()" src="closesettings.png" id="closesettings">
       <span style="position: absolute; right: 2dvh; top: 3dvh; font-size: 5dvh; width: calc(100% - 10.5dvh); text-decoration: underline">Game Settings</span>
       <span style="position: absolute; right: 2dvh; top: 12dvh; font-size: 4.5dvh; width: 100%; text-decoration: underline">Game Length</span>
@@ -25,7 +25,7 @@
       <span style="position: absolute; right: 14dvh; top: 77dvh; font-size: 3.5dvh; width: 100%">Sound Effects</span><div style="top: 77.5dvh" onclick="toggler(4)" class="setval slidergroup"><div class="slider"></div></div>
       <img src="jettcog.gif" id="jettcog">
     </div>
-    <div onclick="home()" id="homepregame"><span style="position: absolute; right: 4dvh; bottom: 0dvh">Home</span></div>
+    <button onclick="home()" id="homepregame"><span style="position: absolute; right: 4dvh; bottom: 0dvh">Home</span></button>
     <div id="titleslide"><div id="logocomponents"><img id="logotop" src="suddendeathlogo.png"><p style="margin-top: 9dvh" id="nameofset"></p></div><div id="halfwhite"></div></div>
     <div id="toggler"><div onclick="toggletype()" class="groupbased selected">Group-Based</div><div onclick="toggletype()" class="individualbased">Individual-Based</div></div>
     <div id="groups">
@@ -48,7 +48,7 @@ Olivia
 Rachel
 Adelaide..." id="individnames"></textarea>
     </div>
-  <div onclick="start()" id="startbutton">Start</div>
+  <button onclick="start()" id="startbutton">Start</button>
   <div class="bg" style="background-image: url('suddendeathbackground.gif')"></div>
   </div>
   <div class="hidden screen" id="prelude">
