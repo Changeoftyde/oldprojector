@@ -569,6 +569,7 @@ textarea {
   bottom: 2.1459dvh;
   height: 14.35dvh;
   width: 16.91dvh;
+  z-index: 1;
   position: absolute;
 }
 #jettbody {
@@ -576,6 +577,7 @@ textarea {
   height: 15.34dvh;
   position: absolute;
   left: 0;
+  z-index: 0;
   bottom: 0;
 }
 #jett {
@@ -805,6 +807,12 @@ body {
   spliceanim = 48;
   stealanim = 48;
   eliminateanim = 48;
+  document.addEventListener('touchstart', function (e) {
+  const active = document.activeElement;
+  if (active && active.tagName === 'TEXTAREA' && !e.target.closest('textarea')) {
+    active.blur();
+  }
+  }, { passive: true });
   for (i = 0; i < ptvalues.length; i++) {
     imgToLoad.push(game.concat(ptvalues[i].toString()));
   }
