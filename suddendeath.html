@@ -1482,6 +1482,11 @@ iosTextareaFix();
         chance = Math.floor(Math.random() * 4);
         powerplay = powerplays[chance];
       }
+      img = document.createElement("img");
+      img.style.display = "none";
+      for (i = 0; i < window[powerplay.concat("anim")]; i++) {
+        img.src = powerplay.concat("animf", (i + 1).toString(), ".png");
+      }
       oc = false;
       for (i = 0; i < numsbgroups; i++) {
         if (window[(i + 1).toString().concat("status")] == 1) {
@@ -1548,11 +1553,6 @@ iosTextareaFix();
   }
   function animation() {
     if (animationsenabled && oc && powerplay != false) {
-      for (i = 0; i < window[powerplay.concat("anim")]; i++) {
-        img = document.createElement("img");
-        img.style.display = "none";
-        img.src = powerplay.concat("animf", (i + 1).toString(), ".png");
-      }
       ar = true;
       document.getElementById("animationsdiv").style.transition = "0s opacity";
       window.innerHeight;
