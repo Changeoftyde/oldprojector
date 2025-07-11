@@ -1467,7 +1467,7 @@ iosTextareaFix();
   }
   { //functions for scoreboard slide
   const animationCache = {};
-  async function scoreboardSlide() {
+  function scoreboardSlide() {
     if (questionnumber == numberofcycles * parseInt(localStorage.getItem(current.concat("qat"))) && !endlessmode) { finish(); } else {
     if (powerplay == false) {for (i = 0; i < numsbgroups; i++) {
       loopstatus = window[(i + 1).toString().concat("status")];
@@ -1482,6 +1482,11 @@ iosTextareaFix();
       if (powerplay == "random") {
         chance = Math.floor(Math.random() * 4);
         powerplay = powerplays[chance];
+      }
+      img = document.createElement("img");
+      img.style.display = "none";
+      for (i = 0; i < window[powerplay.concat("anim")]; i++) {
+        img.src = powerplay.concat("animf", (i + 1).toString(), ".png");
       }
       oc = false;
       for (i = 0; i < numsbgroups; i++) {
@@ -1544,7 +1549,6 @@ iosTextareaFix();
     }
     renderscoreboardteams();
     hideallbutone("scoreboard");
-    await ensurePowerplayPreloaded(powerplay, window[powerplay.concat("anim")]);
     animation();
     }
   }
@@ -1568,23 +1572,7 @@ iosTextareaFix();
     }
   }
   function newanimframe(frame) {
-  frames = animationCache[powerplay];
-  if (frames && frames[frame]) {
-    document.getElementById("animationsdiv").style.backgroundImage = `url('${frames[frame].src}')`;
-  }
-  }
-  async function ensurePowerplayPreloaded(powerplayName, frameCount) {
-  if (animationCache[powerplayName]) return; // Already cached
-
-  const frames = [];
-  for (let i = 1; i <= frameCount; i++) {
-    const img = new Image();
-    img.src = `${powerplayName}animf${i}.png`;
-    await img.decode(); // Decodes image to prevent flashing
-    frames.push(img);
-  }
-
-  animationCache[powerplayName] = frames;
+    document.getElementById("animationsdiv").style.backgroundImage = "url('".concat(powerplay, "animf", (frame + 1).toString(), ".png')");
   }
   function renderscoreboardteams() {
     ogarray = [];
