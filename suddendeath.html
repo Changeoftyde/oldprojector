@@ -834,11 +834,6 @@ iosTextareaFix();
   for (i = 0; i < ptvalues.length; i++) {
     imgToLoad.push(game.concat(ptvalues[i].toString()));
   }
-  for (i = 0; i < powerplayanimlength.length; i++) {
-    for (a = 1; a <= window[powerplayanimlength[i]]; a++) {
-      imgToLoad.push(powerplayanimlength[i] + "f" + a.toString());
-    }
-  }
   for (i = 0; i < imgToLoad.length; i++) {
     img = document.createElement("img");
     img.style.display = "none";
@@ -1553,6 +1548,11 @@ iosTextareaFix();
   }
   function animation() {
     if (animationsenabled && oc && powerplay != false) {
+      for (i = 0; i < window[powerplay.concat("anim")]; i++) {
+        img = document.createElement("img");
+        img.style.display = "none";
+        img.src = powerplay.concat("animf", (i + 1).toString(), ".png");
+      }
       ar = true;
       document.getElementById("animationsdiv").style.transition = "0s opacity";
       window.innerHeight;
