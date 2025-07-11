@@ -51,11 +51,6 @@ Adelaide..." id="individnames"></textarea>
   <button onclick="start()" id="startbutton">Start</button>
   <div class="bg" style="background-image: url('suddendeathbackground.gif')"></div>
   </div>
-  <div class="hidden screen" id="loadingscreen">
-    <p id="loadingdot">Loading...</p>
-    <div id="loadbaroutline2"><div id="loadbar2"></div></div>
-    <div style="background-color: black; background-image: url('suddendeathblackbackground.gif')" class="bg"></div>
-  </div>
   <div class="hidden screen" id="prelude">
     <div id="jett">
       <img src="jettheadnormal.png" id="jetthead">
@@ -130,16 +125,6 @@ Adelaide..." id="individnames"></textarea>
   </div>
 </body>
 <style>
-#loadingdot {
-  top: 33dvh;
-  width: 100%;
-  font-size: 4dvh;
-  text-align: center;
-  color: white;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
 button {
   font-family: fredokaone;
 }
@@ -538,26 +523,6 @@ textarea {
   top: 30.5dvh;
 
 }
-#loadbaroutline2 {
-  width: calc(100% - 7dvh);
-  height: 5dvh;
-  outline: 1.5dvh solid white;
-  border-radius: 3dvh;
-  transform: translate(-50%, -100%);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-}
-#loadbar2 {
-  width: 0%;
-  border-radius: 10dvh;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #fe7c00;
-  transition: 1s width;
-}
 #loadbar {
   width: 0%;
   border-radius: 10dvh;
@@ -851,15 +816,14 @@ body {
 
 iosTextareaFix();
   }
-  /*if (sessionStorage.getItem("setToUse")) {
+  if (sessionStorage.getItem("setToUse")) {
     current = sessionStorage.getItem("setToUse");
     sessionStorage.removeItem("setToUse");
   } else {
     window.location.href = "urlerror.html";
-  }*/ current = "1";
+  }
   { //load images
-  //imgToLoad = ["goldstill", "silverstill", "bronzestill", "goldmoving.gif", "silvermoving.gif", "bronzemoving.gif"];
-  imgToLoad = [];
+  imgToLoad = ["goldstill.png", "silverstill.png", "bronzestill.png", "goldmoving.gif", "silvermoving.gif", "bronzemoving.gif"];
   ptvalues = [2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
   game = "sd";
   powerplayanimlength = ["doubleanim", "spliceanim", "stealanim", "eliminateanim"];
@@ -870,67 +834,17 @@ iosTextareaFix();
   for (i = 0; i < ptvalues.length; i++) {
     imgToLoad.push(game.concat(ptvalues[i].toString()));
   }
-  for (i = 0; i < powerplayanimlength.length; i++) {
-    for (a = 0; a < window[powerplayanimlength[i]]; a++) {
-      imgToLoad.push(powerplayanimlength[i].concat("f", (a + 1).toString()))
-    }
-  }
-  eal = eliminateanim;
-  stal = stealanim;
-  sal = spliceanim;
-  dal = doubleanim;
-  otheral = 14;
-  pct = 0;
-  ls = false;
-  window.addEventListener("DOMContentLoaded", function() {
   for (i = 0; i < imgToLoad.length; i++) {
     img = document.createElement("img");
-    document.body.appendChild(img);
-    img.addEventListener("load", function(event) {
-    ff = event.target.id.substring(0, 4);
-    if (ff == "doub") {
-      dal--;
-      if (dal < 1) {
-        pct += 22.5;
-      }
-    } else if (ff == "stea") {
-      stal--;
-      if (stal < 1) {
-        pct += 22.5;
-      }
-    } else if (ff == "spli") {
-      sal--;
-      if (sal < 1) {
-        pct += 22.5;
-      }
-    } else if (ff == "elim") {
-      eal--;
-      if (eal < 1) {
-        pct += 22.5;
-      }
-    } else {
-      otheral--;
-      if (otheral < 1) {
-        pct += 22.5;
-      }
-    }
-    document.getElementById("loadbar2").style.width = pct.toString() + "%";
-    if (ls && pct == 100) {
-      preludeSlide();
-    }
-  })
-    img.width = 300;
-    img.height = 300;
-    img.classList.add("hidden");
-    img.id = imgToLoad[i];
     img.style.display = "none";
-    if (imgToLoad[i] == "goldmoving.gif" || imgToLoad[i] == "silvermoving.gif" || imgToLoad[i] == "bronzemoving.gif") {
-    img.src = imgToLoad[i];
-    } else {
     img.src = imgToLoad[i].concat(".png");
-    }
+    link = document.createElement("link");
+    link.href = imgToLoad[i].concat(".png");
+    link.setAttribute("rel", "preload");
+    link.setAttribute("as", "image");
+    //<link rel="preload" href="path/to/your/image.jpg" as="image">
+
   }
-  });
   }
   { //resize function
   window.addEventListener("resize", resizee);
@@ -999,15 +913,6 @@ iosTextareaFix();
     }
   }
   });
-  ls = false;
-  function loadingSlide() {
-    hideallbutone("loadingscreen");
-    ls = true;
-    window.innerHeight;
-    if (pct == 100) {
-      preludeSlide();
-    }
-  }
   { /*functions for pregame slide*/ 
   dgr = true;
   function toggletype() {
@@ -1231,7 +1136,7 @@ iosTextareaFix();
       }
       resizee();
     }
-    loadingSlide();
+    preludeSlide();
   }
   function addsbgroup() {
     numsbgroups++;
@@ -1561,6 +1466,7 @@ iosTextareaFix();
     }
   }
   { //functions for scoreboard slide
+  const animationCache = {};
   function scoreboardSlide() {
     if (questionnumber == numberofcycles * parseInt(localStorage.getItem(current.concat("qat"))) && !endlessmode) { finish(); } else {
     if (powerplay == false) {for (i = 0; i < numsbgroups; i++) {
