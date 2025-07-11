@@ -1465,8 +1465,9 @@ iosTextareaFix();
       event.target.innerHTML = localStorage.getItem(current.concat("a", qn.toString()));
     }
   }
-  { //functions for scoreboard slide 
-  function scoreboardSlide() {
+  { //functions for scoreboard slide
+  const animationCache = {};
+  async function scoreboardSlide() {
     if (questionnumber == numberofcycles * parseInt(localStorage.getItem(current.concat("qat"))) && !endlessmode) { finish(); } else {
     if (powerplay == false) {for (i = 0; i < numsbgroups; i++) {
       loopstatus = window[(i + 1).toString().concat("status")];
