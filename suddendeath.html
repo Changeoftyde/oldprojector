@@ -840,6 +840,9 @@ iosTextareaFix();
     }
   }
   for (i = 0; i < imgToLoad.length; i++) {
+    img = document.createElement("img");
+    img.style.display = "none";
+    img.src = imgToLoad[i].concat(".png");
     link = document.createElement("link");
     link.href = imgToLoad[i].concat(".png");
     link.setAttribute("rel", "preload");
