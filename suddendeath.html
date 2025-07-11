@@ -1485,6 +1485,9 @@ iosTextareaFix();
       }
       img = document.createElement("img");
       img.style.display = "none";
+      img.width = 300;
+      img.height = 300;
+      img.classList.add("hidden");
       for (i = 0; i < window[powerplay.concat("anim")]; i++) {
         img.src = powerplay.concat("animf", (i + 1).toString(), ".png");
       }
