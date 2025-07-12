@@ -52,7 +52,7 @@ Adelaide..." id="individnames"></textarea>
   <div class="bg" style="background-image: url('suddendeathbackground.gif')"></div>
   </div>
   <div class="hidden screen" id="loadingscreen">
-    <p id="loadingdot">Loading...</p>
+    <p id="loadingdot">Loading... (0%)</p>
     <div id="loadbaroutline2"><div id="loadbar2"></div></div>
     <div style="background-color: black; background-image: url('suddendeathblackbackground.gif')" class="bg"></div>
   </div>
@@ -654,11 +654,12 @@ body {
   left: 50%;
   transform: translate(-50%, 0%);
   bottom: 1.5dvh;
-  width: 10dvh;
-  height: 5dvh;
+  width: 13dvh;
+  height: 8dvh;
+  border: none;
+  text-align: center;
   font-size: 3.5dvh;
-  border-radius: 1dvh;
-  outline: 1.5dvh solid black;
+  border-radius: 2.5dvh;
   text-align: center;
   color: white;
   position: absolute;
@@ -880,6 +881,8 @@ iosTextareaFix();
   sal = spliceanim;
   dal = doubleanim;
   otheral = 10;
+  totalal = otheral + dal + stal + sal + eal;  
+  cnl = 0;
   pct = 0;
   ls = false;
   window.addEventListener("DOMContentLoaded", function() {
@@ -887,6 +890,7 @@ iosTextareaFix();
     img = document.createElement("img");
     document.body.appendChild(img);
     img.addEventListener("load", function(event) {
+    cnl++;
     ff = event.target.id.substring(0, 4);
     if (ff == "doub") {
       dal--;
@@ -915,6 +919,7 @@ iosTextareaFix();
       }
     }
     document.getElementById("loadbar2").style.width = pct.toString() + "%";
+    document.getElementById("loadingdot").innerHTML = "Loading... (".concat(Math.floor(cnl / totalal * 100).toString(), "%)");
     if (ls && pct == 100) {
       preludeSlide();
     }
@@ -1004,7 +1009,7 @@ iosTextareaFix();
     hideallbutone("loadingscreen");
     ls = true;
     window.innerHeight;
-    if (pct == 100) {
+    if (pct == 100 || animationsenabled == false) {
       preludeSlide();
     }
   }
