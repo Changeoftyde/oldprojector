@@ -74,6 +74,7 @@
   position: absolute;
 }
 .answer {
+  white-space: nowrap;
   overflow: hidden;
   color: white;
   font-size: 2.5dvh;
@@ -88,6 +89,7 @@
   top: 1dvh;
 }
 .question {
+  white-space: nowrap;
   overflow: hidden;
   color: white;
   font-size: 2.5dvh;
@@ -427,6 +429,7 @@ function removegroup() {
     document.getElementsByClassName("answerspan")[i].textContent = "Answer ".concat((i + 1).toString(), ": ");
     document.getElementsByClassName("qgroup")[i].style.top =  0.005 * window.innerHeight + (i * window.innerHeight * 0.16);
   }
+  resizeeverything();
 }
 document.getElementsByClassName("mb")[0].value = sessionStorage.getItem("n");
 document.getElementsByClassName("mb")[1].value = sessionStorage.getItem("a");
@@ -501,6 +504,7 @@ function addgroup() {
     newTxtArea2.style.color = "black";
   }
   }
+  resizeeverything();
 }
 function save() {
   isempty = false;
@@ -621,6 +625,20 @@ function resizeeverything() {
   height = window.innerHeight;
   space = (window.innerWidth) - window.innerHeight * 0.1475;
   ratio = height / width;
+  if (ratio > 1) {
+    for (i = 0; i < document.getElementsByClassName("questionspan").length; i++) {
+      document.getElementsByClassName("questionspan")[i].innerHTML = "Q".concat((i + 1).toString(), ": ");
+      document.getElementsByClassName("answerspan")[i].innerHTML = "A".concat((i + 1).toString(), ": ");
+    }
+  } else {
+    for (i = 0; i < document.getElementsByClassName("questionspan").length; i++) {
+      document.getElementsByClassName("questionspan")[i].innerHTML = "Question ".concat((i + 1).toString(), ": ");
+      document.getElementsByClassName("answerspan")[i].innerHTML = "Answer ".concat((i + 1).toString(), ": ");
+    }
+  }
+  for (a = 0; a < document.getElementsByClassName("questionspan").length; a++) {
+    document.getElementsByClassName("qgroup")[a].style.top = (0.005 * window.innerHeight) + (a * window.innerHeight * 0.16);
+  }
   ratio = (ratio / 3) * 2;
   margin = window.innerHeight * 0.02;
   nopr = parseInt((1 / (ratio / 1.5)) * 1.5);
