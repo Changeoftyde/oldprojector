@@ -21,9 +21,9 @@
   <button onclick="check()" id="check">Submit</button>
  <div id="question"><span id="qtext">
  </span></div>
- <textarea maxlength="1000" placeholder="Write some notes about the concept here..." id="inputnotes"></textarea>
- <textarea class="hidden" maxlength="1000" placeholder="Type the answer here..." id="answer"></textarea>
- <div class="hidden" id="notes"></div>
+ <textarea class="hidden" maxlength="1000" placeholder="Write some notes about the concept here..." id="inputnotes"></textarea>
+ <textarea class="" maxlength="1000" placeholder="Type the answer here..." id="answer"></textarea>
+ <div class="" id="notes"></div>
  <div id="loadbar"><div id="insloadbar"></div></div><span onclick="window.location.href = 'study'.concat(current.concat('.html'))" id="x">X</span>
 </div>
 <div id="secondpart" class="hidden">
@@ -324,11 +324,11 @@
     border-radius: 3dvh;
     border: none;
     background-color: rgba(200, 200, 200, 0.3);
-    font-size: 2.5dvh;
+    font-size: 3.5dvh;
     padding: 2dvh 2dvh 4dvh 2dvh;
     resize: none;
     transition: 0.6s opacity;
-    font-family: "Permanent Marker";
+    font-family: fredokaone;
     overflow-x: hidden;
     overflow-y: scroll;
   }
@@ -487,6 +487,7 @@
   }
 </style>
 <script>
+  
 currentq = 1;
 if (localStorage.getItem("darkmode") == "1") {
   document.getElementById("title").transition = "none";
@@ -528,7 +529,7 @@ sessionStorage.removeItem("setToUse");
 } else {
 window.location.href = "studyurlerror.html";
 }
-document.getElementById("qtext").innerHTML = "Write notes about the question: ".concat(localStorage.getItem(current.concat("q1")));
+document.getElementById("qtext").innerHTML = "".concat(localStorage.getItem(current.concat("q1")));
 congratsmsg = ["Great Job!", "Perfect!", "Nice Work!", "Good Work!", "Good Job!"];
 nopemsg = ["Oops", "Not quite", ":(", "Not exactly", "Erm, actually..."];
 allnumbers = [];
@@ -537,13 +538,13 @@ for (i = 1; i <= parseInt(localStorage.getItem(current.concat("qat"))); i++) {
 }
 clbl = 0;
 notestoUse = [];
-isquestions = false;
+isquestions = true;
 function finish() {
   window.location.href = "study".concat(current, ".html");
 }
 function redo() {
   sessionStorage.setItem("stu", current);
-  sessionStorage.setItem("wpr", "usenotestoanswer");
+  sessionStorage.setItem("wpr", "unscramble");
   window.location.href = "justamoment.html";
 }
 // ===== Cubic Bezier Implementation =====
@@ -844,7 +845,7 @@ function check() {
   if (clbl != 100) {
   clbl += (100 - clbl) / (allnumbers.length + 1 - currentq);
   }
-  document.getElementById("insloadbar").style.width = 40 + clbl * 0.6 + "%";
+  document.getElementById("insloadbar").style.width = clbl + "%";
   currentq++;
   } else {
     currentnotesq++;
@@ -906,6 +907,7 @@ function posescore(exp) {
   }
   }, 1500);
 }
+document.getElementById("notes").textContent = doallthescrambling(localStorage.getItem(current.concat("a1")));
 function next() {
   if (currentq != allnumbers.length+1) {
   document.getElementById("insloadbar").style.backgroundColor = "#c12020";
@@ -933,7 +935,8 @@ function next() {
     document.getElementById("answer").classList.remove("hidden");
     document.getElementById("notes").style.opacity = 1; 
     document.getElementById("qtext").innerHTML = "".concat(localStorage.getItem(current.concat("q", allnumbers[currentq - 1])));
-    document.getElementById("notes").textContent = notestoUse[parseInt(allnumbers[currentq - 1]) - 1];
+    
+    document.getElementById("notes").textContent = doallthescrambling(localStorage.getItem(current.concat("a", allnumbers[currentq - 1])));
     } else {
       document.getElementById("inputnotes").value = "";
 
@@ -952,5 +955,101 @@ function next() {
     }
   } else { showresults(); }
 }
+function doallthescrambling(ogstring) {
+  word = "";
+    bwword ="";
+    allcontent = [];
+    codingforcontent = [];
+    scrambledContent = [];
+    alphabet = [
+  "a","b","c","d","e","f","g","h","i","j","k","l","m",
+  "n","o","p","q","r","s","t","u","v","w","x","y","z",
+  "A","B","C","D","E","F","G","H","I","J","K","L","M",
+  "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+  "0","1","2","3","4","5","6","7","8","9"
+];
+    ogcontent = ogstring;
+    for (i = 0; i < ogcontent.length; i++) {
+      if (i + 1 != ogcontent.length) {
+        if (alphabet.indexOf(ogcontent[i]) > -1) {
+          word = word.concat(ogcontent[i]);
+          if (alphabet.indexOf(ogcontent[i + 1]) == -1) {
+            allcontent.push(word);
+            codingforcontent.push(1);
+            word = "";
+          }
+        } else {
+          bwword = bwword.concat(ogcontent[i]);
+          if (alphabet.indexOf(ogcontent[i+1]) > -1) {
+            allcontent.push(bwword);
+            codingforcontent.push(0);
+            bwword = "";
+          }
+        }
+      } else {
+        if (alphabet.indexOf(ogcontent[i]) > -1) {
+          word = word.concat(ogcontent[i]);
+          allcontent.push(word);
+          codingforcontent.push(1);
+        } else {
+          bwword = bwword.concat(ogcontent[i]);
+          allcontent.push(bwword);
+          codingforcontent.push(0);
+        }
+      }
+    }
+    upperCaseAlphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
+    "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    for (i = 0; i < codingforcontent.length; i++) {
+      if (codingforcontent[i] == 1) {
+        arrayofuppercase = [];
+        for (a = 0; a < allcontent[i].length; a++) {
+          if (upperCaseAlphabet.indexOf(allcontent[i][a]) > -1) {
+            arrayofuppercase.push(a);
+          }
+        }
+        ogs = scrambleString(allcontent[i]).toLowerCase();
+        mgs = "";
+        for (b = 0; b < ogs.length; b++) {
+          if (arrayofuppercase.indexOf(b) > -1) {
+            mgs = mgs.concat(ogs[b].toUpperCase());
+          } else {
+            mgs = mgs.concat(ogs[b]);
+          }
+        }
+        scrambledContent.push(mgs);
+      } else {
+        scrambledContent.push(allcontent[i]);
+      }
+    }
+    newstringforscrambled = "";
+    for (i = 0; i < scrambledContent.length; i++) {
+      newstringforscrambled = newstringforscrambled.concat(scrambledContent[i]);
+    }
+    return "Unscramble: ".concat(newstringforscrambled);
+}
+function scrambleString(str) {
+  if (str.length < 2) return str; // nothing to scramble
+
+  let shuffled = str;
+  const arr = str.split("");
+
+  // If all characters are identical, no shuffle can change it
+  const allSame = arr.every(ch => ch === arr[0]);
+  if (allSame) return str;
+
+  // Keep scrambling until it’s different
+  while (shuffled === str) {
+    const temp = [...arr];
+    for (let i = temp.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [temp[i], temp[j]] = [temp[j], temp[i]];
+    }
+    shuffled = temp.join("");
+  }
+
+  return shuffled;
+}
+
 </script>
 </html>
