@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<html>
+<body>
+<div id="firstpart" class="">
+<div id="fullscreen">
+ <div id="popup">
+   <span id="title">
+   </span>
+   <div id="showanswer"><span id="desc"></span><div id="gatb"></div></div>
+   <div id="torabody"></div>
+   <div id="torahead"></div>
+   <button id="next" onclick="next()">Next</button>
+ </div>
+  </div>
+  <button onclick="check()" id="check">Check</button>
+ <div id="question"><span id="qtext">
+ </span></div>
+ <button style="opacity: 0" onclick="toggleaudio()" id="audio"><img src="microphone.png" id="microphone"></button>
+ <select class="hidden" id="lildropdown">
+   <option value="en-US">English</option>
+   <option value="zh-CN">Mandarin</option>
+   <option value="es-ES">Spanish</option>
+   <option value="fr-FR">French</option>
+   <option value="it-IT">Italian</option>
+   <option value="de-DE">German</option>
+   <option value="ja-JP">Japanese</option>
+   <option value="hi-IN">Hindi</option>
+ </select>
+ <textarea maxlength="1000" placeholder="Write some notes about the concept here..." id="inputnotes"></textarea>
+ <textarea class="hidden" maxlength="1000" placeholder="Click the button and start talking and the answer will appear here..." id="answer"></textarea>
+ <div class="hidden" id="notes"></div>
+ <div id="loadbar"><div id="insloadbar"></div></div><span onclick="window.location.href = 'study'.concat(current.concat('.html'))" id="x">X</span>
+</div>
+<div id="secondpart" class="hidden">
+     <button class="hidden" id="finish" onclick="finish()">Done</button>
+   <button class="hidden" id="redo" onclick="redo()">Redo</button>
+  <div id="torabody2"></div>
+  <div id="torahead2"></div>
+  <div class="fmq2"><div id="lilgrayguy"></div></div>
+  <div id="fmq">
+    <div id="whitebit"></div>
+    <span id="sq">Struggle Questions</span>
+  </div>
+  <div id="percentage">
+  <div id="middlecircle">
+    <span id="textim"></span>
+  </div>
+  <div id="frontcircle"></div>
+  </div>
+</div>
+</body>
+<style>
+#lildropdown {
+  border: none;
+  font-family: fredokaone;
+  border-radius: 3dvh;
+  width: 12.5dvh;
+  height: 11dvh;
+  position: absolute;
+  left: calc(0.5 * (100dvw - 43.4dvh) + 8.5dvh);
+  /*width: calc(0.5 * (100dvw - 43.4dvh));*/
+  bottom: 34dvh;
+  background-color: #efefef;
+  color: black;
+  transition: 0.6s opacity;
+  font-size: 2dvh;
+}
+#finish:hover {
+  outline: 1.5dvh solid #c12020;
+}
+#redo:hover {
+  outline: 1.5dvh solid #c12020;
+}
+#microphone {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#audio {
+  overflow: hidden;
+  left: calc(0.5 * (100dvw - 43.4dvh) + 8.5dvh);
+  top: 40dvh;
+  height: 12.5dvh;
+  width: 12.5dvh;
+  background-color: #efefef;
+  position: absolute;
+  border-radius: 3dvh;
+  transition: 0.6s opacity;
+  border: none;
+}
+#finish {
+  width: 12dvh;
+  height: 6dvh;
+  border-radius: 2dvh;
+  border: none;
+  outline: 1.5dvh solid #efefef;
+  background-color: white;
+  color: #c12020;
+  left: calc(50% - 15dvh);
+  bottom: 54dvh;
+  position: absolute;
+  z-index: 2;
+  font-family: fredokaone;
+  font-size: 3.5dvh;
+  cursor: pointer;
+  transition: 0.6s opacity;
+}
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#redo {
+  width: 12dvh;
+  height: 6dvh;
+  border-radius: 2dvh;
+  border: none;
+  outline: 1.5dvh solid #efefef;
+  background-color: white;
+  color: #c12020;
+  left: calc(50% + 3dvh);
+  bottom: 54dvh;
+  position: absolute;
+  z-index: 2;
+  font-family: fredokaone;
+  font-size: 3.5dvh;
+  cursor: pointer;
+  transition: 0.6s opacity;
+}
+#torahead2 {
+    z-index: 1001;
+    transform: translate(-50%, -50%);
+    width: 18.41dvh;
+    height: 12.90dvh;
+    position: absolute;
+    bottom: 5.71dvh; /*+1*/
+    left: 50%;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url("toraheadnormal.png");
+    transition: 0.8s transform;
+    
+  }
+  #torabody2 {
+    bottom: 2.9dvh;
+    right: calc(50% - 7.2dvh);
+    position: absolute;
+    width: 17.56dvh;
+    height: 13.42dvh;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url("torabody.png");
+    z-index: 1000;
+  }
+  #lilgrayguy {
+    position: absolute;
+    top: 12dvh;
+    left: 0;
+    width: 100%;
+    height: 3dvh;
+    background-image: linear-gradient(rgba(0,0,0,0), #efefef);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .sqq {
+    width: calc(100% - 7dvh);
+    right: 1dvh;
+    top: 4.5dvh;
+    background-color: white;
+    border-radius: 0.5dvh;
+    position: absolute;
+    padding: 0.5dvh;
+    word-wrap: break-word;
+  }
+  #sq {
+    width: calc(100% - 3dvh);
+    text-align: center;
+    color: black;
+    top: 0.5dvh;
+    left: 3.5dvh;
+    position: absolute;
+    z-index: 0;
+    font-size: 2.5dvh;
+    white-space: nowrap;
+  }
+  #whitebit {
+    z-index: 1;
+    width: 110%;
+    right: -5%;
+    top: -5%;
+    position: absolute;
+    background-color: white;
+    height: 110%;
+    transition: 1.5s;
+  }
+  #fmq {
+    width: calc(100% - 16dvh);
+    height: 15dvh;
+    top: 22.5dvh;
+    background-color: #efefef;
+    position: absolute;
+    right: 3dvh;
+    border-radius: 3dvh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .fmq2 {
+    width: calc(100% - 16dvh);
+    height: 15dvh;
+    top: 22.5dvh;
+    background-color: #efefef;
+    position: absolute;
+    right: 3dvh;
+    border-radius: 3dvh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  #textim {
+    color: white;
+    transition: 2s;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    font-size: 10dvh;
+  }
+  #middlecircle {
+    width: 67.5%;
+    height: 67.5%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 50%;
+    z-index: 1; 
+  }
+  #percentage {
+    z-index: 2;
+    width: 45dvh;
+    height: 45dvh;
+    border-radius: 22.5dvh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: 2s;
+  }
+  #frontcircle {
+    width: 110%;
+    height: 110%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: white;
+  }
+  #secondpart {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #firstpart {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow-y: hidden;
+    top: 0;
+    left: 0;
+  }
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #gatb {
+    width: 100%;
+    height: 10dvh;
+    top: 20dvh;
+    position: fixed;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), #efefef);
+    z-index: 1;
+    pointer-events: none;
+  }
+  #showanswer {
+    overflow-y: scroll;
+    width: 100%;
+    height: 20dvh;
+    left: 0;
+    top: 10dvh;
+    position: absolute;
+  }
+  #torahead {
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    width: 18.41dvh;
+    height: 12.90dvh;
+    position: absolute;
+    top: -8.31dvh;
+    right: -5.2dvh;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url("toraheadnormal.png");
+    transition: 0.8s transform;
+  }
+  #torabody {
+    top: -5.5dvh;
+    right: 6.03dvh;
+    position: absolute;
+    width: 17.56dvh;
+    height: 13.42dvh;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-image: url("torabody.png");
+  }
+  #qtext {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 4.5dvh;
+    transform: translateY(-50%);
+  }
+  button {
+  font-family: fredokaone;
+  }
+  @font-face {
+  font-family: fredokaone;
+  src: url("FredokaOne-Regular.otf");
+  }
+  textarea {
+    font-family: fredokaone;
+  }
+  body {
+    font-family: fredokaone;
+    overflow: hidden;
+  }
+  #question {
+    width: calc(100% - 8dvh);
+    left: 4dvh;
+    top: 18dvh;
+    height: 20dvh;
+    position: absolute;
+    overflow-y: scroll;
+    color: #c12020;
+    border-radius: 3dvh;
+    word-wrap: break-word;
+    transition: 0.6s opacity;
+  }
+  #notes {
+    width: calc(0.5 * (100dvw - 43.4dvh));
+    left: 2.2dvh;
+    height: 20dvh;
+    position: absolute;
+    top: 40dvh;
+    border-radius: 3dvh;
+    border: none;
+    background-color: rgba(200, 200, 200, 0.3);
+    font-size: 2.5dvh;
+    padding: 2dvh 2dvh 4dvh 2dvh;
+    resize: none;
+    transition: 0.6s opacity;
+    font-family: "Permanent Marker";
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  #answer {
+    width: calc(0.5 * (100dvw - 14.4dvh));
+    right: 2.2dvh;
+    height: 20dvh;
+    position: absolute;
+    top: 40dvh;
+    border-radius: 3dvh;
+    border: none;
+    background-color: rgba(200, 200, 200, 0.3);
+    font-size: 2.5dvh;
+    padding: 2dvh 2dvh 4dvh 2dvh;
+    resize: none;
+    transition: 0.6s opacity;
+  }
+  #loadbar {
+    width: calc(100dvw - 20dvh);
+    position: fixed;
+    top: 3.5dvh;
+    left: 3.5dvh;
+    height: 7dvh;
+    border-radius: 5dvh;
+    outline: 2dvh solid rgba(200, 200, 200, 0.3);
+    overflow: hidden;
+  }
+  #x {
+    color: #c12020;
+    font-size: 10dvh;
+    text-align: center;
+    width: 14.5dvh;
+    height: 12.5dvh;
+    position: absolute;
+    right: 0;
+    top: 1dvh;
+  }
+  #insloadbar {
+    height: 100%;
+    transition: 0.6s;
+    left: 0;
+    top: 0;
+    border-radius: 5dvh;
+    position: absolute;
+    background-color: #c12020;
+    width: 0;
+  }
+  #popup {
+    z-index: 10;
+    width: calc(100% - 4.75dvh);
+    height: 100dvh;
+    background-color: #efefef;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    top: 90dvh;
+    border-radius: 4.5dvh;
+    transition: 0.6s;
+  }
+  #title {
+    left: 2dvh;
+    top: 2dvh;
+    width: calc(100% - 4dvh);
+    position: absolute;
+    font-size: 6dvh;
+    transition: 0.6s color;
+    color: #efefef;
+  }
+  #desc {
+    left: 2dvh;
+    width: calc(100% - 4dvh);
+    position: absolute;
+    font-size: 6dvh;
+    transition: 2s color;
+    color: #000000;
+    font-size: 3dvh;
+    word-wrap: break-word;
+  }
+  #question::-webkit-scrollbar {
+  display: none;
+}
+#check {
+  width: 12dvh;
+  height: 6dvh;
+  border-radius: 2dvh;
+  border: none;
+  outline: 1.5dvh solid #efefef;
+  background-color: white;
+  color: #c12020;
+  right: 5dvh;
+  bottom: 34dvh;
+  position: absolute;
+  z-index: 2;
+  font-family: fredokaone;
+  font-size: 3.5dvh;
+  cursor: pointer;
+  transition: 0.6s opacity;
+}
+  body {
+    overflow-y: hidden;
+}
+#inputnotes {
+    width: calc(100dvw - 8.4dvh);
+    left: 50%;
+    height: 20dvh;
+    position: absolute;
+    top: 40dvh;
+    border-radius: 3dvh;
+    border: none;
+    transform: translateX(-50%);
+    background-color: rgba(200, 200, 200, 0.3);
+    font-size: 2.5dvh;
+    padding: 2dvh 2dvh 4dvh 2dvh;
+    resize: none;
+    transition: 0.6s opacity;
+    font-family: "Permanent Marker";
+    z-index: 1;
+  }
+#next {
+  width: 12dvh;
+  height: 6dvh;
+  border-radius: 2dvh;
+  border: none;
+  outline: 1.5dvh solid #efefef;
+  background-color: white;
+  color: #c12020;
+  right: 2.625dvh;
+  top: 31.5dvh;
+  position: absolute;
+  z-index: 2;
+  font-family: fredokaone;
+  font-size: 3.5dvh;
+  cursor: pointer;
+}
+#check:hover {
+  outline: 1.5dvh solid #c12020;
+}
+#next:hover {
+  outline: 1.5dvh solid #c12020;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+#question {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+  .sqqdm {
+    width: calc(100% - 7dvh);
+    right: 1dvh;
+    top: 4.5dvh;
+    background-color: black;
+    border-radius: 0.5dvh;
+    position: absolute;
+    padding: 0.5dvh;
+    color: white;
+    word-wrap: break-word;
+  }
+</style>
+<script>
+currentq = 1;
+if (localStorage.getItem("darkmode") == "1") {
+  document.getElementById("title").transition = "none";
+  window.innerHeight;
+  document.getElementById("title").style.color = "#3a3a3a";
+  window.innerHeight;
+  document.getElementById("title").style.transition = "0.3s color";
+  document.body.style.backgroundColor = "black";
+  document.getElementById("answer").style.color = "white";
+  document.getElementById("check").style.outline = "1.5dvh solid #3a3a3a";
+  document.getElementById("check").style.backgroundColor = "black";
+  document.getElementById("redo").style.outline = "1.5dvh solid #3a3a3a";
+  document.getElementById("redo").style.backgroundColor = "black";
+  document.getElementById("finish").style.outline = "1.5dvh solid #3a3a3a";
+  document.getElementById("finish").style.backgroundColor = "black";
+  document.getElementById("next").style.outline = "1.5dvh solid #3a3a3a";
+  document.getElementById("next").style.backgroundColor = "black";
+  document.getElementById("popup").style.backgroundColor = "#3a3a3a";
+  document.getElementById("question").style.color = "white";
+  document.getElementById("gatb").style.backgroundImage = "linear-gradient(rgba(0,0,0,0), #3a3a3a)";
+  document.getElementById("desc").style.color = "white";
+  document.getElementById("whitebit").style.backgroundColor = "black";
+  document.getElementById("fmq").style.backgroundColor = "#3a3a3a";
+  document.getElementById("lilgrayguy").style.backgroundImage = "linear-gradient(rgba(0,0,0,0), #3a3a3a)";
+  document.getElementById("middlecircle").style.backgroundColor = "black";
+  document.getElementById("frontcircle").style.backgroundColor = "black";
+  document.getElementById("sq").style.color = "white";
+  document.getElementById("textim").style.color = "black";
+  document.getElementById("answer").style.backgroundColor = "#3a3a3a";
+  document.getElementById("notes").style.backgroundColor = "#3a3a3a";
+  document.getElementById("inputnotes").style.backgroundColor = "#3a3a3a";
+  document.getElementById("answer").style.color = "white";
+  document.getElementById("notes").style.color = "white";
+  document.getElementById("inputnotes").style.color = "white";
+  document.getElementById("lildropdown").style.backgroundColor = "#3a3a3a";
+  document.getElementById("lildropdown").style.color = "white";
+  document.getElementById("audio").style.backgroundColor = "#3a3a3a";
+  document.getElementById("microphone").style.filter = "invert(1)";
+}
+audio = false;
+let recognition = null;
+let finalTranscript = "";
+let restartTimer = null;
+
+function toggleaudio() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert("Your browser does not support speech recognition.");
+    return;
+  }
+
+  const answerBox = document.getElementById("answer");
+
+  if (!audio) {
+    audio = true;
+    if (localStorage.getItem("darkmode") != "1") {
+      document.getElementById("microphone").src = "microphonered.png";
+    } else {
+      document.getElementById("audio").style.backgroundColor = "#c12020";
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = document.getElementById("lildropdown").value;
+    recognition.continuous = true;       // true for Safari pseudo-continuous
+    recognition.interimResults = true;   // true so we capture partials immediately
+
+    let tempTranscript = "";
+
+    recognition.onresult = (event) => {
+      let finalTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript + " ";
+        } else {
+          tempTranscript = transcript;
+        }
+      }
+      answerBox.value = finalTranscript + tempTranscript;
+    };
+
+    recognition.onerror = (event) => {
+      console.log("Speech recognition error:", event.error);
+    };
+
+    recognition.onend = () => {
+      if (audio) recognition.start(); // restart if still active
+    };
+
+    recognition.start();
+
+  } else {
+    audio = false;
+    if (localStorage.getItem("darkmode") != "1") {
+      document.getElementById("microphone").src = "microphone.png";
+    } else {
+      document.getElementById("audio").style.backgroundColor = "#3a3a3a";
+    }
+
+    if (recognition) {
+      recognition.onend = null;  // prevent auto-restart
+      recognition.stop();
+    }
+  }
+}
+if (sessionStorage.getItem("setToUse")) {
+current = sessionStorage.getItem("setToUse");
+sessionStorage.removeItem("setToUse");
+} else {
+window.location.href = "studyurlerror.html";
+}
+document.getElementById("qtext").innerHTML = "Write notes about the question: ".concat(localStorage.getItem(current.concat("q1")));
+congratsmsg = ["Great Job!", "Perfect!", "Nice Work!", "Good Work!", "Good Job!"];
+nopemsg = ["Oops", "Not quite", ":(", "Not exactly", "Erm, actually..."];
+allnumbers = [];
+for (i = 1; i <= parseInt(localStorage.getItem(current.concat("qat"))); i++) {
+  allnumbers.push(i.toString());
+}
+clbl = 0;
+notestoUse = [];
+isquestions = false;
+function finish() {
+  window.location.href = "study".concat(current, ".html");
+}
+function redo() {
+  sessionStorage.setItem("stu", current);
+  sessionStorage.setItem("wpr", "usenotestospeak");
+  window.location.href = "justamoment.html";
+}
+// ===== Cubic Bezier Implementation =====
+function cubicBezier(x1, y1, x2, y2) {
+  function A(a1, a2) { return 1 - 3*a2 + 3*a1 }
+  function B(a1, a2) { return 3*a2 - 6*a1 }
+  function C(a1)     { return 3*a1 }
+
+  function bezier(t, a1, a2) {
+    return ((A(a1,a2)*t + B(a1,a2))*t + C(a1))*t
+  }
+  function slope(t, a1, a2) {
+    return 3*A(a1,a2)*t*t + 2*B(a1,a2)*t + C(a1)
+  }
+
+  function getT(x) {
+    let t = x
+    for (let i=0; i<5; i++) {
+      let s = slope(t, x1, x2)
+      if (s === 0) return t
+      let xCalc = bezier(t, x1, x2) - x
+      t -= xCalc / s
+    }
+    return t
+  }
+
+  return function(x) {
+    return bezier(getT(x), y1, y2)
+  }
+}
+
+// ===== Animation Loop =====
+function animate(target, duration, easing, callback) {
+  const start = performance.now()
+
+  function step(now) {
+    let progress = Math.min((now - start) / duration, 1)
+    let eased = easing(progress)
+    let val = eased * target
+    callback(val)
+    if (progress < 1) requestAnimationFrame(step)
+  }
+  requestAnimationFrame(step)
+}
+
+// ===== Example easing: CSS "ease-in-out" =====
+const easeInOut = cubicBezier(0.42, 0, 0.58, 1)
+const frontcircle = document.getElementById("frontcircle")
+
+
+// ===== Your Results Function =====
+function showresults() {
+  howdidido = Math.floor(360 * (allcorrect / allnumbers.length)).toString();
+  ofo = allcorrect / allnumbers.length;
+  if (ofo < 0.4) {
+    cfc = "#ff8500";
+    posescore("sad");
+  } else if (ofo < 0.7) {
+    cfc = "#ffe017";
+    posescore("confused");
+  } else if (ofo < 0.9) {
+    cfc = "#a8c96e";
+    posescore("happy");
+  } else {
+    cfc = "#2dcc70";
+    posescore("amazed");
+  } 
+  if (ofo == 1) {
+    createsq("e");
+  } else {
+    whichqs = [];
+    prevnumfound = 0;
+    for (a = 0; a < parseInt(localStorage.getItem(current.concat("qat"))); a++) {
+      numfound = 0;
+      for (b = 0; b < allnumbers.length; b++) {
+        if (allnumbers[b] == (a + 1).toString()) {
+          numfound++;
+        }
+      }
+      if (numfound > prevnumfound) {
+        whichqs = [];
+        whichqs.push((a + 1).toString());
+        prevnumfound = numfound;
+      } else if (numfound == prevnumfound) {
+        whichqs.push((a + 1).toString());
+      } else {}
+    }
+    for (z = 0; z < whichqs.length; z++) {
+      createsq(whichqs[z]);
+    }
+  }
+  if (howdidido == 360) {
+  document.getElementById("percentage").style.backgroundColor = "#2dcc70";
+  } else if (localStorage.getItem("darkmode") != "1") {
+  document.getElementById("percentage").style.backgroundImage = "conic-gradient(".concat(cfc, " 0deg, ", cfc, " ", howdidido, "deg, #efefef ", howdidido, "deg, #efefef 360deg)");
+  } else {
+  document.getElementById("percentage").style.backgroundImage = "conic-gradient(".concat(cfc, " 0deg, ", cfc, " ", howdidido, "deg, #3a3a3a ", howdidido, "deg, #3a3a3a 360deg)");
+  }
+  document.getElementById("textim").innerHTML = Math.floor(ofo * 100) + "%";
+  document.getElementById("firstpart").classList.add("hidden")
+  document.getElementById("secondpart").classList.remove("hidden")
+  setTimeout(function() {
+    frontcircle.classList.add("hidden");
+  }, 3000);
+  setTimeout(function() {
+      document.getElementById("textim").style.color = cfc;
+  animate(360, 2000, easeInOut, (val) => {
+    // Build a valid conic-gradient
+    frontcircle.style.backgroundColor = "rgba(0,0,0,0)";
+    if (localStorage.getItem("darkmode") == "1") {
+    frontcircle.style.backgroundImage = 
+      `conic-gradient(from 0deg, rgba(0,0,0,0) 0deg ${val}deg, black ${val}deg 360deg)`
+    } else {
+    frontcircle.style.backgroundImage = 
+      `conic-gradient(from 0deg, rgba(0,0,0,0) 0deg ${val}deg, white ${val}deg 360deg)`
+    }
+  })}, 1000);
+  setTimeout(function() {
+    document.getElementById("percentage").style.top = "30dvh";
+    document.getElementById("percentage").style.left = "10.5dvh";
+    document.getElementById("percentage").style.width = "15dvh";
+    document.getElementById("percentage").style.height = "15dvh";
+    document.getElementById("textim").style.fontSize = "3.33dvh";
+  }, 4000)
+  setTimeout(function() {
+    document.getElementById("whitebit").style.width = 0;
+    document.getElementById("finish").classList.remove("hidden");
+    document.getElementById("redo").classList.remove("hidden");
+  }, 6000)
+}
+
+allcorrect = 0;
+function createsq(type) {
+  if (type == "e") {
+    newSQ = document.createElement("div");
+    newSQ.innerHTML = "Nice Work! No struggle questions to show.";
+    if (localStorage.getItem("darkmode") == "1") {
+    newSQ.classList.add("sqqdm");
+    } else {
+    newSQ.classList.add("sqq");
+    }
+    document.getElementById("fmq").appendChild(newSQ);
+  } else {
+    newSQ = document.createElement("div");
+    newSQ.innerHTML = "Q: " + localStorage.getItem(current.concat("q", type)) + "<br><span style='font-weight: bold'>A: " + localStorage.getItem(current.concat("a", type)) + "</span>";
+    if (localStorage.getItem("darkmode") == "1") {
+    newSQ.classList.add("sqqdm");
+    } else {
+    newSQ.classList.add("sqq");
+    }
+    document.getElementById("fmq").appendChild(newSQ);
+    resizeSQs();
+  }
+}
+currentnotesq = 1;
+window.addEventListener("resize", resizeSQs);
+function resizeSQs() {
+  totaltop = 0.045 * window.innerHeight;
+  for (i = 0; i < document.getElementsByClassName("sqq").length; i++) {
+    document.getElementsByClassName("sqq")[i].style.top = totaltop + "px";
+    totaltop += document.getElementsByClassName("sqq")[i].offsetHeight + 0.01 * window.innerHeight;
+  }
+}
+function check() {
+  if (audio) { toggleaudio() }
+  document.getElementById("audio").setAttribute("onclick", "");
+  document.getElementById("check").setAttribute("onclick", "");
+  document.getElementById("lildropdown").style.pointerEvents = "none";
+  if (isquestions) {
+  if (localStorage.getItem("gn") == "1") {
+    correcton = localStorage.getItem(current.concat("a", allnumbers[currentq - 1])).toUpperCase() == document.getElementById("answer").value.toUpperCase();
+  } else {
+    newword = "";
+    allwords = [];
+    alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    thequestion = document.getElementById("answer").value.toLowerCase();
+    for (i = 0; i < thequestion.length; i++) {
+      if (i+1 == thequestion.length) {
+        if (alphabet.indexOf(thequestion[i]) != -1) {
+        allwords.push(newword.concat(thequestion[i]));
+        } else if (newword != "") {
+        allwords.push(newword);
+        }
+      } else if (alphabet.indexOf(thequestion[i]) != -1) {
+        newword = newword.concat(thequestion[i]);
+      } else {
+        if (newword != "") {
+        allwords.push(newword);
+        }
+        newword = "";
+      }
+    }
+    newword = "";
+    allwordsa = [];
+    thequestion = localStorage.getItem(current.concat("a", allnumbers[currentq - 1])).toLowerCase();
+    for (i = 0; i < thequestion.length; i++) {
+      if (i+1 == thequestion.length) {
+        if (alphabet.indexOf(thequestion[i]) != -1) {
+        allwordsa.push(newword.concat(thequestion[i]));
+        } else if (newword != "") {
+        allwordsa.push(newword);
+        }
+      } else if (alphabet.indexOf(thequestion[i]) != -1) {
+        newword = newword.concat(thequestion[i]);
+      } else {
+        if (newword != "") {
+        allwordsa.push(newword);
+        }
+        newword = "";
+      }
+    }
+    nallwords = [];
+    unimportantWords = [
+  "a","an","the","about","above","across","after","against","along","amid","among","around",
+  "at","before","behind","below","beneath","beside","between","beyond","by","despite","down",
+  "during","except","for","from","in","inside","into","near","of","off","on","onto","out",
+  "outside","over","since","through","throughout","till","to","toward","under","underneath",
+  "until","up","upon","with","within","without",
+  "der","die","das","ein","eine","einer","einem","einen","eines","dem","den","des",
+  "an","auf","aus","bei","durch","für","gegen","hinter","in","mit","nach","neben","ohne",
+  "seit","um","unter","über","von","vor","während","wegen","zu","zum","zur",
+  "il","lo","la","i","gli","le","un","una","uno","del","della","dello","dei","degli","dell'",
+  "a","da","di","in","su","con","tra","fra","sopra","sotto","senza","dopo","prima","fino","entro",
+  "le","la","les","un","une","des","du","de","d'","au","aux",
+  "à","chez","dans","en","sur","sous","devant","derrière","par","pour","sans","vers",
+  "avec","entre","pendant","jusqu’à","depuis","avant","après","près","autour",
+  "el","la","los","las","un","una","unos","unas","al","del",
+  "a","ante","bajo","con","contra","de","desde","en","entre","hacia","hasta",
+  "sin","sobre","tras","durante","mediante",
+  "and","or","but","nor","so","yet","for","although","because","since","unless","while","whereas","if","as","though","even","once","when",
+  "und","oder","aber","denn","doch","sondern","obwohl","weil","da","wenn","falls","sowie","solange","bis","bevor","nachdem","während","obgleich",
+  "e","o","ma","né","però","anche se","poiché","dato che","quando","finché","se","mentre","perché","come","anche","appena","fino a",
+  "et","ou","mais","ni","car","donc","tandis que","parce que","puisque","lorsque","si","quoique","bien que","comme","pendant que","avant que","après que",
+  "y","o","pero","ni","aunque","porque","pues","ya que","mientras","cuando","hasta que","si","como","una vez que"
+];
+
+    for (i = 0; i < allwords.length; i++) {
+      if (unimportantWords.indexOf(allwords[i]) == -1) {
+        nallwords.push(allwords[i]);
+      }
+    }
+    allwords = nallwords;
+    nallwords = [];
+    for (i = 0; i < allwordsa.length; i++) {
+      if (unimportantWords.indexOf(allwordsa[i]) == -1) {
+        nallwords.push(allwordsa[i]);
+      }
+    }
+    allwordsa = nallwords;
+    numtobeat = allwordsa.length * 0.85;
+    numhave = 0;
+    for (i = 0; i < allwords.length; i++) {
+      if (allwordsa.indexOf(allwords[i]) > -1) {
+        ogi = i;
+        if (allwordsa.indexOf(allwords[i]) <= i) {
+          i--;
+        }
+        eindex = allwordsa.indexOf(allwords[ogi]);
+        allwords.splice(allwords[ogi], 1);
+        allwordsa.splice(eindex, 1);
+        numhave++; 
+      }
+    }
+    correcton = numhave >= numtobeat;
+  }
+  if (correcton) {
+    if (currentq == allnumbers.length) {
+      clbl = 100;
+    }
+    if (localStorage.getItem("darkmode") == "1") {
+      document.getElementById("title").style.color = "white";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh black";
+    } else {
+      document.getElementById("title").style.color = "#c12020";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh rgb(173, 173, 173)";
+    }
+    allcorrect++;
+    pose("happy");
+    document.getElementById("answer").style.pointerEvents = "none";
+    document.getElementById("insloadbar").style.backgroundColor = "#2dcc70";
+    document.getElementById("popup").style.top = "60dvh";
+    random = Math.floor(Math.random() * congratsmsg.length);
+    document.getElementById("title").innerHTML = congratsmsg[random];
+    document.getElementById("desc").innerHTML = "<span style='font-weight: bold'>Correct Answer: </span>".concat(localStorage.getItem(current.concat("a", allnumbers[currentq - 1])), "<br><br><br><br><br>");
+  } else {
+    if (localStorage.getItem("darkmode") == "1") {
+      document.getElementById("title").style.color = "white";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh black";
+    } else {
+      document.getElementById("title").style.color = "#c12020";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh rgb(173, 173, 173)";
+    }
+    document.getElementById("answer").style.pointerEvents = "none";
+    pose("confused");
+    allnumbers.push(allnumbers[currentq - 1]);
+    document.getElementById("popup").style.top = "60dvh";
+    random = Math.floor(Math.random() * nopemsg.length);
+    document.getElementById("title").innerHTML = nopemsg[random];
+    document.getElementById("desc").innerHTML = "<span style='font-weight: bold'>Your Answer: </span>".concat(document.getElementById("answer").value, "<br><br><span style='font-weight: bold'>Correct Answer: </span>", localStorage.getItem(current.concat("a", allnumbers[currentq - 1])), "<br><br><br><br><br>");
+  }
+  if (clbl != 100) {
+  clbl += (100 - clbl) / (allnumbers.length + 1 - currentq);
+  }
+  document.getElementById("insloadbar").style.width = 40 + clbl * 0.6 + "%";
+  currentq++;
+  } else {
+    currentnotesq++;
+    notestoUse.push(document.getElementById("inputnotes").value);
+    if (localStorage.getItem("darkmode") == "1") {
+      document.getElementById("title").style.color = "white";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh black";
+    } else {
+      document.getElementById("title").style.color = "#c12020";
+      document.getElementById("popup").style.boxShadow = "0 0 10dvh rgb(173, 173, 173)";
+    }
+    pose("happy");
+    document.getElementById("inputnotes").style.pointerEvents = "none";
+    document.getElementById("insloadbar").style.backgroundColor = "#2dcc70";
+    document.getElementById("popup").style.top = "60dvh";
+    document.getElementById("desc").innerHTML = "You'll use these later when you answer the questions.";
+    document.getElementById("title").innerHTML = "Great Notes!";
+    clbl += 1/parseInt(localStorage.getItem(current.concat("qat")))
+    document.getElementById("insloadbar").style.width = clbl * 40 + "%";
+  }
+  
+}
+function pose(exp) {
+  if (exp == "confused") {
+    document.getElementById("torahead").style.backgroundImage = "url('toraheadconfused.png')";
+    document.getElementById("torahead").style.transform = "translate(-50%, -50%) rotate(30deg)";
+  } else if (exp == "happy") {
+    document.getElementById("torahead").style.backgroundImage = "url('toraheadhappy.png')";
+    document.getElementById("torahead").style.transform = "translate(-50%, -50%) rotate(30deg)";
+  } else {
+    document.getElementById("torahead").style.backgroundImage = "url('toraheadnormal.png')";
+    document.getElementById("torahead").style.transform = "translate(-50%, -50%) rotate(0deg)";
+  }
+}
+function posescore(exp) {
+  setTimeout(function() {
+  if (exp == "confused") {
+    document.getElementById("torahead2").style.backgroundImage = "url('toraheadconfused.png')";
+    document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(30deg)";
+  } else if (exp == "happy") {
+    document.getElementById("torahead2").style.backgroundImage = "url('toraheadhappy.png')";
+    document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(30deg)";
+  } else if (exp == "amazed") {
+    document.getElementById("torahead2").style.backgroundImage = "url('toraheadamazed.png')";
+    document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(30deg)";
+  } else {
+    document.getElementById("torahead2").style.backgroundImage = "url('toraheadsad.png')";
+    document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(30deg)";
+    setTimeout(function() {
+      document.getElementById("torahead2").style.transition = "1.2s transform";
+      window.innerHeight;
+      document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(-30deg)";
+    }, 800);
+    setTimeout(function() {
+      document.getElementById("torahead2").style.transition = "0.8s transform";
+      window.innerHeight;
+      document.getElementById("torahead2").style.transform = "translate(-50%, -50%) rotate(0deg)";
+    }, 2200)
+  }
+  }, 1500);
+}
+function next() {
+  if (currentq != allnumbers.length+1) {
+  document.getElementById("insloadbar").style.backgroundColor = "#c12020";
+  pose("normal");
+  document.getElementById("popup").style.top = "90dvh";
+    document.getElementById("popup").style.boxShadow = "none";
+    if (localStorage.getItem("darkmode") == "1") {
+    document.getElementById("title").style.color = "#3a3a3a";
+    } else {
+    document.getElementById("title").style.color = "#efefef";
+    }
+    document.getElementById("desc").innerHTML = "";
+    document.getElementById("question").style.opacity = 0;
+    if (isquestions) {
+    document.getElementById("answer").classList.add("hidden");
+    document.getElementById("notes").style.opacity = 0; 
+    document.getElementById("audio").style.opacity = 0;
+    document.getElementById("lildropdown").style.opacity = 0;
+    } else {
+    document.getElementById("inputnotes").style.opacity = 0;
+    }
+    document.getElementById("check").style.opacity = 0;
+    setTimeout(function() {
+    document.getElementById("answer").style.pointerEvents = "all";
+    document.getElementById("question").style.opacity = 1;
+    if (isquestions) {
+    document.getElementById("audio").style.opacity = 1;
+    document.getElementById("lildropdown").style.opacity = 1;
+    document.getElementById("answer").classList.remove("hidden");
+    document.getElementById("lildropdown").style.pointerEvents = "all";
+    document.getElementById("audio").setAttribute("onclick", "toggleaudio()");
+    document.getElementById("notes").style.opacity = 1; 
+    document.getElementById("qtext").innerHTML = "".concat(localStorage.getItem(current.concat("q", allnumbers[currentq - 1])));
+    document.getElementById("notes").textContent = notestoUse[parseInt(allnumbers[currentq - 1]) - 1];
+    } else {
+      document.getElementById("inputnotes").value = "";
+
+    document.getElementById("inputnotes").style.opacity = 1;
+    document.getElementById("inputnotes").style.pointerEvents = "all";
+    document.getElementById("qtext").innerHTML = "Write notes about the question: ".concat(localStorage.getItem(current.concat("q", (currentnotesq).toString())));
+    }
+    document.getElementById("check").style.opacity = 1;
+    document.getElementById("answer").value = "";
+    }, 700)
+    setTimeout(function() {
+    document.getElementById("check").setAttribute("onclick", "check()");
+    }, 1300);
+    if (currentnotesq - 1 == parseInt(localStorage.getItem(current.concat("qat")))) {
+      isquestions = true;
+    }
+  } else { showresults(); }
+}
+</script>
+</html>
