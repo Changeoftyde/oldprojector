@@ -18,22 +18,11 @@
    <button id="next" onclick="next()">Next</button>
  </div>
   </div>
-  <button onclick="check()" id="check">Check</button>
+  <button onclick="check()" id="check">Submit</button>
  <div id="question"><span id="qtext">
  </span></div>
- <button style="opacity: 0" onclick="toggleaudio()" id="audio"><img src="microphone.png" id="microphone"></button>
- <select class="hidden" id="lildropdown">
-   <option value="en-US">English</option>
-   <option value="zh-CN">Mandarin</option>
-   <option value="es-ES">Spanish</option>
-   <option value="fr-FR">French</option>
-   <option value="it-IT">Italian</option>
-   <option value="de-DE">German</option>
-   <option value="ja-JP">Japanese</option>
-   <option value="hi-IN">Hindi</option>
- </select>
  <textarea maxlength="1000" placeholder="Write some notes about the concept here..." id="inputnotes"></textarea>
- <textarea class="hidden" maxlength="1000" placeholder="Click the button and start talking and the answer will appear here..." id="answer"></textarea>
+ <textarea class="hidden" maxlength="1000" placeholder="Type the answer here..." id="answer"></textarea>
  <div class="hidden" id="notes"></div>
  <div id="loadbar"><div id="insloadbar"></div></div><span onclick="window.location.href = 'study'.concat(current.concat('.html'))" id="x">X</span>
 </div>
@@ -56,45 +45,11 @@
 </div>
 </body>
 <style>
-#lildropdown {
-  border: none;
-  font-family: fredokaone;
-  border-radius: 3dvh;
-  width: 12.5dvh;
-  height: 11dvh;
-  position: absolute;
-  left: calc(0.5 * (100dvw - 43.4dvh) + 8.5dvh);
-  /*width: calc(0.5 * (100dvw - 43.4dvh));*/
-  bottom: 34dvh;
-  background-color: #efefef;
-  color: black;
-  transition: 0.6s opacity;
-  font-size: 2dvh;
-}
 #finish:hover {
   outline: 1.5dvh solid #c12020;
 }
 #redo:hover {
   outline: 1.5dvh solid #c12020;
-}
-#microphone {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#audio {
-  overflow: hidden;
-  left: calc(0.5 * (100dvw - 43.4dvh) + 8.5dvh);
-  top: 40dvh;
-  height: 12.5dvh;
-  width: 12.5dvh;
-  background-color: #efefef;
-  position: absolute;
-  border-radius: 3dvh;
-  transition: 0.6s opacity;
-  border: none;
 }
 #finish {
   width: 12dvh;
@@ -361,7 +316,7 @@
     transition: 0.6s opacity;
   }
   #notes {
-    width: calc(0.5 * (100dvw - 43.4dvh));
+    width: calc(0.5 * (100dvw - 14.4dvh));
     left: 2.2dvh;
     height: 20dvh;
     position: absolute;
@@ -566,76 +521,6 @@ if (localStorage.getItem("darkmode") == "1") {
   document.getElementById("answer").style.color = "white";
   document.getElementById("notes").style.color = "white";
   document.getElementById("inputnotes").style.color = "white";
-  document.getElementById("lildropdown").style.backgroundColor = "#3a3a3a";
-  document.getElementById("lildropdown").style.color = "white";
-  document.getElementById("audio").style.backgroundColor = "#3a3a3a";
-  document.getElementById("microphone").style.filter = "invert(1)";
-}
-audio = false;
-let recognition = null;
-let finalTranscript = "";
-let restartTimer = null;
-
-function toggleaudio() {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    alert("Your browser does not support speech recognition.");
-    return;
-  }
-
-  const answerBox = document.getElementById("answer");
-
-  if (!audio) {
-    audio = true;
-    if (localStorage.getItem("darkmode") != "1") {
-      document.getElementById("microphone").src = "microphonered.png";
-    } else {
-      document.getElementById("audio").style.backgroundColor = "#c12020";
-    }
-
-    recognition = new SpeechRecognition();
-    recognition.lang = document.getElementById("lildropdown").value;
-    recognition.continuous = true;       // true for Safari pseudo-continuous
-    recognition.interimResults = true;   // true so we capture partials immediately
-
-    let tempTranscript = "";
-
-    recognition.onresult = (event) => {
-      let finalTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript + " ";
-        } else {
-          tempTranscript = transcript;
-        }
-      }
-      answerBox.value = finalTranscript + tempTranscript;
-    };
-
-    recognition.onerror = (event) => {
-      console.log("Speech recognition error:", event.error);
-    };
-
-    recognition.onend = () => {
-      if (audio) recognition.start(); // restart if still active
-    };
-
-    recognition.start();
-
-  } else {
-    audio = false;
-    if (localStorage.getItem("darkmode") != "1") {
-      document.getElementById("microphone").src = "microphone.png";
-    } else {
-      document.getElementById("audio").style.backgroundColor = "#3a3a3a";
-    }
-
-    if (recognition) {
-      recognition.onend = null;  // prevent auto-restart
-      recognition.stop();
-    }
-  }
 }
 if (sessionStorage.getItem("setToUse")) {
 current = sessionStorage.getItem("setToUse");
@@ -658,7 +543,7 @@ function finish() {
 }
 function redo() {
   sessionStorage.setItem("stu", current);
-  sessionStorage.setItem("wpr", "usenotestospeak");
+  sessionStorage.setItem("wpr", "usenotestoanswer");
   window.location.href = "justamoment.html";
 }
 // ===== Cubic Bezier Implementation =====
@@ -823,10 +708,7 @@ function resizeSQs() {
   }
 }
 function check() {
-  if (audio) { toggleaudio() }
-  document.getElementById("audio").setAttribute("onclick", "");
   document.getElementById("check").setAttribute("onclick", "");
-  document.getElementById("lildropdown").style.pointerEvents = "none";
   if (isquestions) {
   if (localStorage.getItem("gn") == "1") {
     correcton = localStorage.getItem(current.concat("a", allnumbers[currentq - 1])).toUpperCase() == document.getElementById("answer").value.toUpperCase();
@@ -1040,8 +922,6 @@ function next() {
     if (isquestions) {
     document.getElementById("answer").classList.add("hidden");
     document.getElementById("notes").style.opacity = 0; 
-    document.getElementById("audio").style.opacity = 0;
-    document.getElementById("lildropdown").style.opacity = 0;
     } else {
     document.getElementById("inputnotes").style.opacity = 0;
     }
@@ -1050,11 +930,7 @@ function next() {
     document.getElementById("answer").style.pointerEvents = "all";
     document.getElementById("question").style.opacity = 1;
     if (isquestions) {
-    document.getElementById("audio").style.opacity = 1;
-    document.getElementById("lildropdown").style.opacity = 1;
     document.getElementById("answer").classList.remove("hidden");
-    document.getElementById("lildropdown").style.pointerEvents = "all";
-    document.getElementById("audio").setAttribute("onclick", "toggleaudio()");
     document.getElementById("notes").style.opacity = 1; 
     document.getElementById("qtext").innerHTML = "".concat(localStorage.getItem(current.concat("q", allnumbers[currentq - 1])));
     document.getElementById("notes").textContent = notestoUse[parseInt(allnumbers[currentq - 1]) - 1];
